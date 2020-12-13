@@ -23,10 +23,10 @@ public class DataBase {
             s = c.createStatement();
             String sql = "CREATE TABLE USERS " +
                     "(ID INT PRIMARY KEY NOT NULL," +
-                    " FNAME TEXT NOT NULL, " +
-                    " LNAME TEXT NOT NULL, " +
-                    " EMAIL CHAR(50) NOT NULL, " +
-                    " PASSW CHAR(50) NOT NULL)";
+                    " FNAME VARCHAR(50) NOT NULL, " +
+                    " LNAME VARCHAR(50) NOT NULL, " +
+                    " EMAIL VARCHAR(50) NOT NULL, " +
+                    " PASSW VARCHAR(50) NOT NULL)";
             s.executeUpdate(sql);
             s1 = c.createStatement();
             String sql1 = "INSERT INTO USERS (ID,FNAME,LNAME,EMAIL,PASSW) VALUES (1,'John','Doe','johnappleseed@gmail.com','pass123');";
