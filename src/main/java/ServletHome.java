@@ -10,8 +10,8 @@ public class ServletHome extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        //DataBase db = new DataBase();
-        resp.getWriter().write("<html><title>Home></title><head><body><h1>Test</h1></body></head></html>");
+        DataBase db = new DataBase();
+        resp.getWriter().write("<html><title>Home></title><head><body><h1>Database</h1></body></head></html>");
     }
 
     @Override
