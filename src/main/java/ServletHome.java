@@ -12,6 +12,7 @@ public class ServletHome extends HttpServlet {
         resp.setContentType("text/html");
         DataBase db = new DataBase();
         resp.getWriter().write("<html> <head><title>Home</title> </head><body> <h1>Database" + db.fname + "</h1> </body> </html>");
+        resp.getWriter().write(req.getServletPath());
     }
 
     @Override

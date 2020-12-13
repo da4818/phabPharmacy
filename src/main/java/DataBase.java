@@ -1,4 +1,8 @@
 import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
 
 public class DataBase {
     public String fname;
@@ -6,19 +10,11 @@ public class DataBase {
     public String email;
     public String pass;
     public DataBase(){
+        Connection c = null;
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try {
             Class.forName("org.postgresql.Driver");
-        } catch (Exception e) {
-        }
-        Connection c = null;
-        try {
             c = DriverManager.getConnection(dbUrl);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
-        try {
             Statement s = c.createStatement();
             String sql = "CREATE TABLE USER" +
                     "(ID INT PRIMARY KEY NOT NULL," +
