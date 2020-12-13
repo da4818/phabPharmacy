@@ -10,13 +10,22 @@ public class DataBase {
     public String email;
     public String pass;
     public DataBase(){
-        Connection c = null;
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try {
             Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        Connection c = null;
+        try {
             c = DriverManager.getConnection(dbUrl);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        try {
             Statement s = c.createStatement();
-            String sql = "CREATE TABLE USER" +
+            String sql = "CREATE TABLE USERS" +
                     "(ID INT PRIMARY KEY NOT NULL," +
                     "FNAME TEXT NOT NULL," +
                     "LNAME TEXT NOT NULL," +
@@ -27,7 +36,8 @@ public class DataBase {
             String sql1 = "INSERT INTO USER (ID,FNAME,LNAME,EMAIL,PASS) VALUES (1,'John','Doe','johnappleseed@gmail.com','pass123');";
             s1.executeUpdate(sql1);
             Statement s2 = c.createStatement();
-            ResultSet rs = s.executeQuery("SELECT * FROM USER;");
+            String query = "SELECT * FROM USERS;";
+            ResultSet rs = s.executeQuery(query);
             while (rs.next()) {
                 String fname = rs.getString("fname");
                 String lname = rs.getString("lname");
@@ -43,10 +53,11 @@ public class DataBase {
             s1.close();
             s2.close();
             c.close();
-        } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
-        System.out.println("Table created");
+
     }
 }
+
+
