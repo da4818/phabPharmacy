@@ -5,7 +5,7 @@ import java.sql.Statement;
 
 
 public class DataBase {
-    public String fname;
+    public String fname = "Paul";
     public DataBase(){
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try {
@@ -21,11 +21,11 @@ public class DataBase {
         try {
             Statement s = c.createStatement();
             String sql = "CREATE TABLE USERS" +
-                    "(ID INT PRIMARY KEY NOT NULL," +
-                    "FNAME TEXT NOT NULL," +
-                    "LNAME TEXT NOT NULL," +
-                    "EMAIL CHAR(50) NOT NULL," +
-                    "PASSW CHAR(50) NOT NULL)";
+                    "(ID    INT PRIMARY KEY NOT NULL," +
+                    "FNAME  TEXT    NOT NULL," +
+                    "LNAME  TEXT    NOT NULL," +
+                    "EMAIL  CHAR(50)    NOT NULL," +
+                    "PASSW  CHAR(50)    NOT NULL)";
             s.executeUpdate(sql);
             Statement s1 = c.createStatement();
             String sql1 = "INSERT INTO USERS (ID,FNAME,LNAME,EMAIL,PASSW) VALUES (1,'John','Doe','johnappleseed@gmail.com','pass123');";
