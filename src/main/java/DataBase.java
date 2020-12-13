@@ -16,7 +16,6 @@ public class DataBase {
         try {
             c = DriverManager.getConnection(dbUrl);
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
         }
 
         try {
@@ -29,7 +28,7 @@ public class DataBase {
                     "PASSW CHAR(50) NOT NULL)";
             s.executeUpdate(sql);
             Statement s1 = c.createStatement();
-            String sql1 = "INSERT INTO USER (ID,FNAME,LNAME,EMAIL,PASSW) VALUES (1,'John','Doe','johnappleseed@gmail.com','pass123');";
+            String sql1 = "INSERT INTO USERS (ID,FNAME,LNAME,EMAIL,PASSW) VALUES (1,'John','Doe','johnappleseed@gmail.com','pass123');";
             s1.executeUpdate(sql1);
             Statement s2 = c.createStatement();
             String query = "SELECT * FROM USERS;";
