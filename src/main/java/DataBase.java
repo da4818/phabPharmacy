@@ -7,6 +7,7 @@ import java.sql.Statement;
 public class DataBase {
     public String fname;
     public DataBase(){
+        Statement s,s1,s2 = null;
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try {
             Class.forName("org.postgresql.Driver");
@@ -19,7 +20,7 @@ public class DataBase {
         }
 
         try {
-            Statement s = c.createStatement();
+            s = c.createStatement();
             String sql = "CREATE TABLE USERS" +
                     "(ID    INT PRIMARY KEY NOT NULL," +
                     "FNAME  TEXT    NOT NULL," +
@@ -27,12 +28,11 @@ public class DataBase {
                     "EMAIL  CHAR(50)    NOT NULL," +
                     "PASSW  CHAR(50)    NOT NULL)";
             s.executeUpdate(sql);
-            Statement s1 = c.createStatement();
+            s1 = c.createStatement();
             String sql1 = "INSERT INTO USERS (ID,FNAME,LNAME,EMAIL,PASSW) VALUES (1,'John','Doe','johnappleseed@gmail.com','pass123');";
             s1.executeUpdate(sql1);
-            Statement s2 = c.createStatement();
-            String query = "SELECT * FROM USERS;";
-            ResultSet rs = s.executeQuery(query);
+            s2 = c.createStatement();
+            ResultSet rs = s.executeQuery("SELECT * FROM USERS;");
             while (rs.next()) {
                 String fname = rs.getString("FNAME");
                 String lname = rs.getString("lname");
