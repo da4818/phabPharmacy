@@ -21,12 +21,12 @@ public class DataBase {
 
         try {
             s = c.createStatement();
-            String sql = "CREATE TABLE USERS" +
-                    "(ID    INT PRIMARY KEY NOT NULL," +
-                    "FNAME  TEXT    NOT NULL," +
-                    "LNAME  TEXT    NOT NULL," +
-                    "EMAIL  CHAR(50)    NOT NULL," +
-                    "PASSW  CHAR(50)    NOT NULL)";
+            String sql = "CREATE TABLE USERS " +
+                    "(ID INT PRIMARY KEY NOT NULL," +
+                    " FNAME TEXT NOT NULL, " +
+                    " LNAME TEXT NOT NULL, " +
+                    " EMAIL CHAR(50) NOT NULL, " +
+                    " PASSW CHAR(50) NOT NULL)";
             s.executeUpdate(sql);
             s1 = c.createStatement();
             String sql1 = "INSERT INTO USERS (ID,FNAME,LNAME,EMAIL,PASSW) VALUES (1,'John','Doe','johnappleseed@gmail.com','pass123');";
@@ -34,12 +34,12 @@ public class DataBase {
             s2 = c.createStatement();
             ResultSet rs = s.executeQuery("SELECT * FROM USERS;");
             while (rs.next()) {
-                String fname = rs.getString("FNAME");
+                int id = rs.getInt("id");
+                String fname = rs.getString("fname");
+                this.fname = fname;
                 String lname = rs.getString("lname");
                 String email = rs.getString("email");
                 String pass = rs.getString("passw");
-                this.fname = fname;
-
             }
             rs.close();
             s.close();
@@ -47,9 +47,13 @@ public class DataBase {
             s2.close();
             c.close();
         } catch (Exception e) {
+            System.err.println(e.getClass().getName()+": "+e.getMessage());
+            System.exit(0);
         }
-
+        System.out.println("Table created");
     }
+
 }
+
 
 
