@@ -21,7 +21,7 @@ public class DataBase {
         try {
             Statement s = c.createStatement();
             String sql = "CREATE TABLE USER" +
-                    "(ID IN PRIMARY KEY NOT NULL," +
+                    "(ID INT PRIMARY KEY NOT NULL," +
                     "FNAME TEXT NOT NULL," +
                     "LNAME TEXT NOT NULL," +
                     "EMAIL CHAR(50) NOT NULL," +
