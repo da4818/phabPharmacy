@@ -46,11 +46,9 @@ public class DataBase {
             s1.close();
             s2.close();
             c.close();
-        } catch (Exception e) {
-            System.err.println(e.getClass().getName()+": "+e.getMessage());
-            System.exit(0);
+        } catch (SQLException throwables) {
         }
-        System.out.println("Table created");
+
     }
 
 }
