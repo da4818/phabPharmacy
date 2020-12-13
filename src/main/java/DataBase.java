@@ -30,10 +30,10 @@ public class DataBase {
                     "FNAME TEXT NOT NULL," +
                     "LNAME TEXT NOT NULL," +
                     "EMAIL CHAR(50) NOT NULL," +
-                    "PASS CHAR(50) NOT NULL)";
+                    "PASSW CHAR(50) NOT NULL)";
             s.executeUpdate(sql);
             Statement s1 = c.createStatement();
-            String sql1 = "INSERT INTO USER (ID,FNAME,LNAME,EMAIL,PASS) VALUES (1,'John','Doe','johnappleseed@gmail.com','pass123');";
+            String sql1 = "INSERT INTO USER (ID,FNAME,LNAME,EMAIL,PASSW) VALUES (1,'John','Doe','johnappleseed@gmail.com','pass123');";
             s1.executeUpdate(sql1);
             Statement s2 = c.createStatement();
             String query = "SELECT * FROM USERS;";
@@ -42,7 +42,7 @@ public class DataBase {
                 String fname = rs.getString("fname");
                 String lname = rs.getString("lname");
                 String email = rs.getString("email");
-                String pass = rs.getString("pass");
+                String pass = rs.getString("passw");
                 this.fname = fname;
                 this.lname = lname;
                 this.email = email;
