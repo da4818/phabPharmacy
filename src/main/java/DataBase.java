@@ -6,9 +6,6 @@ import java.sql.Statement;
 
 public class DataBase {
     public String fname;
-    public String lname;
-    public String email;
-    public String pass;
     public DataBase(){
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try {
@@ -43,9 +40,7 @@ public class DataBase {
                 String email = rs.getString("email");
                 String pass = rs.getString("passw");
                 this.fname = fname;
-                this.lname = lname;
-                this.email = email;
-                this.pass = pass;
+
             }
             rs.close();
             s.close();
