@@ -13,8 +13,7 @@ public class DataBase {
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try {
             Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
         }
         Connection c = null;
         try {
@@ -53,8 +52,7 @@ public class DataBase {
             s1.close();
             s2.close();
             c.close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (Exception e) {
         }
 
     }
