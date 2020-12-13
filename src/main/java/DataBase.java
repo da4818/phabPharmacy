@@ -5,7 +5,7 @@ import java.sql.Statement;
 
 
 public class DataBase {
-    public String fname = "Paul";
+    public String fname;
     public DataBase(){
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try {
@@ -34,7 +34,7 @@ public class DataBase {
             String query = "SELECT * FROM USERS;";
             ResultSet rs = s.executeQuery(query);
             while (rs.next()) {
-                String fname = rs.getString("fname");
+                String fname = rs.getString("FNAME");
                 String lname = rs.getString("lname");
                 String email = rs.getString("email");
                 String pass = rs.getString("passw");
