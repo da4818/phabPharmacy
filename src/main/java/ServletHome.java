@@ -9,13 +9,11 @@ import java.io.IOException;
 public class ServletHome extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
         resp.setContentType("text/html");
         resp.getWriter().write("<html><title>Home></title><head><body><h1>Home</h1></body></head></html>");
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
     }
 }
