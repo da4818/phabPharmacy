@@ -2,14 +2,16 @@
   Created by IntelliJ IDEA.
   User: debbie
   Date: 14/12/2020
-  Time: 18:27
+  Time: 19:19
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Home</title>
     <!-- Import Icon Library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Creates navigation bar -->
@@ -76,38 +78,7 @@
             display: block;
         }
     </style>
-    <script LANGUAGE="JavaScript" type="text/javascript">
-        function display() {
-            var a ="username";
-            var b ="pass1";
-            var x = validateInput();
-            if (x==2){
-                if (a == document.loginForm.user.value && b == document.loginForm.pass.value){
-                    message = "Login successful. Welcome back, " + document.loginForm.user.value;
-                    message += "!";
-                    document.getElementById("demo").innerHTML = message
-                }
-                else{
-                    message = "Incorrect login details. Please try again."
-                    document.getElementById("demo").innerHTML = message
-                    setTimeout(refreshPage,2000)
-                }
-            }
-            else{
-                message = "Incomplete fields, please enter all information.";
-                document.getElementById("demo").innerHTML = message
-            }
-        }
-        function refreshPage(){
-            location.reload()
-        }
-        function validateInput(){
-            var t=0;
-            if(document.loginForm.user.value.trim()){t=t+1;}
-            if(document.loginForm.pass.value.trim()){t=t+1;}
-            return t;
-        }
-    </script>
+
 </head>
 <body>
 <div class="navbar">
@@ -126,20 +97,14 @@
     <a href="https://cmdmcpharmacywebsite.herokuapp.com/login"><i class="fa fa-fw fa-user"></i> Login</a>
     <a href="https://cmdmcpharmacywebsite.herokuapp.com/register"><i class="fa fa-fw fa-user-plus"></i> Register</a>
 </div>
+<h1><center> PhabPharmacy </center></h1>
 
-<h1><center>Login</center></h1>
-<p> Login below. If you haven't got an account, <a href="https://cmdmcpharmacywebsite.herokuapp.com/register"> register here.</a> </p>
-
-<form name="loginForm">
-    <div class="input-group">
-        <input type="TEXT" size="30" class="form-control" name="user" placeholder="Username*"><br>
-    </div>
-    <div class="input-group">
-        <input type="TEXT" size="30" class="form-control" name="pass" placeholder="Password*"><br>
-    </div>
-    <p><input TYPE="BUTTON" VALUE="Submit" onClick="display();"></p>
-</form>
-<p id="demo"></p>
+<script>
+    function redirectBrowse(){
+        window.location.href="https://cmdmcpharmacywebsite.herokuapp.com/browse"
+    }
+</script>
 </body>
 </html>
+
 
