@@ -21,7 +21,7 @@ public class DataBase {
 
         try {
             s = c.createStatement();
-            String sql = "CREATE TABLE ACCOUNTS " +
+            String sql = "CREATE TABLE ACCOUNT " +
                     "(ID INT PRIMARY KEY NOT NULL," +
                     " FNAME VARCHAR(50) NOT NULL, " +
                     " LNAME VARCHAR(50) NOT NULL, " +
@@ -29,10 +29,10 @@ public class DataBase {
                     " PASSW VARCHAR(50) NOT NULL)";
             s.executeUpdate(sql);
             s1 = c.createStatement();
-            String sql1 = "INSERT INTO ACCOUNTS (ID,FNAME,LNAME,EMAIL,PASSW) VALUES (1,'John','Doe','johnappleseed@gmail.com','pass123');";
+            String sql1 = "INSERT INTO ACCOUNT (ID,FNAME,LNAME,EMAIL,PASSW) VALUES (1,'John','Doe','johnappleseed@gmail.com','pass123');";
             s1.executeUpdate(sql1);
             s2 = c.createStatement();
-            ResultSet rs = s.executeQuery("SELECT * FROM ACCOUNTS;");
+            ResultSet rs = s.executeQuery("SELECT * FROM ACCOUNT;");
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("fname");
