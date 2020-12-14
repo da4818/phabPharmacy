@@ -14,7 +14,6 @@ public class SerlvetLogin extends HttpServlet {
                 "<html>\n" +
                 "<head>\n" +
                 "    <title>Login</title>\n" +
-                "    <!-- Import Icon Library -->\n" +
                 "    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">\n" +
                 "    <!-- Creates navigation bar -->\n" +
                 "    <style>\n" +
