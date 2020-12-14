@@ -11,11 +11,15 @@ public class ServletHome extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         DataBase db = new DataBase();
-        resp.getWriter().write("<html><head><title>Home</title></head><body><h1>Name: " + db.fname +"</h1></body></html>");
+        resp.getWriter().write("<html><head><title>Home</title></head><body><h1>Name: " + db.fname +"</h1> </body></html>");
 
     }
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String usern = req.getParameter("user");
+        String passw = req.getParameter("pass");
+        System.out.println(usern +"," +passw);
+        UserCheck usercheck = new UserCheck();
     }
 }
