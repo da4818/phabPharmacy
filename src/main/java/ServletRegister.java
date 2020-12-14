@@ -88,7 +88,7 @@ public class ServletRegister extends HttpServlet {
                 "<div class=\"navbar\">\n" +
                 "    <a class=\"active\" href=\"https://phabpharmacy.herokuapp.com/home\"><i class=\"fa fa-fw fa-home\"></i> Home</a>\n" +
                 "    <div class=\"dropdown\">\n" +
-                "        <button class= \"dropbtn\" onclick=\"redirectBrowse()\"><i class=\"fa fa-fw fa-search\"></i>Browse<i class=\"fa fa-caret-down\"></i></button>\n" +
+                "        <button style=\"cursor: pointer;\"class=\"dropbtn\" onclick=\"redirectBrowse()\"><i class=\"fa fa-fw fa-search\"></i>Browse<i class=\"fa fa-caret-down\"></i></button>\n" +
                 "        <div class=\"dropdown-content\">\n" +
                 "            <a href=\"#\">Cold and Flu</a>\n" +
                 "            <a href=\"#\">Skincare</a>\n" +
@@ -114,6 +114,40 @@ public class ServletRegister extends HttpServlet {
                 "        <p><input type=\"button\" value=\"Submit\" onClick=\"display();\"></p>\n" +
                 "    </form>\n" +
                 "<p id=\"demo\"></p>\n" +
+                "<script>\n" +
+                "    function display() {\n" +
+                "        var x = validateInput();\n" +
+                "        if (x==6){\n" +
+                "            if (document.registerForm.pass.value == document.registerForm.verifyPass.value){\n" +
+                "                message = \"Registration successful. Welcome \" + document.registerForm.user.value;\n" +
+                "                message += \"!\";\n" +
+                "                document.getElementById(\"demo\").innerHTML = message\n" +
+                "            }\n" +
+                "            else if (document.registerForm.pass.value != document.registerForm.verifyPass.value){\n" +
+                "\n" +
+                "                message = \"Passwords don't match. Please try again.\";\n" +
+                "                document.getElementById(\"demo\").innerHTML = message\n" +
+                "            }\n" +
+                "        }\n" +
+                "        else{\n" +
+                "            message = \"Incomplete fields, please enter all information.\";\n" +
+                "            document.getElementById(\"demo\").innerHTML = message\n" +
+                "        }\n" +
+                "    }\n" +
+                "    function validateInput(){\n" +
+                "        var t=0;\n" +
+                "        if(document.registerForm.fname.value.trim()){t=t+1;}\n" +
+                "        if(document.registerForm.lname.value.trim()){t=t+1;}\n" +
+                "        if(document.registerForm.user.value.trim()){t=t+1;}\n" +
+                "        if(document.registerForm.email.value.trim()){t=t+1;}\n" +
+                "        if(document.registerForm.pass.value.trim()){t=t+1;}\n" +
+                "        if(document.registerForm.verifyPass.value.trim()){t=t+1;}\n" +
+                "        return t;\n" +
+                "    }\n" +
+                "    function redirectBrowse(){\n" +
+                "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
+                "    }\n" +
+                "</script>\n" +
                 "</body>\n" +
                 "</html>");
     }

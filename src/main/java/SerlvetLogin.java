@@ -116,7 +116,7 @@ public class SerlvetLogin extends HttpServlet {
                 "<div class=\"navbar\">\n" +
                 "    <a class=\"active\" href=\"https://cmdmcpharmacywebsite.herokuapp.com/home\"><i class=\"fa fa-fw fa-home\"></i> Home</a>\n" +
                 "    <div class=\"dropdown\">\n" +
-                "        <button class= \"dropbtn\" onclick=\"redirectBrowse()\"><i class=\"fa fa-fw fa-search\"></i>Browse<i class=\"fa fa-caret-down\"></i></button>\n" +
+                "        <button style=\"cursor: pointer;\"class=\"dropbtn\" onclick=\"redirectBrowse()\"><i class=\"fa fa-fw fa-search\"></i>Browse<i class=\"fa fa-caret-down\"></i></button>\n" +
                 "        <div class=\"dropdown-content\">\n" +
                 "            <a href=\"#\">Cold and Flu</a>\n" +
                 "            <a href=\"#\">Skincare</a>\n" +
@@ -139,6 +139,41 @@ public class SerlvetLogin extends HttpServlet {
                 "        <p><input type=\"button\" value=\"Submit\" onClick=\"display();\"></p>\n" +
                 "</form>\n" +
                 "<p id=\"demo\"></p>\n" +
+                "<script>\n" +
+                "    function display() {\n" +
+                "        var a =\"username\";\n" +
+                "        var b =\"pass1\";\n" +
+                "        var x = validateInput();\n" +
+                "        if (x==2){\n" +
+                "            if (a == document.loginForm.user.value && b == document.loginForm.pass.value){\n" +
+                "                message = \"Login successful. Welcome back, \" + document.loginForm.user.value;\n" +
+                "                message += \"!\";\n" +
+                "                document.getElementById(\"demo\").innerHTML = message\n" +
+                "            }\n" +
+                "            else{\n" +
+                "                message = \"Incorrect login details. Please try again.\"\n" +
+                "                document.getElementById(\"demo\").innerHTML = message\n" +
+                "                setTimeout(refreshPage,2000)\n" +
+                "            }\n" +
+                "        }\n" +
+                "        else{\n" +
+                "            message = \"Incomplete fields, please enter all information.\";\n" +
+                "            document.getElementById(\"demo\").innerHTML = message\n" +
+                "        }\n" +
+                "    }\n" +
+                "    function refreshPage(){\n" +
+                "        location.reload()\n" +
+                "    }\n" +
+                "    function validateInput(){\n" +
+                "        var t=0;\n" +
+                "        if(document.loginForm.user.value.trim()){t=t+1;}\n" +
+                "        if(document.loginForm.pass.value.trim()){t=t+1;}\n" +
+                "        return t;\n" +
+                "    }\n" +
+                "    function redirectBrowse(){\n" +
+                "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
+                "    }\n" +
+                "</script>\n" +
                 "</body>\n" +
                 "</html>");
     }

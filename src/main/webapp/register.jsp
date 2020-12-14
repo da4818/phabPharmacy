@@ -110,6 +110,41 @@
         <p><input type="button" value="Submit" onClick="display();"></p>
     </form>
 <p id="demo"></p>
+
+<script>
+    function display() {
+        var x = validateInput();
+        if (x==6){
+            if (document.registerForm.pass.value == document.registerForm.verifyPass.value){
+                message = "Registration successful. Welcome " + document.registerForm.user.value;
+                message += "!";
+                document.getElementById("demo").innerHTML = message
+            }
+            else if (document.registerForm.pass.value != document.registerForm.verifyPass.value){
+
+                message = "Passwords don't match. Please try again.";
+                document.getElementById("demo").innerHTML = message
+            }
+        }
+        else{
+            message = "Incomplete fields, please enter all information.";
+            document.getElementById("demo").innerHTML = message
+        }
+    }
+    function validateInput(){
+        var t=0;
+        if(document.registerForm.fname.value.trim()){t=t+1;}
+        if(document.registerForm.lname.value.trim()){t=t+1;}
+        if(document.registerForm.user.value.trim()){t=t+1;}
+        if(document.registerForm.email.value.trim()){t=t+1;}
+        if(document.registerForm.pass.value.trim()){t=t+1;}
+        if(document.registerForm.verifyPass.value.trim()){t=t+1;}
+        return t;
+    }
+    function redirectBrowse(){
+        window.location.href="https://phabpharmacy.herokuapp.com/browse"
+    }
+</script>
 </body>
 </html>
 
