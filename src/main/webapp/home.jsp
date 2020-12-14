@@ -82,7 +82,7 @@
 </head>
 <body>
 <div class="navbar">
-    <a class="active" href="https://phabpharmacy.herokuapp.com/home"><i class="fa fa-fw fa-home"></i> Home</a>
+    <a class="active"><i class="fa fa-fw fa-home"></i> Home</a>
     <div class="dropdown">
         <button class= "dropbtn" onclick="redirectBrowse()"><i class="fa fa-fw fa-search"></i>Browse<i class="fa fa-caret-down"></i></button>
         <div class="dropdown-content">

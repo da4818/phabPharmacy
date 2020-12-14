@@ -76,42 +76,10 @@
             display: block;
         }
     </style>
-    <script LANGUAGE="JavaScript" type="text/javascript">
-        function display() {
-            var a ="username";
-            var b ="pass1";
-            var x = validateInput();
-            if (x==2){
-                if (a == document.loginForm.user.value && b == document.loginForm.pass.value){
-                    message = "Login successful. Welcome back, " + document.loginForm.user.value;
-                    message += "!";
-                    document.getElementById("demo").innerHTML = message
-                }
-                else{
-                    message = "Incorrect login details. Please try again."
-                    document.getElementById("demo").innerHTML = message
-                    setTimeout(refreshPage,2000)
-                }
-            }
-            else{
-                message = "Incomplete fields, please enter all information.";
-                document.getElementById("demo").innerHTML = message
-            }
-        }
-        function refreshPage(){
-            location.reload()
-        }
-        function validateInput(){
-            var t=0;
-            if(document.loginForm.user.value.trim()){t=t+1;}
-            if(document.loginForm.pass.value.trim()){t=t+1;}
-            return t;
-        }
-    </script>
 </head>
 <body>
 <div class="navbar">
-    <a href="https://phabpharmacy.herokuapp.com/home"><i class="fa fa-fw fa-home"></i> Home</a>
+    <a href="https://phabpharmacy.herokuapp.com/home"><i class="fa fa-fw fa-home"></i>Home</a>
     <div class="dropdown">
         <button class= "dropbtn" onclick="redirectBrowse()"><i class="fa fa-fw fa-search"></i>Browse<i class="fa fa-caret-down"></i></button>
         <div class="dropdown-content">
@@ -123,8 +91,8 @@
             <a href="#">First Aid</a>
         </div>
     </div>
-    <a class="active" href="https://phabpharmacy.herokuapp.com/login"><i class="fa fa-fw fa-user"></i> Login</a>
-    <a href="https://phabpharmacy.herokuapp.com/register"><i class="fa fa-fw fa-user-plus"></i> Register</a>
+    <a class="active"><i class="fa fa-fw fa-user"></i>Login</a>
+    <a href="https://phabpharmacy.herokuapp.com/register"><i class="fa fa-fw fa-user-plus"></i>Register</a>
 </div>
 
 <h1><center>Login</center></h1>

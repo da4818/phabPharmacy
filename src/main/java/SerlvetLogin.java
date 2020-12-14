@@ -14,6 +14,7 @@ public class SerlvetLogin extends HttpServlet {
                 "<html>\n" +
                 "<head>\n" +
                 "    <title>Login</title>\n" +
+                "    <!-- Import Icon Library -->\n" +
                 "    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">\n" +
                 "    <!-- Creates navigation bar -->\n" +
                 "    <style>\n" +
@@ -79,44 +80,12 @@ public class SerlvetLogin extends HttpServlet {
                 "            display: block;\n" +
                 "        }\n" +
                 "    </style>\n" +
-                "    <script LANGUAGE=\"JavaScript\" type=\"text/javascript\">\n" +
-                "        function display() {\n" +
-                "            var a =\"username\";\n" +
-                "            var b =\"pass1\";\n" +
-                "            var x = validateInput();\n" +
-                "            if (x==2){\n" +
-                "                if (a == document.loginForm.user.value && b == document.loginForm.pass.value){\n" +
-                "                    message = \"Login successful. Welcome back, \" + document.loginForm.user.value;\n" +
-                "                    message += \"!\";\n" +
-                "                    document.getElementById(\"demo\").innerHTML = message\n" +
-                "                }\n" +
-                "                else{\n" +
-                "                    message = \"Incorrect login details. Please try again.\"\n" +
-                "                    document.getElementById(\"demo\").innerHTML = message\n" +
-                "                    setTimeout(refreshPage,2000)\n" +
-                "                }\n" +
-                "            }\n" +
-                "            else{\n" +
-                "                message = \"Incomplete fields, please enter all information.\";\n" +
-                "                document.getElementById(\"demo\").innerHTML = message\n" +
-                "            }\n" +
-                "        }\n" +
-                "        function refreshPage(){\n" +
-                "            location.reload()\n" +
-                "        }\n" +
-                "        function validateInput(){\n" +
-                "            var t=0;\n" +
-                "            if(document.loginForm.user.value.trim()){t=t+1;}\n" +
-                "            if(document.loginForm.pass.value.trim()){t=t+1;}\n" +
-                "            return t;\n" +
-                "        }\n" +
-                "    </script>\n" +
                 "</head>\n" +
                 "<body>\n" +
                 "<div class=\"navbar\">\n" +
-                "    <a class=\"active\" href=\"https://cmdmcpharmacywebsite.herokuapp.com/home\"><i class=\"fa fa-fw fa-home\"></i> Home</a>\n" +
+                "    <a href=\"https://phabpharmacy.herokuapp.com/home\"><i class=\"fa fa-fw fa-home\"></i>Home</a>\n" +
                 "    <div class=\"dropdown\">\n" +
-                "        <button style=\"cursor: pointer;\"class=\"dropbtn\" onclick=\"redirectBrowse()\"><i class=\"fa fa-fw fa-search\"></i>Browse<i class=\"fa fa-caret-down\"></i></button>\n" +
+                "        <button class= \"dropbtn\" onclick=\"redirectBrowse()\"><i class=\"fa fa-fw fa-search\"></i>Browse<i class=\"fa fa-caret-down\"></i></button>\n" +
                 "        <div class=\"dropdown-content\">\n" +
                 "            <a href=\"#\">Cold and Flu</a>\n" +
                 "            <a href=\"#\">Skincare</a>\n" +
@@ -126,8 +95,8 @@ public class SerlvetLogin extends HttpServlet {
                 "            <a href=\"#\">First Aid</a>\n" +
                 "        </div>\n" +
                 "    </div>\n" +
-                "    <a href=\"https://phabpharmacy.herokuapp.com/login\"><i class=\"fa fa-fw fa-user\"></i> Login</a>\n" +
-                "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i> Register</a>\n" +
+                "    <a class=\"active\"><i class=\"fa fa-fw fa-user\"></i>Login</a>\n" +
+                "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
                 "</div>\n" +
                 "\n" +
                 "<h1><center>Login</center></h1>\n" +
