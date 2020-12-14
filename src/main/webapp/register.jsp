@@ -2,14 +2,16 @@
   Created by IntelliJ IDEA.
   User: debbie
   Date: 14/12/2020
-  Time: 18:27
+  Time: 19:31
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Home</title>
     <!-- Import Icon Library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Creates navigation bar -->
@@ -76,42 +78,11 @@
             display: block;
         }
     </style>
-    <script LANGUAGE="JavaScript" type="text/javascript">
-        function display() {
-            var a ="username";
-            var b ="pass1";
-            var x = validateInput();
-            if (x==2){
-                if (a == document.loginForm.user.value && b == document.loginForm.pass.value){
-                    message = "Login successful. Welcome back, " + document.loginForm.user.value;
-                    message += "!";
-                    document.getElementById("demo").innerHTML = message
-                }
-                else{
-                    message = "Incorrect login details. Please try again."
-                    document.getElementById("demo").innerHTML = message
-                    setTimeout(refreshPage,2000)
-                }
-            }
-            else{
-                message = "Incomplete fields, please enter all information.";
-                document.getElementById("demo").innerHTML = message
-            }
-        }
-        function refreshPage(){
-            location.reload()
-        }
-        function validateInput(){
-            var t=0;
-            if(document.loginForm.user.value.trim()){t=t+1;}
-            if(document.loginForm.pass.value.trim()){t=t+1;}
-            return t;
-        }
-    </script>
+
 </head>
 <body>
 <div class="navbar">
-    <a class="active" href="https://phabpharmacy.herokuapp.com/home"><i class="fa fa-fw fa-home"></i> Home</a>
+    <a class="active" href="https://cmdmcpharmacywebsite.herokuapp.com/home"><i class="fa fa-fw fa-home"></i> Home</a>
     <div class="dropdown">
         <button class= "dropbtn" onclick="redirectBrowse()"><i class="fa fa-fw fa-search"></i>Browse<i class="fa fa-caret-down"></i></button>
         <div class="dropdown-content">
@@ -127,14 +98,17 @@
     <a href="https://phabpharmacy.herokuapp.com/register"><i class="fa fa-fw fa-user-plus"></i> Register</a>
 </div>
 
-<h1><center>Login</center></h1>
-<p> Login below. If you haven't got an account, <a href="https://phabpharmacy.herokuapp.com/register"> register here.</a> </p>
-
-<form name="loginForm">
+<h1><center>Register</center></h1>
+<p> Register below. If you already have an account, <a href="https://phabpharmacy.herokuapp.com/login"> login here.</a>
+    <form name="registerForm">
+        <input type="text" size="30" class="form-control" name="fname" placeholder="First Name*"><br>
+        <input type="text" size="30" class="form-control" name="lname" placeholder="Last Name*"><br>
         <input type="text" size="30" class="form-control" name="user" placeholder="Username*"><br>
+        <input type="text" size="30" class="form-control" name="email" placeholder="Email Address*"><br>
         <input type="text" size="30" class="form-control" name="pass" placeholder="Password*"><br>
+        <input type="text" size="30" class="form-control" name="verifyPass" placeholder="Verify Password*"><br>
         <p><input type="button" value="Submit" onClick="display();"></p>
-</form>
+    </form>
 <p id="demo"></p>
 </body>
 </html>

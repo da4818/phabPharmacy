@@ -5,12 +5,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns ={"/home"},loadOnStartup = 1)
-public class ServletHome extends HttpServlet {
+@WebServlet(urlPatterns = "/register", loadOnStartup = 0)
+public class ServletRegister extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        DataBase db = new DataBase();
         resp.getWriter().write("<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "<head>\n" +
@@ -102,19 +101,20 @@ public class ServletHome extends HttpServlet {
                 "    <a href=\"https://phabpharmacy.herokuapp.com/login\"><i class=\"fa fa-fw fa-user\"></i> Login</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i> Register</a>\n" +
                 "</div>\n" +
-                "<h1><center> PhabPharmacy </center></h1>\n" +
                 "\n" +
-                "<script>\n" +
-                "    function redirectBrowse(){\n" +
-                "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
-                "    }\n" +
-                "</script>\n" +
+                "<h1><center>Register</center></h1>\n" +
+                "<p> Register below. If you already have an account, <a href=\"https://phabpharmacy.herokuapp.com/login\"> login here.</a>\n" +
+                "    <form name=\"registerForm\">\n" +
+                "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"fname\" placeholder=\"First Name*\"><br>\n" +
+                "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"lname\" placeholder=\"Last Name*\"><br>\n" +
+                "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"user\" placeholder=\"Username*\"><br>\n" +
+                "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"email\" placeholder=\"Email Address*\"><br>\n" +
+                "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"pass\" placeholder=\"Password*\"><br>\n" +
+                "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"verifyPass\" placeholder=\"Verify Password*\"><br>\n" +
+                "        <p><input type=\"button\" value=\"Submit\" onClick=\"display();\"></p>\n" +
+                "    </form>\n" +
+                "<p id=\"demo\"></p>\n" +
                 "</body>\n" +
                 "</html>");
-    }
-
-    @Override
-    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
     }
 }

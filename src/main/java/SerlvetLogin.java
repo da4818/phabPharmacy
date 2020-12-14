@@ -127,21 +127,17 @@ public class SerlvetLogin extends HttpServlet {
                 "            <a href=\"#\">First Aid</a>\n" +
                 "        </div>\n" +
                 "    </div>\n" +
-                "    <a href=\"https://cmdmcpharmacywebsite.herokuapp.com/login\"><i class=\"fa fa-fw fa-user\"></i> Login</a>\n" +
-                "    <a href=\"https://cmdmcpharmacywebsite.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i> Register</a>\n" +
+                "    <a href=\"https://phabpharmacy.herokuapp.com/login\"><i class=\"fa fa-fw fa-user\"></i> Login</a>\n" +
+                "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i> Register</a>\n" +
                 "</div>\n" +
                 "\n" +
                 "<h1><center>Login</center></h1>\n" +
-                "<p> Login below. If you haven't got an account, <a href=\"https://cmdmcpharmacywebsite.herokuapp.com/register\"> register here.</a> </p>\n" +
+                "<p> Login below. If you haven't got an account, <a href=\"https://phabpharmacy.herokuapp.com/register\"> register here.</a> </p>\n" +
                 "\n" +
                 "<form name=\"loginForm\">\n" +
-                "    <div class=\"input-group\">\n" +
-                "        <input type=\"TEXT\" size=\"30\" class=\"form-control\" name=\"user\" placeholder=\"Username*\"><br>\n" +
-                "    </div>\n" +
-                "    <div class=\"input-group\">\n" +
-                "        <input type=\"TEXT\" size=\"30\" class=\"form-control\" name=\"pass\" placeholder=\"Password*\"><br>\n" +
-                "    </div>\n" +
-                "    <p><input TYPE=\"BUTTON\" VALUE=\"Submit\" onClick=\"display();\"></p>\n" +
+                "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"user\" placeholder=\"Username*\"><br>\n" +
+                "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"pass\" placeholder=\"Password*\"><br>\n" +
+                "        <p><input type=\"button\" value=\"Submit\" onClick=\"display();\"></p>\n" +
                 "</form>\n" +
                 "<p id=\"demo\"></p>\n" +
                 "</body>\n" +
