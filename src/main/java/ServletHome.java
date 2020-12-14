@@ -20,6 +20,5 @@ public class ServletHome extends HttpServlet {
         String usern = req.getParameter("user");
         String passw = req.getParameter("pass");
         System.out.println(usern +"," +passw);
-        UserCheck usercheck = new UserCheck();
     }
 }
