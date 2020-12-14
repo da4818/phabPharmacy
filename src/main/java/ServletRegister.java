@@ -86,9 +86,9 @@ public class ServletRegister extends HttpServlet {
                 "</head>\n" +
                 "<body>\n" +
                 "<div class=\"navbar\">\n" +
-                "    <a class=\"active\" href=\"https://cmdmcpharmacywebsite.herokuapp.com/home\"><i class=\"fa fa-fw fa-home\"></i> Home</a>\n" +
+                "    <a href=\"https://cmdmcpharmacywebsite.herokuapp.com/home\"><i class=\"fa fa-fw fa-home\"></i>Home</a>\n" +
                 "    <div class=\"dropdown\">\n" +
-                "        <button class= \"dropbtn\" onclick=\"redirectBrowse()\"><i class=\"fa fa-fw fa-search\"></i>Browse<i class=\"fa fa-caret-down\"></i></button>\n" +
+                "        <button style=\"cursor: pointer;\" class= \"dropbtn\" onclick=\"redirectBrowse()\"><i class=\"fa fa-fw fa-search\"></i>Browse<i class=\"fa fa-caret-down\"></i></button>\n" +
                 "        <div class=\"dropdown-content\">\n" +
                 "            <a href=\"#\">Cold and Flu</a>\n" +
                 "            <a href=\"#\">Skincare</a>\n" +
@@ -98,8 +98,8 @@ public class ServletRegister extends HttpServlet {
                 "            <a href=\"#\">First Aid</a>\n" +
                 "        </div>\n" +
                 "    </div>\n" +
-                "    <a href=\"https://phabpharmacy.herokuapp.com/login\"><i class=\"fa fa-fw fa-user\"></i> Login</a>\n" +
-                "    <a class=\"active\"><i class=\"fa fa-fw fa-user-plus\"></i> Register</a>\n" +
+                "    <a href=\"https://phabpharmacy.herokuapp.com/login\"><i class=\"fa fa-fw fa-user\"></i>Login</a>\n" +
+                "    <a class=\"active\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
                 "</div>\n" +
                 "\n" +
                 "<h1><center>Register</center></h1>\n" +

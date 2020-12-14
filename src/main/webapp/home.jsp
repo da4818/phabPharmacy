@@ -82,9 +82,9 @@
 </head>
 <body>
 <div class="navbar">
-    <a class="active"><i class="fa fa-fw fa-home"></i> Home</a>
+    <a class="active"><i class="fa fa-fw fa-home"></i>Home</a>
     <div class="dropdown">
-        <button class= "dropbtn" onclick="redirectBrowse()"><i class="fa fa-fw fa-search"></i>Browse<i class="fa fa-caret-down"></i></button>
+        <button style="cursor: pointer;" class= "dropbtn" onclick="redirectBrowse()"><i class="fa fa-fw fa-search"></i>Browse<i class="fa fa-caret-down"></i></button>
         <div class="dropdown-content">
             <a href="#">Cold and Flu</a>
             <a href="#">Skincare</a>
@@ -94,8 +94,8 @@
             <a href="#">First Aid</a>
         </div>
     </div>
-    <a href="https://phabpharmacy.herokuapp.com/login"><i class="fa fa-fw fa-user"></i> Login</a>
-    <a href="https://phabpharmacy.herokuapp.com/register"><i class="fa fa-fw fa-user-plus"></i> Register</a>
+    <a href="https://phabpharmacy.herokuapp.com/login"><i class="fa fa-fw fa-user"></i>Login</a>
+    <a href="https://phabpharmacy.herokuapp.com/register"><i class="fa fa-fw fa-user-plus"></i>Register</a>
 </div>
 <h1><center> PhabPharmacy </center></h1>
 

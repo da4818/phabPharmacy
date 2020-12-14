@@ -86,9 +86,9 @@ public class ServletHome extends HttpServlet {
                 "</head>\n" +
                 "<body>\n" +
                 "<div class=\"navbar\">\n" +
-                "    <a class=\"active\"><i class=\"fa fa-fw fa-home\"></i> Home</a>\n" +
+                "    <a class=\"active\"><i class=\"fa fa-fw fa-home\"></i>Home</a>\n" +
                 "    <div class=\"dropdown\">\n" +
-                "        <button class= \"dropbtn\" onclick=\"redirectBrowse()\"><i class=\"fa fa-fw fa-search\"></i>Browse<i class=\"fa fa-caret-down\"></i></button>\n" +
+                "        <button style=\"cursor: pointer;\" class= \"dropbtn\" onclick=\"redirectBrowse()\"><i class=\"fa fa-fw fa-search\"></i>Browse<i class=\"fa fa-caret-down\"></i></button>\n" +
                 "        <div class=\"dropdown-content\">\n" +
                 "            <a href=\"#\">Cold and Flu</a>\n" +
                 "            <a href=\"#\">Skincare</a>\n" +
@@ -98,8 +98,8 @@ public class ServletHome extends HttpServlet {
                 "            <a href=\"#\">First Aid</a>\n" +
                 "        </div>\n" +
                 "    </div>\n" +
-                "    <a href=\"https://phabpharmacy.herokuapp.com/login\"><i class=\"fa fa-fw fa-user\"></i> Login</a>\n" +
-                "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i> Register</a>\n" +
+                "    <a href=\"https://phabpharmacy.herokuapp.com/login\"><i class=\"fa fa-fw fa-user\"></i>Login</a>\n" +
+                "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
                 "</div>\n" +
                 "<h1><center> PhabPharmacy </center></h1>\n" +
                 "\n" +
@@ -109,7 +109,7 @@ public class ServletHome extends HttpServlet {
                 "    }\n" +
                 "</script>\n" +
                 "</body>\n" +
-                "</html>");
+                "</html>\n");
     }
 
     @Override
