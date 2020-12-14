@@ -11,7 +11,7 @@ public class SerlvetLogin extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String usern = req.getParameter("user");
         String passw = req.getParameter("pass");
-        System.out.println(usern +"," +passw);
+        resp.getWriter().write("<html><head><title>Login</title></head><body><h1>Login</h1><h2>Username: " + usern + "</h2></body></html>");
     }
 
     @Override
