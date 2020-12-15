@@ -81,6 +81,18 @@ public class ServletRegister extends HttpServlet {
                 "        .dropdown:hover .dropdown-content {\n" +
                 "            display: block;\n" +
                 "        }\n" +
+                "        .button2{\n" +
+                "            background-color: #51B5C2;\n" +
+                "            border: none;\n" +
+                "            color: white;\n" +
+                "            padding: 5px 25px;\n" +
+                "            text-align: center;\n" +
+                "            text-decoration: none;\n" +
+                "            display: inline-block;\n" +
+                "            font-size: 16px;\n" +
+                "            margin: 4px 2px;\n" +
+                "            cursor: pointer;\n" +
+                "        }\n" +
                 "    </style>\n" +
                 "\n" +
                 "</head>\n" +
@@ -111,7 +123,7 @@ public class ServletRegister extends HttpServlet {
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"email\" placeholder=\"Email Address*\"><br>\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"pass\" placeholder=\"Password*\"><br>\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"verifyPass\" placeholder=\"Verify Password*\"><br>\n" +
-                "        <p><input type=\"button\" value=\"Submit\" onClick=\"display();\"></p>\n" +
+                "        <p><input class=\"button button2\" value=\"Submit\" onClick=\"display();\"></p>\n" +
                 "    </form>\n" +
                 "<p id=\"demo\"></p>\n" +
                 "\n" +

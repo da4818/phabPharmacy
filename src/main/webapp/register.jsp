@@ -77,6 +77,18 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
+        .button2{
+            background-color: #51B5C2;
+            border: none;
+            color: white;
+            padding: 5px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
     </style>
 
 </head>
@@ -107,7 +119,7 @@
         <input type="text" size="30" class="form-control" name="email" placeholder="Email Address*"><br>
         <input type="text" size="30" class="form-control" name="pass" placeholder="Password*"><br>
         <input type="text" size="30" class="form-control" name="verifyPass" placeholder="Verify Password*"><br>
-        <p><input type="button" value="Submit" onClick="display();"></p>
+        <p><input class="button button2" value="Submit" onClick="display();"></p>
     </form>
 <p id="demo"></p>
 
