@@ -131,7 +131,6 @@ public class ServletBrowse extends HttpServlet {
                 "        <input type=\"number\" name =\"VicksF\" size=\"5\" min=\"1\" max=\"5\">\n" +
                 "        <button class=\"button button2\">Add to Basket</button>\n" +
                 "    </div>\n" +
-                "\n" +
                 "    <div id=\"div3\" class =\"boxed\">\n" +
                 "        <label><center>Gsk Night Nurse<br>160ml</center></label><br>\n" +
                 "        <label><center>£8.50</center></label><br>\n" +
@@ -144,7 +143,6 @@ public class ServletBrowse extends HttpServlet {
                 "        <input type=\"number\" name =\"GskN2\" size=\"5\" min=\"1\" max=\"5\">\n" +
                 "        <button class=\"button button2\">Add to Basket</button>\n" +
                 "    </div>\n" +
-                "\n" +
                 "    <div id=\"div5\" class =\"boxed\">\n" +
                 "        <label><center>Lemsip Max<br>16 caps</center></label><br>\n" +
                 "        <label><center>£4.20</center></label><br>\n" +
@@ -157,7 +155,6 @@ public class ServletBrowse extends HttpServlet {
                 "        <input type=\"number\" name =\"LemsipS\" size=\"5\" min=\"1\" max=\"5\">\n" +
                 "        <button class=\"button button2\">Add to Basket</button>\n" +
                 "    </div>\n" +
-                "\n" +
                 "    <div id=\"div7\" class =\"boxed\">\n" +
                 "        <label><center>Sudafed Day & Night<br>16 caps</center></label><br>\n" +
                 "        <label><center>£4.50</center></label><br>\n" +
@@ -170,7 +167,6 @@ public class ServletBrowse extends HttpServlet {
                 "        <input type=\"number\" name =\"SudafedM\" size=\"5\" min=\"1\" max=\"1\">\n" +
                 "        <button class=\"button button2\">Add to Basket</button>\n" +
                 "    </div>\n" +
-                "\n" +
                 "    <div id=\"div9\" class =\"boxed\">\n" +
                 "        <label><center>Benylin Mucus Relief<br>16 caps</center></label><br>\n" +
                 "        <label><center>£4.80</center></label><br>\n" +
@@ -182,7 +178,7 @@ public class ServletBrowse extends HttpServlet {
                 "        <label><center>£6.00</center></label><br>\n" +
                 "        <input type=\"number\" name =\"BenylinF\" size=\"5\" min=\"1\" max=\"5\">\n" +
                 "        <button class=\"button button2\">Add to Basket</button>\n" +
-                "    </div>\n" +
+                "    </div><br>\n" +
                 "<h2 id=\"skincare\">Skincare</h2>\n" +
                 "<div id=\"div11\" class =\"boxed\">\n" +
                 "    <label><center>E45 Psoriasis Cream<br>50ml</center></label><br>\n" +

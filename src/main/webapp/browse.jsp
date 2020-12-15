@@ -127,7 +127,6 @@
         <input type="number" name ="VicksF" size="5" min="1" max="5">
         <button class="button button2">Add to Basket</button>
     </div>
-
     <div id="div3" class ="boxed">
         <label><center>Gsk Night Nurse<br>160ml</center></label><br>
         <label><center>£8.50</center></label><br>
@@ -140,7 +139,6 @@
         <input type="number" name ="GskN2" size="5" min="1" max="5">
         <button class="button button2">Add to Basket</button>
     </div>
-
     <div id="div5" class ="boxed">
         <label><center>Lemsip Max<br>16 caps</center></label><br>
         <label><center>£4.20</center></label><br>
@@ -153,7 +151,6 @@
         <input type="number" name ="LemsipS" size="5" min="1" max="5">
         <button class="button button2">Add to Basket</button>
     </div>
-
     <div id="div7" class ="boxed">
         <label><center>Sudafed Day & Night<br>16 caps</center></label><br>
         <label><center>£4.50</center></label><br>
@@ -166,7 +163,6 @@
         <input type="number" name ="SudafedM" size="5" min="1" max="1">
         <button class="button button2">Add to Basket</button>
     </div>
-
     <div id="div9" class ="boxed">
         <label><center>Benylin Mucus Relief<br>16 caps</center></label><br>
         <label><center>£4.80</center></label><br>
@@ -178,7 +174,7 @@
         <label><center>£6.00</center></label><br>
         <input type="number" name ="BenylinF" size="5" min="1" max="5">
         <button class="button button2">Add to Basket</button>
-    </div>
+    </div><br>
 <h2 id="skincare">Skincare</h2>
 <div id="div11" class ="boxed">
     <label><center>E45 Psoriasis Cream<br>50ml</center></label><br>
