@@ -114,10 +114,10 @@ public class ServletBrowse extends HttpServlet {
                 "        <div class=\"dropdown-content\">\n" +
                 "            <a href=\"#cold_and_flu\">Cold and Flu</a>\n" +
                 "            <a href=\"#skincare\">Skincare</a>\n" +
-                "            <a href=\"#\">Headaches and Pain Relief</a>\n" +
-                "            <a href=\"#\">Digestion</a>\n" +
-                "            <a href=\"#\">Allergy</a>\n" +
-                "            <a href=\"#\">First Aid</a>\n" +
+                "            <a href=\"#headaches_and_pain_relief\">Headaches and Pain Relief</a>\n" +
+                "            <a href=\"#digestion\">Digestion</a>\n" +
+                "            <a href=\"#allergy\">Allergy</a>\n" +
+                "            <a href=\"#first_aid\">First Aid</a>\n" +
                 "        </div>\n" +
                 "    </div>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/login\"><i class=\"fa fa-fw fa-user\"></i>Login</a>\n" +
@@ -187,6 +187,7 @@ public class ServletBrowse extends HttpServlet {
                 "    </div>\n" +
                 "</section>\n" +
                 "\n" +
+                "\n" +
                 "<section>\n" +
                 "    <h2 id=\"skincare\">Skincare</h2>\n" +
                 "    <div id=\"div11\" class =\"boxed\">\n" +
@@ -250,7 +251,150 @@ public class ServletBrowse extends HttpServlet {
                 "        <button class=\"button button2\">Add to Basket</button>\n" +
                 "    </div>\n" +
                 "</section>\n" +
-                "\n" +
+                "<section>\n" +
+                "    <h2 id=\"headaches_and_pain_relief\">Headache and Pain Relief</h2>\n" +
+                "    <div id=\"div21\" class =\"boxed\">\n" +
+                "        <label><center>Nurofen Meltlets<br>16 caps</center></label><br>\n" +
+                "        <label><center>£4.00</center></label><br>\n" +
+                "        <input type=\"number\" name =\"NurofenM\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <button class=\"button button2\">Add to Basket</button>\n" +
+                "    </div>\n" +
+                "    <div id=\"div22\" class =\"boxed\">\n" +
+                "        <label><center>Nurofen Express<br>16 caps</center></label><br>\n" +
+                "        <label><center>£4.00</center></label><br>\n" +
+                "        <input type=\"number\" name =\"NurofenE\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <button class=\"button button2\">Add to Basket</button>\n" +
+                "    </div>\n" +
+                "    <div id=\"div23\" class =\"boxed\">\n" +
+                "        <label><center>Nurofen Max Strength<br>32 caps</center></label><br>\n" +
+                "        <label><center>£7.00</center></label><br>\n" +
+                "        <input type=\"number\" name =\"NurofenMS\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <button class=\"button button2\">Add to Basket</button>\n" +
+                "    </div>\n" +
+                "    <div id=\"div24\" class =\"boxed\">\n" +
+                "        <label><center>Nurofen Standard<br>16 caps</center></label><br>\n" +
+                "        <label><center>£4.00</center></label><br>\n" +
+                "        <input type=\"number\" name =\"NurofenS\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <button class=\"button button2\">Add to Basket</button>\n" +
+                "    </div>\n" +
+                "    <div id=\"div25\" class =\"boxed\">\n" +
+                "        <label><center>Cuprofen Max Strength<br>96 caps</center></label><br>\n" +
+                "        <label><center>£11.00</center></label><br>\n" +
+                "        <input type=\"number\" name =\"Cuprofen\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <button class=\"button button2\">Add to Basket</button>\n" +
+                "    </div>\n" +
+                "    <div id=\"div26\" class =\"boxed\">\n" +
+                "        <label><center>Solpadeine<br>16 caps</center></label><br>\n" +
+                "        <label><center>£2.00</center></label><br>\n" +
+                "        <input type=\"number\" name =\"Solpadeine\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <button class=\"button button2\">Add to Basket</button>\n" +
+                "    </div>\n" +
+                "    <div id=\"div27\" class =\"boxed\">\n" +
+                "        <label><center>Anadin Extra<br>16 caps</center></label><br>\n" +
+                "        <label><center>£2.30</center></label><br>\n" +
+                "        <input type=\"number\" name =\"AnadinE\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <button class=\"button button2\">Add to Basket</button>\n" +
+                "    </div>\n" +
+                "    <div id=\"div28\" class =\"boxed\">\n" +
+                "        <label><center>Anadin Triple Action<br>12 caps</center></label><br>\n" +
+                "        <label><center>£2.00</center></label><br>\n" +
+                "        <input type=\"number\" name =\"AnadinT\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <button class=\"button button2\">Add to Basket</button>\n" +
+                "    </div>\n" +
+                "    <div id=\"div1=29\" class =\"boxed\">\n" +
+                "        <label><center>Anadin Original<br>16 caps</center></label><br>\n" +
+                "        <label><center>£1.80</center></label><br>\n" +
+                "        <input type=\"number\" name =\"AnadinO\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <button class=\"button button2\">Add to Basket</button>\n" +
+                "    </div>\n" +
+                "    <div id=\"div30\" class =\"boxed\">\n" +
+                "        <label><center>Disprin Soluble<br>32 tablets</center></label><br>\n" +
+                "        <label><center>£3.60</center></label><br>\n" +
+                "        <input type=\"number\" name =\"Disprin\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <button class=\"button button2\">Add to Basket</button>\n" +
+                "    </div>\n" +
+                "</section>\n" +
+                "<section>\n" +
+                "    <h2 id=\"digestion\">Digestion</h2>\n" +
+                "    <div id=\"div31\" class =\"boxed\">\n" +
+                "        <label><center>Dioralyte Blackurrent<br>12 sachets</center></label><br>\n" +
+                "        <label><center>£8.00</center></label><br>\n" +
+                "        <input type=\"number\" name =\"DioralyteB\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <button class=\"button button2\">Add to Basket</button>\n" +
+                "    </div>\n" +
+                "    <div id=\"div32\" class =\"boxed\">\n" +
+                "        <label><center>Dioralyte Lemon<br>12 sachets</center></label><br>\n" +
+                "        <label><center>£8.00</center></label><br>\n" +
+                "        <input type=\"number\" name =\"DioralyteL\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <button class=\"button button2\">Add to Basket</button>\n" +
+                "    </div>\n" +
+                "    <div id=\"div33\" class =\"boxed\">\n" +
+                "        <label><center>Gaviscon Chewable<br>24 tablets</center></label><br>\n" +
+                "        <label><center>£4.20</center></label><br>\n" +
+                "        <input type=\"number\" name =\"GavisconC\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <button class=\"button button2\">Add to Basket</button>\n" +
+                "    </div>\n" +
+                "    <div id=\"div34\" class =\"boxed\">\n" +
+                "        <label><center>Gaviscon Advance<br>10 tablets</center></label><br>\n" +
+                "        <label><center>£3.00</center></label><br>\n" +
+                "        <input type=\"number\" name =\"GavisconA\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <button class=\"button button2\">Add to Basket</button>\n" +
+                "    </div>\n" +
+                "    <div id=\"div35\" class =\"boxed\">\n" +
+                "        <label><center>Senokot Max<br>300ml</center></label><br>\n" +
+                "        <label><center>£3.00</center></label><br>\n" +
+                "        <input type=\"number\" name =\"SenokotM\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <button class=\"button button2\">Add to Basket</button>\n" +
+                "    </div>\n" +
+                "</section>\n" +
+                "<section>\n" +
+                "    <h2 id=\"allergy\">Allergy</h2>\n" +
+                "    <div id=\"div41\" class =\"boxed\">\n" +
+                "        <label><center>Benadryl<br>24 caps</center></label><br>\n" +
+                "        <label><center>£9.00</center></label><br>\n" +
+                "        <input type=\"number\" name =\"Benadryl\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <button class=\"button button2\">Add to Basket</button>\n" +
+                "    </div>\n" +
+                "    <div id=\"div42\" class =\"boxed\">\n" +
+                "        <label><center>Piriteze Tabs<br>7 tablets</center></label><br>\n" +
+                "        <label><center>£3.00</center></label><br>\n" +
+                "        <input type=\"number\" name =\"Piriteze\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <button class=\"button button2\">Add to Basket</button>\n" +
+                "    </div>\n" +
+                "    <div id=\"div43\" class =\"boxed\">\n" +
+                "        <label><center>Beconase Relief<br>100 sprays</center></label><br>\n" +
+                "        <label><center>£6.00</center></label><br>\n" +
+                "        <input type=\"number\" name =\"GavisconC\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <button class=\"button button2\">Add to Basket</button>\n" +
+                "    </div>\n" +
+                "</section>\n" +
+                "<section>\n" +
+                "    <h2 id=\"first_aid\">First Aid</h2>\n" +
+                "    <div id=\"div51\" class =\"boxed\">\n" +
+                "        <label><center>Dettol Antiseptic<br>500ml</center></label><br>\n" +
+                "        <label><center>£3.20</center></label><br>\n" +
+                "        <input type=\"number\" name =\"DettolA\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <button class=\"button button2\">Add to Basket</button>\n" +
+                "    </div>\n" +
+                "    <div id=\"div52\" class =\"boxed\">\n" +
+                "        <label><center>Dettol Hand Sanitiser<br>500ml</center></label><br>\n" +
+                "        <label><center>£7.00</center></label><br>\n" +
+                "        <input type=\"number\" name =\"DettolH\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <button class=\"button button2\">Add to Basket</button>\n" +
+                "    </div>\n" +
+                "    <div id=\"div53\" class =\"boxed\">\n" +
+                "        <label><center>Elastoplast Plasters<br>20 plasters</center></label><br>\n" +
+                "        <label><center>£3.00</center></label><br>\n" +
+                "        <input type=\"number\" name =\"Elastoplast\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <button class=\"button button2\">Add to Basket</button>\n" +
+                "    </div>\n" +
+                "    <div id=\"div54\" class =\"boxed\">\n" +
+                "        <label><center>TCP Liquid<br>200ml</center></label><br>\n" +
+                "        <label><center>£4.00</center></label><br>\n" +
+                "        <input type=\"number\" name =\"TCP\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <button class=\"button button2\">Add to Basket</button>\n" +
+                "    </div>\n" +
+                "</section>\n" +
                 "</body>\n" +
                 "</html>");
     }
