@@ -92,7 +92,7 @@ public class SerlvetLogin extends HttpServlet {
                 "</head>\n" +
                 "<body>\n" +
                 "<div class=\"navbar\">\n" +
-                "    <a href=\"https://phabpharmacy.herokuapp.com/home\"><i class=\"fa fa-fw fa-home\"></i>Home</a>\n" +
+                "    <button href=\"https://phabpharmacy.herokuapp.com/home\"><i class=\"fa fa-fw fa-home\"></i>Home</button>\n" +
                 "    <div class=\"dropdown\">\n" +
                 "        <button style=\"cursor: pointer;\" class= \"dropbtn\" onclick=\"redirectBrowse()\"><i class=\"fa fa-fw fa-search\"></i>Browse<i class=\"fa fa-caret-down\"></i></button>\n" +
                 "        <div class=\"dropdown-content\">\n" +
@@ -104,8 +104,8 @@ public class SerlvetLogin extends HttpServlet {
                 "            <a href=\"https://phabpharmacy.herokuapp.com/browse#first_aid\">First Aid</a>\n" +
                 "        </div>\n" +
                 "    </div>\n" +
-                "    <a style=\"background-color: #00B8C5\"><i class=\"fa fa-fw fa-user\"></i>Login</a>\n" +
-                "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
+                "    <button style=\"background-color: #00B8C5\"><i class=\"fa fa-fw fa-user\"></i>Login</button>\n" +
+                "    <button href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</button>\n" +
                 "</div>\n" +
                 "\n" +
                 "<h1><center>Login</center></h1>\n" +
