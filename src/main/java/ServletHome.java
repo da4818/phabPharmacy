@@ -34,7 +34,7 @@ public class ServletHome extends HttpServlet {
                 "            font-size: 17px;\n" +
                 "        }\n" +
                 "        .active {\n" +
-                "            background-color: #6CCCBF;\n" +
+                "            background-color: #51B5C2;\n" +
                 "        }\n" +
                 "        @media screen and (max-width: 500px) {\n" +
                 "            .navbar a {\n" +

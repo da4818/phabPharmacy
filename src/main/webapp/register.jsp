@@ -30,7 +30,7 @@
             font-size: 17px;
         }
         .active {
-            background-color: #6CCCBF;
+            background-color: #51B5C2;
         }
         @media screen and (max-width: 500px) {
             .navbar a {

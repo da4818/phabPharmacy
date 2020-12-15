@@ -34,7 +34,7 @@ public class ServletBrowse extends HttpServlet {
                 "            font-size: 17px;\n" +
                 "        }\n" +
                 "        .active {\n" +
-                "            background-color: #6CCCBF;\n" +
+                "            background-color: #51B5C2;\n" +
                 "        }\n" +
                 "        @media screen and (max-width: 500px) {\n" +
                 "            .navbar a {\n" +
@@ -89,7 +89,7 @@ public class ServletBrowse extends HttpServlet {
                 "            float: left;\n" +
                 "        }\n" +
                 "        .button2{\n" +
-                "            background-color: #4CAF50; /* Green */\n" +
+                "            background-color: #51B5C2;\n" +
                 "            border: none;\n" +
                 "            color: white;\n" +
                 "            padding: 5px 25px;\n" +
@@ -102,6 +102,24 @@ public class ServletBrowse extends HttpServlet {
                 "        }\n" +
                 "        section{\n" +
                 "            display: table-row;\n" +
+                "        }\n" +
+                "        .tooltip{\n" +
+                "            position: relative;\n" +
+                "            display: inline;\n" +
+                "        }\n" +
+                "        .tooltip .tooltiptext {\n" +
+                "            visibility: hidden;\n" +
+                "            width: 120px;\n" +
+                "            background-color: black;\n" +
+                "            color: #fff;\n" +
+                "            text-align: center;\n" +
+                "            border-radius: 6px;\n" +
+                "            padding: 5px 0;\n" +
+                "            position: absolute;\n" +
+                "            z-index: 1;\n" +
+                "        }\n" +
+                "        .tooltip:hover .tooltiptext {\n" +
+                "            visibility: visible;\n" +
                 "        }\n" +
                 "    </style>\n" +
                 "\n" +
@@ -162,13 +180,15 @@ public class ServletBrowse extends HttpServlet {
                 "        <button class=\"button button2\">Add to Basket</button>\n" +
                 "    </div>\n" +
                 "    <div id=\"div7\" class =\"boxed\">\n" +
-                "        <label><center>Sudafed Day & Night<br>16 caps</center></label><br>\n" +
+                "        <label class=\"tooltip\"><center>Sudafed Day & Night<br>16 caps</center>\n" +
+                "            <span class=\"tooltiptext\"><i>Limited to one per customer</i></span></label><br>\n" +
                 "        <label><center>£4.50</center></label><br>\n" +
                 "        <input type=\"number\" name =\"SudafedDN\" size=\"5\" min=\"1\" max=\"1\">\n" +
                 "        <button class=\"button button2\">Add to Basket</button>\n" +
                 "    </div>\n" +
                 "    <div id=\"div8\" class =\"boxed\">\n" +
-                "        <label><center>Sudafed Max<br>16 caps</center></label><br>\n" +
+                "        <label class=\"tooltiptext\"><center>Sudafed Max<br>16 caps</center>\n" +
+                "            <span class=\"tooltiptext\"><i>Limited to one per customer</i></span></label><br>\n" +
                 "        <label><center>£4.20</center></label><br>\n" +
                 "        <input type=\"number\" name =\"SudafedM\" size=\"5\" min=\"1\" max=\"1\">\n" +
                 "        <button class=\"button button2\">Add to Basket</button>\n" +
@@ -278,39 +298,45 @@ public class ServletBrowse extends HttpServlet {
                 "        <button class=\"button button2\">Add to Basket</button>\n" +
                 "    </div>\n" +
                 "    <div id=\"div25\" class =\"boxed\">\n" +
-                "        <label><center>Cuprofen Max Strength<br>96 caps</center></label><br>\n" +
+                "        <label class=\"tooltip\"><center>Cuprofen Max Strength<br>96 caps</center>\n" +
+                "            <span class=\"tooltiptext\"><i>Limited to one per customer</i></span></label><br>\n" +
                 "        <label><center>£11.00</center></label><br>\n" +
-                "        <input type=\"number\" name =\"Cuprofen\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <input type=\"number\" name =\"Cuprofen\" size=\"5\" min=\"1\" max=\"1\">\n" +
                 "        <button class=\"button button2\">Add to Basket</button>\n" +
                 "    </div>\n" +
                 "    <div id=\"div26\" class =\"boxed\">\n" +
-                "        <label><center>Solpadeine<br>16 caps</center></label><br>\n" +
+                "        <label class=\"tooltip\"><center>Solpadeine<br>16 caps</center>\n" +
+                "            <span class=\"tooltiptext\"><i>Limited to one per customer</i></span></label><br>\n" +
                 "        <label><center>£2.00</center></label><br>\n" +
-                "        <input type=\"number\" name =\"Solpadeine\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <input type=\"number\" name =\"Solpadeine\" size=\"5\" min=\"1\" max=\"1\">\n" +
                 "        <button class=\"button button2\">Add to Basket</button>\n" +
                 "    </div>\n" +
                 "    <div id=\"div27\" class =\"boxed\">\n" +
-                "        <label><center>Anadin Extra<br>16 caps</center></label><br>\n" +
+                "        <label class=\"tooltip\"><center>Anadin Extra<br>16 caps</center>\n" +
+                "            <span class=\"tooltiptext\"><i>Limited to one per customer</i></span></label><br>\n" +
                 "        <label><center>£2.30</center></label><br>\n" +
-                "        <input type=\"number\" name =\"AnadinE\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <input type=\"number\" name =\"AnadinE\" size=\"5\" min=\"1\" max=\"1\">\n" +
                 "        <button class=\"button button2\">Add to Basket</button>\n" +
                 "    </div>\n" +
                 "    <div id=\"div28\" class =\"boxed\">\n" +
-                "        <label><center>Anadin Triple Action<br>12 caps</center></label><br>\n" +
+                "        <label class=\"tooltip\"><center>Anadin Triple Action<br>12 caps</center>\n" +
+                "            <span class=\"tooltiptext\"><i>Limited to one per customer</i></span></label><br>\n" +
                 "        <label><center>£2.00</center></label><br>\n" +
-                "        <input type=\"number\" name =\"AnadinT\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <input type=\"number\" name =\"AnadinT\" size=\"5\" min=\"1\" max=\"1\">\n" +
                 "        <button class=\"button button2\">Add to Basket</button>\n" +
                 "    </div>\n" +
                 "    <div id=\"div1=29\" class =\"boxed\">\n" +
-                "        <label><center>Anadin Original<br>16 caps</center></label><br>\n" +
+                "        <label class=\"tooltip\"><center>Anadin Original<br>16 caps</center>\n" +
+                "            <span class=\"tooltiptext\"><i>Limited to one per customer</i></span></label><br>\n" +
                 "        <label><center>£1.80</center></label><br>\n" +
-                "        <input type=\"number\" name =\"AnadinO\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <input type=\"number\" name =\"AnadinO\" size=\"5\" min=\"1\" max=\"1\">\n" +
                 "        <button class=\"button button2\">Add to Basket</button>\n" +
                 "    </div>\n" +
                 "    <div id=\"div30\" class =\"boxed\">\n" +
-                "        <label><center>Disprin Soluble<br>32 tablets</center></label><br>\n" +
+                "        <label class=\"tooltip\"><center>Disprin Soluble<br>32 tablets</center>\n" +
+                "            <span class=\"tooltiptext\"><i>Limited to one per customer</i></span></label><br>\n" +
                 "        <label><center>£3.60</center></label><br>\n" +
-                "        <input type=\"number\" name =\"Disprin\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <input type=\"number\" name =\"Disprin\" size=\"5\" min=\"1\" max=\"1\">\n" +
                 "        <button class=\"button button2\">Add to Basket</button>\n" +
                 "    </div>\n" +
                 "</section>\n" +

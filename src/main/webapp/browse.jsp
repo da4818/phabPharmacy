@@ -30,7 +30,7 @@
             font-size: 17px;
         }
         .active {
-            background-color: #6CCCBF;
+            background-color: #51B5C2;
         }
         @media screen and (max-width: 500px) {
             .navbar a {
@@ -85,7 +85,7 @@
             float: left;
         }
         .button2{
-            background-color: #4CAF50; /* Green */
+            background-color: #51B5C2;
             border: none;
             color: white;
             padding: 5px 25px;
@@ -98,6 +98,24 @@
         }
         section{
             display: table-row;
+        }
+        .tooltip{
+            position: relative;
+            display: inline;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
         }
     </style>
 
@@ -158,13 +176,15 @@
         <button class="button button2">Add to Basket</button>
     </div>
     <div id="div7" class ="boxed">
-        <label><center>Sudafed Day & Night<br>16 caps</center></label><br>
+        <label class="tooltip"><center>Sudafed Day & Night<br>16 caps</center>
+            <span class="tooltiptext"><i>Limited to one per customer</i></span></label><br>
         <label><center>£4.50</center></label><br>
         <input type="number" name ="SudafedDN" size="5" min="1" max="1">
         <button class="button button2">Add to Basket</button>
     </div>
     <div id="div8" class ="boxed">
-        <label><center>Sudafed Max<br>16 caps</center></label><br>
+        <label class="tooltiptext"><center>Sudafed Max<br>16 caps</center>
+            <span class="tooltiptext"><i>Limited to one per customer</i></span></label><br>
         <label><center>£4.20</center></label><br>
         <input type="number" name ="SudafedM" size="5" min="1" max="1">
         <button class="button button2">Add to Basket</button>
@@ -274,39 +294,45 @@
         <button class="button button2">Add to Basket</button>
     </div>
     <div id="div25" class ="boxed">
-        <label><center>Cuprofen Max Strength<br>96 caps</center></label><br>
+        <label class="tooltip"><center>Cuprofen Max Strength<br>96 caps</center>
+            <span class="tooltiptext"><i>Limited to one per customer</i></span></label><br>
         <label><center>£11.00</center></label><br>
-        <input type="number" name ="Cuprofen" size="5" min="1" max="5">
+        <input type="number" name ="Cuprofen" size="5" min="1" max="1">
         <button class="button button2">Add to Basket</button>
     </div>
     <div id="div26" class ="boxed">
-        <label><center>Solpadeine<br>16 caps</center></label><br>
+        <label class="tooltip"><center>Solpadeine<br>16 caps</center>
+            <span class="tooltiptext"><i>Limited to one per customer</i></span></label><br>
         <label><center>£2.00</center></label><br>
-        <input type="number" name ="Solpadeine" size="5" min="1" max="5">
+        <input type="number" name ="Solpadeine" size="5" min="1" max="1">
         <button class="button button2">Add to Basket</button>
     </div>
     <div id="div27" class ="boxed">
-        <label><center>Anadin Extra<br>16 caps</center></label><br>
+        <label class="tooltip"><center>Anadin Extra<br>16 caps</center>
+            <span class="tooltiptext"><i>Limited to one per customer</i></span></label><br>
         <label><center>£2.30</center></label><br>
-        <input type="number" name ="AnadinE" size="5" min="1" max="5">
+        <input type="number" name ="AnadinE" size="5" min="1" max="1">
         <button class="button button2">Add to Basket</button>
     </div>
     <div id="div28" class ="boxed">
-        <label><center>Anadin Triple Action<br>12 caps</center></label><br>
+        <label class="tooltip"><center>Anadin Triple Action<br>12 caps</center>
+            <span class="tooltiptext"><i>Limited to one per customer</i></span></label><br>
         <label><center>£2.00</center></label><br>
-        <input type="number" name ="AnadinT" size="5" min="1" max="5">
+        <input type="number" name ="AnadinT" size="5" min="1" max="1">
         <button class="button button2">Add to Basket</button>
     </div>
     <div id="div1=29" class ="boxed">
-        <label><center>Anadin Original<br>16 caps</center></label><br>
+        <label class="tooltip"><center>Anadin Original<br>16 caps</center>
+            <span class="tooltiptext"><i>Limited to one per customer</i></span></label><br>
         <label><center>£1.80</center></label><br>
-        <input type="number" name ="AnadinO" size="5" min="1" max="5">
+        <input type="number" name ="AnadinO" size="5" min="1" max="1">
         <button class="button button2">Add to Basket</button>
     </div>
     <div id="div30" class ="boxed">
-        <label><center>Disprin Soluble<br>32 tablets</center></label><br>
+        <label class="tooltip"><center>Disprin Soluble<br>32 tablets</center>
+            <span class="tooltiptext"><i>Limited to one per customer</i></span></label><br>
         <label><center>£3.60</center></label><br>
-        <input type="number" name ="Disprin" size="5" min="1" max="5">
+        <input type="number" name ="Disprin" size="5" min="1" max="1">
         <button class="button button2">Add to Basket</button>
     </div>
 </section>
