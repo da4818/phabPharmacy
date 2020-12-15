@@ -100,6 +100,9 @@ public class ServletBrowse extends HttpServlet {
                 "            margin: 4px 2px;\n" +
                 "            cursor: pointer;\n" +
                 "        }\n" +
+                "        section{\n" +
+                "            display: table-row;\n" +
+                "        }\n" +
                 "    </style>\n" +
                 "\n" +
                 "</head>\n" +
@@ -120,14 +123,17 @@ public class ServletBrowse extends HttpServlet {
                 "    <a href=\"https://phabpharmacy.herokuapp.com/login\"><i class=\"fa fa-fw fa-user\"></i>Login</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
                 "</div>\n" +
-                "<h2 id=\"cold_and_flu\">Cold and Flu </h2>\n" +
+                "<section>\n" +
+                "    <h2 id=\"cold_and_flu\">Cold and Flu </h2>\n" +
                 "    <div id=\"div1\" class =\"boxed\">\n" +
-                "        <label><center>Vicks Vaporub<br>100g</center></label><br>    <label><center>£4.50</center></label><br>\n" +
+                "        <label><center>Vicks Vaporub<br>100g</center></label><br>\n" +
+                "        <label><center>£4.50</center></label><br>\n" +
                 "        <input type=\"number\" name =\"VicksV\" size=\"5\" min=\"1\" max=\"5\">\n" +
                 "        <button class=\"button button2\">Add to Basket</button>\n" +
                 "    </div>\n" +
                 "    <div id=\"div2\" class =\"boxed\">\n" +
-                "        <label><center>Vicks First Defence<br>15ml</center></label><br>    <label><center>£6.80</center></label><br>\n" +
+                "        <label><center>Vicks First Defence<br>15ml</center></label><br>\n" +
+                "        <label><center>£6.80</center></label><br>\n" +
                 "        <input type=\"number\" name =\"VicksF\" size=\"5\" min=\"1\" max=\"5\">\n" +
                 "        <button class=\"button button2\">Add to Basket</button>\n" +
                 "    </div>\n" +
@@ -178,68 +184,72 @@ public class ServletBrowse extends HttpServlet {
                 "        <label><center>£6.00</center></label><br>\n" +
                 "        <input type=\"number\" name =\"BenylinF\" size=\"5\" min=\"1\" max=\"5\">\n" +
                 "        <button class=\"button button2\">Add to Basket</button>\n" +
-                "    </div><br>\n" +
-                "<h2 id=\"skincare\">Skincare</h2>\n" +
-                "<div id=\"div11\" class =\"boxed\">\n" +
-                "    <label><center>E45 Psoriasis Cream<br>50ml</center></label><br>\n" +
-                "    <label><center>£20.00</center></label><br>\n" +
-                "    <input type=\"number\" name =\"E45\" size=\"5\" min=\"1\" max=\"5\">\n" +
-                "    <button class=\"button button2\">Add to Basket</button>\n" +
-                "</div>\n" +
-                "<div id=\"div12\" class =\"boxed\">\n" +
-                "    <label><center>Eurax Skin Cream<br>100g</center></label><br>\n" +
-                "    <label><center>£5.70</center></label><br>\n" +
-                "    <input type=\"number\" name =\"Eurax\" size=\"5\" min=\"1\" max=\"5\">\n" +
-                "    <button class=\"button button2\">Add to Basket</button>\n" +
-                "</div>\n" +
-                "<div id=\"div13\" class =\"boxed\">\n" +
-                "    <label><center>Eucerin Skin Relief Cream<br>50ml</center></label><br>\n" +
-                "    <label><center>£9.00</center></label><br>\n" +
-                "    <input type=\"number\" name =\"EucerinS\" size=\"5\" min=\"1\" max=\"5\">\n" +
-                "    <button class=\"button button2\">Add to Basket</button>\n" +
-                "</div>\n" +
-                "<div id=\"div14\" class =\"boxed\">\n" +
-                "    <label><center>Eucerin Face Scrub<br>100ml</center></label><br>\n" +
-                "    <label><center>£7.50</center></label><br>\n" +
-                "    <input type=\"number\" name =\"EucerinF\" size=\"5\" min=\"1\" max=\"5\">\n" +
-                "    <button class=\"button button2\">Add to Basket</button>\n" +
-                "</div>\n" +
-                "<div id=\"div15\" class =\"boxed\">\n" +
-                "    <label><center>Dermalex Psoriasis Cream<br>150ml</center></label><br>\n" +
-                "    <label><center>£30.00</center></label><br>\n" +
-                "    <input type=\"number\" name =\"DermalexP\" size=\"5\" min=\"1\" max=\"5\">\n" +
-                "    <button class=\"button button2\">Add to Basket</button>\n" +
-                "</div>\n" +
-                "<div id=\"div16\" class =\"boxed\">\n" +
-                "    <label><center>Dermalex Repair & Restore<br>100g</center></label><br>\n" +
-                "    <label><center>£12.00</center></label><br>\n" +
-                "    <input type=\"number\" name =\"DermalexR\" size=\"5\" min=\"1\" max=\"5\">\n" +
-                "    <button class=\"button button2\">Add to Basket</button>\n" +
-                "</div>\n" +
-                "<div id=\"div17\" class =\"boxed\">\n" +
-                "    <label><center>Dermalex Eczema Cream<br>30g</center></label><br>\n" +
-                "    <label><center>£12.00</center></label><br>\n" +
-                "    <input type=\"number\" name =\"DermalexE30\" size=\"5\" min=\"1\" max=\"5\">\n" +
-                "    <button class=\"button button2\">Add to Basket</button>\n" +
-                "</div>\n" +
-                "<div id=\"div18\" class =\"boxed\">\n" +
-                "    <label><center>Dermalex Eczema Cream<br>100g</center></label><br>\n" +
-                "    <label><center>£25.00</center></label><br>\n" +
-                "    <input type=\"number\" name =\"DermalexE100\" size=\"5\" min=\"1\" max=\"5\">\n" +
-                "    <button class=\"button button2\">Add to Basket</button>\n" +
-                "</div>\n" +
-                "<div id=\"div19\" class =\"boxed\">\n" +
-                "    <label><center>Cetaphil Moisturising Cream<br>50ml</center></label><br>\n" +
-                "    <label><center>£10.00</center></label><br>\n" +
-                "    <input type=\"number\" name =\"CetaphilM\" size=\"5\" min=\"1\" max=\"5\">\n" +
-                "    <button class=\"button button2\">Add to Basket</button>\n" +
-                "</div>\n" +
-                "<div id=\"div20\" class =\"boxed\">\n" +
-                "    <label><center>Cetaphil Exfoliating Cleanser<br>180ml</center></label><br>\n" +
-                "    <label><center>£12.00</center></label><br>\n" +
-                "    <input type=\"number\" name =\"CetaphilE\" size=\"5\" min=\"1\" max=\"5\">\n" +
-                "    <button class=\"button button2\">Add to Basket</button>\n" +
-                "</div>\n" +
+                "    </div>\n" +
+                "</section>\n" +
+                "\n" +
+                "<section>\n" +
+                "    <h2 id=\"skincare\">Skincare</h2>\n" +
+                "    <div id=\"div11\" class =\"boxed\">\n" +
+                "        <label><center>E45 Psoriasis Cream<br>50ml</center></label><br>\n" +
+                "        <label><center>£20.00</center></label><br>\n" +
+                "        <input type=\"number\" name =\"E45\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <button class=\"button button2\">Add to Basket</button>\n" +
+                "    </div>\n" +
+                "    <div id=\"div12\" class =\"boxed\">\n" +
+                "        <label><center>Eurax Skin Cream<br>100g</center></label><br>\n" +
+                "        <label><center>£5.70</center></label><br>\n" +
+                "        <input type=\"number\" name =\"Eurax\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <button class=\"button button2\">Add to Basket</button>\n" +
+                "    </div>\n" +
+                "    <div id=\"div13\" class =\"boxed\">\n" +
+                "        <label><center>Eucerin Skin Relief Cream<br>50ml</center></label><br>\n" +
+                "        <label><center>£9.00</center></label><br>\n" +
+                "        <input type=\"number\" name =\"EucerinS\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <button class=\"button button2\">Add to Basket</button>\n" +
+                "    </div>\n" +
+                "    <div id=\"div14\" class =\"boxed\">\n" +
+                "        <label><center>Eucerin Face Scrub<br>100ml</center></label><br>\n" +
+                "        <label><center>£7.50</center></label><br>\n" +
+                "        <input type=\"number\" name =\"EucerinF\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <button class=\"button button2\">Add to Basket</button>\n" +
+                "    </div>\n" +
+                "    <div id=\"div15\" class =\"boxed\">\n" +
+                "        <label><center>Dermalex Psoriasis Cream<br>150ml</center></label><br>\n" +
+                "        <label><center>£30.00</center></label><br>\n" +
+                "        <input type=\"number\" name =\"DermalexP\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <button class=\"button button2\">Add to Basket</button>\n" +
+                "    </div>\n" +
+                "    <div id=\"div16\" class =\"boxed\">\n" +
+                "        <label><center>Dermalex Repair & Restore<br>100g</center></label><br>\n" +
+                "        <label><center>£12.00</center></label><br>\n" +
+                "        <input type=\"number\" name =\"DermalexR\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <button class=\"button button2\">Add to Basket</button>\n" +
+                "    </div>\n" +
+                "    <div id=\"div17\" class =\"boxed\">\n" +
+                "        <label><center>Dermalex Eczema Cream<br>30g</center></label><br>\n" +
+                "        <label><center>£12.00</center></label><br>\n" +
+                "        <input type=\"number\" name =\"DermalexE30\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <button class=\"button button2\">Add to Basket</button>\n" +
+                "    </div>\n" +
+                "    <div id=\"div18\" class =\"boxed\">\n" +
+                "        <label><center>Dermalex Eczema Cream<br>100g</center></label><br>\n" +
+                "        <label><center>£25.00</center></label><br>\n" +
+                "        <input type=\"number\" name =\"DermalexE100\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <button class=\"button button2\">Add to Basket</button>\n" +
+                "    </div>\n" +
+                "    <div id=\"div19\" class =\"boxed\">\n" +
+                "        <label><center>Cetaphil Moisturising Cream<br>50ml</center></label><br>\n" +
+                "        <label><center>£10.00</center></label><br>\n" +
+                "        <input type=\"number\" name =\"CetaphilM\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <button class=\"button button2\">Add to Basket</button>\n" +
+                "    </div>\n" +
+                "    <div id=\"div20\" class =\"boxed\">\n" +
+                "        <label><center>Cetaphil Exfoliating Cleanser<br>180ml</center></label><br>\n" +
+                "        <label><center>£12.00</center></label><br>\n" +
+                "        <input type=\"number\" name =\"CetaphilE\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "        <button class=\"button button2\">Add to Basket</button>\n" +
+                "    </div>\n" +
+                "</section>\n" +
                 "\n" +
                 "</body>\n" +
                 "</html>");
