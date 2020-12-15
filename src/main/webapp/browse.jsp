@@ -29,9 +29,6 @@
             text-decoration: none;
             font-size: 17px;
         }
-        .active {
-            background-color: #51B5C2;
-        }
         @media screen and (max-width: 500px) {
             .navbar a {
                 float: none;
@@ -94,7 +91,7 @@
             float: left;
         }
         .button2{
-            background-color: #51B5C2;
+            background-color: #00B8C5;
             border: none;
             color: white;
             padding: 5px 25px;
@@ -133,7 +130,7 @@
 <div class="navbar">
     <a href="https://phabpharmacy.herokuapp.com/home"><i class="fa fa-fw fa-home"></i>Home</a>
     <div class="dropdown">
-        <button style="background-color: #51B5C2;"class= "dropbtn"><i class="fa fa-fw fa-search"></i>Browse<i class="fa fa-caret-down"></i></button>
+        <button style="background-color: #00B8C5" class= "dropbtn"><i class="fa fa-fw fa-search"></i>Browse<i class="fa fa-caret-down"></i></button>
         <div class="dropdown-content">
             <a href="#cold_and_flu">Cold and Flu</a>
             <a href="#skincare">Skincare</a>
@@ -175,7 +172,7 @@
     <div id="div4" class ="relative">
         <label><center>Gsk Night Nurse<br>200ml</center></label><br>
         <label><center>£9.00</center></label><br>
-        <<div class="absolute">
+        <div class="absolute">
         <input type="number" name ="GskN2" size="5" min="1" max="5">
         <button class="button button2">Add to Basket</button>
     </div>
@@ -206,7 +203,7 @@
         </div>
     </div>
     <div id="div8" class ="relative">
-        <label class="tooltiptext"><center>Sudafed Max<br>16 caps</center>
+        <label class="tooltip"><center>Sudafed Max<br>16 caps</center>
             <span class="tooltiptext"><i>Limited to one per customer</i></span></label><br>
         <label><center>£4.20</center></label><br>
         <div class="absolute">

@@ -33,9 +33,6 @@ public class ServletHome extends HttpServlet {
                 "            text-decoration: none;\n" +
                 "            font-size: 17px;\n" +
                 "        }\n" +
-                "        .active {\n" +
-                "            background-color: #51B5C2;\n" +
-                "        }\n" +
                 "        @media screen and (max-width: 500px) {\n" +
                 "            .navbar a {\n" +
                 "                float: none;\n" +
@@ -86,13 +83,13 @@ public class ServletHome extends HttpServlet {
                 "</head>\n" +
                 "<body>\n" +
                 "<div class=\"navbar\">\n" +
-                "    <a class=\"active\"><i class=\"fa fa-fw fa-home\"></i>Home</a>\n" +
+                "    <a style=\"background-color: #00B8C5\"><i class=\"fa fa-fw fa-home\"></i>Home</a>\n" +
                 "    <div class=\"dropdown\">\n" +
                 "        <button style=\"cursor: pointer;\" class= \"dropbtn\" onclick=\"redirectBrowse()\"><i class=\"fa fa-fw fa-search\"></i>Browse<i class=\"fa fa-caret-down\"></i></button>\n" +
                 "        <div class=\"dropdown-content\">\n" +
                 "            <a href=\"https://phabpharmacy.herokuapp.com/browse#cold_and_flu\">Cold and Flu</a>\n" +
                 "            <a href=\"https://phabpharmacy.herokuapp.com/browse#skincare\">Skincare</a>\n" +
-                "            <a href=\"https://phabpharmacy.herokuapp.com/browse#headaches_and_pain_relief\">Headaches and Pain Relief</a>\n" +
+                "            <a href=\"https://phabpharmacy.herokuapp.com/browse#headaches_and_pain_relief\">Headaches and Pain Relief</a>\\n\" +\n" +
                 "            <a href=\"https://phabpharmacy.herokuapp.com/browse#digestion\">Digestion</a>\n" +
                 "            <a href=\"https://phabpharmacy.herokuapp.com/browse#allergy\">Allergy</a>\n" +
                 "            <a href=\"https://phabpharmacy.herokuapp.com/browse#first_aid\">First Aid</a>\n" +
@@ -109,7 +106,7 @@ public class ServletHome extends HttpServlet {
                 "    }\n" +
                 "</script>\n" +
                 "</body>\n" +
-                "</html>\n");
+                "</html>");
     }
 
     @Override

@@ -27,9 +27,6 @@
             text-decoration: none;
             font-size: 17px;
         }
-        .active {
-            background-color: #51B5C2;
-        }
         @media screen and (max-width: 500px) {
             .navbar a {
                 float: none;
@@ -76,7 +73,7 @@
             display: block;
         }
         .button2{
-            background-color: #51B5C2;
+            background-color: #00B8C5;
             border: none;
             color: white;
             padding: 5px 25px;
@@ -103,7 +100,7 @@
             <a href="https://phabpharmacy.herokuapp.com/browse#first_aid">First Aid</a>
         </div>
     </div>
-    <a class="active"><i class="fa fa-fw fa-user"></i>Login</a>
+    <a style="background-color: #00B8C5"><i class="fa fa-fw fa-user"></i>Login</a>
     <a href="https://phabpharmacy.herokuapp.com/register"><i class="fa fa-fw fa-user-plus"></i>Register</a>
 </div>
 

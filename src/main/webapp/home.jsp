@@ -29,9 +29,6 @@
             text-decoration: none;
             font-size: 17px;
         }
-        .active {
-            background-color: #51B5C2;
-        }
         @media screen and (max-width: 500px) {
             .navbar a {
                 float: none;
@@ -82,7 +79,7 @@
 </head>
 <body>
 <div class="navbar">
-    <a class="active"><i class="fa fa-fw fa-home"></i>Home</a>
+    <a style="background-color: #00B8C5"><i class="fa fa-fw fa-home"></i>Home</a>
     <div class="dropdown">
         <button style="cursor: pointer;" class= "dropbtn" onclick="redirectBrowse()"><i class="fa fa-fw fa-search"></i>Browse<i class="fa fa-caret-down"></i></button>
         <div class="dropdown-content">

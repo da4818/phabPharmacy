@@ -33,9 +33,6 @@ public class ServletBrowse extends HttpServlet {
                 "            text-decoration: none;\n" +
                 "            font-size: 17px;\n" +
                 "        }\n" +
-                "        .active {\n" +
-                "            background-color: #51B5C2;\n" +
-                "        }\n" +
                 "        @media screen and (max-width: 500px) {\n" +
                 "            .navbar a {\n" +
                 "                float: none;\n" +
@@ -98,7 +95,7 @@ public class ServletBrowse extends HttpServlet {
                 "            float: left;\n" +
                 "        }\n" +
                 "        .button2{\n" +
-                "            background-color: #51B5C2;\n" +
+                "            background-color: #00B8C5;\n" +
                 "            border: none;\n" +
                 "            color: white;\n" +
                 "            padding: 5px 25px;\n" +
@@ -137,7 +134,7 @@ public class ServletBrowse extends HttpServlet {
                 "<div class=\"navbar\">\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/home\"><i class=\"fa fa-fw fa-home\"></i>Home</a>\n" +
                 "    <div class=\"dropdown\">\n" +
-                "        <button style=\"background-color: #51B5C2;\"class= \"dropbtn\"><i class=\"fa fa-fw fa-search\"></i>Browse<i class=\"fa fa-caret-down\"></i></button>\n" +
+                "        <button style=\"background-color: #00B8C5\" class= \"dropbtn\"><i class=\"fa fa-fw fa-search\"></i>Browse<i class=\"fa fa-caret-down\"></i></button>\n" +
                 "        <div class=\"dropdown-content\">\n" +
                 "            <a href=\"#cold_and_flu\">Cold and Flu</a>\n" +
                 "            <a href=\"#skincare\">Skincare</a>\n" +
@@ -179,7 +176,7 @@ public class ServletBrowse extends HttpServlet {
                 "    <div id=\"div4\" class =\"relative\">\n" +
                 "        <label><center>Gsk Night Nurse<br>200ml</center></label><br>\n" +
                 "        <label><center>£9.00</center></label><br>\n" +
-                "        <<div class=\"absolute\">\n" +
+                "        <div class=\"absolute\">\n" +
                 "        <input type=\"number\" name =\"GskN2\" size=\"5\" min=\"1\" max=\"5\">\n" +
                 "        <button class=\"button button2\">Add to Basket</button>\n" +
                 "    </div>\n" +
@@ -210,7 +207,7 @@ public class ServletBrowse extends HttpServlet {
                 "        </div>\n" +
                 "    </div>\n" +
                 "    <div id=\"div8\" class =\"relative\">\n" +
-                "        <label class=\"tooltiptext\"><center>Sudafed Max<br>16 caps</center>\n" +
+                "        <label class=\"tooltip\"><center>Sudafed Max<br>16 caps</center>\n" +
                 "            <span class=\"tooltiptext\"><i>Limited to one per customer</i></span></label><br>\n" +
                 "        <label><center>£4.20</center></label><br>\n" +
                 "        <div class=\"absolute\">\n" +
