@@ -86,12 +86,12 @@
     <div class="dropdown">
         <button style="cursor: pointer;" class= "dropbtn" onclick="redirectBrowse()"><i class="fa fa-fw fa-search"></i>Browse<i class="fa fa-caret-down"></i></button>
         <div class="dropdown-content">
-            <a href="#">Cold and Flu</a>
-            <a href="#">Skincare</a>
-            <a href="#">Headaches and Pain Relief</a>
-            <a href="#">Digestion</a>
-            <a href="#">Allergy</a>
-            <a href="#">First Aid</a>
+            <a href="https://phabpharmacy.herokuapp.com/browse#cold_and_flu">Cold and Flu</a>
+            <a href="https://phabpharmacy.herokuapp.com/browse#skincare">Skincare</a>
+            <a href="https://phabpharmacy.herokuapp.com/browse#headaches_and_pain_relief">Headaches and Pain Relief</a>\n" +
+            <a href="https://phabpharmacy.herokuapp.com/browse#digestion">Digestion</a>
+            <a href="https://phabpharmacy.herokuapp.com/browse#allergy">Allergy</a>
+            <a href="https://phabpharmacy.herokuapp.com/browse#first_aid">First Aid</a>
         </div>
     </div>
     <a href="https://phabpharmacy.herokuapp.com/login"><i class="fa fa-fw fa-user"></i>Login</a>
