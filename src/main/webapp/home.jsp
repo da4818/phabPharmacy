@@ -79,7 +79,7 @@
 </head>
 <body>
 <div class="navbar">
-    <button style="background-color: #00B8C5"><i class="fa fa-fw fa-home"></i>Home</button>
+    <a style="background-color: #00B8C5"><i class="fa fa-fw fa-home"></i>Home</a>
     <div class="dropdown">
         <button style="cursor: pointer;" class= "dropbtn" onclick="redirectBrowse()"><i class="fa fa-fw fa-search"></i>Browse<i class="fa fa-caret-down"></i></button>
         <div class="dropdown-content">
@@ -91,8 +91,8 @@
             <a href="https://phabpharmacy.herokuapp.com/browse#first_aid">First Aid</a>
         </div>
     </div>
-    <button href="https://phabpharmacy.herokuapp.com/login"><i class="fa fa-fw fa-user"></i>Login</button>
-    <button href="https://phabpharmacy.herokuapp.com/register"><i class="fa fa-fw fa-user-plus"></i>Register</button>
+    <a href="https://phabpharmacy.herokuapp.com/login"><i class="fa fa-fw fa-user"></i>Login</a>
+    <a href="https://phabpharmacy.herokuapp.com/register"><i class="fa fa-fw fa-user-plus"></i>Register</a>
 </div>
 <h1><center> PhabPharmacy </center></h1>
 
