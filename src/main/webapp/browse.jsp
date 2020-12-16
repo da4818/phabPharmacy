@@ -150,7 +150,7 @@
         <label><center>Vicks Vaporub<br>100g</center></label><br>
         <label><center>£4.50</center></label><br>
         <div class="absolute">
-            <input id="number1" type="number" name ="VicksV" size="5" min="1" max="5">
+            <input id="number1" type="number" name ="VicksV" size="5" min="0" max="5">
             <button onclick="addBasket()" class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -158,7 +158,7 @@
         <label><center>Vicks First Defence<br>15ml</center></label><br>
         <label><center>£6.80</center></label><br>
         <div class="absolute">
-            <input type="number" name ="VicksF" size="5" min="1" max="5">
+            <input type="number" name ="VicksF" size="5" min="0" max="5">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -166,7 +166,7 @@
         <label><center>Gsk Night Nurse<br>160ml</center></label><br>
         <label><center>£8.50</center></label><br>
         <div class="absolute">
-            <input type="number" name ="GskN" size="5" min="1" max="5">
+            <input type="number" name ="GskN" size="5" min="0" max="5">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -174,7 +174,7 @@
         <label><center>Gsk Night Nurse<br>200ml</center></label><br>
         <label><center>£9.00</center></label><br>
         <div class="absolute">
-        <input type="number" name ="GskN2" size="5" min="1" max="5">
+        <input type="number" name ="GskN2" size="5" min="0" max="5">
         <button class="button button2">Add to Basket</button>
     </div>
     </div>
@@ -182,7 +182,7 @@
         <label><center>Lemsip Max<br>16 caps</center></label><br>
         <label><center>£4.20</center></label><br>
         <div class="absolute">
-            <input type="number" name ="LemsipM" size="5" min="1" max="5">
+            <input type="number" name ="LemsipM" size="5" min="0" max="5">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -190,7 +190,7 @@
         <label><center>Lemsip Standard<br>10 capsules</center></label><br>
         <label><center>£4.50</center></label><br>
         <div class="absolute">
-            <input type="number" name ="LemsipS" size="5" min="1" max="5">
+            <input type="number" name ="LemsipS" size="5" min="0" max="5">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -199,7 +199,7 @@
             <span class="tooltiptext"><i>Limited to one per customer</i></span></label><br>
         <label><center>£4.50</center></label><br>
         <div class="absolute">
-            <input type="number" name ="SudafedDN" size="5" min="1" max="1">
+            <input type="number" name ="SudafedDN" size="5" min="0" max="1">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -208,7 +208,7 @@
             <span class="tooltiptext"><i>Limited to one per customer</i></span></label><br>
         <label><center>£4.20</center></label><br>
         <div class="absolute">
-            <input type="number" name ="SudafedM" size="5" min="1" max="1">
+            <input type="number" name ="SudafedM" size="5" min="0" max="1">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -216,7 +216,7 @@
         <label><center>Benylin Mucus Relief<br>16 caps</center></label><br>
         <label><center>£4.80</center></label><br>
         <div class="absolute">
-            <input type="number" name ="BenylinM" size="5" min="1" max="5">
+            <input type="number" name ="BenylinM" size="5" min="0" max="5">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -224,7 +224,7 @@
         <label><center>Benylin 4 Flu<br>24 caps</center></label><br>
         <label><center>£6.00</center></label><br>
         <div class="absolute">
-            <input type="number" name ="BenylinF" size="5" min="1" max="5">
+            <input type="number" name ="BenylinF" size="5" min="0" max="5">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -237,7 +237,7 @@
         <label><center>E45 Psoriasis Cream<br>50ml</center></label><br>
         <label><center>£20.00</center></label><br>
         <div class="absolute">
-            <input type="number" name ="E45" size="5" min="1" max="5">
+            <input type="number" name ="E45" size="5" min="0" max="5">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -245,7 +245,7 @@
         <label><center>Eurax Skin Cream<br>100g</center></label><br>
         <label><center>£5.70</center></label><br>
         <div class="absolute">
-            <input type="number" name ="EuraxS" size="5" min="1" max="5">
+            <input type="number" name ="EuraxS" size="5" min="0" max="5">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -253,7 +253,7 @@
         <label><center>Eucerin Skin Relief Cream<br>50ml</center></label><br>
         <label><center>£9.00</center></label><br>
         <div class="absolute">
-            <input type="number" name ="EucerinS" size="5" min="1" max="5">
+            <input type="number" name ="EucerinS" size="5" min="0" max="5">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -261,7 +261,7 @@
         <label><center>Eucerin Face Scrub<br>100ml</center></label><br>
         <label><center>£7.50</center></label><br>
         <div class="absolute">
-            <input type="number" name ="EucerinF" size="5" min="1" max="5">
+            <input type="number" name ="EucerinF" size="5" min="0" max="5">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -269,7 +269,7 @@
         <label><center>Dermalex Psoriasis Cream<br>150ml</center></label><br>
         <label><center>£30.00</center></label><br>
         <div class="absolute">
-            <input type="number" name ="DermalexP" size="5" min="1" max="5">
+            <input type="number" name ="DermalexP" size="5" min="0" max="5">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -277,7 +277,7 @@
         <label><center>Dermalex Repair & Restore<br>100g</center></label><br>
         <label><center>£12.00</center></label><br>
         <div class="absolute">
-            <input type="number" name ="DermalexR" size="5" min="1" max="5">
+            <input type="number" name ="DermalexR" size="5" min="0" max="5">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -285,7 +285,7 @@
         <label><center>Dermalex Eczema Cream<br>30g</center></label><br>
         <label><center>£12.00</center></label><br>
         <div class="absolute">
-            <input type="number" name ="Dermalex30" size="5" min="1" max="5">
+            <input type="number" name ="Dermalex30" size="5" min="0" max="5">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -293,7 +293,7 @@
         <label><center>Dermalex Eczema Cream<br>100g</center></label><br>
         <label><center>£25.00</center></label><br>
         <div class="absolute">
-            <input type="number" name ="Dermalex100" size="5" min="1" max="5">
+            <input type="number" name ="Dermalex100" size="5" min="0" max="5">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -301,7 +301,7 @@
         <label><center>Cetaphil Moisturising Cream<br>50ml</center></label><br>
         <label><center>£10.00</center></label><br>
         <div class="absolute">
-            <input type="number" name ="CetaphilM" size="5" min="1" max="5">
+            <input type="number" name ="CetaphilM" size="5" min="0" max="5">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -309,7 +309,7 @@
         <label><center>Cetaphil Exfoliating Cleanser<br>180ml</center></label><br>
         <label><center>£12.00</center></label><br>
         <div class="absolute">
-            <input type="number" name ="CetaphilE" size="5" min="1" max="5">
+            <input type="number" name ="CetaphilE" size="5" min="0" max="5">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -320,7 +320,7 @@
         <label><center>Nurofen Meltlets<br>16 caps</center></label><br>
         <label><center>£4.00</center></label><br>
         <div class="absolute">
-            <input type="number" name ="NurofenM" size="5" min="1" max="5">
+            <input type="number" name ="NurofenM" size="5" min="0" max="5">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -328,7 +328,7 @@
         <label><center>Nurofen Express<br>16 caps</center></label><br>
         <label><center>£4.00</center></label><br>
         <div class="absolute">
-            <input type="number" name ="NurofenE" size="5" min="1" max="5">
+            <input type="number" name ="NurofenE" size="5" min="0" max="5">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -336,7 +336,7 @@
         <label><center>Nurofen Max Strength<br>32 caps</center></label><br>
         <label><center>£7.00</center></label><br>
         <div class="absolute">
-            <input type="number" name ="NurofenMS" size="5" min="1" max="5">
+            <input type="number" name ="NurofenMS" size="5" min="0" max="5">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -344,7 +344,7 @@
         <label><center>Nurofen Standard<br>16 caps</center></label><br>
         <label><center>£4.00</center></label><br>
         <div class="absolute">
-            <input type="number" name ="NurofenS" size="5" min="1" max="5">
+            <input type="number" name ="NurofenS" size="5" min="0" max="5">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -353,7 +353,7 @@
             <span class="tooltiptext"><i>Limited to one per customer</i></span></label><br>
         <label><center>£11.00</center></label><br>
         <div class="absolute">
-            <input type="number" name ="Cuprofen" size="5" min="1" max="1">
+            <input type="number" name ="Cuprofen" size="5" min="0" max="1">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -362,7 +362,7 @@
             <span class="tooltiptext"><i>Limited to one per customer</i></span></label><br>
         <label><center>£2.00</center></label><br>
         <div class="absolute">
-            <input type="number" name ="Solpadeine" size="5" min="1" max="1">
+            <input type="number" name ="Solpadeine" size="5" min="0" max="1">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -371,7 +371,7 @@
             <span class="tooltiptext"><i>Limited to one per customer</i></span></label><br>
         <label><center>£2.30</center></label><br>
         <div class="absolute">
-            <input type="number" name ="AnadinE" size="5" min="1" max="1">
+            <input type="number" name ="AnadinE" size="5" min="0" max="1">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -380,7 +380,7 @@
             <span class="tooltiptext"><i>Limited to one per customer</i></span></label><br>
         <label><center>£2.00</center></label><br>
         <div class="absolute">
-            <input type="number" name ="AnadinT" size="5" min="1" max="1">
+            <input type="number" name ="AnadinT" size="5" min="0" max="1">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -389,7 +389,7 @@
             <span class="tooltiptext"><i>Limited to one per customer</i></span></label><br>
         <label><center>£1.80</center></label><br>
         <div class="absolute">
-            <input type="number" name ="AnadinO" size="5" min="1" max="1">
+            <input type="number" name ="AnadinO" size="5" min="0" max="1">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -398,7 +398,7 @@
             <span class="tooltiptext"><i>Limited to one per customer</i></span></label><br>
         <label><center>£3.60</center></label><br>
         <div class="absolute">
-            <input type="number" name ="Disprin" size="5" min="1" max="1">
+            <input type="number" name ="Disprin" size="5" min="0" max="1">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -410,7 +410,7 @@
         <label><center>Dioralyte Blackurrent<br>12 sachets</center></label><br>
         <label><center>£8.00</center></label><br>
         <div class="absolute">
-            <input type="number" name ="DioralyteB" size="5" min="1" max="5">
+            <input type="number" name ="DioralyteB" size="5" min="0" max="5">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -418,7 +418,7 @@
         <label><center>Dioralyte Lemon<br>12 sachets</center></label><br>
         <label><center>£8.00</center></label><br>
         <div class="absolute">
-            <input type="number" name ="DioralyteL" size="5" min="1" max="5">
+            <input type="number" name ="DioralyteL" size="5" min="0" max="5">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -426,7 +426,7 @@
         <label><center>Gaviscon Chewable<br>24 tablets</center></label><br>
         <label><center>£4.20</center></label><br>
         <div class="absolute">
-            <input type="number" name ="GavisconC" size="5" min="1" max="5">
+            <input type="number" name ="GavisconC" size="5" min="0" max="5">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -434,7 +434,7 @@
         <label><center>Gaviscon Advance<br>10 tablets</center></label><br>
         <label><center>£3.00</center></label><br>
         <div class="absolute">
-            <input type="number" name ="GavisconA" size="5" min="1" max="5">
+            <input type="number" name ="GavisconA" size="5" min="0" max="5">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -442,7 +442,7 @@
         <label><center>Senokot Max<br>300ml</center></label><br>
         <label><center>£3.00</center></label><br>
         <div class="absolute">
-            <input type="number" name ="Senokot" size="5" min="1" max="5">
+            <input type="number" name ="Senokot" size="5" min="0" max="5">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -453,7 +453,7 @@
         <label><center>Benadryl<br>24 caps</center></label><br>
         <label><center>£9.00</center></label><br>
         <div class="absolute">
-            <input type="number" name ="Benadryl" size="5" min="1" max="5">
+            <input type="number" name ="Benadryl" size="5" min="0" max="5">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -461,7 +461,7 @@
         <label><center>Piriteze Tabs<br>7 tablets</center></label><br>
         <label><center>£3.00</center></label><br>
         <div class="absolute">
-            <input type="number" name ="Piriteze" size="5" min="1" max="5">
+            <input type="number" name ="Piriteze" size="5" min="0" max="5">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -469,7 +469,7 @@
         <label><center>Beconase Relief<br>100 sprays</center></label><br>
         <label><center>£6.00</center></label><br>
         <div class="absolute">
-            <input type="number" name ="BeconaseR" size="5" min="1" max="5">
+            <input type="number" name ="BeconaseR" size="5" min="0" max="5">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -480,7 +480,7 @@
         <label><center>Dettol Antiseptic<br>500ml</center></label><br>
         <label><center>£3.20</center></label><br>
         <div class="absolute">
-            <input type="number" name ="DettolA" size="5" min="1" max="5">
+            <input type="number" name ="DettolA" size="5" min="0" max="5">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -488,7 +488,7 @@
         <label><center>Dettol Hand Sanitiser<br>500ml</center></label><br>
         <label><center>£7.00</center></label><br>
         <div class="absolute">
-            <input type="number" name ="DettolH" size="5" min="1" max="5">
+            <input type="number" name ="DettolH" size="5" min="0" max="5">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -496,7 +496,7 @@
         <label><center>Elastoplast Plasters<br>20 plasters</center></label><br>
         <label><center>£3.00</center></label><br>
         <div class="absolute">
-            <input type="number" name ="Elastoplast" size="5" min="1" max="5">
+            <input type="number" name ="Elastoplast" size="5" min="0" max="5">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
@@ -504,7 +504,7 @@
         <label><center>TCP Liquid<br>200ml</center></label><br>
         <label><center>£4.00</center></label><br>
         <div class="absolute">
-            <input type="number" name ="TCP" size="5" min="1" max="5">
+            <input type="number" name ="TCP" size="5" min="0" max="5">
             <button class="button button2">Add to Basket</button>
         </div>
     </div>
