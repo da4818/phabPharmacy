@@ -115,7 +115,7 @@
         <input type="text" size="30" class="form-control" name="email" placeholder="Email Address*"><br>
         <input type="text" size="30" class="form-control" name="pass" placeholder="Password*"><br>
         <input type="text" size="30" class="form-control" name="verifyPass" placeholder="Verify Password*"><br>
-        <p><input class="button button2" value="Submit" onClick="display();"></p>
+        <button class=" button2" value="Submit" onClick="display();"></button>
         <h2>Order Info</h2>
         <input type="text" size="30" class="form-control" name="sortcode" placeholder="Sort Code*"><br>
         <input type="text" size="30" class="form-control" name="cardno" placeholder="Card Number*"><br>
@@ -128,7 +128,7 @@
         var x = validateInput();
         if (x==8){
             if (document.registerForm.pass.value == document.registerForm.verifyPass.value){
-                message = "Registration successful. Welcome " + document.registerForm.user.value;
+                message = "Registration successful. Welcome " + document.registerForm.fname.value;
                 message += "!";
                 document.getElementById("demo").innerHTML = message
             }
