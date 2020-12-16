@@ -123,7 +123,7 @@ public class ServletRegister extends HttpServlet {
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"sortcode\" placeholder=\"Sort Code*\"><br>\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"cardno\" placeholder=\"Card Number*\"><br>\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"address\" placeholder=\"Postcode*\"><br>\n" +
-                "        <p><input class=\"submit button2\" value=\"Submit\" onClick=\"display();\"></p>\n" +
+                "        <input class=\"button2\" value=\"Submit\" onClick=\"display();\">\n" +
                 "    </form>\n" +
                 "<p id=\"demo\"></p>\n" +
                 "\n" +
@@ -154,9 +154,9 @@ public class ServletRegister extends HttpServlet {
                 "        if(document.registerForm.email.value.trim()){t=t+1;}\n" +
                 "        if(document.registerForm.pass.value.trim()){t=t+1;}\n" +
                 "        if(document.registerForm.verifyPass.value.trim()){t=t+1;}\n" +
-                "        if(document.registerForm.pass.sortcode.trim()){t=t+1;}\n" +
-                "        if(document.registerForm.pass.cardno.trim()){t=t+1;}\n" +
-                "        if(document.registerForm.pass.address.trim()){t=t+1;}\n" +
+                "        if(document.registerForm.sortcode.value.trim()){t=t+1;}\n" +
+                "        if(document.registerForm.cardno.value.trim()){t=t+1;}\n" +
+                "        if(document.registerForm.address.value.trim()){t=t+1;}\n" +
                 "        return t;\n" +
                 "    }\n" +
                 "    function redirectBrowse(){\n" +

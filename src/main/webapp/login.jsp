@@ -110,7 +110,7 @@
 <form name="loginForm">
         <input type="text" size="30" class="form-control" name="email" placeholder="Email Address*"><br>
         <input type="text" size="30" class="form-control" name="pass" placeholder="Password*"><br>
-        <p><input class="submit button2" value="Submit" onClick="display();"></p>
+        <input class="button2" value="Submit" onClick="display();">
 </form>
 <p id="demo"></p>
 <script>

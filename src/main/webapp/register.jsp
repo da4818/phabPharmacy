@@ -119,7 +119,7 @@
         <input type="text" size="30" class="form-control" name="sortcode" placeholder="Sort Code*"><br>
         <input type="text" size="30" class="form-control" name="cardno" placeholder="Card Number*"><br>
         <input type="text" size="30" class="form-control" name="address" placeholder="Postcode*"><br>
-        <p><input class="submit button2" value="Submit" onClick="display();"></p>
+        <input class="button2" value="Submit" onClick="display();">
     </form>
 <p id="demo"></p>
 
@@ -150,9 +150,9 @@
         if(document.registerForm.email.value.trim()){t=t+1;}
         if(document.registerForm.pass.value.trim()){t=t+1;}
         if(document.registerForm.verifyPass.value.trim()){t=t+1;}
-        if(document.registerForm.pass.sortcode.trim()){t=t+1;}
-        if(document.registerForm.pass.cardno.trim()){t=t+1;}
-        if(document.registerForm.pass.address.trim()){t=t+1;}
+        if(document.registerForm.sortcode.value.trim()){t=t+1;}
+        if(document.registerForm.cardno.value.trim()){t=t+1;}
+        if(document.registerForm.address.value.trim()){t=t+1;}
         return t;
     }
     function redirectBrowse(){
