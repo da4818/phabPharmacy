@@ -91,7 +91,7 @@
 </head>
 <body>
 <div class="navbar">
-    <a href="https://cmdmcpharmacywebsite.herokuapp.com/home"><i class="fa fa-fw fa-home"></i>Home</a>
+    <a href="https://phabpharmacywebsite.herokuapp.com/home"><i class="fa fa-fw fa-home"></i>Home</a>
     <div class="dropdown">
         <button style="cursor: pointer;" class= "dropbtn" onclick="redirectBrowse()"><i class="fa fa-fw fa-search"></i>Browse<i class="fa fa-caret-down"></i></button>
         <div class="dropdown-content">
@@ -115,11 +115,11 @@
         <input type="text" size="30" class="form-control" name="email" placeholder="Email Address*"><br>
         <input type="text" size="30" class="form-control" name="pass" placeholder="Password*"><br>
         <input type="text" size="30" class="form-control" name="verifyPass" placeholder="Verify Password*"><br>
-        <button class=" button2" value="Submit" onClick="display();"></button>
-        <h2>Order Info</h2>
+        <h3>Order Info</h3>
         <input type="text" size="30" class="form-control" name="sortcode" placeholder="Sort Code*"><br>
         <input type="text" size="30" class="form-control" name="cardno" placeholder="Card Number*"><br>
         <input type="text" size="30" class="form-control" name="address" placeholder="Postcode*"><br>
+        <button class=" button2" value="Submit" onClick="display();"></button>
     </form>
 <p id="demo"></p>
 

@@ -95,7 +95,7 @@ public class ServletRegister extends HttpServlet {
                 "</head>\n" +
                 "<body>\n" +
                 "<div class=\"navbar\">\n" +
-                "    <a href=\"https://cmdmcpharmacywebsite.herokuapp.com/home\"><i class=\"fa fa-fw fa-home\"></i>Home</a>\n" +
+                "    <a href=\"https://phabpharmacywebsite.herokuapp.com/home\"><i class=\"fa fa-fw fa-home\"></i>Home</a>\n" +
                 "    <div class=\"dropdown\">\n" +
                 "        <button style=\"cursor: pointer;\" class= \"dropbtn\" onclick=\"redirectBrowse()\"><i class=\"fa fa-fw fa-search\"></i>Browse<i class=\"fa fa-caret-down\"></i></button>\n" +
                 "        <div class=\"dropdown-content\">\n" +
@@ -119,11 +119,11 @@ public class ServletRegister extends HttpServlet {
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"email\" placeholder=\"Email Address*\"><br>\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"pass\" placeholder=\"Password*\"><br>\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"verifyPass\" placeholder=\"Verify Password*\"><br>\n" +
-                "        <p><input class=\"button button2\" value=\"Submit\" onClick=\"display();\"></p>\n" +
-                "        <h2>Order Info</h2>\n" +
+                "        <h3>Order Info</h3>\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"sortcode\" placeholder=\"Sort Code*\"><br>\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"cardno\" placeholder=\"Card Number*\"><br>\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"address\" placeholder=\"Postcode*\"><br>\n" +
+                "        <button class=\" button2\" value=\"Submit\" onClick=\"display();\"></button>\n" +
                 "    </form>\n" +
                 "<p id=\"demo\"></p>\n" +
                 "\n" +
@@ -132,7 +132,7 @@ public class ServletRegister extends HttpServlet {
                 "        var x = validateInput();\n" +
                 "        if (x==8){\n" +
                 "            if (document.registerForm.pass.value == document.registerForm.verifyPass.value){\n" +
-                "                message = \"Registration successful. Welcome \" + document.registerForm.user.value;\n" +
+                "                message = \"Registration successful. Welcome \" + document.registerForm.fname.value;\n" +
                 "                message += \"!\";\n" +
                 "                document.getElementById(\"demo\").innerHTML = message\n" +
                 "            }\n" +
