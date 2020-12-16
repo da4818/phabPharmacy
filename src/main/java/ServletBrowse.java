@@ -146,7 +146,7 @@ public class ServletBrowse extends HttpServlet {
                 "    </div>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/login\"><i class=\"fa fa-fw fa-user\"></i>Login</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
-                "    <a><i class=\"fa fa-fw fa-shopping-basket\"></i><a id=\"basket\"></a></a>\n" +
+                "    <a><i id=\"basket\" class=\"fa fa-fw fa-shopping-basket\"></i></a>\n" +
                 "</div>\n" +
                 "<section>\n" +
                 "    <h2 id=\"cold_and_flu\">Cold and Flu </h2>\n" +
