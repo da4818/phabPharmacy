@@ -112,20 +112,19 @@ public class SerlvetLogin extends HttpServlet {
                 "<p> Login below. If you haven't got an account, <a href=\"https://phabpharmacy.herokuapp.com/register\"> register here.</a> </p>\n" +
                 "\n" +
                 "<form name=\"loginForm\">\n" +
-                "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"user\" placeholder=\"Username*\"><br>\n" +
+                "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"email\" placeholder=\"Email Address*\"><br>\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"pass\" placeholder=\"Password*\"><br>\n" +
                 "        <p><input class=\"button button2\" value=\"Submit\" onClick=\"display();\"></p>\n" +
                 "</form>\n" +
                 "<p id=\"demo\"></p>\n" +
                 "<script>\n" +
                 "    function display() {\n" +
-                "        var a =\"username\";\n" +
+                "        var a =\"johnappleseed@gmail.com\";\n" +
                 "        var b =\"pass1\";\n" +
                 "        var x = validateInput();\n" +
                 "        if (x==2){\n" +
-                "            if (a == document.loginForm.user.value && b == document.loginForm.pass.value){\n" +
-                "                message = \"Login successful. Welcome back, \" + document.loginForm.user.value;\n" +
-                "                message += \"!\";\n" +
+                "            if (a == document.loginForm.email.value && b == document.loginForm.pass.value){\n" +
+                "                message = \"Login successful. Welcome back, John! \"\n" +
                 "                document.getElementById(\"demo\").innerHTML = message\n" +
                 "            }\n" +
                 "            else{\n" +
@@ -144,7 +143,7 @@ public class SerlvetLogin extends HttpServlet {
                 "    }\n" +
                 "    function validateInput(){\n" +
                 "        var t=0;\n" +
-                "        if(document.loginForm.user.value.trim()){t=t+1;}\n" +
+                "        if(document.loginForm.email.value.trim()){t=t+1;}\n" +
                 "        if(document.loginForm.pass.value.trim()){t=t+1;}\n" +
                 "        return t;\n" +
                 "    }\n" +

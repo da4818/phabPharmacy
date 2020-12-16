@@ -95,7 +95,7 @@ public class ServletRegister extends HttpServlet {
                 "</head>\n" +
                 "<body>\n" +
                 "<div class=\"navbar\">\n" +
-                "    <a href=\"https://phabpharmacy.herokuapp.com/home\"><i class=\"fa fa-fw fa-home\"></i>Home</a>\n" +
+                "    <a href=\"https://cmdmcpharmacywebsite.herokuapp.com/home\"><i class=\"fa fa-fw fa-home\"></i>Home</a>\n" +
                 "    <div class=\"dropdown\">\n" +
                 "        <button style=\"cursor: pointer;\" class= \"dropbtn\" onclick=\"redirectBrowse()\"><i class=\"fa fa-fw fa-search\"></i>Browse<i class=\"fa fa-caret-down\"></i></button>\n" +
                 "        <div class=\"dropdown-content\">\n" +
@@ -116,18 +116,21 @@ public class ServletRegister extends HttpServlet {
                 "    <form name=\"registerForm\">\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"fname\" placeholder=\"First Name*\"><br>\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"lname\" placeholder=\"Last Name*\"><br>\n" +
-                "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"user\" placeholder=\"Username*\"><br>\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"email\" placeholder=\"Email Address*\"><br>\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"pass\" placeholder=\"Password*\"><br>\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"verifyPass\" placeholder=\"Verify Password*\"><br>\n" +
                 "        <p><input class=\"button button2\" value=\"Submit\" onClick=\"display();\"></p>\n" +
+                "        <h2>Order Info</h2>\n" +
+                "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"sortcode\" placeholder=\"Sort Code*\"><br>\n" +
+                "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"cardno\" placeholder=\"Card Number*\"><br>\n" +
+                "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"address\" placeholder=\"Postcode*\"><br>\n" +
                 "    </form>\n" +
                 "<p id=\"demo\"></p>\n" +
                 "\n" +
                 "<script>\n" +
                 "    function display() {\n" +
                 "        var x = validateInput();\n" +
-                "        if (x==6){\n" +
+                "        if (x==8){\n" +
                 "            if (document.registerForm.pass.value == document.registerForm.verifyPass.value){\n" +
                 "                message = \"Registration successful. Welcome \" + document.registerForm.user.value;\n" +
                 "                message += \"!\";\n" +
@@ -148,10 +151,12 @@ public class ServletRegister extends HttpServlet {
                 "        var t=0;\n" +
                 "        if(document.registerForm.fname.value.trim()){t=t+1;}\n" +
                 "        if(document.registerForm.lname.value.trim()){t=t+1;}\n" +
-                "        if(document.registerForm.user.value.trim()){t=t+1;}\n" +
                 "        if(document.registerForm.email.value.trim()){t=t+1;}\n" +
                 "        if(document.registerForm.pass.value.trim()){t=t+1;}\n" +
                 "        if(document.registerForm.verifyPass.value.trim()){t=t+1;}\n" +
+                "        if(document.registerForm.pass.sortcode.trim()){t=t+1;}\n" +
+                "        if(document.registerForm.pass.cardno.trim()){t=t+1;}\n" +
+                "        if(document.registerForm.pass.address.trim()){t=t+1;}\n" +
                 "        return t;\n" +
                 "    }\n" +
                 "    function redirectBrowse(){\n" +

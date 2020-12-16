@@ -98,7 +98,8 @@ public class ServletHome extends HttpServlet {
                 "    <a href=\"https://phabpharmacy.herokuapp.com/login\"><i class=\"fa fa-fw fa-user\"></i>Login</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
                 "</div>\n" +
-                "<h1><center> PhabPharmacy </center></h1>\n" +
+                "<h1><center>PhabPharmacy</center></h1>\n" +
+                "<h2><center> Welcome! This is the home page. Please use the tabs at the top to navifate around the website</center></h2>\n" +
                 "\n" +
                 "<script>\n" +
                 "    function redirectBrowse(){\n" +

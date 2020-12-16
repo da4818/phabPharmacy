@@ -108,20 +108,19 @@
 <p> Login below. If you haven't got an account, <a href="https://phabpharmacy.herokuapp.com/register"> register here.</a> </p>
 
 <form name="loginForm">
-        <input type="text" size="30" class="form-control" name="user" placeholder="Username*"><br>
+        <input type="text" size="30" class="form-control" name="email" placeholder="Email Address*"><br>
         <input type="text" size="30" class="form-control" name="pass" placeholder="Password*"><br>
         <p><input class="button button2" value="Submit" onClick="display();"></p>
 </form>
 <p id="demo"></p>
 <script>
     function display() {
-        var a ="username";
+        var a ="johnappleseed@gmail.com";
         var b ="pass1";
         var x = validateInput();
         if (x==2){
-            if (a == document.loginForm.user.value && b == document.loginForm.pass.value){
-                message = "Login successful. Welcome back, " + document.loginForm.user.value;
-                message += "!";
+            if (a == document.loginForm.email.value && b == document.loginForm.pass.value){
+                message = "Login successful. Welcome back, John! "
                 document.getElementById("demo").innerHTML = message
             }
             else{
@@ -140,7 +139,7 @@
     }
     function validateInput(){
         var t=0;
-        if(document.loginForm.user.value.trim()){t=t+1;}
+        if(document.loginForm.email.value.trim()){t=t+1;}
         if(document.loginForm.pass.value.trim()){t=t+1;}
         return t;
     }
