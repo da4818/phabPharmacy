@@ -142,6 +142,7 @@
     </div>
     <a href="https://phabpharmacy.herokuapp.com/login"><i class="fa fa-fw fa-user"></i>Login</a>
     <a href="https://phabpharmacy.herokuapp.com/register"><i class="fa fa-fw fa-user-plus"></i>Register</a>
+    <a><i class="fa fa-fw fa-shopping-basket"></i><a id="basket"></a></a>
 </div>
 <section>
     <h2 id="cold_and_flu">Cold and Flu </h2>
@@ -149,8 +150,8 @@
         <label><center>Vicks Vaporub<br>100g</center></label><br>
         <label><center>£4.50</center></label><br>
         <div class="absolute">
-            <input type="number" name ="VicksV" size="5" min="1" max="5">
-            <button class="button button2">Add to Basket</button>
+            <input id="number1" type="number" name ="VicksV" size="5" min="1" max="5">
+            <button onclick="addBasket()" class="button button2">Add to Basket</button>
         </div>
     </div>
     <div id="div2" class ="relative">
@@ -508,5 +509,11 @@
         </div>
     </div>
 </section>
+<script>
+    function addBasket(){
+        var num=document.getElementById("number1").value;
+        document.getElementById("basket").innerHTML = num
+    }
+</script>
 </body>
 </html>

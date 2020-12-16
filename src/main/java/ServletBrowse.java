@@ -146,6 +146,7 @@ public class ServletBrowse extends HttpServlet {
                 "    </div>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/login\"><i class=\"fa fa-fw fa-user\"></i>Login</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
+                "    <a><i class=\"fa fa-fw fa-shopping-basket\"></i><a id=\"basket\"></a></a>\n" +
                 "</div>\n" +
                 "<section>\n" +
                 "    <h2 id=\"cold_and_flu\">Cold and Flu </h2>\n" +
@@ -153,8 +154,8 @@ public class ServletBrowse extends HttpServlet {
                 "        <label><center>Vicks Vaporub<br>100g</center></label><br>\n" +
                 "        <label><center>£4.50</center></label><br>\n" +
                 "        <div class=\"absolute\">\n" +
-                "            <input type=\"number\" name =\"VicksV\" size=\"5\" min=\"1\" max=\"5\">\n" +
-                "            <button class=\"button button2\">Add to Basket</button>\n" +
+                "            <input id=\"number1\" type=\"number\" name =\"VicksV\" size=\"5\" min=\"1\" max=\"5\">\n" +
+                "            <button onclick=\"addBasket()\" class=\"button button2\">Add to Basket</button>\n" +
                 "        </div>\n" +
                 "    </div>\n" +
                 "    <div id=\"div2\" class =\"relative\">\n" +
@@ -512,6 +513,12 @@ public class ServletBrowse extends HttpServlet {
                 "        </div>\n" +
                 "    </div>\n" +
                 "</section>\n" +
+                "<script>\n" +
+                "    function addBasket(){\n" +
+                "        var num=document.getElementById(\"number1\").value;\n" +
+                "        document.getElementById(\"basket\").innerHTML = num\n" +
+                "    }\n" +
+                "</script>\n" +
                 "</body>\n" +
                 "</html>");
     }
