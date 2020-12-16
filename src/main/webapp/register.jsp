@@ -119,7 +119,7 @@
         <input type="text" size="30" class="form-control" name="sortcode" placeholder="Sort Code*"><br>
         <input type="text" size="30" class="form-control" name="cardno" placeholder="Card Number*"><br>
         <input type="text" size="30" class="form-control" name="address" placeholder="Postcode*"><br>
-        <button class=" button2" value="Submit" onClick="display();"></button>
+        <p><input class="submit button2" value="Submit" onClick="display();"></p>
     </form>
 <p id="demo"></p>
 
