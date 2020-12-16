@@ -120,7 +120,7 @@
         var x = validateInput();
         if (x==2){
             if (a == document.loginForm.email.value && b == document.loginForm.pass.value){
-                message = "Login successful. Welcome back, John! "
+                message = "Login successful. Welcome back!"
                 document.getElementById("demo").innerHTML = message
             }
             else{

@@ -124,7 +124,7 @@ public class SerlvetLogin extends HttpServlet {
                 "        var x = validateInput();\n" +
                 "        if (x==2){\n" +
                 "            if (a == document.loginForm.email.value && b == document.loginForm.pass.value){\n" +
-                "                message = \"Login successful. Welcome back, John! \"\n" +
+                "                message = \"Login successful. Welcome back!\"\n" +
                 "                document.getElementById(\"demo\").innerHTML = message\n" +
                 "            }\n" +
                 "            else{\n" +
