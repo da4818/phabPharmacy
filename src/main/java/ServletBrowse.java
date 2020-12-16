@@ -146,7 +146,7 @@ public class ServletBrowse extends HttpServlet {
                 "    </div>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/login\"><i class=\"fa fa-fw fa-user\"></i>Login</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
-                "    <a><i id=\"basket\" class=\"fa fa-fw fa-shopping-basket\"></i></a>\n" +
+                "    <a class=\"fa fa-fw fa-shopping-basket\"><b id=\"basket\"></b></a>\n" +
                 "</div>\n" +
                 "<section>\n" +
                 "    <h2 id=\"cold_and_flu\">Cold and Flu </h2>\n" +
@@ -517,6 +517,7 @@ public class ServletBrowse extends HttpServlet {
                 "    function addBasket(){\n" +
                 "        var num=document.getElementById(\"number1\").value;\n" +
                 "        document.getElementById(\"basket\").innerHTML = num\n" +
+                "        document.getElementById(\"basket\").style.fontFamily =\"Arial, Helvetica, sans-serif\";\n" +
                 "    }\n" +
                 "</script>\n" +
                 "</body>\n" +

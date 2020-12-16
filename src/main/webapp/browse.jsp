@@ -142,7 +142,7 @@
     </div>
     <a href="https://phabpharmacy.herokuapp.com/login"><i class="fa fa-fw fa-user"></i>Login</a>
     <a href="https://phabpharmacy.herokuapp.com/register"><i class="fa fa-fw fa-user-plus"></i>Register</a>
-    <a><i id="basket" class="fa fa-fw fa-shopping-basket"></i></a>
+    <a class="fa fa-fw fa-shopping-basket"><b id="basket"></b></a>
 </div>
 <section>
     <h2 id="cold_and_flu">Cold and Flu </h2>
@@ -513,6 +513,7 @@
     function addBasket(){
         var num=document.getElementById("number1").value;
         document.getElementById("basket").innerHTML = num
+        document.getElementById("basket").style.fontFamily ="Arial, Helvetica, sans-serif";
     }
 </script>
 </body>
