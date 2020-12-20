@@ -23,6 +23,9 @@ public class ServletLogged extends HttpServlet {
             //RequestDispatcher rd = req.getRequestDispatcher("servlet2");
             //rd.forward(req,resp);
         }
+        else if (em.isEmpty() && pw.isEmpty()){
+            writer.print("<h2>Incomplete fields, please enter all the information.</h2>");
+        }
         else{
             writer.print("<h2>Wrong email or password<h2>");
             RequestDispatcher rd=req.getRequestDispatcher("/home");

@@ -115,7 +115,7 @@ public class SerlvetLogin extends HttpServlet {
                 "<form name=\"loginForm\" action=\"ServletLogged\" method=\"post\">\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"email\" placeholder=\"Email Address*\"><br>\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"pass\" placeholder=\"Password*\"><br>\n" +
-                "        <input class=\"button2\" value=\"Submit\" onClick=\"display();\">\n" +
+                "        <input class=\"button2\" value=\"Submit\">\n" +
                 "</form>\n" +
                 "<p id=\"demo\"></p>\n" +
                 "<script>\n" +
