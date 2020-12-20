@@ -104,7 +104,7 @@ public class SerlvetLogin extends HttpServlet {
                 "            <a href=\"https://phabpharmacy.herokuapp.com/browse#first_aid\">First Aid</a>\n" +
                 "        </div>\n" +
                 "    </div>\n" +
-                "    <a style=\"background-color: #00B8C5\"><i class=\"fa fa-fw fa-user\"></i>Login</a>\n" +
+                "    <a style=\"background-color: #00B8C5;\"><i class=\"fa fa-fw fa-user\"></i>Login</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" class=\"fa fa-fw fa-shopping-basket\"><b id=\"basket\"></b></a>\n" +
                 "</div>\n" +

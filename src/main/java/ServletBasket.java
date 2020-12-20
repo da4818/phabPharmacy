@@ -179,7 +179,7 @@ public class ServletBasket extends HttpServlet {
                 "<div class=\"navbar\">\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/home\"><i class=\"fa fa-fw fa-home\"></i>Home</a>\n" +
                 "    <div class=\"dropdown\">\n" +
-                "        <button style=\"background-color: #51B5C2;\"class= \"dropbtn\"><i class=\"fa fa-fw fa-search\"></i>Browse<i class=\"fa fa-caret-down\"></i></button>\n" +
+                "        <button \"class= \"dropbtn\"><i class=\"fa fa-fw fa-search\"></i>Browse<i class=\"fa fa-caret-down\"></i></button>\n" +
                 "        <div class=\"dropdown-content\">\n" +
                 "            <a href=\"#cold_and_flu\">Cold and Flu</a>\n" +
                 "            <a href=\"#skincare\">Skincare</a>\n" +
@@ -191,7 +191,7 @@ public class ServletBasket extends HttpServlet {
                 "    </div>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/login\"><i class=\"fa fa-fw fa-user\"></i>Login</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
-                "    <a style=\"background-color: #00B8C5\" class=\"fa fa-fw fa-shopping-basket\"><b id=\"basket\"></b></a> \n" +
+                "    <a style=\"background-color: #00B8C5; float: right;\" class=\"fa fa-fw fa-shopping-basket\"><b id=\"basket\"></b></a> \n" +
                 "</div>\n" +
                 "<h1>Shopping Basket</h1>\n" +
                 "\n" +
