@@ -109,6 +109,7 @@ public class ServletRegister extends HttpServlet {
                 "    </div>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/login\"><i class=\"fa fa-fw fa-user\"></i>Login</a>\n" +
                 "    <a style=\"background-color: #00B8C5\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
+                "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" class=\"fa fa-fw fa-shopping-basket\"><b id=\"basket\"></b></a> \n" +
                 "</div>\n" +
                 "\n" +
                 "<h1><center>Register</center></h1>\n" +

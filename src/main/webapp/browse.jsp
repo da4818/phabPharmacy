@@ -142,7 +142,7 @@
     </div>
     <a href="https://phabpharmacy.herokuapp.com/login"><i class="fa fa-fw fa-user"></i>Login</a>
     <a href="https://phabpharmacy.herokuapp.com/register"><i class="fa fa-fw fa-user-plus"></i>Register</a>
-    <a class="fa fa-fw fa-shopping-basket"><b id="basket"></b></a>
+    <a href="https://phabpharmacy.herokuapp.com/basket" class="fa fa-fw fa-shopping-basket"><b id="basket"></b></a>
 </div>
 <section>
     <h2 id="cold_and_flu">Cold and Flu </h2>
@@ -155,7 +155,7 @@
         </div>
     </div>
     <div id="div2" class ="relative">
-        <label><center>Vicks First Defence<br>15ml</center></label><br>
+        <label><center>Vicks First Defense<br>15ml</center></label><br>
         <label><center>£6.80</center></label><br>
         <div class="absolute">
             <input type="number" name ="VicksF" size="5" min="0" max="5">

@@ -102,6 +102,7 @@
     </div>
     <a style="background-color: #00B8C5"><i class="fa fa-fw fa-user"></i>Login</a>
     <a href="https://phabpharmacy.herokuapp.com/register"><i class="fa fa-fw fa-user-plus"></i>Register</a>
+    <a href="https://phabpharmacy.herokuapp.com/basket" class="fa fa-fw fa-shopping-basket"><b id="basket"></b></a>
 </div>
 
 <h1><center>Login</center></h1>

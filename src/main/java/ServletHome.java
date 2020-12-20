@@ -97,6 +97,7 @@ public class ServletHome extends HttpServlet {
                 "    </div>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/login\"><i class=\"fa fa-fw fa-user\"></i>Login</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
+                "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" class=\"fa fa-fw fa-shopping-basket\"><b id=\"basket\"></b></a> \n" +
                 "</div>\n" +
                 "<h1><center>PhabPharmacy</center></h1>\n" +
                 "<h2><center> Welcome to the PhabPharmacy's home page!</center></h2>\n" +
