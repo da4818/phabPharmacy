@@ -1,3 +1,5 @@
+package Website;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,12 +13,14 @@ import java.io.PrintWriter;
 public class ServletLogged extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //UserDB udb = new UserDB();
+        //Website.UserDB udb = new Website.UserDB();
         resp.setContentType("text/html");
+        ServletLogin sl = new ServletLogin();
+        String HTML = sl.htmlOutput();
         PrintWriter writer = resp.getWriter();
         String em = req.getParameter("email");
         String pw = req.getParameter("pass");
-
+        writer.println(HTML);
         if(LoginDAO.validate(em,pw)){
             String output= LoginDAO.getName(em,pw);
             writer.print("<h2>Welcome back, " + output + "!</h2>");

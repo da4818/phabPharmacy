@@ -1,3 +1,5 @@
+package Website;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +12,7 @@ import java.io.PrintWriter;
 public class ServletRegistered extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //UserDB udb = new UserDB();
+        //Website.UserDB udb = new Website.UserDB();
         resp.setContentType("text/html");
         ServletRegister sr = new ServletRegister();
         String HTML = sr.htmlOutput();

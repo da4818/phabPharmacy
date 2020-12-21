@@ -1,4 +1,8 @@
+package Website;
+
 import java.sql.*;
+import java.util.ArrayList;
+
 //DAO = data access object
 public class LoginDAO {
     public static boolean validate(String email_in,String pass_in){
@@ -54,7 +58,28 @@ public class LoginDAO {
             ps.executeUpdate();
             ps.close();
         }catch(Exception e){System.out.println(e);}
+    }
+    public static ProductInfo getProductInfo(int n){
+        ProductInfo pi = new ProductInfo();
+        try{
+            String dbUrl = System.getenv("JDBC_DATABASE_URL");
+            Class.forName("org.postgresql.Driver");
+            Connection con=DriverManager.getConnection(dbUrl);
 
+            PreparedStatement ps=con.prepareStatement("select * from products where id=?");
+            ps.setString(1, String.valueOf(n));
+            ResultSet rs=ps.executeQuery();
+
+            while(rs.next()){
+                pi.name = rs.getString("name");
+                pi.description = rs.getString("description");
+                pi.price = rs.getFloat("price");
+                pi.quantity = rs.getInt("quantity");
+                pi.category = rs.getString("category");
+                pi.limited = rs.getBoolean("limited");
+            }
+        }catch(Exception e){System.out.println(e);}
+        return pi;
     }
 
 }

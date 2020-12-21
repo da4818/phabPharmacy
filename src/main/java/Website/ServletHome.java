@@ -1,3 +1,5 @@
+package Website;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -5,15 +7,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns ={"/login"},loadOnStartup = 0)
-public class SerlvetLogin extends HttpServlet {
+@WebServlet(urlPatterns ={"/home"},loadOnStartup = 1)
+public class ServletHome extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //Website.UserDB udb = new Website.UserDB();
         resp.setContentType("text/html");
         resp.getWriter().write("<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "<head>\n" +
-                "    <title>Login</title>\n" +
+                "    <meta charset=\"utf-8\">\n" +
+                "    <meta name=\"viewport\" content=\"width=device-width\">\n" +
+                "    <title>Home</title>\n" +
                 "    <!-- Import Icon Library -->\n" +
                 "    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">\n" +
                 "    <!-- Creates navigation bar -->\n" +
@@ -76,23 +81,12 @@ public class SerlvetLogin extends HttpServlet {
                 "        .dropdown:hover .dropdown-content {\n" +
                 "            display: block;\n" +
                 "        }\n" +
-                "        .button2{\n" +
-                "            background-color: #00B8C5;\n" +
-                "            border: none;\n" +
-                "            color: white;\n" +
-                "            padding: 5px 25px;\n" +
-                "            text-align: center;\n" +
-                "            text-decoration: none;\n" +
-                "            display: inline-block;\n" +
-                "            font-size: 16px;\n" +
-                "            margin: 4px 2px;\n" +
-                "            cursor: pointer;\n" +
-                "        }\n" +
                 "    </style>\n" +
+                "\n" +
                 "</head>\n" +
                 "<body>\n" +
                 "<div class=\"navbar\">\n" +
-                "    <a href=\"https://phabpharmacy.herokuapp.com/home\"><i class=\"fa fa-fw fa-home\"></i>Home</a>\n" +
+                "    <a style=\"background-color: #00B8C5\"><i class=\"fa fa-fw fa-home\"></i>Home</a>\n" +
                 "    <div class=\"dropdown\">\n" +
                 "        <button style=\"cursor: pointer;\" class= \"dropbtn\" onclick=\"redirectBrowse()\"><i class=\"fa fa-fw fa-search\"></i>Browse<i class=\"fa fa-caret-down\"></i></button>\n" +
                 "        <div class=\"dropdown-content\">\n" +
@@ -104,24 +98,14 @@ public class SerlvetLogin extends HttpServlet {
                 "            <a href=\"https://phabpharmacy.herokuapp.com/browse#first_aid\">First Aid</a>\n" +
                 "        </div>\n" +
                 "    </div>\n" +
-                "    <a style=\"background-color: #00B8C5;\"><i class=\"fa fa-fw fa-user\"></i>Login</a>\n" +
+                "    <a href=\"https://phabpharmacy.herokuapp.com/login\"><i class=\"fa fa-fw fa-user\"></i>Login</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
-                "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" class=\"fa fa-fw fa-shopping-basket\"><b id=\"basket\"></b></a>\n" +
+                "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" class=\"fa fa-fw fa-shopping-basket\"><b id=\"basket\"></b></a> \n" +
                 "</div>\n" +
+                "<h1><center>PhabPharmacy</center></h1>\n" +
+                "<h2><center> Welcome to the PhabPharmacy's home page!</center></h2>\n" +
                 "\n" +
-                "<h1><center>Login</center></h1>\n" +
-                "<p> Login below. If you haven't got an account, <a href=\"https://phabpharmacy.herokuapp.com/register\"> register here.</a> </p>\n" +
-                "\n" +
-                "<form name=\"loginForm\" action=\"login_status\" method=\"post\">\n" +
-                "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"email\" placeholder=\"Email Address*\"><br>\n" +
-                "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"pass\" placeholder=\"Password*\"><br>\n" +
-                "        <input type=\"submit\" class=\"button2\" value=\"Submit\">\n" +
-                "</form>\n" +
-                "<p id=\"demo\"></p>\n" +
                 "<script>\n" +
-                "    function refreshPage(){\n" +
-                "        location.reload()\n" +
-                "    }\n" +
                 "    function redirectBrowse(){\n" +
                 "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
                 "    }\n" +
@@ -129,10 +113,9 @@ public class SerlvetLogin extends HttpServlet {
                 "</body>\n" +
                 "</html>");
     }
+
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
     }
-
-
 }
