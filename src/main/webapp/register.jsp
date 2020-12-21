@@ -110,7 +110,7 @@
 
 <h1><center>Register</center></h1>
 <p> Register below. If you already have an account, <a href="https://phabpharmacy.herokuapp.com/login"> login here.</a>
-    <form name="registerForm">
+    <form name="registerForm" action="registration_status" method="post">
         <input type="text" size="30" class="form-control" name="fname" placeholder="First Name*"><br>
         <input type="text" size="30" class="form-control" name="lname" placeholder="Last Name*"><br>
         <input type="text" size="30" class="form-control" name="email" placeholder="Email Address*"><br>
@@ -120,7 +120,7 @@
         <input type="text" size="30" class="form-control" name="sortcode" placeholder="Sort Code*"><br>
         <input type="text" size="30" class="form-control" name="cardno" placeholder="Card Number*"><br>
         <input type="text" size="30" class="form-control" name="address" placeholder="Postcode*"><br>
-        <input type="submit" class="button2" value="Submit" onClick="display();">
+        <input type="submit" class="button2" value="Submit">
     </form>
 <p id="demo"></p>
 

@@ -15,15 +15,14 @@ public class ServletLogged extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         String em = req.getParameter("email");
         String pw = req.getParameter("pass");
-        UserDB udb = new UserDB();
-        //LoginDAO.createTable();
+        //UserDB udb = new UserDB();
         if(LoginDAO.validate(em,pw)){
             String output= LoginDAO.getName(em,pw);
             writer.print("<h2>Welcome back, " + output + "!</h2>");
             //RequestDispatcher rd = req.getRequestDispatcher("servlet2");
             //rd.forward(req,resp);
         }
-        else if (em.isEmpty() && pw.isEmpty()){
+        else if (em.isEmpty() || pw.isEmpty()){
             writer.print("<h2>Incomplete fields, please enter all the information.</h2>");
         }
         else{
