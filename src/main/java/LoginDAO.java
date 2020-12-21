@@ -76,16 +76,18 @@ public class LoginDAO {
             Class.forName("org.postgresql.Driver");
             Connection con=DriverManager.getConnection(dbUrl);
 
+
             PreparedStatement ps=con.prepareStatement("insert into users (name,email,pass,cardno,postcode) values(?,?,?,?,?)");
             ps.setString(1,email);
             ps.setString(2,email);
             ps.setString(3,pass);
             ps.setString(4,cardno);
-            ps.setString(1,postcode);
+            ps.setString(5,postcode);
 
-            ResultSet rs=ps.executeQuery();
-
+            ps.executeUpdate();
+            ps.close();
         }catch(Exception e){System.out.println(e);}
+
     }
 
 }
