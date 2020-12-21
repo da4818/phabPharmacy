@@ -40,7 +40,7 @@ public class LoginDAO {
             Class.forName("org.postgresql.Driver");
             Connection con = DriverManager.getConnection(dbUrl);
 
-            PreparedStatement ps=con.prepareStatement("select * from users where email=? and pass=?");
+            PreparedStatement ps=con.prepareStatement("select * from users where email=? and passw=?");
             ps.setString(1,email);
             ps.setString(2,pass);
 
@@ -57,7 +57,7 @@ public class LoginDAO {
             Class.forName("org.postgresql.Driver");
             Connection con=DriverManager.getConnection(dbUrl);
 
-            PreparedStatement ps=con.prepareStatement("select * from users where email=? and pass=?");
+            PreparedStatement ps=con.prepareStatement("select * from users where email=? and passw=?");
             ps.setString(1,email);
             ps.setString(2,pass);
 
