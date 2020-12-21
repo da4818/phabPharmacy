@@ -69,5 +69,24 @@ public class LoginDAO {
         }catch(Exception e){System.out.println(e);}
         return userName;
     }
+    public static void addUser(String name, String email,String pass, String cardno, String postcode){
+        String userName="";
+        try{
+            String dbUrl = System.getenv("JDBC_DATABASE_URL");
+            Class.forName("org.postgresql.Driver");
+            Connection con=DriverManager.getConnection(dbUrl);
+
+            PreparedStatement ps=con.prepareStatement("insert into users (name,email,pass,cardno,postcode) values(?,?,?,?,?)");
+            ps.setString(1,email);
+            ps.setString(2,email);
+            ps.setString(3,pass);
+            ps.setString(4,cardno);
+            ps.setString(1,postcode);
+
+            ResultSet rs=ps.executeQuery();
+
+        }catch(Exception e){System.out.println(e);}
+    }
+
 }
 
