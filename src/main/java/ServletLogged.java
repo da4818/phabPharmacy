@@ -15,7 +15,7 @@ public class ServletLogged extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         String em = req.getParameter("email");
         String pw = req.getParameter("pass");
-        UserDB udb = new UserDB();
+
         if(LoginDAO.validate(em,pw)){
             String output= LoginDAO.getName(em,pw);
             writer.print("<h2>Welcome back, " + output + "!</h2>");

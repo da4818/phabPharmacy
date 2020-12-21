@@ -9,6 +9,7 @@ import java.io.IOException;
 public class ServletHome extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //UserDB udb = new UserDB();
         resp.setContentType("text/html");
         resp.getWriter().write("<!DOCTYPE html>\n" +
                 "<html>\n" +
