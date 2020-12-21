@@ -18,7 +18,7 @@ public class ServletRegistered extends HttpServlet {
         String pw = req.getParameter("pass");
         String vpw = req.getParameter("verifyPass");
         String cn = req.getParameter("cardno");
-        String ad = req.getParameter("address");
+        String ad = req.getParameter("postcode");
         if(LoginDAO.validate(em,pw)){ //create validation to see if email exists
            writer.println("<h2> There is an existing account with the email entered. Please log in.</h2>");
         }

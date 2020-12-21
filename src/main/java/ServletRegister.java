@@ -122,7 +122,7 @@ public class ServletRegister extends HttpServlet {
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"verifyPass\" placeholder=\"Verify Password*\"><br>\n" +
                 "        <h3>Order Info</h3>\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"cardno\" placeholder=\"Card Number*\"><br>\n" +
-                "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"address\" placeholder=\"Postcode*\"><br>\n" +
+                "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"postcode\" placeholder=\"Postcode*\"><br>\n" +
                 "        <input type=\"submit\" class=\"button2\" value=\"Submit\">\n" +
                 "    </form>\n" +
                 "<p id=\"demo\"></p>\n" +
