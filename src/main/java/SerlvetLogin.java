@@ -115,7 +115,7 @@ public class SerlvetLogin extends HttpServlet {
                 "<form name=\"loginForm\" action=\"ServletLogged\" method=\"post\">\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"email\" placeholder=\"Email Address*\"><br>\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"pass\" placeholder=\"Password*\"><br>\n" +
-                "        <input class=\"button2\" value=\"Submit\">\n" +
+                "        <input type=\"submit\" class=\"button2\" value=\"Submit\">\n" +
                 "</form>\n" +
                 "<p id=\"demo\"></p>\n" +
                 "<script>\n" +
@@ -157,10 +157,7 @@ public class SerlvetLogin extends HttpServlet {
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String usern = req.getParameter("user");
-        String passw = req.getParameter("pass");
-        resp.setContentType("text/html");
-        resp.getWriter().write("<html><head><title>Login</title></head><body><h1>Login</h1><h2>Username: " + usern + "</h2></body></html>");
+
     }
 
 

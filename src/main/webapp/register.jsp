@@ -105,7 +105,7 @@
     </div>
     <a href="https://phabpharmacy.herokuapp.com/login"><i class="fa fa-fw fa-user"></i>Login</a>
     <a style="background-color: #00B8C5"><i class="fa fa-fw fa-user-plus"></i>Register</a>
-    <a href="https://phabpharmacy.herokuapp.com/basket" class="fa fa-fw fa-shopping-basket"><b id="basket"></b></a>
+    <a style="float: right;" href="https://phabpharmacy.herokuapp.com/basket" class="fa fa-fw fa-shopping-basket"><b id="basket"></b></a>
 </div>
 
 <h1><center>Register</center></h1>
@@ -120,7 +120,7 @@
         <input type="text" size="30" class="form-control" name="sortcode" placeholder="Sort Code*"><br>
         <input type="text" size="30" class="form-control" name="cardno" placeholder="Card Number*"><br>
         <input type="text" size="30" class="form-control" name="address" placeholder="Postcode*"><br>
-        <input class="button2" value="Submit" onClick="display();">
+        <input type="submit" class="button2" value="Submit" onClick="display();">
     </form>
 <p id="demo"></p>
 
