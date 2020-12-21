@@ -115,35 +115,6 @@
 </form>
 <p id="demo"></p>
 <script>
-    function display() {
-        var a ="johnappleseed@gmail.com";
-        var b ="pass1";
-        var x = validateInput();
-        if (x==2){
-            if (a == document.loginForm.email.value && b == document.loginForm.pass.value){
-                message = "Login successful. Welcome back!"
-                document.getElementById("demo").innerHTML = message
-            }
-            else{
-                message = "Incorrect login details. Please try again."
-                document.getElementById("demo").innerHTML = message
-                setTimeout(refreshPage,2000)
-            }
-        }
-        else{
-            message = "Incomplete fields, please enter all information.";
-            document.getElementById("demo").innerHTML = message
-        }
-    }
-    function refreshPage(){
-        location.reload()
-    }
-    function validateInput(){
-        var t=0;
-        if(document.loginForm.email.value.trim()){t=t+1;}
-        if(document.loginForm.pass.value.trim()){t=t+1;}
-        return t;
-    }
     function redirectBrowse(){
         window.location.href="https://phabpharmacy.herokuapp.com/browse"
     }

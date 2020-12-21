@@ -121,7 +121,6 @@ public class ServletRegister extends HttpServlet {
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"pass\" placeholder=\"Password*\"><br>\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"verifyPass\" placeholder=\"Verify Password*\"><br>\n" +
                 "        <h3>Order Info</h3>\n" +
-                "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"sortcode\" placeholder=\"Sort Code*\"><br>\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"cardno\" placeholder=\"Card Number*\"><br>\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"address\" placeholder=\"Postcode*\"><br>\n" +
                 "        <input type=\"submit\" class=\"button2\" value=\"Submit\">\n" +
@@ -129,37 +128,6 @@ public class ServletRegister extends HttpServlet {
                 "<p id=\"demo\"></p>\n" +
                 "\n" +
                 "<script>\n" +
-                "    function display() {\n" +
-                "        var x = validateInput();\n" +
-                "        if (x==8){\n" +
-                "            if (document.registerForm.pass.value == document.registerForm.verifyPass.value){\n" +
-                "                message = \"Registration successful. Welcome \" + document.registerForm.fname.value;\n" +
-                "                message += \"!\";\n" +
-                "                document.getElementById(\"demo\").innerHTML = message\n" +
-                "            }\n" +
-                "            else if (document.registerForm.pass.value != document.registerForm.verifyPass.value){\n" +
-                "\n" +
-                "                message = \"Passwords don't match. Please try again.\";\n" +
-                "                document.getElementById(\"demo\").innerHTML = message\n" +
-                "            }\n" +
-                "        }\n" +
-                "        else{\n" +
-                "            message = \"Incomplete fields, please enter all information.\";\n" +
-                "            document.getElementById(\"demo\").innerHTML = message\n" +
-                "        }\n" +
-                "    }\n" +
-                "    function validateInput(){\n" +
-                "        var t=0;\n" +
-                "        if(document.registerForm.fname.value.trim()){t=t+1;}\n" +
-                "        if(document.registerForm.lname.value.trim()){t=t+1;}\n" +
-                "        if(document.registerForm.email.value.trim()){t=t+1;}\n" +
-                "        if(document.registerForm.pass.value.trim()){t=t+1;}\n" +
-                "        if(document.registerForm.verifyPass.value.trim()){t=t+1;}\n" +
-                "        if(document.registerForm.sortcode.value.trim()){t=t+1;}\n" +
-                "        if(document.registerForm.cardno.value.trim()){t=t+1;}\n" +
-                "        if(document.registerForm.address.value.trim()){t=t+1;}\n" +
-                "        return t;\n" +
-                "    }\n" +
                 "    function redirectBrowse(){\n" +
                 "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
                 "    }\n" +

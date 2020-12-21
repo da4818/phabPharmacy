@@ -78,7 +78,7 @@ public class LoginDAO {
 
 
             PreparedStatement ps=con.prepareStatement("insert into users (name,email,pass,cardno,postcode) values(?,?,?,?,?)");
-            ps.setString(1,email);
+            ps.setString(1,name);
             ps.setString(2,email);
             ps.setString(3,pass);
             ps.setString(4,cardno);
