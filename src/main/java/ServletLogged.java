@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 public class ServletLogged extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserDB udb = new UserDB();
+        //UserDB udb = new UserDB();
         resp.setContentType("text/html");
         PrintWriter writer = resp.getWriter();
         String em = req.getParameter("email");
