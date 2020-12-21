@@ -10,7 +10,11 @@ public class ServletRegister extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        resp.getWriter().write("<!DOCTYPE html>\n" +
+        String output = htmlOutput();
+        resp.getWriter().write(output);
+    }
+    public String htmlOutput(){
+        String output = "<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "<head>\n" +
                 "    <meta charset=\"utf-8\">\n" +
@@ -133,6 +137,7 @@ public class ServletRegister extends HttpServlet {
                 "    }\n" +
                 "</script>\n" +
                 "</body>\n" +
-                "</html>");
+                "</html>";
+                return output;
     }
 }
