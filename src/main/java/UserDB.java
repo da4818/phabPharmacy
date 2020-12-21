@@ -27,13 +27,13 @@ public class UserDB {
                         " FNAME TEXT NOT NULL, " +
                         " LNAME TEXT NOT NULL, " +
                         " EMAIL TEXT NOT NULL, " +
-                        " PASS TEXT NOT NULL, " +
+                        " PASSW TEXT NOT NULL, " +
                         " CARDNO TEXT NOT NULL, " +
                         " POSTCODE TEXT NOT NULL)";
             stmt.executeUpdate(sql);
             Statement s1 = c.createStatement();
-            String sql1 = "INSERT INTO USERS (FNAME,LNAME,EMAIL,PASS,CARDNO,POSTCODE) VALUES ('Luke','Grenshaw','email1','pass1','1122','HS75UZ');";
-            String sql2 = "INSERT INTO USERS (FNAME,LNAME,EMAIL,PASS,CARDNO,POSTCODE) VALUES ('Gina','Wright','email2','pass2','3344','SW72AZ');";
+            String sql1 = "INSERT INTO USERS (FNAME,LNAME,EMAIL,PASSW,CARDNO,POSTCODE) VALUES ('Luke','Grenshaw','email1','pass1','1122','HS75UZ');";
+            String sql2 = "INSERT INTO USERS (FNAME,LNAME,EMAIL,PASSW,CARDNO,POSTCODE) VALUES ('Gina','Wright','email2','pass2','3344','SW72AZ');";
             s1.executeUpdate(sql1);
             Statement s2 = c.createStatement();
             s2.executeUpdate(sql2);
@@ -46,7 +46,7 @@ public class UserDB {
                 ids.add( rs.getInt("id"));
                 names.add(rs.getString("name"));
                 emails.add(rs.getString("email"));
-                passes.add(rs.getString("pass"));
+                passes.add(rs.getString("passw"));
             }
             rs.close();
             s3.close();*/

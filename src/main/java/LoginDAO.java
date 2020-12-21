@@ -77,7 +77,7 @@ public class LoginDAO {
             Connection con=DriverManager.getConnection(dbUrl);
 
 
-            PreparedStatement ps=con.prepareStatement("insert into users (name,email,pass,cardno,postcode) values(?,?,?,?,?)");
+            PreparedStatement ps=con.prepareStatement("insert into users (fname,lname,email,passw,cardno,postcode) values(?,?,?,?,?,?)");
             ps.setString(1,name);
             ps.setString(2,email);
             ps.setString(3,pass);
