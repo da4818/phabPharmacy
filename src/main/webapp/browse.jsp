@@ -154,6 +154,7 @@
             <button onclick="addBasket()" class="button button2">Add to Basket</button>
         </div>
     </div>
+
     <div id="div2" class ="relative">
         <label><center>Vicks First Defense<br>15ml</center></label><br>
         <label><center>£6.80</center></label><br>

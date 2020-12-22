@@ -1,6 +1,7 @@
 package Website;
 
 import java.sql.*;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 //DAO = data access object
@@ -79,6 +80,8 @@ public class LoginDAO {
                 pi.category = rs.getString("category");
                 pi.limited = rs.getBoolean("limited");
             }
+            DecimalFormat df = new DecimalFormat("0.00");
+            pi.price = Float.valueOf(df.format(pi.price));
 
         }catch(Exception e){System.out.println(e);}
         return pi;
