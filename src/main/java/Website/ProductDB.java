@@ -24,7 +24,7 @@ public class ProductDB {
 
         try {
             stmt = c.createStatement();
-            stmt.executeUpdate("TRUNCATE TABLE PRODUCTS;");
+            //stmt.executeUpdate("TRUNCATE TABLE PRODUCTS;");
             String sql ="CREATE TABLE PRODUCTS " +
                     "(ID SERIAL PRIMARY KEY NOT NULL," +
                     " NAME TEXT NOT NULL, " +
