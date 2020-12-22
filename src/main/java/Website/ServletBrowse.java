@@ -158,9 +158,7 @@ public class ServletBrowse extends HttpServlet {
                 "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" class=\"fa fa-fw fa-shopping-basket\"><b id=\"basket\"></b></a>\n" +
                 "</div>");
-                if(req.getParameter("button1")!= null){
-                    writer.print("<p>Button pressed</p>");
-                }
+
                 ArrayList<String> headers = new ArrayList<>();
                 ArrayList<String> headerURLs = new ArrayList<>();
                 headers.add("Cold and Flu");
@@ -194,7 +192,7 @@ public class ServletBrowse extends HttpServlet {
                         }
                         writer.print("<label><center>£" + price + "</label></center><br>\n" +
                                 "<div class=\"absolute\">\n" +
-                                "<form action=\"browse\" method=\"get\">\n" +
+                                "<form action=\"browse\" method=\"post\">\n" +
                                 "<input name=\"number" + j + "\" type=\"number\" size=\"5\" min=\"0\" max=\"" + max + "\">\n" +
                                 "<button name=\"button" + j + "\" type=\"submit\"class=\"buttonStyle\">Add to Basket</button>\n" +
                                 "</form>\n" +
@@ -220,5 +218,10 @@ public class ServletBrowse extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
+        PrintWriter writer = resp.getWriter();
+        if(req.getParameter("button1")!= null){
+            writer.print("<p>Button pressed</p>");
+        }
     }
 }
