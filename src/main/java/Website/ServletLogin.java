@@ -110,7 +110,7 @@ public class ServletLogin extends HttpServlet {
                 "        .dropdown:hover .dropdown-content {\n" +
                 "            display: block;\n" +
                 "        }\n" +
-                "        .button2{\n" +
+                "        .buttonStyle{\n" +
                 "            background-color: #00B8C5;\n" +
                 "            border: none;\n" +
                 "            color: white;\n" +
@@ -149,7 +149,7 @@ public class ServletLogin extends HttpServlet {
                 "<form name=\"loginForm\" action=\"login\" method=\"post\">\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"email\" placeholder=\"Email Address*\"><br>\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"pass\" placeholder=\"Password*\"><br>\n" +
-                "        <input type=\"submit\" class=\"button2\" value=\"Submit\">\n" +
+                "        <input type=\"submit\" class=\"buttonStyle\" value=\"Submit\">\n" +
                 "</form>\n" +
                 "<p id=\"demo\"></p>\n" +
                 "<script>\n" +

@@ -106,7 +106,7 @@ public class ServletBasket extends HttpServlet {
                 "            height: 100px;\n" +
                 "        }\n" +
                 "      \n" +
-                "        .button2{\n" +
+                "        .buttonStyle{\n" +
                 "            background-color: #51B5C2; \n" +
                 "            border: none;\n" +
                 "            color: white;\n" +
@@ -203,7 +203,7 @@ public class ServletBasket extends HttpServlet {
                 "  \"<div class=\\\"container\\\" +id=\\\"cont1\\\">\"+\n" +
                 "  \"<p style=\\\"display: inline-block;\\\"><b>Vicks Vaporub</b><br>100g<br>£<output class=\\\"cost\\\" type=\\\"number\\\">4.50</output></p>\" +\n" +
                 "  \"<div class=\\\"quant\\\">\" +\n" +
-                "    \"<p>Quantity</p><input class=\\\"quantity\\\" onclick=\\\"showPrice()\\\" type=\\\"number\\\" min=\\\"1\\\" max=\\\"5\\\" value=\\\"2\\\"><button onclick=\\\"passVal(\"+i+\")\\\" class=\\\"button2\\\"><i class=\\\"fa fa-trash\\\" aria-hidden=\\\"true\\\"></i></button>\" +\n" +
+                "    \"<p>Quantity</p><input class=\\\"quantity\\\" onclick=\\\"showPrice()\\\" type=\\\"number\\\" min=\\\"1\\\" max=\\\"5\\\" value=\\\"2\\\"><button onclick=\\\"passVal(\"+i+\")\\\" class=\\\"buttonStyle\\\"><i class=\\\"fa fa-trash\\\" aria-hidden=\\\"true\\\"></i></button>\" +\n" +
                 "  \"</div>\" + \n" +
                 "  \"<div class=\\\"price\\\">\" +\n" +
                 "   \"<p>Price<br><br>£<output class=\\\"demo\\\"></output></p>\" +\n" +

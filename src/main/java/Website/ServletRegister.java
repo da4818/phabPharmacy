@@ -12,7 +12,7 @@ import java.io.PrintWriter;
 public class ServletRegister extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserDB udb = new UserDB();
+        //UserDB udb = new UserDB();
         resp.setContentType("text/html");
         String output = htmlOutput();
         resp.getWriter().write(output);
@@ -116,7 +116,7 @@ public class ServletRegister extends HttpServlet {
                 "        .dropdown:hover .dropdown-content {\n" +
                 "            display: block;\n" +
                 "        }\n" +
-                "        .button2{\n" +
+                "        .buttonStyle{\n" +
                 "            background-color: #00B8C5;\n" +
                 "            border: none;\n" +
                 "            color: white;\n" +
@@ -161,7 +161,7 @@ public class ServletRegister extends HttpServlet {
                 "        <h3>Order Info</h3>\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"cardno\" placeholder=\"Card Number*\"><br>\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"postcode\" placeholder=\"Postcode*\"><br>\n" +
-                "        <input type=\"submit\" class=\"button2\" value=\"Submit\">\n" +
+                "        <input type=\"submit\" class=\"buttonStyle\" value=\"Submit\">\n" +
                 "    </form>\n" +
                 "<p id=\"demo\"></p>\n" +
                 "\n" +
