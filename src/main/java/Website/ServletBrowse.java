@@ -220,8 +220,12 @@ public class ServletBrowse extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         PrintWriter writer = resp.getWriter();
+        String val = req.getParameter("button1");
+        String pos_c = val.substring(val.length()-1);
+        int pos = Integer.parseInt(pos_c);
         int num = Integer.parseInt(req.getParameter("number1"));
-        writer.print("<p>Button pressed:" + num + "</p>");
+        writer.print("<p>Button pressed: " + pos + "</p>");
+        writer.print("<p>Quantity: " + num + "</p>");
 
     }
 }
