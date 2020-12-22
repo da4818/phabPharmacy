@@ -5,10 +5,11 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class UserDB {
-    public ArrayList<Integer> ids;
-    public ArrayList <String> names;
-    public ArrayList <String> emails;
-    public ArrayList <String> passes;
+    public String userName;
+    public String userEmail;
+    public String userPass;
+    public String userCardno;
+    public String userPostcode;
     public Statement stmt;
     public UserDB() {
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
