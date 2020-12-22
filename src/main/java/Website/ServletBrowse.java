@@ -162,13 +162,27 @@ public class ServletBrowse extends HttpServlet {
                 headers.add("Digestion");
                 headers.add("Allergy");
                 headers.add("First Aid");
-                for (int i=0;i<5;i++) {
+                for (int i=0;i<1;i++) {
                     writer.println("<section>\n" +
                             "<h2>" + headers.get(i) + "</h2>\n");
-                    for (int j=0;j<2;j++){
-                        String out = LoginDAO.getProductInfo(i);
-                        writer.println("<p>" + out + "</p>");
+                    for (int j=0;j<2;j++) {
+                        ProductInfo pi = LoginDAO.getProductInfo(j);
+                        int max = pi.limited ? 1 : 5;
+                        writer.print("<div class=\"relative\">\n");
+                        if (pi.limited){
+                            writer.print("\"<label class=\"tooltip\"><center>\" + pi.name + \"<br>\" + pi.description + \"</center></label><br>\n" +
+                                    "<span class=\"tooltiptext\"><i>Limited to one per customer</i></span></label><br>\n");
+                        }
+                        else{
+                            writer.print("<label><center>" + pi.name + "<br>" + pi.description + "</center></label><br>\n");
+                        }
+                        writer.print("<label><center>" + pi.price + "</label></center><br>\n" +
+                                "<div class=\"absolute\">\n" +
+                                "<input id=\"number" + j + "\" type=\"number\" size=\"5\" min=\"0\" max =\"" + max + ">\n" +
+                                "<button onclick=\"addBasket()\" class=\"button button2\">Add to Basket</button>\n" +
+                                "</div>");
                     }
+                    writer.println("</section>");
                     writer.println("</section>");
                 }
 
