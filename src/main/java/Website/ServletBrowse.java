@@ -17,7 +17,7 @@ import static java.lang.String.valueOf;
 public class ServletBrowse extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProductDB pdb = new ProductDB();
+        //ProductDB pdb = new ProductDB();
         resp.setContentType("text/html");
         PrintWriter writer = resp.getWriter();
         writer.println("<!DOCTYPE html>\n" +
@@ -168,7 +168,7 @@ public class ServletBrowse extends HttpServlet {
                 headers.add("First Aid");
                 int j=0;
                 ProductInfo pi = LoginDAO.getProductInfo(j);
-                for (int i=0;i<1;i++) {
+                for (int i=0;i<6;i++) {
                     writer.println("<section>\n" +
                             "<h2>" + headers.get(i) + "</h2>\n");
                     while (pi.category.equals(headers.get(i))) {
