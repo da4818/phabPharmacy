@@ -145,7 +145,7 @@
     <a style="float: right;" href="https://phabpharmacy.herokuapp.com/basket" class="fa fa-fw fa-shopping-basket"><b id="basket"></b></a>
 </div>
 <section>
-    <h2 id="cold_and_flu">Cold and Flu </h2>
+    <h2 id="cold_and_flu">Cold and Flu</h2>
     <div id="div1" class ="relative">
         <label><center>Vicks Vaporub<br>100g</center></label><br>
         <label><center>£4.50</center></label><br>

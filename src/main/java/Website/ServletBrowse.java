@@ -162,17 +162,24 @@ public class ServletBrowse extends HttpServlet {
                     writer.print("<p>Button pressed</p>");
                 }
                 ArrayList<String> headers = new ArrayList<>();
+                ArrayList<String> headerURLs = new ArrayList<>();
                 headers.add("Cold and Flu");
                 headers.add("Skincare");
                 headers.add("Headaches and Pain Relief");
                 headers.add("Digestion");
                 headers.add("Allergy");
                 headers.add("First Aid");
+                headerURLs.add("cold_and_flu");
+                headerURLs.add("skincare");
+                headerURLs.add("headaches_and_pain_relief");
+                headerURLs.add("digestion");
+                headerURLs.add("allergy");
+                headerURLs.add("first_aid");
                 int j=0;
                 ProductInfo pi = LoginDAO.getProductInfo(j);
                 for (int i=0;i<6;i++) {
                     writer.println("<section>\n" +
-                            "<h2>" + headers.get(i) + "</h2>\n");
+                            "<h2 id=\""+headerURLs.get(i)+"\">" + headers.get(i) + "</h2>\n");
                     while (pi.category.equals(headers.get(i))) {
                         DecimalFormat df = new DecimalFormat("0.00");
                         String price = valueOf(df.format(pi.price));
