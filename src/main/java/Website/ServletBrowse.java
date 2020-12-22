@@ -164,10 +164,10 @@ public class ServletBrowse extends HttpServlet {
                 headers.add("Allergy");
                 headers.add("First Aid");
                 for (int i=0;i<5;i++) {
-                    ProductInfo pi = LoginDAO.getProductInfo(i);
                     writer.println("<section>\n" +
                             "<h2>" + headers.get(i) + "</h2>\n");
                     for (int j=0;j<2;j++){
+                        ProductInfo pi = LoginDAO.getProductInfo(i);
                         writer.println("<p>" + pi.name + "</p>");
                     }
                     writer.println("</section>");
