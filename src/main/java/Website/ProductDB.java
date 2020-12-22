@@ -24,6 +24,7 @@ public class ProductDB {
 
         try {
             stmt = c.createStatement();
+            stmt.executeUpdate("TRUNCATE TABLE PRODUCTS;");
             String sql ="CREATE TABLE PRODUCTS " +
                     "(ID SERIAL PRIMARY KEY NOT NULL," +
                     " NAME TEXT NOT NULL, " +
@@ -53,6 +54,12 @@ public class ProductDB {
             sql1 = "INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Benylin Mucus Relief','16 caps',4.80,20,'Cold and Flu',false);";
             s1.executeUpdate(sql1);
             sql1 = "INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Benylin 4 Flu','24 caps',6.00,20,'Cold and Flu',false);";
+            s1.executeUpdate(sql1);
+            sql1 = "INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('E45 Psoriasis Cream','50ml',20.00,15,'Skincare',false);";
+            s1.executeUpdate(sql1);
+            sql1 = "INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Eurax Skin Cream','100g',5.70,15,'Skincare',false);";
+            s1.executeUpdate(sql1);
+            sql1 = "INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Nurofen Meltlets','16 caps',4.00,40,'Headaches and Pain Relief',false);";
             s1.executeUpdate(sql1);
             stmt.close();
             s1.close();

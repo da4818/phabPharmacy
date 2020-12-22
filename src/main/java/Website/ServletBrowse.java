@@ -166,12 +166,11 @@ public class ServletBrowse extends HttpServlet {
                 headers.add("Allergy");
                 headers.add("First Aid");
                 int j=0;
+                ProductInfo pi = LoginDAO.getProductInfo(j);
                 for (int i=0;i<1;i++) {
                     writer.println("<section>\n" +
                             "<h2>" + headers.get(i) + "</h2>\n");
-
-                    for (j=0;j<4;j++) {
-                        ProductInfo pi = LoginDAO.getProductInfo(j);
+                    while (pi.category.equals(headers.get(i))) {
                         DecimalFormat df = new DecimalFormat("0.00");
                         String price = valueOf(df.format(pi.price));
                         int max = pi.limited ? 1 : 5;
@@ -189,6 +188,8 @@ public class ServletBrowse extends HttpServlet {
                                 "<button class=\"button2\">Add to Basket</button>\n" +
                                 "</div>\n" +
                                 "</div>");
+                        j++;
+                        pi = LoginDAO.getProductInfo(j);
                     }
                     writer.println("</section>");
                 }
