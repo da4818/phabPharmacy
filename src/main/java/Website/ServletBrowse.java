@@ -158,7 +158,9 @@ public class ServletBrowse extends HttpServlet {
                 "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" class=\"fa fa-fw fa-shopping-basket\"><b id=\"basket\"></b></a>\n" +
                 "</div>");
-
+                if(req.getParameter("number1")!= null){
+                    writer.print("<p>Button pressed</p>");
+                }
                 ArrayList<String> headers = new ArrayList<>();
                 headers.add("Cold and Flu");
                 headers.add("Skincare");
@@ -185,7 +187,7 @@ public class ServletBrowse extends HttpServlet {
                         }
                         writer.print("<label><center>£" + price + "</label></center><br>\n" +
                                 "<div class=\"absolute\">\n" +
-                                "<input id=\"number" + j + "\" type=\"number\" size=\"5\" min=\"0\" max=\"" + max + "\">\n" +
+                                "<input name=\"number" + j + "\" type=\"number\" size=\"5\" min=\"0\" max=\"" + max + "\">\n" +
                                 "<button class=\"button2\">Add to Basket</button>\n" +
                                 "</div>\n" +
                                 "</div>");
