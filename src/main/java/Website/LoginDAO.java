@@ -111,6 +111,22 @@ public class LoginDAO {
             s.close();
         }catch(Exception e){System.out.println(e);}
     }
-
+    public static int tableSize(String tableName){
+        int n=0;
+        try{
+            String dbUrl = System.getenv("JDBC_DATABASE_URL");
+            Class.forName("org.postgresql.Driver");
+            Connection con=DriverManager.getConnection(dbUrl);
+            Statement s =con.createStatement();
+            PreparedStatement ps=con.prepareStatement("insert into basket (name,description,price,quantity,subtotal) values(?,?,?,?,?)");
+            ps.setString(1,tableName);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                n = Integer.parseInt(rs.getString("count(*)"));
+            }
+            s.close();
+        }catch(Exception e){System.out.println(e);}
+        return n;
+    }
 }
 

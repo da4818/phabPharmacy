@@ -92,6 +92,8 @@ public class ServletBrowse extends HttpServlet {
         LoginDAO.addtoBasket(pi,num);
         writer.print("<p>Product " + pi.name + "</p>");
         writer.print("<p>Quantity: " + num + "</p>");
+        int tableSize = LoginDAO.tableSize("products");
+        writer.print("<p> size:" + tableSize + "</p>");
 
     }
     public String htmlOutput(){

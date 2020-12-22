@@ -12,7 +12,16 @@ public class ServletBasket extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        resp.getWriter().write("<!DOCTYPE html>\n" +
+        String HTML =htmlOutput();
+        resp.getWriter().write(HTML);
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    }
+    public String htmlOutput(){
+        String output ="<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "<head>\n" +
                 "    <meta charset=\"utf-8\">\n" +
@@ -196,15 +205,14 @@ public class ServletBasket extends HttpServlet {
                 "    <a style=\"background-color: #00B8C5;\" href=\"https://phabpharmacy.herokuapp.com/basket\" class=\"fa fa-fw fa-shopping-basket\"><b id=\"basket\"></b></a>\n" +
                 "</div>\n" +
                 "<h1>Shopping Basket</h1>\n" +
-                "\n" +
                 "<pre>\n" +
                 "<script>\n" +
                 "  for(var i=0;i<3;i++){\n" +
                 "  document.write(\"<style>p{font-family: Arial, Helvetica, sans-serif;}</style>\"+\n" +
-                "  \"<div class=\\\"container\\\" +id=\\\"cont1\\\">\"+\n" +
-                "  \"<p style=\\\"display: inline-block;\\\"><b>Vicks Vaporub</b><br>100g<br>£<output class=\\\"cost\\\" type=\\\"number\\\">4.50</output></p>\" +\n" +
-                "  \"<div class=\\\"quant\\\">\" +\n" +
-                "    \"<p>Quantity</p><input class=\\\"quantity\\\" onclick=\\\"showPrice()\\\" type=\\\"number\\\" min=\\\"1\\\" max=\\\"5\\\" value=\\\"2\\\"><button onclick=\\\"passVal(\"+i+\")\\\" class=\\\"buttonStyle\\\"><i class=\\\"fa fa-trash\\\" aria-hidden=\\\"true\\\"></i></button>\" +\n" +
+                "  \"<div class=\"container\" +id=\"cont1\">\"+\n" +
+                "  \"<p style=\"display: inline-block;\"><b>Vicks Vaporub</b><br>100g<br>£<output class=\"cost\" type=\"number\">4.50</output></p>\" +\n" +
+                "  \"<div class=\"quant\">\" +\n" +
+                "    \"<p>Quantity</p><input class=\"quantity\" onclick=\"showPrice()\" type=\"number\" min=\"1\" max=\"5\" value=\"2\"><button onclick=\"passVal(\"+i+\")\" class=\"buttonStyle\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button>\" +\n" +
                 "  \"</div>\" + \n" +
                 "  \"<div class=\\\"price\\\">\" +\n" +
                 "   \"<p>Price<br><br>£<output class=\\\"demo\\\"></output></p>\" +\n" +
@@ -214,10 +222,7 @@ public class ServletBasket extends HttpServlet {
                 "</script>\n" +
                 "</pre>\n" +
                 "</body>\n" +
-                "</html>");
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+                "</html>";
+        return output;
     }
 }
