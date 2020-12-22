@@ -89,7 +89,7 @@ public class ServletBrowse extends HttpServlet {
         int pos = Integer.parseInt(req.getParameter("position1"));
         int num = Integer.parseInt(req.getParameter("number1"));
         ProductInfo pi = LoginDAO.getProductInfo(pos);
-        LoginDAO.addtoBasket(pi);
+        LoginDAO.addtoBasket(pi,num);
         writer.print("<p>Product " + pi.name + "</p>");
         writer.print("<p>Quantity: " + num + "</p>");
 

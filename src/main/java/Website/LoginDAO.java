@@ -83,7 +83,7 @@ public class LoginDAO {
         return pi;
     }
 
-    public static void addtoBasket(ProductInfo pi){
+    public static void addtoBasket(ProductInfo pi, int num){
         try{
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
@@ -92,11 +92,23 @@ public class LoginDAO {
             ps.setString(1,pi.name);
             ps.setString(2,pi.description);
             ps.setDouble(3,pi.price);
-            ps.setInt(4,pi.quantity);
+            ps.setInt(4,num);
             ps.setDouble(5,pi.price*pi.quantity);
 
             ps.executeUpdate();
             ps.close();
+        }catch(Exception e){System.out.println(e);}
+    }
+
+    public static void resetTable(String tableName){
+        try{
+            String dbUrl = System.getenv("JDBC_DATABASE_URL");
+            Class.forName("org.postgresql.Driver");
+            Connection con=DriverManager.getConnection(dbUrl);
+            Statement s =con.createStatement();
+            String sql="truncate table " + tableName + ";";
+            s.executeUpdate(sql);
+            s.close();
         }catch(Exception e){System.out.println(e);}
     }
 
