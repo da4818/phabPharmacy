@@ -68,7 +68,7 @@ public class LoginDAO {
             Connection con=DriverManager.getConnection(dbUrl);
 
             PreparedStatement ps=con.prepareStatement("select * from products where id=?");
-            ps.setInt(1,n);
+            ps.setInt(1,n+1);
             ResultSet rs=ps.executeQuery();
 
             while(rs.next()){
