@@ -194,7 +194,7 @@ public class ServletBrowse extends HttpServlet {
                                 "<div class=\"absolute\">\n" +
                                 "<form action=\"browse\" method=\"post\">\n" +
                                 "<input name=\"number" + j + "\" type=\"number\" size=\"5\" min=\"0\" max=\"" + max + "\">\n" +
-                                "<button name=\"button" + j + "\" type=\"submit\"class=\"buttonStyle\">Add to Basket</button>\n" +
+                                "<input name=\"button" + j + "\" type=\"submit\"class=\"buttonStyle\" value=\"Add to Basket\">\n" +
                                 "</form>\n" +
                                 "</div>\n" +
                                 "</div>");
