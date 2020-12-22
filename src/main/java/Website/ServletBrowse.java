@@ -194,6 +194,7 @@ public class ServletBrowse extends HttpServlet {
                                 "<div class=\"absolute\">\n" +
                                 "<form action=\"browse\" method=\"post\">\n" +
                                 "<input name=\"number" + j + "\" type=\"number\" size=\"5\" min=\"0\" max=\"" + max + "\">\n" +
+                                "<input name=\"position" + j + "\" type=\"hidden\"value=\"" + j + "\">\n" +
                                 "<input name=\"button" + j + "\" type=\"submit\"class=\"buttonStyle\" value=\"Add to Basket\">\n" +
                                 "</form>\n" +
                                 "</div>\n" +
@@ -220,10 +221,10 @@ public class ServletBrowse extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         PrintWriter writer = resp.getWriter();
-        String val = req.getParameter("button1");
-        String pos = val.substring(val.length()-1);
+        int pos = Integer.parseInt(req.getParameter("position1"));
         int num = Integer.parseInt(req.getParameter("number1"));
-        writer.print("<p>Button pressed: " + pos + "</p>");
+        ProductInfo pi = LoginDAO.getProductInfo(pos);
+        writer.print("<p>Product " + pi.name + "</p>");
         writer.print("<p>Quantity: " + num + "</p>");
 
     }
