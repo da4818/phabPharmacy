@@ -194,7 +194,7 @@ public class ServletBrowse extends HttpServlet {
                                 "<div class=\"absolute\">\n" +
                                 "<form action=\"browse\" method=\"post\">\n" +
                                 "<input name=\"number" + j + "\" type=\"number\" size=\"5\" min=\"0\" max=\"" + max + "\">\n" +
-                                "<input name=\"button" + j + "\" type=\"submit\"class=\"buttonStyle\" value=\"Add to Basket\">\n" +
+                                "<input name=\"button\" type=\"submit\"class=\"buttonStyle\" value=\"Add to Basket\">\n" +
                                 "</form>\n" +
                                 "</div>\n" +
                                 "</div>");
@@ -220,7 +220,7 @@ public class ServletBrowse extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         PrintWriter writer = resp.getWriter();
-        if(req.getParameter("button1")!= null){
+        if(req.getParameter("button")!= null){
             int num = Integer.parseInt(req.getParameter("number1"));
             writer.print("<p>Button pressed:" + num + "</p>");
         }
