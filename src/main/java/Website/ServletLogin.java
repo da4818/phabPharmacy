@@ -1,11 +1,13 @@
 package Website;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet(urlPatterns ={"/login"},loadOnStartup = 0)
 public class ServletLogin extends HttpServlet {
@@ -15,6 +17,32 @@ public class ServletLogin extends HttpServlet {
         String output = htmlOutput();
         resp.getWriter().write(output);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
+        String HTML = htmlOutput();
+        PrintWriter writer = resp.getWriter();
+        String em = req.getParameter("email");
+        String pw = req.getParameter("pass");
+        writer.println(HTML);
+        if(LoginDAO.validate(em,pw)){
+            String output= LoginDAO.getName(em,pw);
+            writer.print("<h2>Welcome back, " + output + "!</h2>");
+            //RequestDispatcher rd = req.getRequestDispatcher("servlet2");
+            //rd.forward(req,resp);
+        }
+        else if (em.isEmpty() || pw.isEmpty()){
+            writer.print("<h2>Incomplete fields, please enter all the information.</h2>");
+        }
+        else{
+            writer.print("<h2>Wrong email or password<h2>");
+            RequestDispatcher rd=req.getRequestDispatcher("/home");
+            rd.include(req,resp);
+        }
+        writer.close();
+    }
+
     public String htmlOutput(){
         String output = "<!DOCTYPE html>\n" +
                 "<html>\n" +
@@ -118,7 +146,7 @@ public class ServletLogin extends HttpServlet {
                 "<h1><center>Login</center></h1>\n" +
                 "<p> Login below. If you haven't got an account, <a href=\"https://phabpharmacy.herokuapp.com/register\"> register here.</a> </p>\n" +
                 "\n" +
-                "<form name=\"loginForm\" action=\"login_status\" method=\"post\">\n" +
+                "<form name=\"loginForm\" action=\"login\" method=\"post\">\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"email\" placeholder=\"Email Address*\"><br>\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"pass\" placeholder=\"Password*\"><br>\n" +
                 "        <input type=\"submit\" class=\"button2\" value=\"Submit\">\n" +
