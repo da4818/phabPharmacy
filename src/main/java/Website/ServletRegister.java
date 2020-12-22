@@ -12,7 +12,7 @@ import java.io.PrintWriter;
 public class ServletRegister extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //UserDB udb = new UserDB();
+        UserDB udb = new UserDB();
         resp.setContentType("text/html");
         String output = htmlOutput();
         resp.getWriter().write(output);

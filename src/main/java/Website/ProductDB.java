@@ -61,6 +61,12 @@ public class ProductDB {
             s1.executeUpdate(sql1);
             sql1 = "INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Nurofen Meltlets','16 caps',4.00,40,'Headaches and Pain Relief',false);";
             s1.executeUpdate(sql1);
+            sql1 = "INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Dioralyte Blackcurrant','12 sachets',8.00,20,'Digestion',false);";
+            s1.executeUpdate(sql1);
+            sql1 = "INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Benadryl Relief','24 caps',9.00,20,'Allergy',false);";
+            s1.executeUpdate(sql1);
+            sql1 = "INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Dettol Antiseptic','500ml',3.20,20,'First Aid',false);";
+            s1.executeUpdate(sql1);
             stmt.close();
             s1.close();
 
