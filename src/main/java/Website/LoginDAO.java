@@ -59,8 +59,9 @@ public class LoginDAO {
             ps.close();
         }catch(Exception e){System.out.println(e);}
     }
-    public static ProductInfo getProductInfo(int n){
+    public static String getProductInfo(int n){
         ProductInfo pi = new ProductInfo();
+        String out;
         try{
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
@@ -78,8 +79,10 @@ public class LoginDAO {
                 pi.category = rs.getString("category");
                 pi.limited = rs.getBoolean("limited");
             }
+
         }catch(Exception e){System.out.println(e);}
-        return pi;
+        out = pi.name;
+        return out;
     }
 
 }

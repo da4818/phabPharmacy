@@ -167,8 +167,8 @@ public class ServletBrowse extends HttpServlet {
                     writer.println("<section>\n" +
                             "<h2>" + headers.get(i) + "</h2>\n");
                     for (int j=0;j<2;j++){
-                        ProductInfo pi = LoginDAO.getProductInfo(i);
-                        writer.println("<p>" + pi.name + "</p>");
+                        String out = LoginDAO.getProductInfo(i);
+                        writer.println("<p>" + out + "</p>");
                     }
                     writer.println("</section>");
                 }
