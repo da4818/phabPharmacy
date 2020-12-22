@@ -18,7 +18,7 @@ public class ServletBrowse extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //ProductDB pdb = new ProductDB();
-        BasketDB bdb = new BasketDB();
+        //BasketDB bdb = new BasketDB();
         resp.setContentType("text/html");
         PrintWriter writer = resp.getWriter();
         writer.println("<!DOCTYPE html>\n" +
