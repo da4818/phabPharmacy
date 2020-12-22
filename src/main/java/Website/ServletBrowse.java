@@ -17,11 +17,85 @@ import static java.lang.String.valueOf;
 public class ServletBrowse extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProductDB pdb = new ProductDB();
-        BasketDB bdb = new BasketDB();
+        //ProductDB pdb = new ProductDB();
+        //BasketDB bdb = new BasketDB();
         resp.setContentType("text/html");
         PrintWriter writer = resp.getWriter();
-        writer.println("<!DOCTYPE html>\n" +
+        String HTML= htmlOutput();
+        writer.println(HTML);
+
+                ArrayList<String> headers = new ArrayList<>();
+                ArrayList<String> headerURLs = new ArrayList<>();
+                headers.add("Cold and Flu");
+                headers.add("Skincare");
+                headers.add("Headaches and Pain Relief");
+                headers.add("Digestion");
+                headers.add("Allergy");
+                headers.add("First Aid");
+                headerURLs.add("cold_and_flu");
+                headerURLs.add("skincare");
+                headerURLs.add("headaches_and_pain_relief");
+                headerURLs.add("digestion");
+                headerURLs.add("allergy");
+                headerURLs.add("first_aid");
+                int j=1;
+                ProductInfo pi = LoginDAO.getProductInfo(j);
+                for (int i=0;i<6;i++) {
+                    writer.println("<section>\n" +
+                            "<h2 id=\""+headerURLs.get(i)+"\">" + headers.get(i) + "</h2>\n");
+                    while (pi.category.equals(headers.get(i))) {
+                        DecimalFormat df = new DecimalFormat("0.00");
+                        String price = valueOf(df.format(pi.price));
+                        int max = pi.limited ? 1 : 5;
+                        writer.print("<div class=\"relative\">\n");
+                        if (pi.limited){
+                            writer.print("<label class=\"tooltip\"><center>" + pi.name + "<br>" + pi.description + "</center>\n" +
+                                    "<span class=\"tooltiptext\"><i>Limited to one per customer</i></span></label><br>\n");
+                        }
+                        else{
+                            writer.print("<label><center>" + pi.name + "<br>" + pi.description + "</center></label><br>\n");
+                        }
+                        writer.print("<label><center>£" + price + "</label></center><br>\n" +
+                                "<div class=\"absolute\">\n" +
+                                "<form action=\"browse\" method=\"post\">\n" +
+                                "<input name=\"number" + j + "\" type=\"number\" size=\"5\" min=\"0\" max=\"" + max + "\">\n" +
+                                "<input name=\"position" + j + "\" type=\"hidden\"value=\"" + j + "\">\n" +
+                                "<input name=\"button" + j + "\" type=\"submit\"class=\"buttonStyle\" value=\"Add to Basket\">\n" +
+                                "</form>\n" +
+                                "</div>\n" +
+                                "</div>");
+                        j++;
+                        pi = LoginDAO.getProductInfo(j);
+                    }
+                    writer.println("</section>");
+                }
+
+                writer.println("<script>\n" +
+                        "    function addBasket(){\n" +
+                        "        var num=document.getElementById(\"number1\").value;\n" +
+                        "        document.getElementById(\"basket\").innerHTML = num\n" +
+                        "        document.getElementById(\"basket\").style.fontFamily =\"Arial, Helvetica, sans-serif\";\n" +
+                        "    }\n" +
+                        "</script>\n" +
+                        "</body>\n" +
+                        "</html>");
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
+        PrintWriter writer = resp.getWriter();
+        int pos = Integer.parseInt(req.getParameter("position1"));
+        int num = Integer.parseInt(req.getParameter("number1"));
+        ProductInfo pi = LoginDAO.getProductInfo(pos);
+        LoginDAO.addtoBasket(pi);
+        writer.print("<p>Product " + pi.name + "</p>");
+        writer.print("<p>Quantity: " + num + "</p>");
+
+    }
+    public String htmlOutput(){
+        String output="<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "<head>\n" +
                 "    <meta charset=\"utf-8\">\n" +
@@ -158,76 +232,7 @@ public class ServletBrowse extends HttpServlet {
                 "    <a href=\"https://phabpharmacy.herokuapp.com/login\"><i class=\"fa fa-fw fa-user\"></i>Login</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" class=\"fa fa-fw fa-shopping-basket\"><b id=\"basket\"></b></a>\n" +
-                "</div>");
-
-                ArrayList<String> headers = new ArrayList<>();
-                ArrayList<String> headerURLs = new ArrayList<>();
-                headers.add("Cold and Flu");
-                headers.add("Skincare");
-                headers.add("Headaches and Pain Relief");
-                headers.add("Digestion");
-                headers.add("Allergy");
-                headers.add("First Aid");
-                headerURLs.add("cold_and_flu");
-                headerURLs.add("skincare");
-                headerURLs.add("headaches_and_pain_relief");
-                headerURLs.add("digestion");
-                headerURLs.add("allergy");
-                headerURLs.add("first_aid");
-                int j=1;
-                ProductInfo pi = LoginDAO.getProductInfo(j);
-                for (int i=0;i<6;i++) {
-                    writer.println("<section>\n" +
-                            "<h2 id=\""+headerURLs.get(i)+"\">" + headers.get(i) + "</h2>\n");
-                    while (pi.category.equals(headers.get(i))) {
-                        DecimalFormat df = new DecimalFormat("0.00");
-                        String price = valueOf(df.format(pi.price));
-                        int max = pi.limited ? 1 : 5;
-                        writer.print("<div class=\"relative\">\n");
-                        if (pi.limited){
-                            writer.print("<label class=\"tooltip\"><center>" + pi.name + "<br>" + pi.description + "</center>\n" +
-                                    "<span class=\"tooltiptext\"><i>Limited to one per customer</i></span></label><br>\n");
-                        }
-                        else{
-                            writer.print("<label><center>" + pi.name + "<br>" + pi.description + "</center></label><br>\n");
-                        }
-                        writer.print("<label><center>£" + price + "</label></center><br>\n" +
-                                "<div class=\"absolute\">\n" +
-                                "<form action=\"browse\" method=\"post\">\n" +
-                                "<input name=\"number" + j + "\" type=\"number\" size=\"5\" min=\"0\" max=\"" + max + "\">\n" +
-                                "<input name=\"position" + j + "\" type=\"hidden\"value=\"" + j + "\">\n" +
-                                "<input name=\"button" + j + "\" type=\"submit\"class=\"buttonStyle\" value=\"Add to Basket\">\n" +
-                                "</form>\n" +
-                                "</div>\n" +
-                                "</div>");
-                        j++;
-                        pi = LoginDAO.getProductInfo(j);
-                    }
-                    writer.println("</section>");
-                }
-
-                writer.println("<script>\n" +
-                        "    function addBasket(){\n" +
-                        "        var num=document.getElementById(\"number1\").value;\n" +
-                        "        document.getElementById(\"basket\").innerHTML = num\n" +
-                        "        document.getElementById(\"basket\").style.fontFamily =\"Arial, Helvetica, sans-serif\";\n" +
-                        "    }\n" +
-                        "</script>\n" +
-                        "</body>\n" +
-                        "</html>");
-
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        PrintWriter writer = resp.getWriter();
-        int pos = Integer.parseInt(req.getParameter("position1"));
-        int num = Integer.parseInt(req.getParameter("number1"));
-        ProductInfo pi = LoginDAO.getProductInfo(pos);
-        LoginDAO.addtoBasket(pi);
-        writer.print("<p>Product " + pi.name + "</p>");
-        writer.print("<p>Quantity: " + num + "</p>");
-
+                "</div>";
+        return output;
     }
 }
