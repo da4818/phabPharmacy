@@ -221,8 +221,7 @@ public class ServletBrowse extends HttpServlet {
         resp.setContentType("text/html");
         PrintWriter writer = resp.getWriter();
         String val = req.getParameter("button1");
-        String pos_c = val.substring(val.length()-1);
-        int pos = Integer.parseInt(pos_c);
+        String pos = val.substring(val.length()-1);
         int num = Integer.parseInt(req.getParameter("number1"));
         writer.print("<p>Button pressed: " + pos + "</p>");
         writer.print("<p>Quantity: " + num + "</p>");
