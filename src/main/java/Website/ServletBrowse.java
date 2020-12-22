@@ -221,7 +221,11 @@ public class ServletBrowse extends HttpServlet {
         resp.setContentType("text/html");
         PrintWriter writer = resp.getWriter();
         if(req.getParameter("button1")!= null){
-            writer.print("<p>Button pressed</p>");
+            int num = Integer.parseInt(req.getParameter("number1"));
+            writer.print("<p>Button pressed:" + num + "</p>");
+        }
+        else{
+            writer.print("<p>Invalid</p>");
         }
     }
 }
