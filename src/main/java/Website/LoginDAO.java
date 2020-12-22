@@ -75,13 +75,13 @@ public class LoginDAO {
             while(rs.next()){
                 pi.name = rs.getString("name");
                 pi.description = rs.getString("description");
-                pi.price = rs.getFloat("price");
+                pi.price = rs.getDouble("price");
                 pi.quantity = rs.getInt("quantity");
                 pi.category = rs.getString("category");
                 pi.limited = rs.getBoolean("limited");
             }
             DecimalFormat df = new DecimalFormat("0.00");
-            pi.price = Float.valueOf(df.format(pi.price));
+            pi.price = Double.valueOf(df.format(pi.price));
 
         }catch(Exception e){System.out.println(e);}
         return pi;
