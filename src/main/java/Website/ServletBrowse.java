@@ -17,7 +17,7 @@ import static java.lang.String.valueOf;
 public class ServletBrowse extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //ProductDB pdb = new ProductDB();
+        ProductDB pdb = new ProductDB();
         resp.setContentType("text/html");
         PrintWriter writer = resp.getWriter();
         writer.println("<!DOCTYPE html>\n" +
@@ -177,7 +177,7 @@ public class ServletBrowse extends HttpServlet {
                         int max = pi.limited ? 1 : 5;
                         writer.print("<div class=\"relative\">\n");
                         if (pi.limited){
-                            writer.print("\"<label class=\"tooltip\"><center>\" + pi.name + \"<br>\" + pi.description + \"</center></label><br>\n" +
+                            writer.print("<label class=\"tooltip\"><center>" + pi.name + "<br>" + pi.description + "</center></label><br>\n" +
                                     "<span class=\"tooltiptext\"><i>Limited to one per customer</i></span></label><br>\n");
                         }
                         else{
