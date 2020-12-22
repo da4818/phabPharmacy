@@ -83,12 +83,12 @@ public class LoginDAO {
         return pi;
     }
 
-    public static void addOrder(ProductInfo pi){
+    public static void addtoBasket(ProductInfo pi){
         try{
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection con=DriverManager.getConnection(dbUrl);
-            PreparedStatement ps=con.prepareStatement("insert into users (name,description,price,quantity,subtotal) values(?,?,?,?,?)");
+            PreparedStatement ps=con.prepareStatement("insert into basket (name,description,price,quantity,subtotal) values(?,?,?,?,?)");
             ps.setString(1,pi.name);
             ps.setString(2,pi.description);
             ps.setDouble(3,pi.price);

@@ -17,8 +17,8 @@ import static java.lang.String.valueOf;
 public class ServletBrowse extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //ProductDB pdb = new ProductDB();
-        //BasketDB bdb = new BasketDB();
+        ProductDB pdb = new ProductDB();
+        BasketDB bdb = new BasketDB();
         resp.setContentType("text/html");
         PrintWriter writer = resp.getWriter();
         writer.println("<!DOCTYPE html>\n" +
@@ -225,7 +225,7 @@ public class ServletBrowse extends HttpServlet {
         int pos = Integer.parseInt(req.getParameter("position1"));
         int num = Integer.parseInt(req.getParameter("number1"));
         ProductInfo pi = LoginDAO.getProductInfo(pos);
-        LoginDAO.addOrder(pi);
+        LoginDAO.addtoBasket(pi);
         writer.print("<p>Product " + pi.name + "</p>");
         writer.print("<p>Quantity: " + num + "</p>");
 

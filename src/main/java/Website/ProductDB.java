@@ -5,10 +5,10 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class ProductDB {
-    public ArrayList<Integer> ids;
+    /*public ArrayList<Integer> ids;
     public ArrayList <String> names;
     public ArrayList <String> emails;
-    public ArrayList <String> passes;
+    public ArrayList <String> passes;*/
     public Statement stmt;
     public ProductDB() {
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
