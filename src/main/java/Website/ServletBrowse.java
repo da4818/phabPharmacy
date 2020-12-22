@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -162,6 +163,7 @@ public class ServletBrowse extends HttpServlet {
                 headers.add("Digestion");
                 headers.add("Allergy");
                 headers.add("First Aid");
+
                 for (int i=0;i<1;i++) {
                     writer.println("<section>\n" +
                             "<h2>" + headers.get(i) + "</h2>\n");

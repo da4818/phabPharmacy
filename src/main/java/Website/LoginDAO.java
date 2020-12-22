@@ -71,17 +71,18 @@ public class LoginDAO {
             PreparedStatement ps=con.prepareStatement("select * from products where id=?");
             ps.setInt(1,n+1);
             ResultSet rs=ps.executeQuery();
-
+            DecimalFormat df = new DecimalFormat("0.00");
             while(rs.next()){
                 pi.name = rs.getString("name");
                 pi.description = rs.getString("description");
                 pi.price = rs.getDouble("price");
+                pi.price = Double.valueOf(df.format(pi.price));
                 pi.quantity = rs.getInt("quantity");
                 pi.category = rs.getString("category");
                 pi.limited = rs.getBoolean("limited");
             }
-            DecimalFormat df = new DecimalFormat("0.00");
-            pi.price = Double.valueOf(df.format(pi.price));
+
+
 
         }catch(Exception e){System.out.println(e);}
         return pi;
