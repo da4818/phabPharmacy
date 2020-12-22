@@ -118,7 +118,7 @@ public class LoginDAO {
             Class.forName("org.postgresql.Driver");
             Connection con=DriverManager.getConnection(dbUrl);
             Statement s =con.createStatement();
-            PreparedStatement ps=con.prepareStatement("insert into basket (name,description,price,quantity,subtotal) values(?,?,?,?,?)");
+            PreparedStatement ps=con.prepareStatement("select count(*) from ?");
             ps.setString(1,tableName);
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
