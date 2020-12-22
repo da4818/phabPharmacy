@@ -178,8 +178,8 @@ public class ServletBrowse extends HttpServlet {
                         }
                         writer.print("<label><center>£" + pi.price + "</label></center><br>\n" +
                                 "<div class=\"absolute\">\n" +
-                                "<input id=\"number" + j + "\" type=\"number\" size=\"5\" min=\"0\" max =\"" + max + ">\n" +
-                                "<button onclick=\"addBasket()\" class=\"button button2\">Add to Basket</button>\n" +
+                                "<input id=\"number" + j + "\" type=\"number\" size=\"5\" min=\"0\" max=\"" + max + ">\n" +
+                                "<button class=\"button2\">Add to Basket</button>\n" +
                                 "</div>\n" +
                                 "</div>");
                     }
