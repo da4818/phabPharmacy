@@ -79,11 +79,25 @@ public class LoginDAO {
                 pi.category = rs.getString("category");
                 pi.limited = rs.getBoolean("limited");
             }
-
-
-
         }catch(Exception e){System.out.println(e);}
         return pi;
+    }
+
+    public static void addOrder(ProductInfo pi){
+        try{
+            String dbUrl = System.getenv("JDBC_DATABASE_URL");
+            Class.forName("org.postgresql.Driver");
+            Connection con=DriverManager.getConnection(dbUrl);
+            PreparedStatement ps=con.prepareStatement("insert into users (name,description,price,quantity,subtotal) values(?,?,?,?,?)");
+            ps.setString(1,pi.name);
+            ps.setString(2,pi.description);
+            ps.setDouble(3,pi.price);
+            ps.setInt(4,pi.quantity);
+            ps.setDouble(5,pi.price*pi.quantity);
+
+            ps.executeUpdate();
+            ps.close();
+        }catch(Exception e){System.out.println(e);}
     }
 
 }
