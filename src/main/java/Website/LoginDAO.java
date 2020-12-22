@@ -93,7 +93,7 @@ public class LoginDAO {
             ps.setString(2,pi.description);
             ps.setDouble(3,pi.price);
             ps.setInt(4,num);
-            ps.setDouble(5,pi.price*pi.quantity);
+            ps.setDouble(5,pi.price*num);
 
             ps.executeUpdate();
             ps.close();
