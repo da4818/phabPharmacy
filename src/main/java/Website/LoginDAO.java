@@ -142,7 +142,7 @@ public class LoginDAO {
             ps.setString(1,tableName);
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
-                n = Integer.parseInt(rs.getString("count"));
+                n = Integer.parseInt(rs.getString(1));
             }
             s.close();
         }catch(Exception e){System.out.println(e);}
