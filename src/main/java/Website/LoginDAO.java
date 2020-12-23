@@ -25,7 +25,62 @@ public class LoginDAO {
             s.close();
         }catch(Exception e){System.out.println(e);}
     }
-
+    public static void createTable(String tableName){
+        try{
+            Connection c = getConnection();
+            Statement s =c.createStatement();
+            if(tableName.equals("users")) {
+                String sql ="CREATE TABLE USERS " +
+                        "(ID SERIAL PRIMARY KEY NOT NULL," +
+                        " FNAME TEXT NOT NULL, " +
+                        " LNAME TEXT NOT NULL, " +
+                        " EMAIL TEXT NOT NULL, " +
+                        " PASSW TEXT NOT NULL, " +
+                        " CARDNO TEXT NOT NULL, " +
+                        " POSTCODE TEXT NOT NULL)";
+                s.executeUpdate(sql);
+            }
+            else if(tableName.equals("products")){
+                /*String sql ="CREATE TABLE PRODUCTS " +
+                        "(ID SERIAL PRIMARY KEY NOT NULL," +
+                        " NAME TEXT NOT NULL, " +
+                        " DESCRIPTION TEXT NOT NULL, " +
+                        " PRICE DOUBLE PRECISION NOT NULL, " +
+                        " QUANTITY INTEGER NOT NULL, " +
+                        " CATEGORY TEXT NOT NULL, " +
+                        " LIMITED BOOLEAN NOT NULL)";
+                s.executeUpdate(sql);*/
+                Statement s1 = c.createStatement();
+                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Vicks Vaporub','100g',4.50,15,'Cold and Flu',false);");
+                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Vicks First Defence','15ml',6.80,20,'Cold and Flu',false);");
+                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Gsk Night Nurse','160ml',8.50,30,'Cold and Flu',false);");
+                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Gsk Night Nurse','160ml',9.00,30,'Cold and Flu',false);");
+                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Lemsip Max','16 caps',4.20,25,'Cold and Flu',false);");
+                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Lemsip Standard','10 sachets',4.50,25,'Cold and Flu',false);");
+                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Sudafed Day & Night','16 caps',4.20,30,'Cold and Flu',true);");
+                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Sudafed Max','16 caps',4.80,30,'Cold and Flu',true);");
+                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Benylin Mucus Relief','16 caps',4.80,20,'Cold and Flu',false);");
+                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Benylin 4 Flu','24 caps',6.00,20,'Cold and Flu',false);");
+                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('E45 Psoriasis Cream','50ml',20.00,15,'Skincare',false);");
+                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Eurax Skin Cream','100g',5.70,15,'Skincare',false);");
+                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Nurofen Meltlets','16 caps',4.00,40,'Headaches and Pain Relief',false);");
+                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Dioralyte Blackcurrant','12 sachets',8.00,20,'Digestion',false);");
+                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Benadryl Relief','24 caps',9.00,20,'Allergy',false);");
+                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Dettol Antiseptic','500ml',3.20,20,'First Aid',false);");
+            }
+            else if(tableName.equals("basket")){
+                String sql ="CREATE TABLE BASKET " +
+                        "(ID SERIAL PRIMARY KEY NOT NULL," +
+                        " NAME TEXT NOT NULL, " +
+                        " DESCRIPTION TEXT NOT NULL, " +
+                        " PRICE DOUBLE PRECISION NOT NULL, " +
+                        " QUANTITY INTEGER NOT NULL, " +
+                        " SUBTOTAL TEXT NOT NULL)";
+                s.executeUpdate(sql);
+            }
+            s.close();
+        }catch(Exception e){System.out.println(e);}
+    }
     // Functions to execute queries, or amend to the database content //
     // Checking if user is logging in with an existing account //
     public static boolean validateLogin(String email_in,String pass_in){
