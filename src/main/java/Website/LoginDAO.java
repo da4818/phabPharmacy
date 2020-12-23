@@ -29,6 +29,7 @@ public class LoginDAO {
         try{
             Connection c = getConnection();
             Statement s =c.createStatement();
+            Statement s1 = c.createStatement();
             if(tableName.equals("users")) {
                 String sql ="CREATE TABLE USERS " +
                         "(ID SERIAL PRIMARY KEY NOT NULL," +
@@ -39,9 +40,12 @@ public class LoginDAO {
                         " CARDNO TEXT NOT NULL, " +
                         " POSTCODE TEXT NOT NULL)";
                 s.executeUpdate(sql);
+                s1.executeUpdate("INSERT INTO USERS (FNAME,LNAME,EMAIL,PASSW,CARDNO,POSTCODE) VALUES ('John','Doe','email1','pass1','cardno1','SW72AZ');");
+                s1.executeUpdate("INSERT INTO USERS (FNAME,LNAME,EMAIL,PASSW,CARDNO,POSTCODE) VALUES ('Mia','Stewart','email2','pass2','cardno2','SW65TD');");
+
             }
             else if(tableName.equals("products")){
-                /*String sql ="CREATE TABLE PRODUCTS " +
+                String sql ="CREATE TABLE PRODUCTS " +
                         "(ID SERIAL PRIMARY KEY NOT NULL," +
                         " NAME TEXT NOT NULL, " +
                         " DESCRIPTION TEXT NOT NULL, " +
@@ -49,8 +53,8 @@ public class LoginDAO {
                         " QUANTITY INTEGER NOT NULL, " +
                         " CATEGORY TEXT NOT NULL, " +
                         " LIMITED BOOLEAN NOT NULL)";
-                s.executeUpdate(sql);*/
-                Statement s1 = c.createStatement();
+                s.executeUpdate(sql);
+
                 s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Vicks Vaporub','100g',4.50,15,'Cold and Flu',false);");
                 s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Vicks First Defence','15ml',6.80,20,'Cold and Flu',false);");
                 s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Gsk Night Nurse','160ml',8.50,30,'Cold and Flu',false);");
@@ -79,6 +83,7 @@ public class LoginDAO {
                 s.executeUpdate(sql);
             }
             s.close();
+            s1.close();
         }catch(Exception e){System.out.println(e);}
     }
     // Functions to execute queries, or amend to the database content //
