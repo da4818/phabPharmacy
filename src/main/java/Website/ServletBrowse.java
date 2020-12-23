@@ -87,7 +87,7 @@ public class ServletBrowse extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         PrintWriter writer = resp.getWriter();
-        int val= Integer.parseInt(req.getParameter("position"));
+        int val= Integer.valueOf(req.getParameter("position"));
         int q = Integer.parseInt(req.getParameter("number"));
         writer.print("<p> button num" + val + "</p>");
         /*int tableSize = LoginDAO.tableSize("products");
