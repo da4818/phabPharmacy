@@ -26,9 +26,9 @@ public class ServletLogin extends HttpServlet {
         String em = req.getParameter("email");
         String pw = req.getParameter("pass");
         writer.println(HTML);
-        if(LoginDAO.validate(em,pw)){
-            String output= LoginDAO.getName(em,pw);
-            writer.print("<h2>Welcome back, " + output + "!</h2>");
+        if(LoginDAO.validateLogin(em,pw)){
+            User currentUser = LoginDAO.getUser(em,pw);
+            writer.print("<h2>Welcome back, " + currentUser.fname + "!</h2>");
             //RequestDispatcher rd = req.getRequestDispatcher("servlet2");
             //rd.forward(req,resp);
         }

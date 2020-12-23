@@ -31,7 +31,7 @@ public class ServletRegister extends HttpServlet {
         String cn = req.getParameter("cardno");
         String ad = req.getParameter("postcode");
         writer.println(HTML);
-        if(LoginDAO.validate(em,pw)){ //create validation to see if email exists
+        if(LoginDAO.validateRegister(em)){ //create validation to see if email exists
             writer.println("<h2> There is an existing account with the email entered. Please log in.</h2>");
         }
         else if (fn.isEmpty() || ln.isEmpty() || em.isEmpty() || pw.isEmpty() || vpw.isEmpty() || cn.isEmpty() || ad.isEmpty()){
@@ -42,8 +42,8 @@ public class ServletRegister extends HttpServlet {
         }
         else{
             LoginDAO.addUser(fn,ln,em,pw,cn,ad);
-            String output= LoginDAO.getName(em,pw);
-            writer.print("<h2>Succesful registration. Welcome, " + output + "</h2>");
+            User currentUser = LoginDAO.getUser(em,pw);
+            writer.print("<h2>Succesful registration. Welcome, " + currentUser.fname + "</h2>");
         }
     }
 
