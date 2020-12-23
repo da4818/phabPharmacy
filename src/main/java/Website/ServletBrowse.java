@@ -87,22 +87,16 @@ public class ServletBrowse extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         PrintWriter writer = resp.getWriter();
-        String val= req.getParameter("position");
+        int val= Integer.parseInt(req.getParameter("position"));
+        int q = Integer.parseInt(req.getParameter("number"));
         writer.print("<p> button num" + val + "</p>");
         /*int tableSize = LoginDAO.tableSize("products");
         writer.print("<p> size:" + tableSize + "</p>");
-        int t=1;
-            String entry = "button" + t;
-            if (req.getParameter(entry) == null) {t++;}
-            else if (req.getParameter(entry) != null) {
-                int pos = Integer.parseInt(req.getParameter("position" + t));
-                int num = Integer.parseInt(req.getParameter("number" + t));
-                ProductInfo pi = LoginDAO.getProductInfo(pos);
-                LoginDAO.addtoBasket(pi, num);
-                writer.print("<p>Product " + pi.name + "</p>");
-                writer.print("<p>Quantity: " + num + "</p>");
-            }*/
-
+        int t=1;*/
+        ProductInfo pi = LoginDAO.getProductInfo(val);
+        LoginDAO.addtoBasket(pi, val);
+        writer.print("<p>Product " + pi.name + "</p>");
+        writer.print("<p>Quantity: " + val + "</p>");
         }
 
 
