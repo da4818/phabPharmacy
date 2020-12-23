@@ -60,8 +60,8 @@ public class ServletBrowse extends HttpServlet {
                                 "<form action=\"browse\" method=\"post\">\n" +
                                 "<input name=\"number" + j + "\" type=\"number\" size=\"5\" min=\"0\" max=\"" + max + "\">\n" +
                                 "<input name=\"position\" type=\"hidden\"value=\"" + j + "\">\n" +
-                                //"<input name=\"button" + j + "\" type=\"submit\"class=\"buttonStyle\" value=\"Add to Basket\">\n" +
-                                "<button name=\"button\" type=\"submit\" class=\"buttonStyle\" value=\"" + j + "\">Add to Basket</button>\n" +
+                                "<input name=\"button" + j + "\" type=\"submit\"class=\"buttonStyle\" value=\"Add to Basket\">\n" +
+                                //"<button name=\"button\" type=\"submit\" class=\"buttonStyle\" value=\"" + j + "\">Add to Basket</button>\n" +
                                 "</form>\n" +
                                 "</div>\n" +
                                 "</div>");
@@ -87,15 +87,22 @@ public class ServletBrowse extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         PrintWriter writer = resp.getWriter();
-        int value = Integer.parseInt(req.getParameter("button"));
-        int pos = Integer.parseInt(req.getParameter("position"+value));
+        int i=1;
+        String entry = "button" + i;
+        if(req.getParameter(entry) !=null){
+            writer.print("<p>"+i+"</p>");
+        }
+        else{
+            writer.print("<p>error</p>");
+        }
+        /*int pos = Integer.parseInt(req.getParameter("position"+value));
         int num = Integer.parseInt(req.getParameter("number"+value));
         ProductInfo pi = LoginDAO.getProductInfo(pos);
         LoginDAO.addtoBasket(pi,num);
         writer.print("<p>Product " + pi.name + "</p>");
         writer.print("<p>Quantity: " + num + "</p>");
         int tableSize = LoginDAO.tableSize("products");
-        writer.print("<p> size:" + tableSize + "</p>");
+        writer.print("<p> size:" + tableSize + "</p>");*/
 
     }
     public String htmlOutput(){
