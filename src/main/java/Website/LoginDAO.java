@@ -79,7 +79,8 @@ public class LoginDAO {
                         " DESCRIPTION TEXT NOT NULL, " +
                         " PRICE DOUBLE PRECISION NOT NULL, " +
                         " QUANTITY INTEGER NOT NULL, " +
-                        " SUBTOTAL TEXT NOT NULL)";
+                        " SUBTOTAL TEXT NOT NULL, " +
+                        " LIMITED BOOLEAN NOT NULL)";
                 s.executeUpdate(sql);
             }
             s.close();
@@ -181,12 +182,13 @@ public class LoginDAO {
     public static void addToBasket(Product p_in, int quantity_in){
         try{
             Connection c = getConnection();
-            PreparedStatement ps=c.prepareStatement("insert into basket (name,description,price,quantity,subtotal) values(?,?,?,?,?)");
+            PreparedStatement ps=c.prepareStatement("insert into basket (name,description,price,quantity,subtotal,limited) values(?,?,?,?,?,?)");
             ps.setString(1,p_in.name);
             ps.setString(2,p_in.description);
             ps.setDouble(3,p_in.price);
             ps.setInt(4,quantity_in);
             ps.setDouble(5,p_in.price*quantity_in);
+            ps.setBoolean(6, p_in.limited);
 
             ps.executeUpdate();
             ps.close();
@@ -208,6 +210,7 @@ public class LoginDAO {
                 bProduct.price = rs.getDouble("price");
                 bProduct.quantity = rs.getInt("quantity");
                 bProduct.subtotal = rs.getDouble("subtotal");
+                bProduct.limited = rs.getBoolean("limited");
             }
         }catch(Exception e){System.out.println(e);}
         return bProduct;

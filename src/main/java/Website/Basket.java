@@ -6,4 +6,5 @@ public class Basket {
     public double price;
     public int quantity;
     public double subtotal;
+    boolean limited;
 }

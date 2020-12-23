@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
+
+import static java.lang.String.valueOf;
 
 @WebServlet(urlPatterns = "/basket",loadOnStartup = 0)
 public class ServletBasket extends HttpServlet {
@@ -16,9 +19,22 @@ public class ServletBasket extends HttpServlet {
         String HTML = htmlOutput();
         PrintWriter writer = resp.getWriter();
         writer.print(HTML);
+        DecimalFormat df = new DecimalFormat("0.00");
+
         if(LoginDAO.tableSize("basket") > 0){
-            Basket b = LoginDAO.getBasketInfo(1);
-            writer.print("<p>" + b.name + " " + b.price +" " +b.quantity + " " + b.subtotal + "</p>");
+            int i = 1;
+            Basket b = LoginDAO.getBasketInfo(i);
+            String price = valueOf(df.format(b.price));
+            int max = b.limited ? 1 : 5;
+            writer.print("<div class=\"container\" id=\"cont1\">\n" +
+                    "<p style=\"display: inline-block;\"><b>"+ b.name + "</b><br>" + b.description + "<br>£<output class=\"cost\" type=\"number\">" + b.price +"</output></p>\n" +
+                    "<div class=\"quant\">\n" +
+                    "<p>Quantity</p><input class=\"quantity\" onclick=\"showPrice()\" type=\"number\" min=\"1\" max=\"" + max + "\" value=\"" + b.quantity + "\"><button onclick=\" passVal(\"" + i + "\")\" class=\"buttonStyle\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button>\" +\n" +
+                    "</div>\n" +
+                    "<div class=\"price\">\n" +
+                    "<p>Price<br><br>£<output>" + b.subtotal + "</output></p>\n" +
+                    "</div>\n" +
+                    "</div>\n");
         }
         else{
             writer.println("<p>Empty Basket</p>");
@@ -27,6 +43,11 @@ public class ServletBasket extends HttpServlet {
         writer.print("</body>\n</html>");
 
     }
+    /*
+
+
+
+  */
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -162,7 +183,7 @@ public class ServletBasket extends HttpServlet {
                 "    </style>\n" +
                 "<script>\n" +
                 "  function total(){\n" +
-                "    var num=document.getElementById(\"number1\").value;\n" +
+                "    var num = document.getElementById(\"number1\").value;\n" +
                 "    document.getElementById(\"basket\").innerHTML = num\n" +
                 "    document.getElementById(\"basket\").style.fontFamily =\"Arial, Helvetica, sans-serif\";\n" +
                 "  }\n" +
@@ -217,24 +238,7 @@ public class ServletBasket extends HttpServlet {
                 "</div>\n" +
                 "<h1>Shopping Basket</h1>\n";
 
-                /*"<pre>\n" +
-                "<script>\n" +
-                "  for(var i=0;i<3;i++){\n" +
-                "  document.write(\"<style>p{font-family: Arial, Helvetica, sans-serif;}</style>\"+\n" +
-                "  \"<div class=\"container\" +id=\"cont1\">\"+\n" +
-                "  \"<p style=\"display: inline-block;\"><b>Vicks Vaporub</b><br>100g<br>£<output class=\"cost\" type=\"number\">4.50</output></p>\" +\n" +
-                "  \"<div class=\"quant\">\" +\n" +
-                "    \"<p>Quantity</p><input class=\"quantity\" onclick=\"showPrice()\" type=\"number\" min=\"1\" max=\"5\" value=\"2\"><button onclick=\"passVal(\"+i+\")\" class=\"buttonStyle\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button>\" +\n" +
-                "  \"</div>\" + \n" +
-                "  \"<div class=\\\"price\\\">\" +\n" +
-                "   \"<p>Price<br><br>£<output class=\\\"demo\\\"></output></p>\" +\n" +
-                "  \"</div>\"+\n" +
-                "\"</div>\");\n" +
-                "}\n" +
-                "</script>\n" +
-                "</pre>\n" +
-                "</body>\n" +
-                "</html>";*/
+
         return output;
     }
 }
