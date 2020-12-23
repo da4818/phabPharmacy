@@ -141,7 +141,9 @@ public class LoginDAO {
             PreparedStatement ps=con.prepareStatement("select count(*) as total from ?");
             ps.setString(1,tableName);
             ResultSet rs=ps.executeQuery();
-            n = rs.getInt("total");
+            while(rs.next()){
+                n = rs.getInt(1);
+            }
             s.close();
         }catch(Exception e){System.out.println(e);}
         return n;

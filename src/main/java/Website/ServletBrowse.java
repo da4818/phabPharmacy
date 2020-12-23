@@ -87,10 +87,10 @@ public class ServletBrowse extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         PrintWriter writer = resp.getWriter();
-        for (int i=1;i<4;i++) {
-            String entry = "button" + i;
+        for (int t=1;t<4;t++) {
+            String entry = "button" + t;
             if(req.getParameter(entry) !=null){
-                writer.print("<p>"+i+"</p>");
+                writer.print("<p>"+t+"</p>");
             }
         }
         /*int pos = Integer.parseInt(req.getParameter("position"+value));
