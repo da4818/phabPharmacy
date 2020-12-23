@@ -89,16 +89,15 @@ public class ServletBrowse extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         int tableSize = LoginDAO.tableSize("products");
         writer.println("<p> size:" + tableSize + "</p>");
-        writer.println("<p>button pressed</p>");
         String pos_string = req.getParameter("position");
         int pos_int = Integer.parseInt(pos_string);
         String q_string = req.getParameter("number");
         int q = Integer.parseInt(q_string);
-        writer.print("<p> button num" + pos_string + "</p>");
+        writer.println("<p> button number:" + pos_string + "</p>");
         Product p = LoginDAO.getProduct(pos_int);
         LoginDAO.addToBasket(p, pos_int);
-        writer.print("<p>Product " + p.name + "</p>");
-        writer.print("<p>Quantity: " + q_string + "</p>");
+        writer.println("<p>Product " + p.name + "</p>");
+        writer.println("<p>Quantity: " + q_string + "</p>");
     }
     public String htmlOutput(){
         String output="<!DOCTYPE html>\n" +
