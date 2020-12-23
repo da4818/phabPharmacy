@@ -41,9 +41,9 @@ public class ServletBasket extends HttpServlet {
                     "<script>\n" +
                     "document.write(\"<style>p{font-family: Arial, Helvetica, sans-serif;}</style>\"+\n" +
                     "  \"<div class=\\\"container\\\" +id=\\\"cont1\\\">\"+\n" +
-                    "  \"<p style=\\\"display: inline-block;\\\"><b>" + b.name + "</b><br>" + b.description +"<br>£<output class=\\\"cost\\\" type=\\\"number\\\">" + b.price +"</output></p>\" +\n" +
+                    "  \"<p style=\\\"display: inline-block;\\\"><b>" + b.name + "</b><br>" + b.description +"<br>£<output class=\\\"cost\\\" type=\\\"number\\\">" + b.price + "</output></p>\" +\n" +
                     "  \"<div class=\\\"quant\\\">\" +\n" +
-                    "    \"<p>Quantity</p><input class=\\\"quantity\\\" onclick=\\\"showPrice()\\\" type=\\\"number\\\" min=\\\"1\\\" max=\\\"" + max + "\\\" value=\\\"" + b.quantity + "\\\"><button onclick=\\\"passVal(\"+i+\")\\\" class=\\\"button2\\\"><i class=\\\"fa fa-trash\\\" aria-hidden=\\\"true\\\"></i></button>\" +\n" +
+                    "    \"<p>Quantity</p><input class=\\\"quantity\\\" onclick=\\\"showPrice()\\\" type=\\\"number\\\" min=\\\"1\\\" max=\\\"" + max + "\\\" value=\\\"" + b.quantity + "\\\"><button onclick=\\\"passVal(\"" + i + "\")\\\" class=\\\"button2\\\"><i class=\\\"fa fa-trash\\\" aria-hidden=\\\"true\\\"></i></button>\" +\n" +
                     "  \"</div>\" + \n" +
                     "  \"<div class=\\\"price\\\">\" +\n" +
                     "   \"<p>Price<br><br>£<output class=\\\"demo\\\"></output></p>\" +\n" +
