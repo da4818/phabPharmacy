@@ -39,21 +39,21 @@ public class ServletBrowse extends HttpServlet {
                 headerURLs.add("allergy");
                 headerURLs.add("first_aid");
                 int j=1;
-                ProductInfo pi = LoginDAO.getProductInfo(j);
+                Product p = LoginDAO.getProduct(j);
                 for (int i=0;i<6;i++) {
                     writer.println("<section>\n" +
                             "<h2 id=\""+headerURLs.get(i)+"\">" + headers.get(i) + "</h2>\n");
-                    while (pi.category.equals(headers.get(i))) {
+                    while (p.category.equals(headers.get(i))) {
                         DecimalFormat df = new DecimalFormat("0.00");
-                        String price = valueOf(df.format(pi.price));
-                        int max = pi.limited ? 1 : 5;
+                        String price = valueOf(df.format(p.price));
+                        int max = p.limited ? 1 : 5;
                         writer.print("<div class=\"relative\">\n");
-                        if (pi.limited){
-                            writer.print("<label class=\"tooltip\"><center>" + pi.name + "<br>" + pi.description + "</center>\n" +
+                        if (p.limited){
+                            writer.print("<label class=\"tooltip\"><center>" + p.name + "<br>" + p.description + "</center>\n" +
                                     "<span class=\"tooltiptext\"><i>Limited to one per customer</i></span></label><br>\n");
                         }
                         else{
-                            writer.print("<label><center>" + pi.name + "<br>" + pi.description + "</center></label><br>\n");
+                            writer.print("<label><center>" + p.name + "<br>" + p.description + "</center></label><br>\n");
                         }
                         writer.print("<label><center>£" + price + "</label></center><br>\n" +
                                 "<div class=\"absolute\">\n" +
@@ -66,7 +66,7 @@ public class ServletBrowse extends HttpServlet {
                                 "</div>\n" +
                                 "</div>");
                         j++;
-                        pi = LoginDAO.getProductInfo(j);
+                        p = LoginDAO.getProduct(j);
                     }
                     writer.println("</section>");
                 }
@@ -87,15 +87,16 @@ public class ServletBrowse extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         PrintWriter writer = resp.getWriter();
-        int val= Integer.valueOf(req.getParameter("position"));
+        writer.println("<p>button pressed</p>");
+        /*int val= Integer.valueOf(req.getParameter("position"));
         int q = Integer.parseInt(req.getParameter("number"));
         writer.print("<p> button num" + val + "</p>");
-        /*int tableSize = LoginDAO.tableSize("products");
+        int tableSize = LoginDAO.tableSize("products");
         writer.print("<p> size:" + tableSize + "</p>");
         int t=1;*/
-        /*ProductInfo pi = LoginDAO.getProductInfo(val);
-        LoginDAO.addtoBasket(pi, val);
-        writer.print("<p>Product " + pi.name + "</p>");
+        /*Product p = LoginDAO.getProduct(val);
+        LoginDAO.addtoBasket(p, val);
+        writer.print("<p>Product " + p.name + "</p>");
         writer.print("<p>Quantity: " + val + "</p>");*/
         }
 

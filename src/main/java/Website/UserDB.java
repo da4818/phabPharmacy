@@ -24,7 +24,7 @@ public class UserDB {
         }
 
         try {
-            stmt = c.createStatement();
+            /*stmt = c.createStatement();
             String sql ="CREATE TABLE USERS " +
                         "(ID SERIAL PRIMARY KEY NOT NULL," +
                         " FNAME TEXT NOT NULL, " +
@@ -33,7 +33,7 @@ public class UserDB {
                         " PASSW TEXT NOT NULL, " +
                         " CARDNO TEXT NOT NULL, " +
                         " POSTCODE TEXT NOT NULL)";
-            stmt.executeUpdate(sql);
+            stmt.executeUpdate(sql);*/
             Statement s1 = c.createStatement();
             String sql1 = "INSERT INTO USERS (FNAME,LNAME,EMAIL,PASSW,CARDNO,POSTCODE) VALUES ('Luke','Grenshaw','email1','pass1','1122','HS75UZ');";
             String sql2 = "INSERT INTO USERS (FNAME,LNAME,EMAIL,PASSW,CARDNO,POSTCODE) VALUES ('Gina','Wright','email2','pass2','3344','SW72AZ');";

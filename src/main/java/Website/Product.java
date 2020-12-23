@@ -2,7 +2,7 @@ package Website;
 
 import java.util.ArrayList;
 
-public class ProductInfo {
+public class Product {
     String name;
     String description;
     Double price;

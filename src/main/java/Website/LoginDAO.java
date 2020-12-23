@@ -58,9 +58,8 @@ public class LoginDAO {
             ps.close();
         }catch(Exception e){System.out.println(e);}
     }
-    public static ProductInfo getProductInfo(int n){
-        ProductInfo pi = new ProductInfo();
-
+    public static Product getProduct(int n){
+        Product p = new Product();
         try{
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
@@ -70,28 +69,28 @@ public class LoginDAO {
             ps.setInt(1,n);
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
-                pi.name = rs.getString("name");
-                pi.description = rs.getString("description");
-                pi.price = rs.getDouble("price");
-                pi.quantity = rs.getInt("quantity");
-                pi.category = rs.getString("category");
-                pi.limited = rs.getBoolean("limited");
+                p.name = rs.getString("name");
+                p.description = rs.getString("description");
+                p.price = rs.getDouble("price");
+                p.quantity = rs.getInt("quantity");
+                p.category = rs.getString("category");
+                p.limited = rs.getBoolean("limited");
             }
         }catch(Exception e){System.out.println(e);}
-        return pi;
+        return p;
     }
 
-    public static void addtoBasket(ProductInfo pi, int num){
+    public static void addtoBasket(Product p_in, int quantity_in){
         try{
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection con=DriverManager.getConnection(dbUrl);
             PreparedStatement ps=con.prepareStatement("insert into basket (name,description,price,quantity,subtotal) values(?,?,?,?,?)");
-            ps.setString(1,pi.name);
-            ps.setString(2,pi.description);
-            ps.setDouble(3,pi.price);
-            ps.setInt(4,num);
-            ps.setDouble(5,pi.price*num);
+            ps.setString(1,p_in.name);
+            ps.setString(2,p_in.description);
+            ps.setDouble(3,p_in.price);
+            ps.setInt(4,quantity_in);
+            ps.setDouble(5,p_in.price*quantity_in);
 
             ps.executeUpdate();
             ps.close();

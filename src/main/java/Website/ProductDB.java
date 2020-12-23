@@ -23,7 +23,7 @@ public class ProductDB {
         }
 
         try {
-            stmt = c.createStatement();
+            /*stmt = c.createStatement();
             //stmt.executeUpdate("TRUNCATE TABLE PRODUCTS;");
             String sql ="CREATE TABLE PRODUCTS " +
                     "(ID SERIAL PRIMARY KEY NOT NULL," +
@@ -33,7 +33,7 @@ public class ProductDB {
                     " QUANTITY INTEGER NOT NULL, " +
                     " CATEGORY TEXT NOT NULL, " +
                     " LIMITED BOOLEAN NOT NULL)";
-            stmt.executeUpdate(sql);
+            stmt.executeUpdate(sql);*/
             Statement s1 = c.createStatement();
             String sql1 = "INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Vicks Vaporub','100g',4.50,15,'Cold and Flu',false);";
             s1.executeUpdate(sql1);
