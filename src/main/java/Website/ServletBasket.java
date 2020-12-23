@@ -33,7 +33,7 @@ public class ServletBasket extends HttpServlet {
                     "<p>Quantity</p><input class=\"quantity\" onclick=\"showPrice()\" type=\"number\" min=\"1\" max=\"" + max + "\" value=\"" + b.quantity + "\"><button onclick=\" passVal(\"" + i + "\")\" class=\"buttonStyle\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button>\n" +
                     "</div>\n" +
                     "<div class=\"price\">\n" +
-                    "<p>Price<br><br>£<output>" + b.subtotal + "</output></p>\n" +
+                    "<p>Price<br><br>£<output>" + subtotal + "</output></p>\n" +
                     "</div>\n" +
                     "</div>\n");
         }
