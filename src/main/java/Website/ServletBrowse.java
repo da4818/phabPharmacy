@@ -88,14 +88,10 @@ public class ServletBrowse extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         int pos = Integer.parseInt(req.getParameter("buttonNumber"));
         int q = Integer.parseInt(req.getParameter("basketQuantity"));
-        writer.println("<p>Button number:" + pos + "\nQuantity:" + q*5 + "</p>");
-
-       // int q = Integer.parseInt(q_string);
-
-        //Product p = LoginDAO.getProduct(pos_int);
-       // LoginDAO.addToBasket(p, pos_int);
-        //writer.println("<p>Product " + p.name + "</p>");
-        //writer.println("<p>Quantity: " + q_string + "</p>");
+        Product p = LoginDAO.getProduct(pos);
+        LoginDAO.addToBasket(p,q);
+        writer.println("<p>Product " + p.name + "</p>");
+        writer.println("<p>Quantity: " + q + "</p>");
     }
 
     public String htmlOutput(){
