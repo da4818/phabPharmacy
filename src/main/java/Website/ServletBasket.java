@@ -6,14 +6,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet(urlPatterns = "/basket",loadOnStartup = 0)
 public class ServletBasket extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        String HTML =htmlOutput();
-        resp.getWriter().write(HTML);
+        String HTML = htmlOutput();
+        PrintWriter writer = resp.getWriter();
+        writer.print(HTML);
+        if(LoginDAO.tableSize("basket") > 0){
+            Basket b = LoginDAO.getBasketInfo(1);
+            writer.print("<p>" + b.name + " " + b.price +" " +b.quantity + " " + b.subtotal + "</p>");
+        }
+        else{
+            writer.println("<p>Empty Basket</p>");
+        }
+
+        writer.print("</body>\n</html>");
 
     }
 
@@ -204,8 +215,9 @@ public class ServletBasket extends HttpServlet {
                 "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
                 "    <a style=\"background-color: #00B8C5;\" href=\"https://phabpharmacy.herokuapp.com/basket\" class=\"fa fa-fw fa-shopping-basket\"><b id=\"basket\"></b></a>\n" +
                 "</div>\n" +
-                "<h1>Shopping Basket</h1>\n" +
-                "<pre>\n" +
+                "<h1>Shopping Basket</h1>\n";
+
+                /*"<pre>\n" +
                 "<script>\n" +
                 "  for(var i=0;i<3;i++){\n" +
                 "  document.write(\"<style>p{font-family: Arial, Helvetica, sans-serif;}</style>\"+\n" +
@@ -222,7 +234,7 @@ public class ServletBasket extends HttpServlet {
                 "</script>\n" +
                 "</pre>\n" +
                 "</body>\n" +
-                "</html>";
+                "</html>";*/
         return output;
     }
 }

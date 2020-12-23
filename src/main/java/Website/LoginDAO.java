@@ -1,8 +1,6 @@
 package Website;
 
 import java.sql.*;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
 
 //DAO = data access object
 public class LoginDAO {
@@ -99,6 +97,28 @@ public class LoginDAO {
             ps.close();
         }catch(Exception e){System.out.println(e);}
     }
+    public static Basket getBasketInfo(int n){
+        //[0]=name,[1]=description,[2]=price,[3]=quantity,[4]=subtotal
+        Basket basketInfo= new Basket();
+
+        try{
+            String dbUrl = System.getenv("JDBC_DATABASE_URL");
+            Class.forName("org.postgresql.Driver");
+            Connection con=DriverManager.getConnection(dbUrl);
+
+            PreparedStatement ps=con.prepareStatement("select * from basket where id=?");
+            ps.setInt(1,n);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                basketInfo.name = rs.getString("name");
+                basketInfo.description =rs.getString("description");
+                basketInfo.price = rs.getDouble("price");
+                basketInfo.quantity = rs.getInt("quantity");
+                basketInfo.subtotal = rs.getDouble("subtotal");
+            }
+        }catch(Exception e){System.out.println(e);}
+        return basketInfo;
+    }
 
     public static void resetTable(String tableName){
         try{
@@ -122,7 +142,7 @@ public class LoginDAO {
             ps.setString(1,tableName);
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
-                n = Integer.parseInt(rs.getString("count(*)"));
+                n = Integer.parseInt(rs.getString("count"));
             }
             s.close();
         }catch(Exception e){System.out.println(e);}
