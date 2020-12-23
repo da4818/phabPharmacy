@@ -138,12 +138,10 @@ public class LoginDAO {
             Class.forName("org.postgresql.Driver");
             Connection con=DriverManager.getConnection(dbUrl);
             Statement s =con.createStatement();
-            PreparedStatement ps=con.prepareStatement("select count(*) from ?;");
+            PreparedStatement ps=con.prepareStatement("select count(*) as total from ?");
             ps.setString(1,tableName);
             ResultSet rs=ps.executeQuery();
-            while(rs.next()){
-                n = Integer.parseInt(rs.getString(1));
-            }
+            n = rs.getInt("total");
             s.close();
         }catch(Exception e){System.out.println(e);}
         return n;
