@@ -26,36 +26,19 @@ public class ServletBasket extends HttpServlet {
             Basket b = LoginDAO.getBasketInfo(i);
             String price = valueOf(df.format(b.price));
             int max = b.limited ? 1 : 5;
-            /*writer.print("<pre><script>" +
-                    "<div class=\"container\" id=\"cont1\">\n" +
-                    "<p style=\"display: inline-block;\"><b>"+ b.name + "</b><br>" + b.description + "<br>£<output class=\"cost\" type=\"number\">" + b.price +"</output></p>\n" +
+            writer.print("<div class=\"container\" id=\"cont1\">\n" +
+                    "<p style=\"display: inline-block;\"><b>"+ b.name + "</b><br>" + b.description + "<br>£<output class=\"cost\" type=\"number\">" + price +"</output></p>\n" +
                     "<div class=\"quant\">\n" +
                     "<p>Quantity</p><input class=\"quantity\" onclick=\"showPrice()\" type=\"number\" min=\"1\" max=\"" + max + "\" value=\"" + b.quantity + "\"><button onclick=\" passVal(\"" + i + "\")\" class=\"buttonStyle\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button>\" +\n" +
                     "</div>\n" +
                     "<div class=\"price\">\n" +
                     "<p>Price<br><br>£<output>" + b.subtotal + "</output></p>\n" +
                     "</div>\n" +
-                    "</div>\n" +
-                    "</pre></script>");*/
-            writer.println("<pre>\n" +
-                    "<script>\n" +
-                    "document.write(\"<style>p{font-family: Arial, Helvetica, sans-serif;}</style>\"+\n" +
-                    "  \"<div class=\\\"container\\\" +id=\\\"cont1\\\">\"+\n" +
-                    "  \"<p style=\\\"display: inline-block;\\\"><b>" + b.name + "</b><br>" + b.description +"<br>£<output class=\\\"cost\\\" type=\\\"number\\\">" + b.price + "</output></p>\" +\n" +
-                    "  \"<div class=\\\"quant\\\">\" +\n" +
-                    "    \"<p>Quantity</p><input class=\\\"quantity\\\" onclick=\\\"showPrice()\\\" type=\\\"number\\\" min=\\\"1\\\" max=\\\"" + max + "\\\" value=\\\"" + b.quantity + "\\\"><button onclick=\\\"passVal(\"" + i + "\")\\\" class=\\\"button2\\\"><i class=\\\"fa fa-trash\\\" aria-hidden=\\\"true\\\"></i></button>\" +\n" +
-                    "  \"</div>\" + \n" +
-                    "  \"<div class=\\\"price\\\">\" +\n" +
-                    "   \"<p>Price<br><br>£<output class=\\\"demo\\\"></output></p>\" +\n" +
-                    "  \"</div>\"+\n" +
-                    "\"</div>\");" +
-                    "</script>\n" +
-                    "</pre>");
+                    "</div>\n");
         }
         else{
             writer.println("<p>Empty Basket</p>");
         }
-
         writer.print("</body>\n</html>");
 
     }
