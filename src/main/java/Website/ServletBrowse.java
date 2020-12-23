@@ -86,9 +86,9 @@ public class ServletBrowse extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         PrintWriter writer = resp.getWriter();
-        String pos = req.getParameter("buttonNumber");
-        String q = req.getParameter("basketQuantity");
-        writer.println("<p>Button number:" + pos + "\nQuantity:" + q + "</p>");
+        int pos = Integer.parseInt(req.getParameter("buttonNumber"));
+        int q = Integer.parseInt(req.getParameter("basketQuantity"));
+        writer.println("<p>Button number:" + pos + "\nQuantity:" + q*5 + "</p>");
 
        // int q = Integer.parseInt(q_string);
 
