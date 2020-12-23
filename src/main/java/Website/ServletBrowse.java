@@ -58,10 +58,9 @@ public class ServletBrowse extends HttpServlet {
                         writer.print("<label><center>£" + price + "</label></center><br>\n" +
                                 "<div class=\"absolute\">\n" +
                                 "<form action=\"browse\" method=\"post\">\n" +
-                                "<input name=\"number" + j + "\" type=\"number\" size=\"5\" min=\"0\" max=\"" + max + "\">\n" +
-                                "<input name=\"position\" type=\"hidden\"value=\"" + j + "\">\n" +
-                                "<input name=\"button" + j + "\" type=\"submit\"class=\"buttonStyle\" value=\"Add to Basket\">\n" +
-                                //"<button name=\"button\" type=\"submit\" class=\"buttonStyle\" value=\"" + j + "\">Add to Basket</button>\n" +
+                                "<input name=\"basketQuantity\" type=\"number\" size=\"5\" min=\"0\" max=\"" + max + "\">\n" +
+                                "<input name=\"buttonNumber\" type=\"hidden\"value=\"" + j + "\">\n" +
+                                "<input type=\"submit\"class=\"buttonStyle\" value=\"Add to Basket\">\n" +
                                 "</form>\n" +
                                 "</div>\n" +
                                 "</div>");
@@ -87,18 +86,18 @@ public class ServletBrowse extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         PrintWriter writer = resp.getWriter();
-        int tableSize = LoginDAO.tableSize("products");
-        writer.println("<p> size:" + tableSize + "</p>");
-        String pos_string = req.getParameter("position");
-        int pos_int = Integer.parseInt(pos_string);
-        String q_string = req.getParameter("number");
-        int q = Integer.parseInt(q_string);
-        writer.println("<p> button number:" + pos_string + "</p>");
-        Product p = LoginDAO.getProduct(pos_int);
-        LoginDAO.addToBasket(p, pos_int);
-        writer.println("<p>Product " + p.name + "</p>");
-        writer.println("<p>Quantity: " + q_string + "</p>");
+        String pos = req.getParameter("buttonNumber");
+        String q = req.getParameter("basketQuantity");
+        writer.println("<p>Button number:" + pos + "\nQuantity:" + q + "</p>");
+
+       // int q = Integer.parseInt(q_string);
+
+        //Product p = LoginDAO.getProduct(pos_int);
+       // LoginDAO.addToBasket(p, pos_int);
+        //writer.println("<p>Product " + p.name + "</p>");
+        //writer.println("<p>Quantity: " + q_string + "</p>");
     }
+
     public String htmlOutput(){
         String output="<!DOCTYPE html>\n" +
                 "<html>\n" +
