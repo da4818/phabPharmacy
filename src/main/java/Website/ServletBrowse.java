@@ -90,17 +90,15 @@ public class ServletBrowse extends HttpServlet {
         int tableSize = LoginDAO.tableSize("products");
         writer.println("<p> size:" + tableSize + "</p>");
         writer.println("<p>button pressed</p>");
-        String val= req.getParameter("position");
+        String val = req.getParameter("position");
         int value = Integer.parseInt(val);
         int q = Integer.parseInt(req.getParameter("number"));
-        writer.print("<p> button num" + value + "</p>");
+        writer.print("<p> button num" + val + "</p>");
         Product p = LoginDAO.getProduct(value);
         LoginDAO.addToBasket(p, value);
         writer.print("<p>Product " + p.name + "</p>");
         writer.print("<p>Quantity: " + q + "</p>");
-
-
-
+    }
     public String htmlOutput(){
         String output="<!DOCTYPE html>\n" +
                 "<html>\n" +
