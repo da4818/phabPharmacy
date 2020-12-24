@@ -35,7 +35,7 @@ public class ServletBasket extends HttpServlet {
                         "    <input type=\"number\" name=\"q\" class=\"quantity\" size=\"3\" min=\"1\" max=\"" + max + "\" value=\"" + b.quantity + "\">\n" +
                         "    <input name=\"buttonNumber\" type=\"hidden\"value=\"" + i + "\">\n" +
                         "    <button style=\"margin-left: 0px;\" type=\"submit\" class=\"button2\">Update</button> \n" +
-                        "    <button type=\"submit\" class=\"button2\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button> \n" +
+                        "    <button type=\"submit\" class=\"buttonStyle\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button> \n" +
                         "    </form>\n" +
                         "  </div>\n" +
                         "  <div class=\"price\">\n" +
@@ -152,7 +152,7 @@ public class ServletBasket extends HttpServlet {
                 "            position: absolute;\n" +
                 "            bottom: -1px;\n" +
                 "            right: -1px;\n" +
-                "            width: 70px;\n" +
+                "            width: 80px;\n" +
                 "            height: 45px;\n" +
                 "        }\n" +
                 "        .buttonStyle{\n" +
