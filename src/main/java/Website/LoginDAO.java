@@ -204,7 +204,7 @@ public class LoginDAO {
                 String sql1 = "update basket set quantity =" + quantity_in + "where name='" + p_in.name+ "';";
                 s1.executeUpdate(sql1);
                 s1.close();
-                s.close();
+
             }
             else {
                 PreparedStatement ps = c.prepareStatement("insert into basket (name,description,price,quantity,subtotal,limited) values(?,?,?,?,?,?)");
@@ -218,7 +218,7 @@ public class LoginDAO {
                 ps.executeUpdate();
                 ps.close();
             }
-
+            s.close();
             c.close();
         }catch(Exception e){System.out.println(e);}
     }
