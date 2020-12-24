@@ -60,9 +60,7 @@ public class ServletBasket extends HttpServlet {
                     "</div>\n");
         }
         writer.print("</body>\n</html>");
-
     }
-
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -70,9 +68,9 @@ public class ServletBasket extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         String t = req.getParameter("trash");
         writer.println("<p>" + t + "</p>");
-
-
     }
+
+
     public String htmlOutput(){
         String output ="<!DOCTYPE html>\n" +
                 "<html>\n" +
