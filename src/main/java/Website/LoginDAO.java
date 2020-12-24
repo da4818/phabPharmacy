@@ -234,6 +234,23 @@ public class LoginDAO {
         }catch(Exception e){System.out.println(e);}
         return bProduct;
     }
+    public static Double getBasketTotal(){
+        double total = 0;
+        try{
+            String dbUrl = System.getenv("JDBC_DATABASE_URL");
+            Class.forName("org.postgresql.Driver");
+            Connection c = DriverManager.getConnection(dbUrl);
+            String sql = "select sum(price*quantity) from basket";
+            Statement s =c.createStatement();
+            ResultSet rs = s.executeQuery(sql);
+            while(rs.next()){
+                total = rs.getDouble(1);
+            }
+            s.close();
+            c.close();
+        }catch(Exception e){System.out.println(e);}
+        return total;
+    }
 
 
     // Display size of table - i.e. number of entries //

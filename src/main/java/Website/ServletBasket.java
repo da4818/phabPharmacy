@@ -19,6 +19,10 @@ public class ServletBasket extends HttpServlet {
         String HTML = htmlOutput();
         PrintWriter writer = resp.getWriter();
         writer.print(HTML);
+        Double total = LoginDAO.getBasketTotal();
+        writer.println("<div class=\"totalContainer\">\n" +
+                    "  <p>Total: £" + total + "</p>\n" +
+                    "</div>\n");
         DecimalFormat df = new DecimalFormat("0.00");
         int n = LoginDAO.tableSize("basket");
         if(n > 0){
@@ -28,7 +32,7 @@ public class ServletBasket extends HttpServlet {
                 String subtotal = valueOf(df.format(b.subtotal));
                 int max = b.limited ? 1 : 5;
                 writer.print("<section>" +
-                        "<div class=\"container\" id=\"cont1\">\n" +
+                        "<div class=\"basketContainer\" id=\"cont1\">\n" +
                         "  <p style=\"display: inline-block;\"><b>" + b.name + "</b><br>" + b.description + "<br>£<output class=\\\"cost\\\" type=\"number\">" + price + "</output></p>\n" +
                         "  <div class=\"quant\">\n" +
                         "    <form id=\"updateBasket\" method=\"post\"> \n" +
@@ -52,11 +56,7 @@ public class ServletBasket extends HttpServlet {
         writer.print("</body>\n</html>");
 
     }
-    /*
 
-
-
-  */
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -133,23 +133,32 @@ public class ServletBasket extends HttpServlet {
                 "        .dropdown:hover .dropdown-content {\n" +
                 "            display: block;\n" +
                 "        }\n" +
-                "        .container{\n" +
+                "        .totalContainer{\n" +
                 "          position: relative;\n" +
-                "          width: 250px;\n" +
+                "          float: right;\n" +
+                "          width: 200px;\n" +
+                "          height: 70px;\n" +
+                "          border: 1px solid black;\n" +
+                "          margin: 0px;\n" +
+                "          padding: 0px 0px 0px 20px;\n" +
+                "        }\n" +
+                "        .basketContainer{\n" +
+                "          position: relative;\n" +
+                "          width: 350px;\n" +
                 "          height: 140px;\n" +
                 "          border: 1px solid black;\n" +
                 "          margin: 5px;\n" +
-                "          padding: 0px 0px 0px 20px;" +
+                "          padding: 0px 0px 0px 20px;\n" +
                 "        }\n" +
                 "        div.quant {\n" +
                 "            position: absolute;\n" +
                 "            bottom: -1px;\n" +
                 "            left: -1px;\n" +
-                "            width: 250px;\n" +
+                "            width: 350px;\n" +
                 "            height: 50px;\n" +
                 "            padding-left: 20px;\n" +
                 "            padding-top: 5px;\n" +
-                "            border: 1px solid black;\n" +
+                "            border: 1px solid black" +
                 "        }\n" +
                 "        div.price {\n" +
                 "            position: absolute;\n" +
