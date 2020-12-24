@@ -29,7 +29,7 @@ public class ServletBasket extends HttpServlet {
                 int max = b.limited ? 1 : 5;
                 writer.print("<section>" +
                         "<div class=\"container\" id=\"cont1\">\n" +
-                        "  <p style=\"display: inline-block;\"><b>" + b.name + "</b><br>100g<br>£<output class=\\\"cost\\\" type=\"number\">" + price + "</output></p>\n" +
+                        "  <p style=\"display: inline-block;\"><b>" + b.name + "</b><br>" + b.description + "<br>£<output class=\\\"cost\\\" type=\"number\">" + price + "</output></p>\n" +
                         "  <div class=\"quant\">\n" +
                         "    <form id=\"updateBasket\" method=\"post\"> \n" +
                         "    <label for=\"q\">Qty</label><br>\n" +
