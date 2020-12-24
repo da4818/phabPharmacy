@@ -253,6 +253,17 @@ public class LoginDAO {
         }catch(Exception e){System.out.println(e);}
         return total;
     }
+    public static void removeFromBasket(String tableName){
+        try{
+            String dbUrl = System.getenv("JDBC_DATABASE_URL");
+            Class.forName("org.postgresql.Driver");
+            Connection c = DriverManager.getConnection(dbUrl);
+            Statement s =c.createStatement();
+            String sql="delete from basket where name='" + tableName + "';";
+            s.executeUpdate(sql);
+            s.close();
+        }catch(Exception e){System.out.println(e);}
+    }
 
 
     // Display size of table - i.e. number of entries //

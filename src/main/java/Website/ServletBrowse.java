@@ -23,7 +23,6 @@ public class ServletBrowse extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         String HTML= htmlOutput();
         writer.println(HTML);
-
                 ArrayList<String> headers = new ArrayList<>();
                 ArrayList<String> headerURLs = new ArrayList<>();
                 headers.add("Cold and Flu");
@@ -90,8 +89,64 @@ public class ServletBrowse extends HttpServlet {
         int q = Integer.parseInt(req.getParameter("basketQuantity"));
         Product p = LoginDAO.getProduct(pos);
         LoginDAO.addToBasket(p,q);
-        writer.println("<p>Product " + p.name + "</p>");
-        writer.println("<p>Quantity: " + q + "</p>");
+        String HTML= htmlOutput();
+        writer.println(HTML);
+        ArrayList<String> headers = new ArrayList<>();
+        ArrayList<String> headerURLs = new ArrayList<>();
+        headers.add("Cold and Flu");
+        headers.add("Skincare");
+        headers.add("Headaches and Pain Relief");
+        headers.add("Digestion");
+        headers.add("Allergy");
+        headers.add("First Aid");
+        headerURLs.add("cold_and_flu");
+        headerURLs.add("skincare");
+        headerURLs.add("headaches_and_pain_relief");
+        headerURLs.add("digestion");
+        headerURLs.add("allergy");
+        headerURLs.add("first_aid");
+        int j=1;
+         p = LoginDAO.getProduct(j);
+        for (int i=0;i<6;i++) {
+            writer.println("<section>\n" +
+                    "<h2 id=\""+headerURLs.get(i)+"\">" + headers.get(i) + "</h2>\n");
+            while (p.category.equals(headers.get(i))) {
+                DecimalFormat df = new DecimalFormat("0.00");
+                String price = valueOf(df.format(p.price));
+                int max = p.limited ? 1 : 5;
+                writer.print("<div class=\"relative\">\n");
+                if (p.limited){
+                    writer.print("<label class=\"tooltip\"><center>" + p.name + "<br>" + p.description + "</center>\n" +
+                            "<span class=\"tooltiptext\"><i>Limited to one per customer</i></span></label><br>\n");
+                }
+                else{
+                    writer.print("<label><center>" + p.name + "<br>" + p.description + "</center></label><br>\n");
+                }
+                writer.print("<label><center>£" + price + "</label></center><br>\n" +
+                        "<div class=\"absolute\">\n" +
+                        "<form action=\"browse\" method=\"post\">\n" +
+                        "<input name=\"basketQuantity\" type=\"number\" size=\"5\" min=\"0\" max=\"" + max + "\">\n" +
+                        "<input name=\"buttonNumber\" type=\"hidden\"value=\"" + j + "\">\n" +
+                        "<input type=\"submit\"class=\"buttonStyle\" value=\"Add to Basket\">\n" +
+                        "</form>\n" +
+                        "</div>\n" +
+                        "</div>");
+                j++;
+                p = LoginDAO.getProduct(j);
+            }
+            writer.println("</section>");
+        }
+
+        writer.println("<script>\n" +
+                "    function addBasket(){\n" +
+                "        var num=document.getElementById(\"number1\").value;\n" +
+                "        document.getElementById(\"basket\").innerHTML = num\n" +
+                "        document.getElementById(\"basket\").style.fontFamily =\"Arial, Helvetica, sans-serif\";\n" +
+                "    }\n" +
+                "</script>\n" +
+                "</body>\n" +
+                "</html>");
+
     }
 
     public String htmlOutput(){

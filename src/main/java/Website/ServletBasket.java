@@ -36,16 +36,18 @@ public class ServletBasket extends HttpServlet {
                         "<div class=\"basketContainer\" id=\"cont1\">\n" +
                         "  <p style=\"display: inline-block;\"><b>" + b.name + "</b><br>" + b.description + "<br>£<output class=\\\"cost\\\" type=\"number\">" + price + "</output></p>\n" +
                         "  <div class=\"quant\">\n" +
-                        "    <form id=\"updateBasket\" method=\"post\"> \n" +
+                        "    <form id=\"updateBasket\" action=\"basket\" method=\"post\"> \n" +
                         "    <label for=\"q\">Qty</label><br>\n" +
                         "    <input type=\"number\" name=\"q\" class=\"quantity\" size=\"3\" min=\"1\" max=\"" + max + "\" value=\"" + b.quantity + "\">\n" +
-                        "    <input name=\"buttonNumber\" type=\"hidden\"value=\"" + i + "\">\n" +
-                        "    <button style=\"margin-left: 0px;\" type=\"submit\" class=\"buttonStyle\">Update</button> \n" +
-                        "    <button type=\"submit\" class=\"buttonStyle\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button> \n" +
+                        "    <input name=\"basketNumber\" type=\"hidden\"value=\"" + i + "\">\n" +
+                        "    <input style=\"margin-left: 0px;\" type=\"submit\" class=\"buttonStyle\" value=\"Update\"> \n" +
+                        "    <button type=\"submit\" name=\"trash\" class=\"buttonStyle\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button> \n" +
                         "    </form>\n" +
                         "  </div>\n" +
                         "  <div class=\"price\">\n" +
                         "    <p>£<output></output>" + subtotal + "</p>\n" +
+                        "    <form method=\"post\"" +
+                        "    <button type=\"submit\" class=\"buttonStyle\">Proceed to Checkout</button>" +
                         "  </div>\n" +
                         "</div>\n" +
                         "</section>");
@@ -64,6 +66,12 @@ public class ServletBasket extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
+        PrintWriter writer = resp.getWriter();
+        String t = req.getParameter("trash");
+        writer.println("<p>" + t + "</p>");
+
+
     }
     public String htmlOutput(){
         String output ="<!DOCTYPE html>\n" +
