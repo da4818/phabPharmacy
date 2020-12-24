@@ -36,7 +36,6 @@ public class LoginDAO {
                 s.executeUpdate(sql);
                 s1.executeUpdate("INSERT INTO USERS (FNAME,LNAME,EMAIL,PASSW,CARDNO,POSTCODE) VALUES ('John','Doe','email1','pass1','cardno1','SW72AZ');");
                 s1.executeUpdate("INSERT INTO USERS (FNAME,LNAME,EMAIL,PASSW,CARDNO,POSTCODE) VALUES ('Mia','Stewart','email2','pass2','cardno2','SW65TD');");
-
             }
             else if(tableName.equals("products")){
                 String sql ="CREATE TABLE PRODUCTS " +
@@ -48,7 +47,6 @@ public class LoginDAO {
                         " CATEGORY TEXT NOT NULL, " +
                         " LIMITED BOOLEAN NOT NULL)";
                 s.executeUpdate(sql);
-
                 s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Vicks Vaporub','100g',4.50,15,'Cold and Flu',false);");
                 s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Vicks First Defence','15ml',6.80,20,'Cold and Flu',false);");
                 s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Gsk Night Nurse','160ml',8.50,30,'Cold and Flu',false);");
@@ -93,7 +91,6 @@ public class LoginDAO {
             PreparedStatement ps=c.prepareStatement("select * from users where email=? and passw=?");
             ps.setString(1,email_in);
             ps.setString(2,pass_in);
-
             ResultSet rs=ps.executeQuery();
             status=rs.next();
             c.close();
@@ -108,10 +105,8 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-
             PreparedStatement ps=c.prepareStatement("select * from users where email=?");
             ps.setString(1,email_in);
-
             ResultSet rs=ps.executeQuery();
             status=rs.next();
             ps.close();
@@ -126,7 +121,6 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-
             PreparedStatement ps=c.prepareStatement("select * from users where email=? and passw=?");
             ps.setString(1,email_in);
             ps.setString(2,pass_in);
@@ -151,7 +145,6 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-
             PreparedStatement ps=c.prepareStatement("insert into users (fname,lname,email,passw,cardno,postcode) values(?,?,?,?,?,?)");
             ps.setString(1,fname_in);
             ps.setString(2,lname_in);
@@ -159,7 +152,6 @@ public class LoginDAO {
             ps.setString(4,pass_in);
             ps.setString(5,cardno_in);
             ps.setString(6,postcode_in);
-
             ps.executeUpdate();
             ps.close();
             c.close();
@@ -204,7 +196,6 @@ public class LoginDAO {
                 String sql1 = "update basket set quantity =" + quantity_in + "where name='" + p_in.name+ "';";
                 s1.executeUpdate(sql1);
                 s1.close();
-
             }
             else {
                 PreparedStatement ps = c.prepareStatement("insert into basket (name,description,price,quantity,subtotal,limited) values(?,?,?,?,?,?)");
@@ -214,7 +205,6 @@ public class LoginDAO {
                 ps.setInt(4, quantity_in);
                 ps.setDouble(5, p_in.price * quantity_in);
                 ps.setBoolean(6, p_in.limited);
-
                 ps.executeUpdate();
                 ps.close();
             }
@@ -226,7 +216,6 @@ public class LoginDAO {
     // Gets info from products added to basket to display on basket page //
     public static Basket getBasketInfo(int n){
         Basket bProduct= new Basket();
-
         try{
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
