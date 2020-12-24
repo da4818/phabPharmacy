@@ -19,8 +19,6 @@ public class ServletBasket extends HttpServlet {
         String HTML = htmlOutput();
         PrintWriter writer = resp.getWriter();
         writer.print(HTML);
-
-
         DecimalFormat df = new DecimalFormat("0.00");
         int n = LoginDAO.tableSize("basket");
         if(n > 0){
