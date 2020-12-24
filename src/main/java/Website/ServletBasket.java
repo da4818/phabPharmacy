@@ -27,20 +27,23 @@ public class ServletBasket extends HttpServlet {
                 String price = valueOf(df.format(b.price));
                 String subtotal = valueOf(df.format(b.subtotal));
                 int max = b.limited ? 1 : 5;
-                writer.print("<div class=\"container\" id=\"cont1\">\n" +
+                writer.print("<section>" +
+                        "<div class=\"container\" id=\"cont1\">\n" +
                         "  <p style=\"display: inline-block;\"><b>" + b.name + "</b><br>100g<br>£<output class=\\\"cost\\\" type=\"number\">" + price + "</output></p>\n" +
                         "  <div class=\"quant\">\n" +
                         "    <form id=\"updateBasket\" method=\"post\"> \n" +
                         "    <label for=\"q\">Qty</label><br>\n" +
                         "    <input type=\"number\" name=\"q\" class=\"quantity\" size=\"3\" min=\"1\" max=\"" + max + "\" value=\"" + b.quantity + "\">\n" +
                         "    <input name=\"buttonNumber\" type=\"hidden\"value=\"" + i + "\">\n" +
-                        "    <button style=\"margin-left: 0px;\" type=\"submit\" class=\"button2\">Update</button> \n" +
+                        "    <button style=\"margin-left: 0px;\" type=\"submit\" class=\"buttonStyle\">Update</button> \n" +
                         "    <button type=\"submit\" class=\"buttonStyle\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button> \n" +
                         "    </form>\n" +
                         "  </div>\n" +
                         "  <div class=\"price\">\n" +
                         "    <p>£<output></output>" + subtotal + "</p>\n" +
-                        "  </div>");
+                        "  </div>\n" +
+                        "</div>\n" +
+                        "</section>");
             }
         }
         else{

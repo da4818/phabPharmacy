@@ -11,9 +11,9 @@ import java.io.IOException;
 public class ServletHome extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        LoginDAO.createTable("users");
-        LoginDAO.createTable("basket");
-        LoginDAO.createTable("products");
+        //LoginDAO.createTable("users");
+        //LoginDAO.createTable("basket");
+        //LoginDAO.createTable("products");
         resp.setContentType("text/html");
         resp.getWriter().write("<!DOCTYPE html>\n" +
                 "<html>\n" +
