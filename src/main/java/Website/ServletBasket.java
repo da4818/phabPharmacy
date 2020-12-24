@@ -23,7 +23,7 @@ public class ServletBasket extends HttpServlet {
         int n = LoginDAO.tableSize("basket");
         if(n > 0){
             Double totalBasket = LoginDAO.getBasketTotal();
-            String total = valueOf(df.format(totalBasket));
+            String total = df.format(totalBasket);
             writer.println("<div class=\"totalContainer\">\n" +
                     "  <p>Total: £" + total + "</p>\n" +
                     "</div>\n");
@@ -64,15 +64,15 @@ public class ServletBasket extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
+        /*resp.setContentType("text/html");
         PrintWriter writer = resp.getWriter();
         String t = req.getParameter("trash");
-        writer.println("<p>" + t + "</p>");
+        writer.println("<p>" + t + "</p>");*/
     }
 
 
     public String htmlOutput(){
-        String output ="<!DOCTYPE html>\n" +
+        return "<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "<head>\n" +
                 "    <meta charset=\"utf-8\">\n" +
@@ -267,8 +267,5 @@ public class ServletBasket extends HttpServlet {
                 "    <a style=\"background-color: #00B8C5;\" href=\"https://phabpharmacy.herokuapp.com/basket\" class=\"fa fa-fw fa-shopping-basket\"><b id=\"basket\"></b></a>\n" +
                 "</div>\n" +
                 "<h1>Shopping Basket</h1>\n";
-
-
-        return output;
     }
 }

@@ -150,7 +150,7 @@ public class ServletBrowse extends HttpServlet {
     }
 
     public String htmlOutput(){
-        String output="<!DOCTYPE html>\n" +
+        return "<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "<head>\n" +
                 "    <meta charset=\"utf-8\">\n" +
@@ -288,6 +288,5 @@ public class ServletBrowse extends HttpServlet {
                 "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" class=\"fa fa-fw fa-shopping-basket\"><b id=\"basket\"></b></a>\n" +
                 "</div>";
-        return output;
     }
 }

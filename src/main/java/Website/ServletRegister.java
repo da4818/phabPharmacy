@@ -48,7 +48,7 @@ public class ServletRegister extends HttpServlet {
     }
 
     public String htmlOutput(){
-        String output = "<!DOCTYPE html>\n" +
+        return "<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "<head>\n" +
                 "    <meta charset=\"utf-8\">\n" +
@@ -172,6 +172,5 @@ public class ServletRegister extends HttpServlet {
                 "</script>\n" +
                 "</body>\n" +
                 "</html>";
-                return output;
     }
 }

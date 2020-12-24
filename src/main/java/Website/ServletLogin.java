@@ -44,7 +44,7 @@ public class ServletLogin extends HttpServlet {
     }
 
     public String htmlOutput(){
-        String output = "<!DOCTYPE html>\n" +
+        return "<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "<head>\n" +
                 "    <title>Login</title>\n" +
@@ -162,6 +162,5 @@ public class ServletLogin extends HttpServlet {
                 "</script>\n" +
                 "</body>\n" +
                 "</html>";
-        return output;
     }
 }
