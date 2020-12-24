@@ -24,7 +24,8 @@ public class ServletBasket extends HttpServlet {
         DecimalFormat df = new DecimalFormat("0.00");
         int n = LoginDAO.tableSize("basket");
         if(n > 0){
-            Double total = LoginDAO.getBasketTotal();
+            Double totalBasket = LoginDAO.getBasketTotal();
+            String total = valueOf(df.format(totalBasket))
             writer.println("<div class=\"totalContainer\">\n" +
                     "  <p>Total: £" + total + "</p>\n" +
                     "</div>\n");
