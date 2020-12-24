@@ -40,14 +40,14 @@ public class ServletBasket extends HttpServlet {
                         "    <label for=\"q\">Qty</label><br>\n" +
                         "    <input type=\"number\" name=\"q\" class=\"quantity\" size=\"3\" min=\"1\" max=\"" + max + "\" value=\"" + b.quantity + "\">\n" +
                         "    <input name=\"basketNumber\" type=\"hidden\"value=\"" + i + "\">\n" +
-                        "    <input style=\"margin-left: 0px;\" type=\"submit\" class=\"buttonStyle\" value=\"Update\"> \n" +
-                        "    <button type=\"submit\" name=\"trash\" class=\"buttonStyle\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button> \n" +
+                        "    <input style=\"margin-left: 0px;\" type=\"submit\" class=\"buttonStyle\" value=\"Update\">\n" +
+                        "    <button type=\"submit\" class=\"buttonStyle\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button>\n" +
                         "    </form>\n" +
                         "  </div>\n" +
                         "  <div class=\"price\">\n" +
                         "    <p>£<output></output>" + subtotal + "</p>\n" +
                         "    <form method=\"post\"" +
-                        "    <button type=\"submit\" class=\"buttonStyle\">Proceed to Checkout</button>" +
+                        "    <button type=\"submit\" class=\"buttonStyle\">Proceed to Checkout</button>\n" +
                         "  </div>\n" +
                         "</div>\n" +
                         "</section>");
