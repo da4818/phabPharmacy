@@ -40,8 +40,8 @@ public class ServletBasket extends HttpServlet {
                         "    <label for=\"q\">Qty</label><br>\n" +
                         "    <input type=\"number\" name=\"q\" class=\"quantity\" size=\"3\" min=\"1\" max=\"" + max + "\" value=\"" + b.quantity + "\">\n" +
                         "    <input name=\"basketNumber\" type=\"hidden\"value=\"" + i + "\">\n" +
-                        "    <input style=\"margin-left: 0px;\" type=\"submit\" class=\"buttonStyle\" value=\"Update\">\n" +
-                        "    <button type=\"submit\" class=\"buttonStyle\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button>\n" +
+                        "    <input name=\"update\" style=\"margin-left: 0px;\" type=\"submit\" class=\"buttonStyle\" value=\"Update\">\n" +
+                        "    <button name=\"update\" type=\"submit\" class=\"buttonStyle\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button>\n" +
                         "    </form>\n" +
                         "  </div>\n" +
                         "  <div class=\"price\">\n" +
@@ -64,10 +64,10 @@ public class ServletBasket extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        /*resp.setContentType("text/html");
+        resp.setContentType("text/html");
         PrintWriter writer = resp.getWriter();
         String t = req.getParameter("trash");
-        writer.println("<p>" + t + "</p>");*/
+        writer.println("<p>" + t + "</p>");
     }
 
 
