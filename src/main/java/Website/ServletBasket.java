@@ -19,13 +19,15 @@ public class ServletBasket extends HttpServlet {
         String HTML = htmlOutput();
         PrintWriter writer = resp.getWriter();
         writer.print(HTML);
-        Double total = LoginDAO.getBasketTotal();
-        writer.println("<div class=\"totalContainer\">\n" +
-                    "  <p>Total: £" + total + "</p>\n" +
-                    "</div>\n");
+
+
         DecimalFormat df = new DecimalFormat("0.00");
         int n = LoginDAO.tableSize("basket");
         if(n > 0){
+            Double total = LoginDAO.getBasketTotal();
+            writer.println("<div class=\"totalContainer\">\n" +
+                    "  <p>Total: £" + total + "</p>\n" +
+                    "</div>\n");
             for(int i=1;i<n+1;i++) {
                 Basket b = LoginDAO.getBasketInfo(i);
                 String price = valueOf(df.format(b.price));
@@ -52,6 +54,9 @@ public class ServletBasket extends HttpServlet {
         }
         else{
             writer.println("<p>Empty Basket</p>");
+            writer.println("<div class=\"totalContainer\">\n" +
+                    "  <p>Total: £0.00</p>\n" +
+                    "</div>\n");
         }
         writer.print("</body>\n</html>");
 
