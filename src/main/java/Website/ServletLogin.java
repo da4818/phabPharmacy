@@ -143,7 +143,7 @@ public class ServletLogin extends HttpServlet {
                 "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" class=\"fa fa-fw fa-shopping-basket\"><b id=\"basket\"></b></a>\n" +
                 "</div>\n" +
                 "\n" +
-                "<h1><center>Login</center></h1>\n" +
+                "<h1>Login</h1>\n" +
                 "<p> Login below. If you haven't got an account, <a href=\"https://phabpharmacy.herokuapp.com/register\"> register here.</a> </p>\n" +
                 "\n" +
                 "<form name=\"loginForm\" action=\"login\" method=\"post\">\n" +

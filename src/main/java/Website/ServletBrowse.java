@@ -59,7 +59,7 @@ public class ServletBrowse extends HttpServlet {
                                 "<form action=\"browse\" method=\"post\">\n" +
                                 "<input name=\"basketQuantity\" type=\"number\" size=\"5\" min=\"0\" max=\"" + max + "\">\n" +
                                 "<input name=\"buttonNumber\" type=\"hidden\"value=\"" + j + "\">\n" +
-                                "<input type=\"submit\"class=\"buttonStyle\" value=\"Add to Basket\">\n" +
+                                "<input type=\"submit\" class=\"buttonStyle\" value=\"Add to Basket\">\n" +
                                 "</form>\n" +
                                 "</div>\n" +
                                 "</div>");
@@ -69,14 +69,7 @@ public class ServletBrowse extends HttpServlet {
                     writer.println("</section>");
                 }
 
-                writer.println("<script>\n" +
-                        "    function addBasket(){\n" +
-                        "        var num=document.getElementById(\"number1\").value;\n" +
-                        "        document.getElementById(\"basket\").innerHTML = num\n" +
-                        "        document.getElementById(\"basket\").style.fontFamily =\"Arial, Helvetica, sans-serif\";\n" +
-                        "    }\n" +
-                        "</script>\n" +
-                        "</body>\n" +
+                writer.println("</body>\n" +
                         "</html>");
 
     }
@@ -89,6 +82,7 @@ public class ServletBrowse extends HttpServlet {
         int q = Integer.parseInt(req.getParameter("basketQuantity"));
         Product p = LoginDAO.getProduct(pos);
         LoginDAO.addToBasket(p,q);
+
         String HTML= htmlOutput();
         writer.println(HTML);
         ArrayList<String> headers = new ArrayList<>();

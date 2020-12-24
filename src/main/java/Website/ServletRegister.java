@@ -150,7 +150,7 @@ public class ServletRegister extends HttpServlet {
                 "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" class=\"fa fa-fw fa-shopping-basket\"><b id=\"basket\"></b></a> \n" +
                 "</div>\n" +
                 "\n" +
-                "<h1><center>Register</center></h1>\n" +
+                "<h1>Register</h1>\n" +
                 "<p> Register below. If you already have an account, <a href=\"https://phabpharmacy.herokuapp.com/login\"> login here.</a>\n" +
                 "    <form name=\"registerForm\" action=\"register\" method=\"post\">\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"fname\" placeholder=\"First Name*\"><br>\n" +
