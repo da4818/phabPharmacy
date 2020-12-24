@@ -23,7 +23,7 @@ public class ServletBasket extends HttpServlet {
         int n = LoginDAO.tableSize("basket");
         if(n > 0){
             Double totalBasket = LoginDAO.getBasketTotal();
-            String total = valueOf(df.format(totalBasket))
+            String total = valueOf(df.format(totalBasket));
             writer.println("<div class=\"totalContainer\">\n" +
                     "  <p>Total: £" + total + "</p>\n" +
                     "</div>\n");
