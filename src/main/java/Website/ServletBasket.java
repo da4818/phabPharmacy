@@ -151,7 +151,7 @@ public class ServletBasket extends HttpServlet {
                 "            padding-top: 5px;\n" +
                 "            border: 1px solid black;\n" +
                 "        }\n" +
-                "        ddiv.price {\n" +
+                "        div.price {\n" +
                 "            position: absolute;\n" +
                 "            bottom: -1px;\n" +
                 "            right: -1px;\n" +
