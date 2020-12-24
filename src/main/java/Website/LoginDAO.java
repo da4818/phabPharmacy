@@ -5,20 +5,12 @@ import java.sql.*;
 //DAO = data access object
 public class LoginDAO {
     // Functions to regarding creating the databases //
-    public static Connection getConnection(){
-        Connection c = null;
-        try {
-            String dbUrl = System.getenv("JDBC_DATABASE_URL");
-            Class.forName("org.postgresql.Driver");
-            c = DriverManager.getConnection(dbUrl);
 
-        } catch(Exception e){
-        }
-        return c;
-    }
     public static void resetTable(String tableName){
         try{
-            Connection c = getConnection();
+            String dbUrl = System.getenv("JDBC_DATABASE_URL");
+            Class.forName("org.postgresql.Driver");
+            Connection c = DriverManager.getConnection(dbUrl);
             Statement s =c.createStatement();
             String sql="truncate table " + tableName + ";";
             s.executeUpdate(sql);
@@ -27,7 +19,9 @@ public class LoginDAO {
     }
     public static void createTable(String tableName){
         try{
-            Connection c = getConnection();
+            String dbUrl = System.getenv("JDBC_DATABASE_URL");
+            Class.forName("org.postgresql.Driver");
+            Connection c = DriverManager.getConnection(dbUrl);
             Statement s =c.createStatement();
             Statement s1 = c.createStatement();
             if(tableName.equals("users")) {
@@ -85,6 +79,7 @@ public class LoginDAO {
             }
             s.close();
             s1.close();
+            c.close();
         }catch(Exception e){System.out.println(e);}
     }
     // Functions to execute queries, or amend to the database content //
@@ -92,13 +87,16 @@ public class LoginDAO {
     public static boolean validateLogin(String email_in,String pass_in){
         boolean status=false;
         try{
-            Connection c = getConnection();
+            String dbUrl = System.getenv("JDBC_DATABASE_URL");
+            Class.forName("org.postgresql.Driver");
+            Connection c = DriverManager.getConnection(dbUrl);
             PreparedStatement ps=c.prepareStatement("select * from users where email=? and passw=?");
             ps.setString(1,email_in);
             ps.setString(2,pass_in);
 
             ResultSet rs=ps.executeQuery();
             status=rs.next();
+            c.close();
 
         }catch(Exception e){System.out.println(e);}
         return status;
@@ -107,14 +105,17 @@ public class LoginDAO {
     public static boolean validateRegister(String email_in){
         boolean status=false;
         try{
-            Connection c = getConnection();
+            String dbUrl = System.getenv("JDBC_DATABASE_URL");
+            Class.forName("org.postgresql.Driver");
+            Connection c = DriverManager.getConnection(dbUrl);
 
             PreparedStatement ps=c.prepareStatement("select * from users where email=?");
             ps.setString(1,email_in);
 
             ResultSet rs=ps.executeQuery();
             status=rs.next();
-
+            ps.close();
+            c.close();
         }catch(Exception e){System.out.println(e);}
         return status;
     }
@@ -122,7 +123,9 @@ public class LoginDAO {
     public static User getUser(String email_in,String pass_in){
         User u = new User();
         try{
-            Connection c = getConnection();
+            String dbUrl = System.getenv("JDBC_DATABASE_URL");
+            Class.forName("org.postgresql.Driver");
+            Connection c = DriverManager.getConnection(dbUrl);
 
             PreparedStatement ps=c.prepareStatement("select * from users where email=? and passw=?");
             ps.setString(1,email_in);
@@ -138,12 +141,16 @@ public class LoginDAO {
                 u.cardno = rs.getString("cardno");
                 u.postcode = rs.getString("postcode");
             }
+            ps.close();
+            c.close();
         }catch(Exception e){System.out.println(e);}
         return u;
     }
     public static void addUser(String fname_in,String lname_in, String email_in,String pass_in, String cardno_in, String postcode_in){
         try{
-            Connection c = getConnection();
+            String dbUrl = System.getenv("JDBC_DATABASE_URL");
+            Class.forName("org.postgresql.Driver");
+            Connection c = DriverManager.getConnection(dbUrl);
 
             PreparedStatement ps=c.prepareStatement("insert into users (fname,lname,email,passw,cardno,postcode) values(?,?,?,?,?,?)");
             ps.setString(1,fname_in);
@@ -155,6 +162,7 @@ public class LoginDAO {
 
             ps.executeUpdate();
             ps.close();
+            c.close();
         }catch(Exception e){System.out.println(e);}
     }
 
@@ -162,7 +170,9 @@ public class LoginDAO {
     public static Product getProduct(int n){
         Product p = new Product();
         try{
-            Connection c = getConnection();
+            String dbUrl = System.getenv("JDBC_DATABASE_URL");
+            Class.forName("org.postgresql.Driver");
+            Connection c = DriverManager.getConnection(dbUrl);
             PreparedStatement ps=c.prepareStatement("select * from products where id=?");
             ps.setInt(1,n);
             ResultSet rs=ps.executeQuery();
@@ -174,6 +184,8 @@ public class LoginDAO {
                 p.category = rs.getString("category");
                 p.limited = rs.getBoolean("limited");
             }
+            ps.close();
+            c.close();
         }catch(Exception e){System.out.println(e);}
         return p;
     }
@@ -181,7 +193,9 @@ public class LoginDAO {
     // Adds product to a basket table //
     public static void addToBasket(Product p_in, int quantity_in){
         try{
-            Connection c = getConnection();
+            String dbUrl = System.getenv("JDBC_DATABASE_URL");
+            Class.forName("org.postgresql.Driver");
+            Connection c = DriverManager.getConnection(dbUrl);
             PreparedStatement ps=c.prepareStatement("insert into basket (name,description,price,quantity,subtotal,limited) values(?,?,?,?,?,?)");
             ps.setString(1,p_in.name);
             ps.setString(2,p_in.description);
@@ -192,6 +206,7 @@ public class LoginDAO {
 
             ps.executeUpdate();
             ps.close();
+            c.close();
         }catch(Exception e){System.out.println(e);}
     }
 
@@ -200,7 +215,9 @@ public class LoginDAO {
         Basket bProduct= new Basket();
 
         try{
-            Connection c = getConnection();
+            String dbUrl = System.getenv("JDBC_DATABASE_URL");
+            Class.forName("org.postgresql.Driver");
+            Connection c = DriverManager.getConnection(dbUrl);
             PreparedStatement ps=c.prepareStatement("select * from basket where id=?");
             ps.setInt(1,n);
             ResultSet rs=ps.executeQuery();
@@ -212,6 +229,8 @@ public class LoginDAO {
                 bProduct.subtotal = rs.getDouble("subtotal");
                 bProduct.limited = rs.getBoolean("limited");
             }
+            ps.close();
+            c.close();
         }catch(Exception e){System.out.println(e);}
         return bProduct;
     }
@@ -221,7 +240,9 @@ public class LoginDAO {
     public static int tableSize(String tableName){
         int n=0;
         try{
-            Connection c = getConnection();
+            String dbUrl = System.getenv("JDBC_DATABASE_URL");
+            Class.forName("org.postgresql.Driver");
+            Connection c = DriverManager.getConnection(dbUrl);
             String sql = "select count(*) from " + tableName;
             Statement s =c.createStatement();
             ResultSet rs = s.executeQuery(sql);
@@ -230,6 +251,7 @@ public class LoginDAO {
                 n=Integer.parseInt(p);
             }
             s.close();
+            c.close();
         }catch(Exception e){System.out.println(e);}
         return n;
     }

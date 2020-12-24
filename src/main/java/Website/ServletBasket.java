@@ -20,22 +20,28 @@ public class ServletBasket extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         writer.print(HTML);
         DecimalFormat df = new DecimalFormat("0.00");
-
-        if(LoginDAO.tableSize("basket") > 0){
-            int i = 1;
-            Basket b = LoginDAO.getBasketInfo(i);
-            String price = valueOf(df.format(b.price));
-            String subtotal = valueOf(df.format(b.subtotal));
-            int max = b.limited ? 1 : 5;
-            writer.print("<div class=\"container\" id=\"cont1\">\n" +
-                    "<p style=\"display: inline-block;\"><b>"+ b.name + "</b><br>" + b.description + "<br>£<output class=\"cost\" type=\"number\">" + price +"</output></p>\n" +
-                    "<div class=\"quant\">\n" +
-                    "<p>Quantity</p><input class=\"quantity\" onclick=\"showPrice()\" type=\"number\" min=\"1\" max=\"" + max + "\" value=\"" + b.quantity + "\"><button onclick=\" passVal(\"" + i + "\")\" class=\"buttonStyle\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button>\n" +
-                    "</div>\n" +
-                    "<div class=\"price\">\n" +
-                    "<p>Price<br><br>£<output>" + subtotal + "</output></p>\n" +
-                    "</div>\n" +
-                    "</div>\n");
+        int n = LoginDAO.tableSize("basket");
+        if(n > 0){
+            for(int i=1;i<n+1;i++) {
+                Basket b = LoginDAO.getBasketInfo(i);
+                String price = valueOf(df.format(b.price));
+                String subtotal = valueOf(df.format(b.subtotal));
+                int max = b.limited ? 1 : 5;
+                writer.print("<div class=\"container\" id=\"cont1\">\n" +
+                        "  <p style=\"display: inline-block;\"><b>" + b.name + "</b><br>100g<br>£<output class=\\\"cost\\\" type=\"number\">" + price + "</output></p>\n" +
+                        "  <div class=\"quant\">\n" +
+                        "    <form id=\"updateBasket\" method=\"post\"> \n" +
+                        "    <label for=\"q\">Qty</label><br>\n" +
+                        "    <input type=\"number\" name=\"q\" class=\"quantity\" size=\"3\" min=\"1\" max=\"" + max + "\" value=\"" + b.quantity + "\">\n" +
+                        "    <input name=\"buttonNumber\" type=\"hidden\"value=\"" + i + "\">\n" +
+                        "    <button style=\"margin-left: 0px;\" type=\"submit\" class=\"button2\">Update</button> \n" +
+                        "    <button type=\"submit\" class=\"button2\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button> \n" +
+                        "    </form>\n" +
+                        "  </div>\n" +
+                        "  <div class=\"price\">\n" +
+                        "    <p>£<output>" + subtotal + "</output></p>\n" +
+                        "  </div>");
+            }
         }
         else{
             writer.println("<p>Empty Basket</p>");
@@ -58,7 +64,7 @@ public class ServletBasket extends HttpServlet {
                 "<head>\n" +
                 "    <meta charset=\"utf-8\">\n" +
                 "    <meta name=\"viewport\" content=\"width=device-width\">\n" +
-                "    <title>Browse</title>\n" +
+                "    <title>Basket</title>\n" +
                 "    <!-- Import Icon Library -->\n" +
                 "    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">\n" +
                 "    <!-- Creates navigation bar -->\n" +
@@ -126,27 +132,29 @@ public class ServletBasket extends HttpServlet {
                 "        }\n" +
                 "        .container{\n" +
                 "          position: relative;\n" +
-                "          width: auto;\n" +
-                "          height: 100px;\n" +
+                "          width: 250px;\n" +
+                "          height: 140px;\n" +
                 "          border: 1px solid black;\n" +
                 "          margin: 5px;\n" +
-                "          padding: 0px 0px 0px 20px;\n" +
+                "          padding: 0px 0px 0px 20px;" +
                 "        }\n" +
                 "        div.quant {\n" +
                 "            position: absolute;\n" +
-                "            top: -1px;\n" +
-                "            right: 150px;\n" +
-                "            width: 100px;\n" +
-                "            height: 100px;\n" +
+                "            bottom: -1px;\n" +
+                "            left: -1px;\n" +
+                "            width: 250px;\n" +
+                "            height: 50px;\n" +
+                "            padding-left: 20px;\n" +
+                "            padding-top: 5px;\n" +
+                "            border: 1px solid black;\n" +
                 "        }\n" +
-                "        div.price {\n" +
+                "        ddiv.price {\n" +
                 "            position: absolute;\n" +
-                "            top: -1px;\n" +
-                "            right: 50px;\n" +
+                "            bottom: -1px;\n" +
+                "            right: -1px;\n" +
                 "            width: 70px;\n" +
-                "            height: 100px;\n" +
+                "            height: 45px;\n" +
                 "        }\n" +
-                "      \n" +
                 "        .buttonStyle{\n" +
                 "            background-color: #51B5C2; \n" +
                 "            border: none;\n" +
