@@ -39,7 +39,7 @@ public class ServletBasket extends HttpServlet {
                         "    </form>\n" +
                         "  </div>\n" +
                         "  <div class=\"price\">\n" +
-                        "    <p>£<output>" + subtotal + "</output></p>\n" +
+                        "    <p>£<output></output>" + subtotal + "</p>\n" +
                         "  </div>");
             }
         }
