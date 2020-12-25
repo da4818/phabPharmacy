@@ -188,12 +188,12 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            String sql = "select * from basket where name=" + p_in.name;
+            String sql = "select * from basket where name='" + p_in.name + "';";
             Statement s = c.createStatement();
             ResultSet rs = s.executeQuery(sql);
             if(rs.next()){
                 Statement s1 = c.createStatement();
-                String sql1 = "update basket set quantity =" + quantity_in + "where name='" + p_in.name+ "';";
+                String sql1 = "update basket set quantity =" + quantity_in + "where name='" + p_in.name+ "'";
                 s1.executeUpdate(sql1);
                 s1.close();
             }
@@ -260,7 +260,7 @@ public class LoginDAO {
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
             Statement s =c.createStatement();
-            String sql="delete from basket where name='" + tableName + "';";
+            String sql="delete from basket where name='" + tableName + "'";
             s.executeUpdate(sql);
             s.close();
         }catch(Exception e){System.out.println(e);}

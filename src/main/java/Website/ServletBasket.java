@@ -245,6 +245,9 @@ public class ServletBasket extends HttpServlet {
                 "    q[n].value = 0;\n" +
                 "    showPrice();\n" +
                 "  } \n" +
+                "    function redirectBrowse(){\n" +
+                "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
+                "    }\n" +
                 "\n" +
                 "</script>\n" +
                 "</head>\n" +
