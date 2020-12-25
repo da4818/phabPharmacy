@@ -68,14 +68,15 @@ public class ServletBasket extends HttpServlet {
         resp.setContentType("text/html");
         PrintWriter writer = resp.getWriter();
         String t = req.getParameter("update");
+        int n = Integer.parseInt(req.getParameter("basketNumber"));
         if (t.equals("Update")) {
-            writer.println("<p>" + t + "</p>");
+            writer.println("<p>" + t + "button:" + n +"</p>");
         }
         else if(t == null){
             writer.println("<p>null</p>");
         }
         else {
-            writer.println("<p>trash</p>");
+            writer.println("<p>trash" + n + "</p>");
         }
     }
 
