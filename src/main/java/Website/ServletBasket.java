@@ -46,12 +46,16 @@ public class ServletBasket extends HttpServlet {
                         "  </div>\n" +
                         "  <div class=\"price\">\n" +
                         "    <p>£<output></output>" + subtotal + "</p>\n" +
-                        "    <form method=\"post\"" +
-                        "    <button type=\"submit\" class=\"buttonStyle\">Proceed to Checkout</button>\n" +
                         "  </div>\n" +
                         "</div>\n" +
                         "</section>");
             }
+            writer.println("<div class=\"totalContainer\">\n" +
+                        "   <p>Total: " + total + "/p>\n" +
+                        "   <form action=\"basket\" method=\"post\"" +
+                        "   <button type=\"submit\" class=\"buttonStyle\">Proceed to Checkout</button>\n" +
+                        "   </form>" +
+                        "</div>\n");
         }
         else{
             writer.println("<p>Empty Basket</p>");
