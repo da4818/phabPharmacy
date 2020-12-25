@@ -26,7 +26,7 @@ public class ServletBasket extends HttpServlet {
             String total = df.format(totalBasket);
             writer.println("<div class=\"totalContainer\">\n" +
                     "   <form action=\"basket\" method=\"post\"" +
-                    "  <p>Total: £" + total + "</p>\n" +
+                    "  <p style=\"padding-top: 10px;\">Total: £" + total + "</p>\n" +
                     "   <input type=\"submit\" class=\"buttonStyle\" value=\"Proceed to Checkout\">\n" +
                     "   </form>" +
                     "</div>\n");
@@ -67,7 +67,7 @@ public class ServletBasket extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         PrintWriter writer = resp.getWriter();
-        String t = req.getParameter("trash");
+        String t = req.getParameter("update");
         writer.println("<p>" + t + "</p>");
     }
 
