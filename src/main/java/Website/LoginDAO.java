@@ -188,7 +188,7 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            String sql = "select * from basket where name='" + p_in.name + "';";
+            /*String sql = "select * from basket where name='" + p_in.name + "';";
             Statement s = c.createStatement();
             ResultSet rs = s.executeQuery(sql);
             if(rs.next()){
@@ -197,21 +197,18 @@ public class LoginDAO {
                 s1.executeUpdate(sql1);
                 s1.close();
             }
-            else {
+            else {*/
                 PreparedStatement ps = c.prepareStatement("insert into basket (name,description,price,quantity,subtotal,limited) values(?,?,?,?,?,?)");
-                rs = ps.executeQuery();
-                while(rs.next()) {
-                    ps.setString(1, p_in.name);
-                    ps.setString(2, p_in.description);
-                    ps.setDouble(3, p_in.price);
-                    ps.setInt(4, quantity_in);
-                    ps.setDouble(5, p_in.price * quantity_in);
-                    ps.setBoolean(6, p_in.limited);
-                    ps.executeUpdate();
-                    ps.close();
-                }
-            }
-            s.close();
+                ps.setString(1, p_in.name);
+                ps.setString(2, p_in.description);
+                ps.setDouble(3, p_in.price);
+                ps.setInt(4, quantity_in);
+                ps.setDouble(5, p_in.price * quantity_in);
+                ps.setBoolean(6, p_in.limited);
+                ps.executeUpdate();
+                ps.close();
+            //}
+            //s.close();
             c.close();
         }catch(Exception e){System.out.println(e);}
     }
