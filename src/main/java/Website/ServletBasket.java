@@ -25,7 +25,10 @@ public class ServletBasket extends HttpServlet {
             Double totalBasket = LoginDAO.getBasketTotal();
             String total = df.format(totalBasket);
             writer.println("<div class=\"totalContainer\">\n" +
+                    "   <form action=\"basket\" method=\"post\"" +
                     "  <p>Total: £" + total + "</p>\n" +
+                    "   <input type=\"submit\" class=\"buttonStyle\" value=\"Proceed to Checkout\">\n" +
+                    "   </form>" +
                     "</div>\n");
             for(int i=1;i<n+1;i++) {
                 Basket b = LoginDAO.getBasketInfo(i);
@@ -50,12 +53,6 @@ public class ServletBasket extends HttpServlet {
                         "</div>\n" +
                         "</section>");
             }
-            writer.println("<div class=\"totalContainer\">\n" +
-                        "   <p>Total: " + total + "/p>\n" +
-                        "   <form action=\"basket\" method=\"post\"" +
-                        "   <button type=\"submit\" class=\"buttonStyle\">Proceed to Checkout</button>\n" +
-                        "   </form>" +
-                        "</div>\n");
         }
         else{
             writer.println("<p>Empty Basket</p>");
