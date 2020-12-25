@@ -199,6 +199,7 @@ public class LoginDAO {
             }
             else {
                 PreparedStatement ps = c.prepareStatement("insert into basket (name,description,price,quantity,subtotal,limited) values(?,?,?,?,?,?)");
+                rs = ps.executeQuery();
                 ps.setString(1, p_in.name);
                 ps.setString(2, p_in.description);
                 ps.setDouble(3, p_in.price);
