@@ -82,8 +82,8 @@ public class ServletBrowse extends HttpServlet {
         int q = Integer.parseInt(req.getParameter("basketQuantity"));
         Product p = LoginDAO.getProduct(pos);
         LoginDAO.addToBasket(p,q);
-        writer.println("<p> Item:" + p.name +"Quantity:" + q + "</p>");
-        /*String HTML= htmlOutput();
+        //writer.println("<p> Item:" + p.name +"Quantity:" + q + "</p>");
+        String HTML= htmlOutput();
         writer.println(HTML);
         ArrayList<String> headers = new ArrayList<>();
         ArrayList<String> headerURLs = new ArrayList<>();
@@ -139,7 +139,7 @@ public class ServletBrowse extends HttpServlet {
                 "    }\n" +
                 "</script>\n" +
                 "</body>\n" +
-                "</html>");*/
+                "</html>");
     }
 
     public String htmlOutput(){
