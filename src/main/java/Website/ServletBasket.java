@@ -26,7 +26,7 @@ public class ServletBasket extends HttpServlet {
             String total = df.format(totalBasket);
             resp.getWriter().write("<div class=\"totalContainer\">\n" +
                     "  <p style=\"padding-top: 5px;\">Total: £" + total + "</p>\n" +
-                    "   <button href=\"https://phabpharmacy.herokuapp.com/order\" type=\"submit\" class=\"buttonStyle\" >Proceed to Checkout</button>\n" +
+                    "   <button href=\"https://phabpharmacy.herokuapp.com/order\" class=\"buttonStyle\">Proceed to Checkout</button>\n" +
                     "</div>\n");
             for(int i=1;i<n+1;i++) {
                 Product b = LoginDAO.getBasketInfo(i);
@@ -66,24 +66,63 @@ public class ServletBasket extends HttpServlet {
         resp.setContentType("text/html");
         String t = req.getParameter("update");
         int q_in = Integer.parseInt(req.getParameter("q"));
-        int n = Integer.parseInt(req.getParameter("basketNumber"));
-        Product modifiedItem = LoginDAO.getBasketInfo(n);
+        int basketId = Integer.parseInt(req.getParameter("basketNumber"));
+        Product modifiedItem = LoginDAO.getBasketInfo(basketId);
         if (t.equals("Update")) {
             LoginDAO.addToBasket(modifiedItem,q_in);
-            resp.getWriter().write("<p>" + t + "button:" + n +"</p>");
         }
         else if(t == null){
-            resp.getWriter().write("<p>null</p>");
         }
         else {
-            LoginDAO.removeFromBasket(n);
-            resp.getWriter().write("<p>trash" + n + "</p>");
+            LoginDAO.removeFromBasket(basketId);
         }
+        String HTML = htmlOutput();
+        resp.getWriter().write(HTML);
+        DecimalFormat df = new DecimalFormat("0.00");
+        int n = LoginDAO.tableSize("basket");
+        if(n > 0){
+            Double totalBasket = LoginDAO.getBasketTotal();
+            String total = df.format(totalBasket);
+            resp.getWriter().write("<div class=\"totalContainer\">\n" +
+                    "  <p style=\"padding-top: 5px;\">Total: £" + total + "</p>\n" +
+                    "   <button href=\"https://phabpharmacy.herokuapp.com/order\" class=\"buttonStyle\">Proceed to Checkout</button>\n" +
+                    "</div>\n");
+            for(int i=1;i<n+1;i++) {
+                Product b = LoginDAO.getBasketInfo(i);
+                String price = valueOf(df.format(b.price));
+                String subtotal = valueOf(df.format(b.price*b.quantity));
+                int max = b.limited ? 1 : 5;
+                resp.getWriter().write("<section>" +
+                        "<div class=\"basketContainer\" id=\"cont1\">\n" +
+                        "  <p style=\"display: inline-block;\"><b>" + b.name + "</b><br>" + b.description + "<br>£<output class=\\\"cost\\\" type=\"number\">" + price + "</output></p>\n" +
+                        "  <div class=\"quant\">\n" +
+                        "    <form id=\"updateBasket\" action=\"basket\" method=\"post\"> \n" +
+                        "    <label for=\"q\">Qty</label><br>\n" +
+                        "    <input type=\"number\" name=\"q\" class=\"quantity\" size=\"3\" min=\"1\" max=\"" + max + "\" value=\"" + b.quantity + "\">\n" +
+                        "    <input name=\"basketNumber\" type=\"hidden\"value=\"" + i + "\">\n" +
+                        "    <input name=\"update\" style=\"margin-left: 0px;\" type=\"submit\" class=\"buttonStyle\" value=\"Update\">\n" +
+                        "    <button name=\"update\" type=\"submit\" class=\"buttonStyle\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button>\n" +
+                        "    </form>\n" +
+                        "  </div>\n" +
+                        "  <div class=\"price\">\n" +
+                        "    <p>£<output></output>" + subtotal + "</p>\n" +
+                        "  </div>\n" +
+                        "</div>\n" +
+                        "</section>");
+            }
+        }
+        else{
+            resp.getWriter().write("<p>Empty Basket</p>");
+            resp.getWriter().write("<div class=\"totalContainer\">\n" +
+                    "  <p>Total: £0.00</p>\n" +
+                    "</div>\n");
+        }
+        resp.getWriter().write("</body>\n</html>");
     }
 
 
     public String htmlOutput(){
-        int basketSize = LoginDAO.tableSize("basket");
+        int basketSize = LoginDAO.getBasketSize();
         String basketSizeOut="";
         if (basketSize != 0){ basketSizeOut = String.valueOf(basketSize);}
         return "<!DOCTYPE html>\n" +

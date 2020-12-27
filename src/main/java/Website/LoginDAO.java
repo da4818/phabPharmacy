@@ -291,7 +291,7 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            String sql = "select sum(quantities) from basket";
+            String sql = "select sum(quantity) from basket";
             Statement s =c.createStatement();
             ResultSet rs = s.executeQuery(sql);
             while(rs.next()){

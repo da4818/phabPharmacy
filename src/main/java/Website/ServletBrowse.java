@@ -135,7 +135,7 @@ public class ServletBrowse extends HttpServlet {
     }
 
     public String htmlOutput(){
-        int basketSize = LoginDAO.tableSize("basket");
+        int basketSize = LoginDAO.getBasketSize();
         String basketSizeOut="";
         if (basketSize != 0){ basketSizeOut = String.valueOf(basketSize);}
         return "<!DOCTYPE html>\n" +
