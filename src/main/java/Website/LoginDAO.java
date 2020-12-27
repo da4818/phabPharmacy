@@ -260,7 +260,7 @@ public class LoginDAO {
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
             Statement s = c.createStatement();
-            String sql = "delete from basket where name=" + name_in; //similar to line 223
+            String sql = "delete from basket where name='" + name_in +"'"; //similar to line 223
             s.executeUpdate(sql);
 
             s.close();
