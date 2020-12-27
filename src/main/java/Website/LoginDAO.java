@@ -5,7 +5,7 @@ import java.sql.*;
 //DAO = data access object
 public class LoginDAO {
     // Functions to regarding creating the databases //
-
+    //Empties tables like User's basket and order
     public static void resetTable(String tableName){
         try{
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
@@ -81,7 +81,7 @@ public class LoginDAO {
         }catch(Exception e){System.out.println(e);}
     }
     // Functions to execute queries, or amend to the database content //
-    // Checking if user is logging in with an existing account //
+    // Checking if user is logging in with an existing account
     public static boolean validateLogin(String email_in,String pass_in){
         boolean status=false;
         try{
@@ -92,13 +92,13 @@ public class LoginDAO {
             ps.setString(1,email_in);
             ps.setString(2,pass_in);
             ResultSet rs=ps.executeQuery();
-            status=rs.next();
+            status=rs.next(); //Status is now true if an entry with the email and password exists
             c.close();
 
         }catch(Exception e){System.out.println(e);}
         return status;
     }
-    // Checking if user is registering with an existing email address //
+    // Checking if user is registering with an existing email address
     public static boolean validateRegister(String email_in){
         boolean status=false;
         try{
@@ -158,7 +158,7 @@ public class LoginDAO {
         }catch(Exception e){System.out.println(e);}
     }
 
-    // Gets product attributes to display on browse page //
+    // Gets product attributes to display on browse page
     public static Product getProduct(int n){
         Product p = new Product();
         try{
@@ -182,7 +182,7 @@ public class LoginDAO {
         return p;
     }
 
-    // Adds product to a basket table //
+    // Adds product to a basket table
     public static void addToBasket(Product p_in, int quantity_in){
         try{
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
@@ -202,7 +202,7 @@ public class LoginDAO {
                 ps.setString(1, p_in.name);
                 ps.setString(2, p_in.description);
                 ps.setDouble(3, p_in.price);
-                ps.setInt(4, quantity_in);
+                ps.setInt(4, quantity_in); //Quantity added to basket rather than full stock quantity
                 ps.setDouble(5, p_in.price * quantity_in);
                 ps.setBoolean(6, p_in.limited);
                 ps.executeUpdate();
@@ -213,7 +213,7 @@ public class LoginDAO {
         }catch(Exception e){System.out.println(e);}
     }
 
-    // Gets info from products added to basket to display on basket page //
+    // Gets info from products added to basket to display on basket page, based on the position it appears on the page
     public static Product getBasketInfo(int n){
         Product bProduct= new Product();
         try{
@@ -221,9 +221,9 @@ public class LoginDAO {
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
             PreparedStatement ps=c.prepareStatement("with temp as (select row_number() over (order by name asc) as rownum, * from basket) select * from temp where rownum=?");
-            ps.setInt(1,n); //If one item is removed, the IDs aren't automatically updated. SQL has no easy way to select item based on row number rather than an existing column
-            ResultSet rs=ps.executeQuery();
-            while(rs.next()){
+            ps.setInt(1,n); //If one item is removed, the IDs aren't automatically updated e.g. table's ID will read as 1,3,4,5...
+            ResultSet rs=ps.executeQuery(); //SQL has no easy way to select item based on row number rather than an existing column - this is the solution
+            while(rs.next()){ // If int n = 2 (i.e. the second item in the basket), this will correspond to the 2nd entry in the basket table based on alphabetical order
                 bProduct.name = rs.getString("name");
                 bProduct.description =rs.getString("description");
                 bProduct.price = rs.getDouble("price");
@@ -242,8 +242,8 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            String sql = "select sum(price*quantity) from basket";
-            Statement s =c.createStatement();
+            String sql = "select sum(price*quantity) from basket"; //For some reason it won't return the existing value in the subtotal column
+            Statement s = c.createStatement();
             ResultSet rs = s.executeQuery(sql);
             while(rs.next()){
                 total = rs.getDouble(1);
@@ -253,20 +253,21 @@ public class LoginDAO {
         }catch(Exception e){System.out.println(e);}
         return total;
     }
+    //Removes item from the basket database when trash icon is pressed
     public static void removeFromBasket(int basketId){
         try{
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            Statement s =c.createStatement();
-            String sql="with temp as (select row_number() over (order by name asc) as rownum, * from basket) delete from basket where rownum=" + basketId;
+            Statement s = c.createStatement();
+            String sql = "with temp as (select row_number() over (order by name asc) as rownum, * from basket) delete from basket where rownum=" + basketId; //similar to line 223
             s.executeUpdate(sql);
             s.close();
         }catch(Exception e){System.out.println(e);}
     }
 
 
-    // Display size of table - i.e. number of entries //
+    // Display size of table - i.e. number of entries - used in displaying all the products in the browse page
     public static int tableSize(String tableName){
         int n=0;
         try{
@@ -285,7 +286,7 @@ public class LoginDAO {
         }catch(Exception e){System.out.println(e);}
         return n;
     }
-
+    // To return the number of items in the basket - to be displayed on the navigation bar header
     public static int getBasketSize(){
         int n=0;
         try{
