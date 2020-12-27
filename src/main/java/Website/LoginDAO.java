@@ -214,8 +214,8 @@ public class LoginDAO {
     }
 
     // Gets info from products added to basket to display on basket page //
-    public static Basket getBasketInfo(int n){
-        Basket bProduct= new Basket();
+    public static Product getBasketInfo(int n){
+        Product bProduct= new Product();
         try{
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
@@ -228,7 +228,6 @@ public class LoginDAO {
                 bProduct.description =rs.getString("description");
                 bProduct.price = rs.getDouble("price");
                 bProduct.quantity = rs.getInt("quantity");
-                bProduct.subtotal = rs.getDouble("subtotal");
                 bProduct.limited = rs.getBoolean("limited");
             }
             ps.close();
@@ -253,13 +252,13 @@ public class LoginDAO {
         }catch(Exception e){System.out.println(e);}
         return total;
     }
-    public static void removeFromBasket(String tableName){
+    public static void removeFromBasket(int basketId){
         try{
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
             Statement s =c.createStatement();
-            String sql="delete from basket where name='" + tableName + "'";
+            String sql="delete from basket where id=" + basketId;
             s.executeUpdate(sql);
             s.close();
         }catch(Exception e){System.out.println(e);}
@@ -274,6 +273,25 @@ public class LoginDAO {
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
             String sql = "select count(*) from " + tableName;
+            Statement s =c.createStatement();
+            ResultSet rs = s.executeQuery(sql);
+            while(rs.next()){
+                String p = rs.getString(1);
+                n=Integer.parseInt(p);
+            }
+            s.close();
+            c.close();
+        }catch(Exception e){System.out.println(e);}
+        return n;
+    }
+
+    public static int getBasketSize(){
+        int n=0;
+        try{
+            String dbUrl = System.getenv("JDBC_DATABASE_URL");
+            Class.forName("org.postgresql.Driver");
+            Connection c = DriverManager.getConnection(dbUrl);
+            String sql = "select sum(quantities) from basket";
             Statement s =c.createStatement();
             ResultSet rs = s.executeQuery(sql);
             while(rs.next()){

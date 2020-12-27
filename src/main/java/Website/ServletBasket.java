@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.PreparedStatement;
 import java.text.DecimalFormat;
 
 import static java.lang.String.valueOf;
@@ -24,15 +25,15 @@ public class ServletBasket extends HttpServlet {
             Double totalBasket = LoginDAO.getBasketTotal();
             String total = df.format(totalBasket);
             resp.getWriter().write("<div class=\"totalContainer\">\n" +
-                    "   <form action=\"basket\" method=\"post\"" +
+                    "   <form action=\"order\" method=\"post\"" +
                     "  <p style=\"padding-top: 10px;\">Total: £" + total + "</p>\n" +
                     "   <input type=\"submit\" class=\"buttonStyle\" value=\"Proceed to Checkout\">\n" +
                     "   </form>" +
                     "</div>\n");
             for(int i=1;i<n+1;i++) {
-                Basket b = LoginDAO.getBasketInfo(i);
+                Product b = LoginDAO.getBasketInfo(i);
                 String price = valueOf(df.format(b.price));
-                String subtotal = valueOf(df.format(b.subtotal));
+                String subtotal = valueOf(df.format(b.price*b.quantity));
                 int max = b.limited ? 1 : 5;
                 resp.getWriter().write("<section>" +
                         "<div class=\"basketContainer\" id=\"cont1\">\n" +
@@ -66,14 +67,18 @@ public class ServletBasket extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         String t = req.getParameter("update");
+        int q_in = Integer.parseInt(req.getParameter("q"));
         int n = Integer.parseInt(req.getParameter("basketNumber"));
+        Product modifiedItem = LoginDAO.getBasketInfo(n);
         if (t.equals("Update")) {
+            LoginDAO.addToBasket(modifiedItem,q_in);
             resp.getWriter().write("<p>" + t + "button:" + n +"</p>");
         }
         else if(t == null){
             resp.getWriter().write("<p>null</p>");
         }
         else {
+            LoginDAO.removeFromBasket(n);
             resp.getWriter().write("<p>trash" + n + "</p>");
         }
     }
