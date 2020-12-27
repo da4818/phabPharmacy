@@ -260,8 +260,17 @@ public class LoginDAO {
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
             Statement s = c.createStatement();
-            String sql = "with temp as (select row_number() over (order by name asc) as rownum, * from basket) delete from temp where rownum=" + basketId; //similar to line 223
-            s.executeUpdate(sql);
+            String sql = "with temp as (select row_number() over (order by name asc) as rownum, * from basket) select * from temp where rownum=" + basketId; //similar to line 223
+            ResultSet rs = s.executeQuery(sql);
+            String name_in="";
+            while(rs.next()){
+                name_in = rs.getString("name");
+            }
+            if(!name_in.equals("")){
+            String sql1="delete from basket where name=" + name_in;
+            s.executeUpdate(sql1);
+            }
+
             s.close();
         }catch(Exception e){System.out.println(e);}
     }
