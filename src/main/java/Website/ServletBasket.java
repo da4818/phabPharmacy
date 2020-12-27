@@ -84,8 +84,7 @@ public class ServletBasket extends HttpServlet {
             Double totalBasket = LoginDAO.getBasketTotal();
             String total = df.format(totalBasket);
             resp.getWriter().write("<div class=\"totalContainer\">\n" +
-                    "  <p style=\"padding-top: 5px;\">Total: £" + total + "</p>\n" +
-                    "   <button href=\"https://phabpharmacy.herokuapp.com/order\" class=\"buttonStyle\">Proceed to Checkout</button>\n" +
+                    "  <p style=\"padding-top: 5px;\">Total: £" + total + "<br><button href=\"https://phabpharmacy.herokuapp.com/order\" class=\"buttonStyle\">Proceed to Checkout</button></p>\n" +
                     "</div>\n");
             for(int i=1;i<n+1;i++) {
                 Product b = LoginDAO.getBasketInfo(i);
