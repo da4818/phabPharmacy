@@ -254,13 +254,13 @@ public class LoginDAO {
         return total;
     }
     //Removes item from the basket database when trash icon is pressed
-    public static void removeFromBasket(Product p_in){
+    public static void removeFromBasket(String name_in){
         try{
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
             Statement s = c.createStatement();
-            String sql = "delete from basket where name=" + p_in.name; //similar to line 223
+            String sql = "delete from basket where name=" + name_in; //similar to line 223
             s.executeUpdate(sql);
 
             s.close();

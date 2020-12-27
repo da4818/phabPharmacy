@@ -41,6 +41,7 @@ public class ServletBasket extends HttpServlet {
                         "    <label for=\"q\">Qty</label><br>\n" +
                         "    <input type=\"number\" name=\"q\" class=\"quantity\" size=\"3\" min=\"1\" max=\"" + max + "\" value=\"" + b.quantity + "\">\n" +
                         "    <input name=\"basketNumber\" type=\"hidden\"value=\"" + i + "\">\n" +
+                        "    <input name=\"basketName\" type=\"hidden\"value=\"" + b.name + "\">\n" +
                         "    <input name=\"update\" style=\"margin-left: 0px;\" type=\"submit\" class=\"buttonStyle\" value=\"Update\">\n" +
                         "    <button name=\"update\" type=\"submit\" class=\"buttonStyle\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button>\n" +
                         "    </form>\n" +
@@ -67,6 +68,7 @@ public class ServletBasket extends HttpServlet {
         String t = req.getParameter("update");
         int q_in = Integer.parseInt(req.getParameter("q"));
         int basketId = Integer.parseInt(req.getParameter("basketNumber"));
+        String basketName = req.getParameter("basketName");
         Product modifiedItem = LoginDAO.getBasketInfo(basketId);
         if (t.equals("Update")) {
             LoginDAO.addToBasket(modifiedItem,q_in);
@@ -74,7 +76,7 @@ public class ServletBasket extends HttpServlet {
         else if(t == null){
         }
         else {
-            LoginDAO.removeFromBasket(modifiedItem);
+            LoginDAO.removeFromBasket(basketName);
         }
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
@@ -98,7 +100,7 @@ public class ServletBasket extends HttpServlet {
                         "    <form id=\"updateBasket\" action=\"basket\" method=\"post\"> \n" +
                         "    <label for=\"q\">Qty</label><br>\n" +
                         "    <input type=\"number\" name=\"q\" class=\"quantity\" size=\"3\" min=\"1\" max=\"" + max + "\" value=\"" + b.quantity + "\">\n" +
-                        "    <input name=\"basketNumber\" type=\"hidden\"value=\"" + i + "\">\n" +
+                        "    <input name=\"basketNumber\" type=\"hidden\"value=\"" + b.name + "\">\n" +
                         "    <input name=\"update\" style=\"margin-left: 0px;\" type=\"submit\" class=\"buttonStyle\" value=\"Update\">\n" +
                         "    <button name=\"update\" type=\"submit\" class=\"buttonStyle\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button>\n" +
                         "    </form>\n" +
