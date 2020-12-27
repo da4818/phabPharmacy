@@ -74,7 +74,7 @@ public class ServletBasket extends HttpServlet {
         else if(t == null){
         }
         else {
-            LoginDAO.removeFromBasket(basketId);
+            LoginDAO.removeFromBasket(modifiedItem);
         }
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
