@@ -202,7 +202,7 @@ public class ServletBasket extends HttpServlet {
                 "          height: 70px;\n" +
                 "          border: 1px solid black;\n" +
                 "          margin: 0px 50px 0px 0px;\n" +
-                "          padding: 0px 0px 0px 20px;\n" +
+                "          padding: 0px 0px 10px 20px;\n" +
                 "        }\n" +
                 "        .basketContainer{\n" +
                 "          position: relative;\n" +
