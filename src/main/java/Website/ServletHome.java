@@ -13,7 +13,7 @@ public class ServletHome extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //LoginDAO.createTable("users");
         //LoginDAO.createTable("basket");
-        //LoginDAO.createTable("products");
+        LoginDAO.createTable("products");
         //LoginDAO.resetTable("basket");
         resp.setContentType("text/html");
         int basketSize = LoginDAO.tableSize("basket");
