@@ -220,8 +220,8 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            PreparedStatement ps=c.prepareStatement("with temp as (select row_number() over (order by name asc) as rownum, *from products) select * from temp where rownum=?");
-            ps.setInt(1,n);
+            PreparedStatement ps=c.prepareStatement("with temp as (select row_number() over (order by name asc) as rownum, * from basket) select * from temp where rownum=?");
+            ps.setInt(1,n); //If one item is removed, the IDs aren't automatically updated. SQL has no easy way to select item based on row number rather than an existing column
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
                 bProduct.name = rs.getString("name");
@@ -235,6 +235,7 @@ public class LoginDAO {
         }catch(Exception e){System.out.println(e);}
         return bProduct;
     }
+
     public static Double getBasketTotal(){
         double total = 0;
         try{
