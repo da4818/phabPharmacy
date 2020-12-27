@@ -220,7 +220,7 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            PreparedStatement ps=c.prepareStatement("select * from basket where id=?");
+            PreparedStatement ps=c.prepareStatement("with temp as (select row_number() over (order by name asc) as rownum, *from products) select * from temp where rownum=?");
             ps.setInt(1,n);
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
