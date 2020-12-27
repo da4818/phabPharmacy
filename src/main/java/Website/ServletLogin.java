@@ -16,34 +16,36 @@ public class ServletLogin extends HttpServlet {
         resp.setContentType("text/html");
         String output = htmlOutput();
         resp.getWriter().write(output);
+
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         String HTML = htmlOutput();
-        PrintWriter writer = resp.getWriter();
         String em = req.getParameter("email");
         String pw = req.getParameter("pass");
-        writer.println(HTML);
+        resp.getWriter().write(HTML);
         if(LoginDAO.validateLogin(em,pw)){
             User currentUser = LoginDAO.getUser(em,pw);
-            writer.print("<h2>Welcome back, " + currentUser.fname + "!</h2>");
+            resp.getWriter().write("<h2>Welcome back, " + currentUser.fname + "!</h2>");
             //RequestDispatcher rd = req.getRequestDispatcher("servlet2");
             //rd.forward(req,resp);
         }
         else if (em.isEmpty() || pw.isEmpty()){
-            writer.print("<h2>Incomplete fields, please enter all the information.</h2>");
+            resp.getWriter().write("<h2>Incomplete fields, please enter all the information.</h2>");
         }
         else{
-            writer.print("<h2>Wrong email or password<h2>");
-            RequestDispatcher rd=req.getRequestDispatcher("/home");
-            rd.include(req,resp);
+            resp.getWriter().write("<h2>Wrong email or password<h2>");
+            //RequestDispatcher rd=req.getRequestDispatcher("/home");
+            //rd.include(req,resp);
         }
-        writer.close();
     }
 
     public String htmlOutput(){
+        int basketSize = LoginDAO.tableSize("basket");
+        String basketSizeOut="";
+        if (basketSize != 0){ basketSizeOut = String.valueOf(basketSize);}
         return "<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "<head>\n" +
@@ -140,7 +142,7 @@ public class ServletLogin extends HttpServlet {
                 "    </div>\n" +
                 "    <a style=\"background-color: #00B8C5;\"><i class=\"fa fa-fw fa-user\"></i>Login</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
-                "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" class=\"fa fa-fw fa-shopping-basket\"><b id=\"basket\"></b></a>\n" +
+                "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" style=\"width: 35px;\" class=\"fa fa-fw fa-shopping-basket\"><b style=\"font-family: Arial;\" id=\"basket\">" + basketSize +"</b></a>\n" +
                 "</div>\n" +
                 "\n" +
                 "<h1>Login</h1>\n" +

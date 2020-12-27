@@ -22,7 +22,6 @@ public class ServletRegister extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         String HTML = htmlOutput();
-        PrintWriter writer = resp.getWriter();
         String fn = req.getParameter("fname");
         String ln = req.getParameter("lname");
         String em = req.getParameter("email");
@@ -30,24 +29,27 @@ public class ServletRegister extends HttpServlet {
         String vpw = req.getParameter("verifyPass");
         String cn = req.getParameter("cardno");
         String ad = req.getParameter("postcode");
-        writer.println(HTML);
+        resp.getWriter().write(HTML);
         if(LoginDAO.validateRegister(em)){ //create validation to see if email exists
-            writer.println("<h2> There is an existing account with the email entered. Please log in.</h2>");
+            resp.getWriter().write("<h2> There is an existing account with the email entered. Please log in.</h2>");
         }
         else if (fn.isEmpty() || ln.isEmpty() || em.isEmpty() || pw.isEmpty() || vpw.isEmpty() || cn.isEmpty() || ad.isEmpty()){
-            writer.print("<h2>Incomplete fields, please enter all the information.</h2>");
+            resp.getWriter().write("<h2>Incomplete fields, please enter all the information.</h2>");
         }
         else if (!pw.equals(vpw)){
-            writer.println("<h2> Passwords don't match. Please try again.</h2>");
+            resp.getWriter().write("<h2> Passwords don't match. Please try again.</h2>");
         }
         else{
             LoginDAO.addUser(fn,ln,em,pw,cn,ad);
             User currentUser = LoginDAO.getUser(em,pw);
-            writer.print("<h2>Succesful registration. Welcome, " + currentUser.fname + "</h2>");
+            resp.getWriter().write("<h2>Succesful registration. Welcome, " + currentUser.fname + "</h2>");
         }
     }
 
     public String htmlOutput(){
+        int basketSize = LoginDAO.tableSize("basket");
+        String basketSizeOut="";
+        if (basketSize != 0){ basketSizeOut = String.valueOf(basketSize);}
         return "<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "<head>\n" +
@@ -147,7 +149,7 @@ public class ServletRegister extends HttpServlet {
                 "    </div>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/login\"><i class=\"fa fa-fw fa-user\"></i>Login</a>\n" +
                 "    <a style=\"background-color: #00B8C5;\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
-                "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" class=\"fa fa-fw fa-shopping-basket\"><b id=\"basket\"></b></a> \n" +
+                "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" style=\"width: 35px;\" class=\"fa fa-fw fa-shopping-basket\"><b style=\"font-family: Arial;\" id=\"basket\">" + basketSizeOut + "</b></a> \n" +
                 "</div>\n" +
                 "\n" +
                 "<h1>Register</h1>\n" +

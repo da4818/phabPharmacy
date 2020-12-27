@@ -20,9 +20,9 @@ public class ServletBrowse extends HttpServlet {
         //ProductDB pdb = new ProductDB();
         //BasketDB bdb = new BasketDB();
         resp.setContentType("text/html");
-        PrintWriter writer = resp.getWriter();
         String HTML= htmlOutput();
-        writer.println(HTML);
+        resp.getWriter().write(HTML);
+        int basketSize = LoginDAO.tableSize("basket");
                 ArrayList<String> headers = new ArrayList<>();
                 ArrayList<String> headerURLs = new ArrayList<>();
                 headers.add("Cold and Flu");
@@ -40,21 +40,21 @@ public class ServletBrowse extends HttpServlet {
                 int j=1;
                 Product p = LoginDAO.getProduct(j);
                 for (int i=0;i<6;i++) {
-                    writer.println("<section>\n" +
+                    resp.getWriter().write("<section>\n" +
                             "<h2 id=\""+headerURLs.get(i)+"\">" + headers.get(i) + "</h2>\n");
                     while (p.category.equals(headers.get(i))) {
                         DecimalFormat df = new DecimalFormat("0.00");
                         String price = valueOf(df.format(p.price));
                         int max = p.limited ? 1 : 5;
-                        writer.print("<div class=\"relative\">\n");
+                        resp.getWriter().write("<div class=\"relative\">\n");
                         if (p.limited){
-                            writer.print("<label class=\"tooltip\"><center>" + p.name + "<br>" + p.description + "</center>\n" +
+                            resp.getWriter().write("<label class=\"tooltip\"><center>" + p.name + "<br>" + p.description + "</center>\n" +
                                     "<span class=\"tooltiptext\"><i>Limited to one per customer</i></span></label><br>\n");
                         }
                         else{
-                            writer.print("<label><center>" + p.name + "<br>" + p.description + "</center></label><br>\n");
+                            resp.getWriter().write("<label><center>" + p.name + "<br>" + p.description + "</center></label><br>\n");
                         }
-                        writer.print("<label><center>£" + price + "</label></center><br>\n" +
+                        resp.getWriter().write("<label><center>£" + price + "</label></center><br>\n" +
                                 "<div class=\"absolute\">\n" +
                                 "<form action=\"browse\" method=\"post\">\n" +
                                 "<input name=\"basketQuantity\" type=\"number\" size=\"5\" min=\"0\" max=\"" + max + "\">\n" +
@@ -66,10 +66,10 @@ public class ServletBrowse extends HttpServlet {
                         j++;
                         p = LoginDAO.getProduct(j);
                     }
-                    writer.println("</section>");
+                    resp.getWriter().write("</section>");
                 }
 
-                writer.println("</body>\n" +
+        resp.getWriter().write("</body>\n" +
                         "</html>");
 
     }
@@ -77,14 +77,13 @@ public class ServletBrowse extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        PrintWriter writer = resp.getWriter();
         int pos = Integer.parseInt(req.getParameter("buttonNumber"));
         int q = Integer.parseInt(req.getParameter("basketQuantity"));
         Product p = LoginDAO.getProduct(pos);
         LoginDAO.addToBasket(p,q);
-        //writer.println("<p> Item:" + p.name +"Quantity:" + q + "</p>");
+        //resp.getWriter().write("<p> Item:" + p.name +"Quantity:" + q + "</p>");
         String HTML= htmlOutput();
-        writer.println(HTML);
+        resp.getWriter().write(HTML);
         ArrayList<String> headers = new ArrayList<>();
         ArrayList<String> headerURLs = new ArrayList<>();
         headers.add("Cold and Flu");
@@ -102,21 +101,21 @@ public class ServletBrowse extends HttpServlet {
         int j=1;
          p = LoginDAO.getProduct(j);
         for (int i=0;i<6;i++) {
-            writer.println("<section>\n" +
+            resp.getWriter().write("<section>\n" +
                     "<h2 id=\""+headerURLs.get(i)+"\">" + headers.get(i) + "</h2>\n");
             while (p.category.equals(headers.get(i))) {
                 DecimalFormat df = new DecimalFormat("0.00");
                 String price = valueOf(df.format(p.price));
                 int max = p.limited ? 1 : 5;
-                writer.print("<div class=\"relative\">\n");
+                resp.getWriter().write("<div class=\"relative\">\n");
                 if (p.limited){
-                    writer.print("<label class=\"tooltip\"><center>" + p.name + "<br>" + p.description + "</center>\n" +
+                    resp.getWriter().write("<label class=\"tooltip\"><center>" + p.name + "<br>" + p.description + "</center>\n" +
                             "<span class=\"tooltiptext\"><i>Limited to one per customer</i></span></label><br>\n");
                 }
                 else{
-                    writer.print("<label><center>" + p.name + "<br>" + p.description + "</center></label><br>\n");
+                    resp.getWriter().write("<label><center>" + p.name + "<br>" + p.description + "</center></label><br>\n");
                 }
-                writer.print("<label><center>£" + price + "</label></center><br>\n" +
+                resp.getWriter().write("<label><center>£" + price + "</label></center><br>\n" +
                         "<div class=\"absolute\">\n" +
                         "<form action=\"browse\" method=\"post\">\n" +
                         "<input name=\"basketQuantity\" type=\"number\" size=\"5\" min=\"0\" max=\"" + max + "\">\n" +
@@ -128,21 +127,17 @@ public class ServletBrowse extends HttpServlet {
                 j++;
                 p = LoginDAO.getProduct(j);
             }
-            writer.println("</section>");
+            resp.getWriter().write("</section>");
         }
 
-        writer.println("<script>\n" +
-                "    function addBasket(){\n" +
-                "        var num=document.getElementById(\"number1\").value;\n" +
-                "        document.getElementById(\"basket\").innerHTML = num\n" +
-                "        document.getElementById(\"basket\").style.fontFamily =\"Arial, Helvetica, sans-serif\";\n" +
-                "    }\n" +
-                "</script>\n" +
-                "</body>\n" +
+        resp.getWriter().write("</body>\n" +
                 "</html>");
     }
 
     public String htmlOutput(){
+        int basketSize = LoginDAO.tableSize("basket");
+        String basketSizeOut="";
+        if (basketSize != 0){ basketSizeOut = String.valueOf(basketSize);}
         return "<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "<head>\n" +
@@ -279,7 +274,7 @@ public class ServletBrowse extends HttpServlet {
                 "    </div>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/login\"><i class=\"fa fa-fw fa-user\"></i>Login</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
-                "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" class=\"fa fa-fw fa-shopping-basket\"><b id=\"basket\"></b></a>\n" +
+                "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" class=\"fa fa-fw fa-shopping-basket\"><b  style=\"font-family: Arial;\" id=\"basket\">" + basketSizeOut + "</b></a>\n" +
                 "</div>";
     }
 }
