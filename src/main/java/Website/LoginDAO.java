@@ -88,7 +88,7 @@ public class LoginDAO {
                 s1.executeUpdate("INSERT INTO ORDER(ID,NAME,DESCRIPTION,PRICE,QUANTITY,SUBTOTAL,LIMITED) SELECT * FROM BASKET;");
             }
             else if(tableName.equals("logged")) {
-                String sql ="CREATE TABLE logged " +
+                String sql ="CREATE TABLE LOGGED " +
                         "(ID SERIAL PRIMARY KEY NOT NULL," +
                         " FNAME TEXT NOT NULL, " +
                         " LNAME TEXT NOT NULL, " +

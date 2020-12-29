@@ -65,6 +65,13 @@ public class ServletOrder extends HttpServlet {
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
         resp.getWriter().write("<h2>Order confirmed!</h2>");
+        resp.getWriter().write("<script>\n" +
+                "    function redirectBrowse(){\n" +
+                "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
+                "    }\n" +
+                "</script>\n" +
+                "</body>\n" +
+                "</html>");
         LoginDAO.createTable("order");
         LoginDAO.resetTable("basket");
     }
