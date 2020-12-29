@@ -1,6 +1,7 @@
+
 package Website;
 
-public class Basket {
+public class BasketItem {
     public String name;
     public String description;
     public double price;

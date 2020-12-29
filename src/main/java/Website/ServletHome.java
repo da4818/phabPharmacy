@@ -17,8 +17,6 @@ public class ServletHome extends HttpServlet {
         LoginDAO.createTable("products");
         //LoginDAO.resetTable("basket");
         resp.setContentType("text/html");
-        ServletLogin sl = new ServletLogin();
-        String name = sl.currentUserName;
         // Finds size of items in basket to display on navigation bar. This happens for each servlet subpage
         int basketSize = LoginDAO.getBasketSize();
         String basketSizeOut="";
@@ -123,7 +121,6 @@ public class ServletHome extends HttpServlet {
                 "<h1><center>PhabPharmacy</center></h1>\n" +
                 "<h2><center> Welcome to the PhabPharmacy's home page!<br>Please login or register to create an account.</center></h2>\n" +
                 "\n" +
-                "<p>" + name + "</p>\n" +
                 "<script>\n" +
                 "    function redirectBrowse(){\n" +
                 "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +

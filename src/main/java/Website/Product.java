@@ -1,6 +1,5 @@
 package Website;
 
-import java.util.ArrayList;
 
 public class Product {
     String name;
