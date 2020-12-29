@@ -80,6 +80,7 @@ public class ServletBasket extends HttpServlet {
         }
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
+        resp.getWriter().write("<p>" + basketId + "</p>");
         DecimalFormat df = new DecimalFormat("0.00");
         int n = LoginDAO.tableSize("basket");
         if(n > 0){
@@ -196,6 +197,14 @@ public class ServletBasket extends HttpServlet {
                 "        }\n" +
                 "        .dropdown:hover .dropdown-content {\n" +
                 "            display: block;\n" +
+                "        }\n" +
+                "        .currentUser{\n" +
+                "           float: right;\n" +
+                "           font-size: 16px;\n" +
+                "           color: white;\n" +
+                "           text-align: center;\n" +
+                "           padding: 14px 16px;\n" +
+                "           text-decoration: none;\n" +
                 "        }\n" +
                 "        .totalContainer{\n" +
                 "          position: relative;\n" +

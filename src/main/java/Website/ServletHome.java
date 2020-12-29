@@ -87,6 +87,14 @@ public class ServletHome extends HttpServlet {
                 "        .dropdown:hover .dropdown-content {\n" +
                 "            display: block;\n" +
                 "        }\n" +
+                "        .currentUser{\n" +
+                "           float: right;\n" +
+                "           font-size: 16px;\n" +
+                "           color: white;\n" +
+                "           text-align: center;\n" +
+                "           padding: 14px 16px;\n" +
+                "           text-decoration: none;\n" +
+                "        }\n" +
                 "    </style>\n" +
                 "\n" +
                 "</head>\n" +
@@ -109,7 +117,7 @@ public class ServletHome extends HttpServlet {
                 "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" style=\"width: 35px;\" class=\"fa fa-fw fa-shopping-basket\"><b style=\"font-family: Arial;\" id=\"basket\">" + basketSizeOut + "</b></a>\n" +
                 "</div>\n" +
                 "<h1><center>PhabPharmacy</center></h1>\n" +
-                "<h2><center> Welcome to the PhabPharmacy's home page!</center></h2>\n" +
+                "<h2><center> Welcome to the PhabPharmacy's home page!<br>Please login or register to create an account.</center></h2>\n" +
                 "\n" +
                 "<script>\n" +
                 "    function redirectBrowse(){\n" +

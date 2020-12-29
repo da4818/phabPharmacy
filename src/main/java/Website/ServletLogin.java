@@ -16,7 +16,6 @@ public class ServletLogin extends HttpServlet {
         resp.setContentType("text/html");
         String output = htmlOutput();
         resp.getWriter().write(output);
-
     }
 
     @Override
@@ -111,6 +110,14 @@ public class ServletLogin extends HttpServlet {
                 "        }\n" +
                 "        .dropdown:hover .dropdown-content {\n" +
                 "            display: block;\n" +
+                "        }\n" +
+                "        .currentUser{\n" +
+                "           float: right;\n" +
+                "           font-size: 16px;\n" +
+                "           color: white;\n" +
+                "           text-align: center;\n" +
+                "           padding: 14px 16px;\n" +
+                "           text-decoration: none;\n" +
                 "        }\n" +
                 "        .buttonStyle{\n" +
                 "            background-color: #00B8C5;\n" +

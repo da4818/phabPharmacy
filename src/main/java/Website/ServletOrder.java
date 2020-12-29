@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 @WebServlet(urlPatterns = "/order", loadOnStartup = 0)
 public class ServletOrder extends HttpServlet {
@@ -22,6 +23,10 @@ public class ServletOrder extends HttpServlet {
         resp.setContentType("text/html");
     }
     public String htmlOutput(){
+
+        DecimalFormat df = new DecimalFormat("0.00");
+        Double totalBasket = LoginDAO.getBasketTotal();
+        String total = df.format(totalBasket);
         int basketSize = LoginDAO.getBasketSize();
         String basketSizeOut="";
         if (basketSize != 0){ basketSizeOut = String.valueOf(basketSize);}
@@ -96,12 +101,21 @@ public class ServletOrder extends HttpServlet {
                 "        .dropdown:hover .dropdown-content {\n" +
                 "            display: block;\n" +
                 "        }\n" +
+                "        .currentUser{\n" +
+                "           float: right;\n" +
+                "           font-size: 16px;\n" +
+                "           color: white;\n" +
+                "           text-align: center;\n" +
+                "           padding: 14px 16px;\n" +
+                "           text-decoration: none;\n" +
+                "        }\n" +
                 "        div.confirmContainer{\n" +
                 "          float: right;\n" +
+                "          position: relative\n" +
                 "          width: 170px;\n" +
                 "          height: 70px;\n" +
                 "          margin: 0px 50px 0px 0px;\n" +
-                "          padding: 0px 0px 15px 10px;\n" +
+                "          padding: 0px 10px 0px 10px;\n" +
                 "          border: 1px solid black;\n" +
                 "        }\n" +
                 "        div.basketContainer{\n" +
@@ -173,9 +187,10 @@ public class ServletOrder extends HttpServlet {
                 "</div>\n" +
                 "<h1>Confirm Order</h1>\n" +
                 "<div class=\"confirmContainer\">\n" +
-                "  <form action=\"/order\" method=\"post\"\n" +
-                "  <p>Total Cost</p>\n" +
-                "  <input type=\"submit\" class=\"buttonStyle\" value=\"Confirm Order\">\n" +
+                "  <p>Total Cost: <b>£" + total + "</b></p>\n" +
+                "  <form action=\"/order\" method=\"post\">\n" +
+                "  <input style=\"position: relative; bottom: 10px;\" type=\"submit\" class=\"buttonStyle\" value=\"Confirm Order\">\n" +
+                "  </form>\n" +
                 "</div>\n" +
                 "  <div class=\"basketContainer\" id=\"cont1\">\n" +
                 "  <p style=\"display: inline-block; margin-bottom: 0px;\"><b>Order Summary</b></p>\n" +
