@@ -66,20 +66,20 @@ public class ServletBasket extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         String t = req.getParameter("update");
-        int q_in = Integer.parseInt(req.getParameter("q"));
-        int basketId = Integer.parseInt(req.getParameter("basketNumber"));
+        //int q_in = Integer.parseInt(req.getParameter("q"));
+        //int basketId = Integer.parseInt(req.getParameter("basketNumber"));
         String basketName = req.getParameter("basketName");
-        Product modifiedItem = LoginDAO.getBasketInfo(basketId);
+        //Product modifiedItem = LoginDAO.getBasketInfo(basketId);
         if (t.equals("Update")) {
-            LoginDAO.addToBasket(modifiedItem,q_in);
+            //LoginDAO.addToBasket(modifiedItem,q_in);
         }
         else {
             LoginDAO.removeFromBasket(basketName);
         }
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
-        DecimalFormat df = new DecimalFormat("0.00");
         int n = LoginDAO.tableSize("basket");
+        DecimalFormat df = new DecimalFormat("0.00");
         if(n > 0){
             Double totalBasket = LoginDAO.getBasketTotal();
             String total = df.format(totalBasket);
