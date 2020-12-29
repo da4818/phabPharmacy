@@ -16,7 +16,7 @@ import java.io.StringWriter;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.when;
-
+import Website.*;
 public class TestServletLogin extends ServletLogin{
     @Mock
     HttpServletRequest request;

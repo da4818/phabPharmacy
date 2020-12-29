@@ -17,8 +17,23 @@ public class ServletOrder extends HttpServlet {
         resp.setContentType("text/html");
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
-        int n = LoginDAO.tableSize("basket");
         DecimalFormat df = new DecimalFormat("0.00");
+        Double totalBasket = LoginDAO.getBasketTotal();
+        String total = df.format(totalBasket);
+        resp.getWriter().write("<div class=\"addressContainer\">\n" +
+                "  <form id=\"updateBasket\" method=\"post\"> \n" +
+                "  <p style=\"display: inline-block; margin-bottom: 0px;\"><b>Shipping Address</b></p>\n" +
+                "  <p>Name<br>Shipping Address<br>Payment</p>\n" +
+                "  <button href=\"https://phabpharmacy.herokuapp.com/basket\" class=\"buttonStyle\">Edit Details</button>\n" +
+                "  </form>\n" +
+                "  <div class=\"confirmContainer\">\n" +
+                "  <p>Total Cost: <b>£" + total +"</b></p>\n" +
+                "  <form action=\"/order\" method=\"post\">\n" +
+                "    <input type=\"submit\" class=\"buttonStyle\" value=\"Confirm Order\">\n" +
+                "  </form>\n" +
+                "  </div>\n" +
+                "</div>\n");
+        int n = LoginDAO.tableSize("basket");
         if(n>0) {
             resp.getWriter().write("<div class=\"basketContainer\">\n" +
                     "  <p style=\"display: inline-block; margin-bottom: 0px;\"><b>Order Summary</b></p>\n" +
@@ -47,12 +62,11 @@ public class ServletOrder extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
+        String HTML = htmlOutput();
+        resp.getWriter().write(HTML);
+        resp.getWriter().write("<h2>Order confirmed!</h2>");
     }
     public String htmlOutput(){
-
-        DecimalFormat df = new DecimalFormat("0.00");
-        Double totalBasket = LoginDAO.getBasketTotal();
-        String total = df.format(totalBasket);
         int basketSize = LoginDAO.getBasketSize();
         String basketSizeOut="";
         if (basketSize != 0){ basketSizeOut = String.valueOf(basketSize);}
@@ -157,7 +171,7 @@ public class ServletOrder extends HttpServlet {
                 "          padding: 0px 0px 10px 20px;\n" +
                 "          margin: 0px 50px 0px 0px;\n" +
                 "          border: 1px solid black;\n" +
-                "        }}\n" +
+                "        }\n" +
                 "        .buttonStyle{\n" +
                 "            background-color: #51B5C2; \n" +
                 "            border: none;\n" +
@@ -211,20 +225,7 @@ public class ServletOrder extends HttpServlet {
                 "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" style=\"background-color: #00B8C5; width: 35px;\" class=\"fa fa-fw fa-shopping-basket\"><b style=\"font-family: Arial;\" id=\"basket\">" + basketSizeOut + "</b></a>\n" +
                 "</div>\n" +
-                "<h1>Confirm Order</h1>\n" +
-                "<div class=\"addressContainer\">\n" +
-                "  <form id=\"updateBasket\" method=\"post\"> \n" +
-                "  <p style=\"display: inline-block; margin-bottom: 0px;\"><b>Shipping Address</b></p>\n" +
-                "  <p>Name<br>Shipping Address<br>Payment</p>\n" +
-                "  <input type=\"submit\" class=\"buttonStyle\" value=\"Edit Details\">\n" +
-                "  </form>\n" +
-                "  <div class=\"confirmContainer\">\n" +
-                "  <p>Total Cost: <b>£" + total +"</b></p>\n" +
-                "  <form action=\"/order\" method=\"post\">\n" +
-                "    <input type=\"submit\" class=\"buttonStyle\" value=\"Confirm Order\">\n" +
-                "  </form>\n" +
-                "  </div>\n" +
-                "</div>\n";
+                "<h1>Confirm Order</h1>\n";
 
     }
 }
