@@ -73,14 +73,11 @@ public class ServletBasket extends HttpServlet {
         if (t.equals("Update")) {
             LoginDAO.addToBasket(modifiedItem,q_in);
         }
-        else if(t == null){
-        }
         else {
             LoginDAO.removeFromBasket(basketName);
         }
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
-        resp.getWriter().write("<p>" + basketId + "</p>");
         DecimalFormat df = new DecimalFormat("0.00");
         int n = LoginDAO.tableSize("basket");
         if(n > 0){
