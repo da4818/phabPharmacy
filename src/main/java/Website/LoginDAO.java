@@ -22,7 +22,7 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            Statement s =c.createStatement();
+            Statement s = c.createStatement();
             Statement s1 = c.createStatement();
             if(tableName.equals("users")) {
                 String sql ="CREATE TABLE USERS " +
@@ -74,6 +74,19 @@ public class LoginDAO {
                         " SUBTOTAL TEXT NOT NULL, " +
                         " LIMITED BOOLEAN NOT NULL)";
                 s.executeUpdate(sql);
+            }
+            else if(tableName.equals("order")){
+                String sql ="CREATE TABLE ORDER " +
+                        "(ID SERIAL PRIMARY KEY NOT NULL," +
+                        " NAME TEXT NOT NULL, " +
+                        " DESCRIPTION TEXT NOT NULL, " +
+                        " PRICE DOUBLE PRECISION NOT NULL, " +
+                        " QUANTITY INTEGER NOT NULL, " +
+                        " SUBTOTAL TEXT NOT NULL, " +
+                        " LIMITED BOOLEAN NOT NULL)";
+                s.executeUpdate(sql);
+                s1.executeUpdate("INSERT INTO ORDER(ID,NAME,DESCRIPTION,PRICE,QUANTITY,SUBTOTAL,LIMITED) SELECT * FROM BASKET;");
+
             }
             s.close();
             s1.close();

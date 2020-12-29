@@ -65,6 +65,8 @@ public class ServletOrder extends HttpServlet {
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
         resp.getWriter().write("<h2>Order confirmed!</h2>");
+        LoginDAO.createTable("order");
+        LoginDAO.resetTable("basket");
     }
     public String htmlOutput(){
         int basketSize = LoginDAO.getBasketSize();
