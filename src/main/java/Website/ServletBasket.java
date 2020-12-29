@@ -66,6 +66,7 @@ public class ServletBasket extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         String t = req.getParameter("update");
+        String basketName = req.getParameter("basketName");
         if (t.equals("Update")) {
             int q_in = Integer.parseInt(req.getParameter("q"));
             int basketId = Integer.parseInt(req.getParameter("basketNumber"));
@@ -73,7 +74,6 @@ public class ServletBasket extends HttpServlet {
             LoginDAO.addToBasket(modifiedItem,q_in);
         }
         else {
-            String basketName = req.getParameter("basketName");
             LoginDAO.removeFromBasket(basketName);
         }
         String HTML = htmlOutput();
