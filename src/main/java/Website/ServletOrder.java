@@ -20,27 +20,19 @@ public class ServletOrder extends HttpServlet {
         int n = LoginDAO.tableSize("basket");
         DecimalFormat df = new DecimalFormat("0.00");
         if(n>0) {
-            resp.getWriter().write("  <div class=\"basketContainer\" id=\"cont1\">\n" +
+            resp.getWriter().write("  <div class=\"basketContainer\">\n" +
                     "  <p style=\"display: inline-block; margin-bottom: 0px;\"><b>Order Summary</b></p>\n" +
                     "  <p>");
             for(int i=1;i<n+1;i++) {
             Product b = LoginDAO.getBasketInfo(i);
             String subtotal = valueOf(df.format(b.price*b.quantity));
-            resp.getWriter().write(b.name + " " + b.description + " " + b.quantity + " £" + subtotal + "<br>");
+            resp.getWriter().write(b.name + " - " + b.description + " x" + b.quantity + " - £" + subtotal + "<br>");
             }
             resp.getWriter().write("</p>\n" +
                     "<form action=\"/basket\" method=\"post\">\n" +
                     "    <input type=\"submit\" class=\"buttonStyle\" value=\"Edit Basket\">\n" +
                     "  </form>\n" +
                     "</div>\n");
-            resp.getWriter().write("<div class=\"addressContainer\">\n" +
-                    "  <form id=\"updateBasket\" method=\"post\"> \n" +
-                    "  <p style=\"display: inline-block; margin-bottom: 0px;\"><b>Shipping Adress</b></p>\n" +
-                    "  <p>Name<br>Shipping Address<br>Payment</p>\n" +
-                    "  <input type=\"submit\" class=\"buttonStyle\" value=\"Edit Details\">\n" +
-                    "  </form>\n" +
-                    "</div>\n" +
-                    "\n");
             resp.getWriter().write("<script>\n" +
                     "    function redirectBrowse(){\n" +
                     "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
@@ -144,12 +136,12 @@ public class ServletOrder extends HttpServlet {
                 "           text-decoration: none;\n" +
                 "        }\n" +
                 "        div.confirmContainer{\n" +
-                "          float: right;\n" +
-                "          position: relative\n" +
-                "          width: 170px;\n" +
+                "          position: absolute;\n" +
+                "          width: 270px;\n" +
                 "          height: 70px;\n" +
-                "          margin: 0px 50px 0px 0px;\n" +
-                "          padding: 0px 10px 0px 10px;\n" +
+                "          right: -1px;\n" +
+                "          bottom: -87px;\n" +
+                "          padding: 0px 0px 15px 20px;\n" +
                 "          border: 1px solid black;\n" +
                 "        }\n" +
                 "        div.basketContainer{\n" +
@@ -159,13 +151,13 @@ public class ServletOrder extends HttpServlet {
                 "          border: 1px solid black;\n" +
                 "        }\n" +
                 "        div.addressContainer {\n" +
-                "            //position: absolute;\n" +
-                "            width: 350px;\n" +
-                "            height: 150px;\n" +
-                "            margin: -1px 0px 0px 0px;\n" +
-                "            padding: 0px 0px 20px 20px;\n" +
-                "            border: 1px solid black;\n" +
-                "        }\n" +
+                "          position: relative;\n" +
+                "          width: 270px;\n" +
+                "          float: right;\n" +
+                "          padding: 0px 0px 10px 20px;\n" +
+                "          margin: 0px 50px 0px 0px;\n" +
+                "          border: 1px solid black;\n" +
+                "        }}\n" +
                 "        .buttonStyle{\n" +
                 "            background-color: #51B5C2; \n" +
                 "            border: none;\n" +
@@ -220,11 +212,18 @@ public class ServletOrder extends HttpServlet {
                 "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" style=\"background-color: #00B8C5; width: 35px;\" class=\"fa fa-fw fa-shopping-basket\"><b style=\"font-family: Arial;\" id=\"basket\">" + basketSizeOut + "</b></a>\n" +
                 "</div>\n" +
                 "<h1>Confirm Order</h1>\n" +
-                "<div class=\"confirmContainer\">\n" +
-                "  <p>Total Cost: <b>£" + total + "</b></p>\n" +
-                "  <form action=\"/order\" method=\"post\">\n" +
-                "  <input style=\"position: relative; bottom: 10px;\" type=\"submit\" class=\"buttonStyle\" value=\"Confirm Order\">\n" +
+                "<div class=\"addressContainer\">\n" +
+                "  <form id=\"updateBasket\" method=\"post\"> \n" +
+                "  <p style=\"display: inline-block; margin-bottom: 0px;\"><b>Shipping Adress</b></p>\n" +
+                "  <p>Name<br>Shipping Address<br>Payment</p>\n" +
+                "  <input type=\"submit\" class=\"buttonStyle\" value=\"Edit Details\">\n" +
                 "  </form>\n" +
+                "  <div class=\"confirmContainer\">\n" +
+                "  <p>Total Cost: <b>£" + total +"</b></p>\n" +
+                "  <form action=\"/order\" method=\"post\">\n" +
+                "    <input type=\"submit\" class=\"buttonStyle\" value=\"Confirm Order\">\n" +
+                "  </form>\n" +
+                "</div>\n" +
                 "</div>\n";
 
     }
