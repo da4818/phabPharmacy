@@ -12,9 +12,9 @@ public class ServletHome extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Creating/resetting database tables if necessary //
-        //LoginDAO.createTable("users");
-        //LoginDAO.createTable("basket");
-        //LoginDAO.createTable("products");
+        LoginDAO.createTable("users");
+        LoginDAO.createTable("basket");
+        LoginDAO.createTable("products");
         //LoginDAO.resetTable("basket");
         resp.setContentType("text/html");
         ServletLogin sl = new ServletLogin();
@@ -123,7 +123,7 @@ public class ServletHome extends HttpServlet {
                 "<h1><center>PhabPharmacy</center></h1>\n" +
                 "<h2><center> Welcome to the PhabPharmacy's home page!<br>Please login or register to create an account.</center></h2>\n" +
                 "\n" +
-                "<p>" + name + "</p>/n" +
+                "<p>" + name + "</p>\n" +
                 "<script>\n" +
                 "    function redirectBrowse(){\n" +
                 "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
