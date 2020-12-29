@@ -9,7 +9,6 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns ={"/login"},loadOnStartup = 0)
 public class ServletLogin extends HttpServlet {
-    String currentUserName = "";
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
@@ -28,7 +27,7 @@ public class ServletLogin extends HttpServlet {
         if(LoginDAO.validateLogin(em,pw)){
             User currentUser = LoginDAO.getUser(em,pw); //If the login entries pass the validation checks
             resp.getWriter().write("<h2>Welcome back, " + currentUser.fname + "!</h2>");
-            currentUserName = currentUser.fname;
+            LoginDAO.setLoggedInUser(currentUser);
         }
         else if (em.isEmpty() || pw.isEmpty()){
             resp.getWriter().write("<h2>Incomplete fields, please enter all the information.</h2>");
@@ -39,6 +38,11 @@ public class ServletLogin extends HttpServlet {
     }
 
     public String htmlOutput(){
+        int userLoggedIn = LoginDAO.tableSize("logged");
+        String userMessage = "";
+        if (userLoggedIn !=0){
+            User cUser = LoginDAO.getCurrentUser();
+            userMessage  = "<a style=\"float: right; font-size: 15px;\">" + cUser.fname + "<i class=\"fa fa-fw fa-user\"></i></a>";}
         int basketSize = LoginDAO.getBasketSize();
         String basketSizeOut="";
         if (basketSize != 0){ basketSizeOut = String.valueOf(basketSize);}
@@ -147,6 +151,7 @@ public class ServletLogin extends HttpServlet {
                 "    <a style=\"background-color: #00B8C5;\"><i class=\"fa fa-fw fa-user\"></i>Login</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" style=\"width: 35px;\" class=\"fa fa-fw fa-shopping-basket\"><b style=\"font-family: Arial;\" id=\"basket\">" + basketSizeOut + "</b></a>\n" +
+                userMessage +
                 "</div>\n" +
                 "\n" +
                 "<h1>Login</h1>\n" +

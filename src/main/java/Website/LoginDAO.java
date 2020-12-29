@@ -86,7 +86,17 @@ public class LoginDAO {
                         " LIMITED BOOLEAN NOT NULL)";
                 s.executeUpdate(sql);
                 s1.executeUpdate("INSERT INTO ORDER(ID,NAME,DESCRIPTION,PRICE,QUANTITY,SUBTOTAL,LIMITED) SELECT * FROM BASKET;");
-
+            }
+            else if(tableName.equals("logged")) {
+                String sql ="CREATE TABLE logged " +
+                        "(ID SERIAL PRIMARY KEY NOT NULL," +
+                        " FNAME TEXT NOT NULL, " +
+                        " LNAME TEXT NOT NULL, " +
+                        " EMAIL TEXT NOT NULL, " +
+                        " PASSW TEXT NOT NULL, " +
+                        " CARDNO TEXT NOT NULL, " +
+                        " POSTCODE TEXT NOT NULL)";
+                s.executeUpdate(sql);
             }
             s.close();
             s1.close();
@@ -165,6 +175,46 @@ public class LoginDAO {
             ps.setString(4,pass_in);
             ps.setString(5,cardno_in);
             ps.setString(6,postcode_in);
+            ps.executeUpdate();
+            ps.close();
+            c.close();
+        }catch(Exception e){System.out.println(e);}
+    }
+    public static User getCurrentUser(){
+        User u = new User();
+        try{
+            String dbUrl = System.getenv("JDBC_DATABASE_URL");
+            Class.forName("org.postgresql.Driver");
+            Connection c = DriverManager.getConnection(dbUrl);
+            Statement s=c.createStatement();
+            ResultSet rs=s.executeQuery("select * from logged;");
+            while(rs.next()){
+                u.fname = rs.getString("fname");
+                u.lname = rs.getString("name");
+                u.email = rs.getString("email");
+                u.password = rs.getString("passw");
+                u.cardno = rs.getString("cardno");
+                u.postcode = rs.getString("postcode");
+            }
+            s.close();
+            c.close();
+        }catch(Exception e){System.out.println(e);}
+        return u;
+    }
+    public static void setLoggedInUser(User loggedInuser){
+        try{
+            String dbUrl = System.getenv("JDBC_DATABASE_URL");
+            Class.forName("org.postgresql.Driver");
+            Connection c = DriverManager.getConnection(dbUrl);
+            Statement s = c.createStatement();
+            s.executeUpdate("truncate table logged;");
+            PreparedStatement ps=c.prepareStatement("insert into logged (fname,lname,email,passw,cardno,postcode) values(?,?,?,?,?,?)");
+            ps.setString(1,loggedInuser.fname);
+            ps.setString(2,loggedInuser.lname);
+            ps.setString(3, loggedInuser.email);
+            ps.setString(4,loggedInuser.password);
+            ps.setString(5, loggedInuser.cardno);
+            ps.setString(6, loggedInuser.postcode);
             ps.executeUpdate();
             ps.close();
             c.close();

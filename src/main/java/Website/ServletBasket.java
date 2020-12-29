@@ -121,6 +121,11 @@ public class ServletBasket extends HttpServlet {
 
 
     public String htmlOutput(){
+        int userLoggedIn = LoginDAO.tableSize("logged");
+        String userMessage = "";
+        if (userLoggedIn !=0){
+            User cUser = LoginDAO.getCurrentUser();
+            userMessage  = "<a style=\"float: right; font-size: 15px;\">" + cUser.fname + "<i class=\"fa fa-fw fa-user\"></i></a>";}
         int basketSize = LoginDAO.getBasketSize();
         String basketSizeOut="";
         if (basketSize != 0){ basketSizeOut = String.valueOf(basketSize);}
@@ -295,6 +300,7 @@ public class ServletBasket extends HttpServlet {
                 "    <a href=\"https://phabpharmacy.herokuapp.com/login\"><i class=\"fa fa-fw fa-user\"></i>Login</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" style=\"background-color: #00B8C5; width: 35px;\" class=\"fa fa-fw fa-shopping-basket\"><b style=\"font-family: Arial;\" id=\"basket\">" + basketSizeOut + "</b></a>\n" +
+                userMessage +
                 "</div>\n" +
                 "<h1>Shopping Basket</h1>\n";
     }

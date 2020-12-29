@@ -15,9 +15,14 @@ public class ServletHome extends HttpServlet {
         LoginDAO.createTable("users");
         LoginDAO.createTable("basket");
         LoginDAO.createTable("products");
-        //LoginDAO.resetTable("basket");
+        LoginDAO.createTable("logged");
         resp.setContentType("text/html");
         // Finds size of items in basket to display on navigation bar. This happens for each servlet subpage
+        int userLoggedIn = LoginDAO.tableSize("logged");
+        String userMessage = "";
+        if (userLoggedIn !=0){
+            User cUser = LoginDAO.getCurrentUser();
+            userMessage  = "<a style=\"float: right; font-size: 15px;\">" + cUser.fname + "<i class=\"fa fa-fw fa-user\"></i></a>";}
         int basketSize = LoginDAO.getBasketSize();
         String basketSizeOut="";
         if (basketSize != 0){ basketSizeOut = String.valueOf(basketSize);}
@@ -117,6 +122,7 @@ public class ServletHome extends HttpServlet {
                 "    <a href=\"https://phabpharmacy.herokuapp.com/login\"><i class=\"fa fa-fw fa-user\"></i>Login</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" style=\"width: 35px;\" class=\"fa fa-fw fa-shopping-basket\"><b style=\"font-family: Arial;\" id=\"basket\">" + basketSizeOut + "</b></a>\n" +
+                userMessage +
                 "</div>\n" +
                 "<h1><center>PhabPharmacy</center></h1>\n" +
                 "<h2><center> Welcome to the PhabPharmacy's home page!<br>Please login or register to create an account.</center></h2>\n" +
