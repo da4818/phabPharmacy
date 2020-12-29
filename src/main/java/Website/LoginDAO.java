@@ -2,7 +2,7 @@ package Website;
 
 import java.sql.*;
 
-//DAO = data access object
+// DAO = data access object //
 public class LoginDAO {
     // Functions to regarding creating the databases //
     //Empties tables like User's basket and order

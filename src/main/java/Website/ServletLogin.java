@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 
 @WebServlet(urlPatterns ={"/login"},loadOnStartup = 0)
 public class ServletLogin extends HttpServlet {
+    String currentUserName = "";
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
@@ -22,22 +23,20 @@ public class ServletLogin extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         String HTML = htmlOutput();
+        //Retrieves info that user has entered - in HTML code, the input tags are named "email" and "pass" (lines 160-161)
         String em = req.getParameter("email");
         String pw = req.getParameter("pass");
         resp.getWriter().write(HTML);
         if(LoginDAO.validateLogin(em,pw)){
-            User currentUser = LoginDAO.getUser(em,pw);
+            User currentUser = LoginDAO.getUser(em,pw); //If the login entries pass the validation checks
             resp.getWriter().write("<h2>Welcome back, " + currentUser.fname + "!</h2>");
-            //RequestDispatcher rd = req.getRequestDispatcher("servlet2");
-            //rd.forward(req,resp);
+            currentUserName = currentUser.fname;
         }
         else if (em.isEmpty() || pw.isEmpty()){
             resp.getWriter().write("<h2>Incomplete fields, please enter all the information.</h2>");
         }
         else{
             resp.getWriter().write("<h2>Wrong email or password<h2>");
-            //RequestDispatcher rd=req.getRequestDispatcher("/home");
-            //rd.include(req,resp);
         }
     }
 
