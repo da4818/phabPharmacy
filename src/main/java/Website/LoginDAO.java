@@ -207,7 +207,7 @@ public class LoginDAO {
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
             Statement s = c.createStatement();
-            s.executeUpdate("truncate table logged;");
+            //s.executeUpdate("truncate table logged;");
             PreparedStatement ps=c.prepareStatement("insert into logged (fname,lname,email,passw,cardno,postcode) values(?,?,?,?,?,?)");
             ps.setString(1,loggedInuser.fname);
             ps.setString(2,loggedInuser.lname);
@@ -216,6 +216,7 @@ public class LoginDAO {
             ps.setString(5, loggedInuser.cardno);
             ps.setString(6, loggedInuser.postcode);
             ps.executeUpdate();
+            s.close();
             ps.close();
             c.close();
         }catch(Exception e){System.out.println(e);}
