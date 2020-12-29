@@ -266,8 +266,6 @@ public class LoginDAO {
             s.close();
         }catch(Exception e){System.out.println(e);}
     }
-
-
     // Display size of table - i.e. number of entries - used in displaying all the products in the browse page
     public static int tableSize(String tableName){
         int n=0;
@@ -276,7 +274,7 @@ public class LoginDAO {
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
             String sql = "select count(*) from " + tableName;
-            Statement s =c.createStatement();
+            Statement s = c.createStatement();
             ResultSet rs = s.executeQuery(sql);
             while(rs.next()){
                 String p = rs.getString(1);
@@ -295,7 +293,7 @@ public class LoginDAO {
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
             String sql = "select sum(quantity) from basket";
-            Statement s =c.createStatement();
+            Statement s = c.createStatement();
             ResultSet rs = s.executeQuery(sql);
             while(rs.next()){
                 String p = rs.getString(1);

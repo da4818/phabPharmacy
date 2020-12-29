@@ -15,8 +15,6 @@ import static java.lang.String.valueOf;
 public class ServletBrowse extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //ProductDB pdb = new ProductDB();
-        //BasketDB bdb = new BasketDB();
         resp.setContentType("text/html");
         String HTML= htmlOutput();
         resp.getWriter().write(HTML);

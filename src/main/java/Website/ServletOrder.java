@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.DecimalFormat;
 
+import static java.lang.String.valueOf;
+
 @WebServlet(urlPatterns = "/order", loadOnStartup = 0)
 public class ServletOrder extends HttpServlet {
     @Override
@@ -15,6 +17,38 @@ public class ServletOrder extends HttpServlet {
         resp.setContentType("text/html");
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
+        int n = LoginDAO.tableSize("basket");
+        DecimalFormat df = new DecimalFormat("0.00");
+        if(n>0) {
+            resp.getWriter().write("  <div class=\"basketContainer\" id=\"cont1\">\n" +
+                    "  <p style=\"display: inline-block; margin-bottom: 0px;\"><b>Order Summary</b></p>\n" +
+                    "  <p>");
+            for(int i=1;i<n+1;i++) {
+            Product b = LoginDAO.getBasketInfo(i);
+            String subtotal = valueOf(df.format(b.price*b.quantity));
+            resp.getWriter().write(b.name + " " + b.description + " " + b.quantity + " £" + subtotal + "<br>");
+            }
+            resp.getWriter().write("</p>\n" +
+                    "<form action=\"/basket\" method=\"post\">\n" +
+                    "    <input type=\"submit\" class=\"buttonStyle\" value=\"Edit Basket\">\n" +
+                    "  </form>\n" +
+                    "</div>\n");
+            resp.getWriter().write("<div class=\"addressContainer\">\n" +
+                    "  <form id=\"updateBasket\" method=\"post\"> \n" +
+                    "  <p style=\"display: inline-block; margin-bottom: 0px;\"><b>Shipping Adress</b></p>\n" +
+                    "  <p>Name<br>Shipping Address<br>Payment</p>\n" +
+                    "  <input type=\"submit\" class=\"buttonStyle\" value=\"Edit Details\">\n" +
+                    "  </form>\n" +
+                    "</div>\n" +
+                    "\n");
+            resp.getWriter().write("<script>\n" +
+                    "    function redirectBrowse(){\n" +
+                    "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
+                    "    }\n" +
+                    "</script>\n" +
+                    "</body>\n" +
+                    "</html>");
+        }
 
     }
 
@@ -191,29 +225,7 @@ public class ServletOrder extends HttpServlet {
                 "  <form action=\"/order\" method=\"post\">\n" +
                 "  <input style=\"position: relative; bottom: 10px;\" type=\"submit\" class=\"buttonStyle\" value=\"Confirm Order\">\n" +
                 "  </form>\n" +
-                "</div>\n" +
-                "  <div class=\"basketContainer\" id=\"cont1\">\n" +
-                "  <p style=\"display: inline-block; margin-bottom: 0px;\"><b>Order Summary</b></p>\n" +
-                "  <p>Item Quantity Subtotal<br>Item Quantity Subtotal<br>Item Quantity Subtotal<br>Item Quantity Subtotal<br>Item Quantity Subtotal<br>Item Quantity Subtotal</p>\n" +
-                "  \n" +
-                "  <form action=\"/basket\" method=\"post\">\n" +
-                "    <input type=\"submit\" class=\"buttonStyle\" value=\"Edit Basket\">\n" +
-                "  </form>\n" +
-                "</div>\n" +
-                "<div class=\"addressContainer\">\n" +
-                "  <form id=\"updateBasket\" method=\"post\"> \n" +
-                "  <p style=\"display: inline-block; margin-bottom: 0px;\"><b>Shipping Adress</b></p>\n" +
-                "  <p>Name<br>Shipping Address<br>Payment</p>\n" +
-                "  <input type=\"submit\" class=\"buttonStyle\" value=\"Edit Details\">\n" +
-                "  </form>\n" +
-                "</div>\n" +
-                "\n" +
-                "<script>\n" +
-                "    function redirectBrowse(){\n" +
-                "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
-                "    }\n" +
-                "</script>\n" +
-                "</body>\n" +
-                "</html>";
+                "</div>\n";
+
     }
 }
