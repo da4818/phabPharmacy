@@ -66,14 +66,14 @@ public class ServletBasket extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         String t = req.getParameter("update");
-        //int q_in = Integer.parseInt(req.getParameter("q"));
-        //int basketId = Integer.parseInt(req.getParameter("basketNumber"));
-        String basketName = req.getParameter("basketName");
-        //Product modifiedItem = LoginDAO.getBasketInfo(basketId);
         if (t.equals("Update")) {
-            //LoginDAO.addToBasket(modifiedItem,q_in);
+            int q_in = Integer.parseInt(req.getParameter("q"));
+            int basketId = Integer.parseInt(req.getParameter("basketNumber"));
+            Product modifiedItem = LoginDAO.getBasketInfo(basketId);
+            LoginDAO.addToBasket(modifiedItem,q_in);
         }
         else {
+            String basketName = req.getParameter("basketName");
             LoginDAO.removeFromBasket(basketName);
         }
         String HTML = htmlOutput();
