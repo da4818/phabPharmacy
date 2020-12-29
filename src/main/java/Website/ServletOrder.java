@@ -20,13 +20,13 @@ public class ServletOrder extends HttpServlet {
         int n = LoginDAO.tableSize("basket");
         DecimalFormat df = new DecimalFormat("0.00");
         if(n>0) {
-            resp.getWriter().write("  <div class=\"basketContainer\">\n" +
+            resp.getWriter().write("<div class=\"basketContainer\">\n" +
                     "  <p style=\"display: inline-block; margin-bottom: 0px;\"><b>Order Summary</b></p>\n" +
                     "  <p>");
             for(int i=1;i<n+1;i++) {
             Product b = LoginDAO.getBasketInfo(i);
             String subtotal = valueOf(df.format(b.price*b.quantity));
-            resp.getWriter().write(b.name + " - " + b.description + " x" + b.quantity + " - £" + subtotal + "<br>");
+            resp.getWriter().write(b.name + " - " + b.description + " - x" + b.quantity + " - £" + subtotal + "<br>");
             }
             resp.getWriter().write("</p>\n" +
                     "<form action=\"/basket\" method=\"post\">\n" +
@@ -197,7 +197,7 @@ public class ServletOrder extends HttpServlet {
                 "<div class=\"navbar\">\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/home\"><i class=\"fa fa-fw fa-home\"></i>Home</a>\n" +
                 "    <div class=\"dropdown\">\n" +
-                "        <button style=\"cursor: pointer;\" class= \"dropbtn\" onclick=\"redirectBrowse()\"><i class=\"fa fa-fw fa-search\"></i>Browse<i class=\"fa fa-caret-down\"></i></button>\n" +
+                "        <button style=\"cursor: pointer;\" class=\"dropbtn\" onclick=\"redirectBrowse()\"><i class=\"fa fa-fw fa-search\"></i>Browse<i class=\"fa fa-caret-down\"></i></button>\n" +
                 "        <div class=\"dropdown-content\">\n" +
                 "            <a href=\"#cold_and_flu\">Cold and Flu</a>\n" +
                 "            <a href=\"#skincare\">Skincare</a>\n" +
@@ -214,7 +214,7 @@ public class ServletOrder extends HttpServlet {
                 "<h1>Confirm Order</h1>\n" +
                 "<div class=\"addressContainer\">\n" +
                 "  <form id=\"updateBasket\" method=\"post\"> \n" +
-                "  <p style=\"display: inline-block; margin-bottom: 0px;\"><b>Shipping Adress</b></p>\n" +
+                "  <p style=\"display: inline-block; margin-bottom: 0px;\"><b>Shipping Address</b></p>\n" +
                 "  <p>Name<br>Shipping Address<br>Payment</p>\n" +
                 "  <input type=\"submit\" class=\"buttonStyle\" value=\"Edit Details\">\n" +
                 "  </form>\n" +
@@ -223,7 +223,7 @@ public class ServletOrder extends HttpServlet {
                 "  <form action=\"/order\" method=\"post\">\n" +
                 "    <input type=\"submit\" class=\"buttonStyle\" value=\"Confirm Order\">\n" +
                 "  </form>\n" +
-                "</div>\n" +
+                "  </div>\n" +
                 "</div>\n";
 
     }
