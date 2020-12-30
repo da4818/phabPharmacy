@@ -208,6 +208,7 @@ public class LoginDAO {
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
             Statement s=c.createStatement();
+            s.executeUpdate("truncate table logged");
             String sql = "INSERT INTO LOGGED (ID,FNAME,LNAME,EMAIL,PASSW,CARDNO,POSTCODE) SELECT ID,FNAME,LNAME,EMAIL,PASSW,CARDNO,POSTCODE FROM USERS WHERE ID=" +loggedInUser.id +";";
             s.executeUpdate(sql);
             s.close();

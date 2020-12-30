@@ -12,13 +12,18 @@ public class ServletHome extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Creating/resetting database tables if necessary //
-        //LoginDAO.resetTable("logged");
+        /*LoginDAO.resetTable("logged");
         LoginDAO.createTable("users");
         LoginDAO.createTable("basket");
         LoginDAO.createTable("products");
-        LoginDAO.createTable("logged");
+        LoginDAO.createTable("logged");*/
         resp.setContentType("text/html");
         // Finds size of items in basket to display on navigation bar. This happens for each servlet subpage
+    }
+    @Override
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    }
+    public String htmlOutput() {
         boolean userLoggedIn = LoginDAO.checkLoggedIn();
         String userMessage = "test";
         User cUser = null;
@@ -28,8 +33,10 @@ public class ServletHome extends HttpServlet {
         }
         int basketSize = LoginDAO.getBasketSize();
         String basketSizeOut = "";
-        if (basketSize != 0){ basketSizeOut = String.valueOf(basketSize);}
-        resp.getWriter().write("<!DOCTYPE html>\n" +
+        if (basketSize != 0) {
+            basketSizeOut = String.valueOf(basketSize);
+        }
+        return "<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "<head>\n" +
                 "    <meta charset=\"utf-8\">\n" +
@@ -136,10 +143,9 @@ public class ServletHome extends HttpServlet {
                 "    }\n" +
                 "</script>\n" +
                 "</body>\n" +
-                "</html>");
+                "</html>";
     }
 
-    @Override
-    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    }
+
+
 }
