@@ -18,6 +18,8 @@ public class ServletHome extends HttpServlet {
         LoginDAO.createTable("products");
         LoginDAO.createTable("logged");*/
         resp.setContentType("text/html");
+        String HTML=htmlOutput();
+        resp.getWriter().write(HTML);
         // Finds size of items in basket to display on navigation bar. This happens for each servlet subpage
     }
     @Override
