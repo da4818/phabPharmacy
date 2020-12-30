@@ -27,7 +27,7 @@ public class ServletLogin extends HttpServlet {
         if(LoginDAO.validateLogin(em,pw)){
             User currentUser = LoginDAO.getUser(em,pw); //If the login entries pass the validation checks
             LoginDAO.setLoggedInUser(currentUser);
-            resp.getWriter().write("<h2>Welcome back, " + currentUser.fname + "!"+currentUser.id+"</h2>");
+            resp.getWriter().write("<h2>Welcome back, " + currentUser.fname + "!</h2>");
 
         }
         else if (em.isEmpty() || pw.isEmpty()){

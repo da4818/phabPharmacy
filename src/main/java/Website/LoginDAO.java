@@ -147,7 +147,6 @@ public class LoginDAO {
             PreparedStatement ps=c.prepareStatement("select * from users where email=? and passw=?");
             ps.setString(1,email_in);
             ps.setString(2,pass_in);
-
             ResultSet rs=ps.executeQuery();
 
             while(rs.next()){

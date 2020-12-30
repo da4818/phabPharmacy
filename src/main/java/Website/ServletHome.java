@@ -33,7 +33,7 @@ public class ServletHome extends HttpServlet {
                 "<head>\n" +
                 "    <meta charset=\"utf-8\">\n" +
                 "    <meta name=\"viewport\" content=\"width=device-width\">\n" +
-                "    <title>Home</title>\n" +
+                "    <title>Home"+userLoggedIn+"</title>\n" +
                 "    <!-- Import Icon Library -->\n" +
                 "    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">\n" +
                 "    <!-- Creates navigation bar -->\n" +
