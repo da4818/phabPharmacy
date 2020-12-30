@@ -151,6 +151,7 @@ public class LoginDAO {
             ResultSet rs=ps.executeQuery();
 
             while(rs.next()){
+                u.id = rs.getInt("id");
                 u.fname = rs.getString("fname");
                 u.lname = rs.getString("name");
                 u.email = rs.getString("email");
@@ -189,6 +190,7 @@ public class LoginDAO {
             Statement s=c.createStatement();
             ResultSet rs=s.executeQuery("select * from logged;");
             while(rs.next()){
+                u.id = rs.getInt("id");
                 u.fname = rs.getString("fname");
                 u.lname = rs.getString("name");
                 u.email = rs.getString("email");
@@ -201,23 +203,15 @@ public class LoginDAO {
         }catch(Exception e){System.out.println(e);}
         return u;
     }
-    public static void setLoggedInUser(User loggedInuser){
+    public static void setLoggedInUser(User loggedInUser){
         try{
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            Statement s = c.createStatement();
-            //s.executeUpdate("truncate table logged;");
-            PreparedStatement ps=c.prepareStatement("insert into logged (fname,lname,email,passw,cardno,postcode) values(?,?,?,?,?,?)");
-            ps.setString(1,loggedInuser.fname);
-            ps.setString(2,loggedInuser.lname);
-            ps.setString(3, loggedInuser.email);
-            ps.setString(4,loggedInuser.password);
-            ps.setString(5, loggedInuser.cardno);
-            ps.setString(6, loggedInuser.postcode);
-            ps.executeUpdate();
+            Statement s=c.createStatement();
+            String sql = "INSERT INTO LOGGED (ID,FNAME,LNAME,EMAIL,PASSW,CARDNO,POSTCODE) SELECT ID,FNAME,LNAME,EMAIL,PASSW,CARDNO,POSTCODE FROM USERS WHERE ID=" +loggedInUser.id +";";
+            s.executeUpdate(sql);
             s.close();
-            ps.close();
             c.close();
         }catch(Exception e){System.out.println(e);}
     }
