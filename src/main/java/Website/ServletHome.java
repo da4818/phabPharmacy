@@ -19,9 +19,9 @@ public class ServletHome extends HttpServlet {
         LoginDAO.createTable("logged");
         resp.setContentType("text/html");
         // Finds size of items in basket to display on navigation bar. This happens for each servlet subpage
-        int userLoggedIn = LoginDAO.tableSize("logged");
+        boolean userLoggedIn = LoginDAO.checkLoggedIn();
         String userMessage = "test";
-        if (userLoggedIn == 1) {
+        if (userLoggedIn == true) {
             User cUser = LoginDAO.getCurrentUser();
             userMessage = cUser.fname;
         }

@@ -214,6 +214,20 @@ public class LoginDAO {
             c.close();
         }catch(Exception e){System.out.println(e);}
     }
+    public static boolean checkLoggedIn(){
+        boolean status=false;
+        try{
+            String dbUrl = System.getenv("JDBC_DATABASE_URL");
+            Class.forName("org.postgresql.Driver");
+            Connection c = DriverManager.getConnection(dbUrl);
+            Statement s=c.createStatement();
+            ResultSet rs=s.executeQuery("select * from logged");
+            status=rs.next(); //Status is now true if an entry with the email and password exists
+            c.close();
+
+        }catch(Exception e){System.out.println(e);}
+        return status;
+    }
 
     // Gets product attributes to display on browse page
     public static Product getProduct(int n){
