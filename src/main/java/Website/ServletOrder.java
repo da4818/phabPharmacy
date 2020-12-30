@@ -72,7 +72,7 @@ public class ServletOrder extends HttpServlet {
                 "</script>\n" +
                 "</body>\n" +
                 "</html>");
-        LoginDAO.createTable("order");
+        LoginDAO.createTable("orders");
         LoginDAO.resetTable("basket");
     }
     public String htmlOutput(){

@@ -75,8 +75,8 @@ public class LoginDAO {
                         " LIMITED BOOLEAN NOT NULL)";
                 s.executeUpdate(sql);
             }
-            else if(tableName.equals("order")){
-                String sql ="CREATE TABLE ORDER " +
+            else if(tableName.equals("orders")){
+                String sql ="CREATE TABLE ORDERS " +
                         "(ID SERIAL PRIMARY KEY NOT NULL," +
                         " NAME TEXT NOT NULL, " +
                         " DESCRIPTION TEXT NOT NULL, " +
@@ -85,7 +85,7 @@ public class LoginDAO {
                         " SUBTOTAL TEXT NOT NULL, " +
                         " LIMITED BOOLEAN NOT NULL)";
                 s.executeUpdate(sql);
-                s1.executeUpdate("INSERT INTO ORDER(ID,NAME,DESCRIPTION,PRICE,QUANTITY,SUBTOTAL,LIMITED) SELECT ID,NAME,DESCRIPTION,PRICE,QUANTITY,SUBTOTAL,LIMITED FROM BASKET;");
+                s1.executeUpdate("INSERT INTO ORDERS (ID,NAME,DESCRIPTION,PRICE,QUANTITY,SUBTOTAL,LIMITED) SELECT ID,NAME,DESCRIPTION,PRICE,QUANTITY,SUBTOTAL,LIMITED FROM BASKET;");
             }
             else if(tableName.equals("logged")) {
                 String sql ="CREATE TABLE LOGGED " +
