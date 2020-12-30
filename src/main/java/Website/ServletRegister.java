@@ -41,8 +41,9 @@ public class ServletRegister extends HttpServlet {
         else{
             LoginDAO.addUser(fn,ln,em,pw,cn,ad);
             User currentUser = LoginDAO.getUser(em,pw);
-            resp.getWriter().write("<h2>Successful registration. Welcome, " + currentUser.fname + "</h2>");
             LoginDAO.setLoggedInUser(currentUser);
+            LoginDAO.resetTable("basket");
+            resp.getWriter().write("<h2>Successful registration. Welcome, " + currentUser.fname + "</h2>");
         }
     }
 

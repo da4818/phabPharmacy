@@ -256,6 +256,14 @@ public class ServletBrowse extends HttpServlet {
                 "        .tooltip:hover .tooltiptext {\n" +
                 "            visibility: visible;\n" +
                 "        }\n" +
+                "        .currentUser{\n" +
+                "           float: right;\n" +
+                "           font-size: 16px;\n" +
+                "           color: white;\n" +
+                "           text-align: center;\n" +
+                "           padding: 14px 16px;\n" +
+                "           text-decoration: none;\n" +
+                "        }\n" +
                 "    </style>\n" +
                 "\n" +
                 "</head>\n" +
