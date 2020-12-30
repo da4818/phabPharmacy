@@ -20,14 +20,13 @@ public class ServletHome extends HttpServlet {
         resp.setContentType("text/html");
         // Finds size of items in basket to display on navigation bar. This happens for each servlet subpage
         int userLoggedIn = LoginDAO.tableSize("logged");
-        String userMessage = "";
-        if (userLoggedIn !=0) {
+        String userMessage = "test";
+        if (userLoggedIn == 1) {
             User cUser = LoginDAO.getCurrentUser();
             userMessage = cUser.fname;
         }
-            //userMessage  = "<a style=\"float: right; font-size: 15px;\">" + cUser.fname + "<i class=\"fa fa-fw fa-user\"></i></a>";}
-            int basketSize = LoginDAO.getBasketSize();
-            String basketSizeOut = "";
+        int basketSize = LoginDAO.getBasketSize();
+        String basketSizeOut = "";
         if (basketSize != 0){ basketSizeOut = String.valueOf(basketSize);}
         resp.getWriter().write("<!DOCTYPE html>\n" +
                 "<html>\n" +
