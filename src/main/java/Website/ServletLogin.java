@@ -34,7 +34,7 @@ public class ServletLogin extends HttpServlet {
             resp.getWriter().write("<h2>Incomplete fields, please enter all the information.</h2>");
         }
         else{
-            resp.getWriter().write("<h2>Wrong email or password<h2>");
+            resp.getWriter().write("<h2>Wrong email or password, please try again.</h2>");
         }
     }
 
@@ -158,14 +158,13 @@ public class ServletLogin extends HttpServlet {
                 "</div>\n" +
                 "\n" +
                 "<h1>Login</h1>\n" +
-                "<p> Login below. If you haven't got an account, <a href=\"https://phabpharmacy.herokuapp.com/register\"> register here.</a> </p>\n" +
+                "<p> Login below. If you haven't got an account, <a href=\"https://phabpharmacy.herokuapp.com/register\"> register here.</a></p>\n" +
                 "\n" +
                 "<form name=\"loginForm\" action=\"login\" method=\"post\">\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"email\" placeholder=\"Email Address*\"><br>\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"pass\" placeholder=\"Password*\"><br>\n" +
                 "        <input type=\"submit\" class=\"buttonStyle\" value=\"Submit\">\n" +
                 "</form>\n" +
-                "<p id=\"demo\"></p>\n" +
                 "<script>\n" +
                 "    function refreshPage(){\n" +
                 "        location.reload()\n" +

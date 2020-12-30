@@ -72,7 +72,7 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
-        .button2{
+        .buttonStyle{
             background-color: #00B8C5;
             border: none;
             color: white;
@@ -102,19 +102,26 @@
     </div>
     <a style="background-color: #00B8C5"><i class="fa fa-fw fa-user"></i>Login</a>
     <a href="https://phabpharmacy.herokuapp.com/register"><i class="fa fa-fw fa-user-plus"></i>Register</a>
-    <a style="float: right;" href="https://phabpharmacy.herokuapp.com/basket" class="fa fa-fw fa-shopping-basket"><b id="basket"></b></a>
+    <a href="https://phabpharmacy.herokuapp.com/basket" style="width: 35px;" class="fa fa-fw fa-shopping-basket"><b style="font-family: Arial;" id="basket">basketNumber</b></a>
+    <div class="currentUser"><!--current user's name--><i class="fa fa-fw fa-user"></i></div>
 </div>
 
 <h1><center>Login</center></h1>
-<p> Login below. If you haven't got an account, <a href="https://phabpharmacy.herokuapp.com/register"> register here.</a> </p>
+<p> Login below. If you haven't got an account, <a href="https://phabpharmacy.herokuapp.com/register">register here.</a></p>
 
-<form name="loginForm" action="ServletLogged" method="post">
+<form name="loginForm" action="login" method="post">
         <input type="text" size="30" class="form-control" name="email" placeholder="Email Address*"><br>
         <input type="text" size="30" class="form-control" name="pass" placeholder="Password*"><br>
-        <input type="submit" class="button2" value="Submit">
+        <input type="submit" class="buttonStyle" value="Submit">
 </form>
-<p id="demo"></p>
+<%-- doPost response
+<h2>Welcome back, " + currentUser.fname + "!</h2>
+<h2>Incomplete fields, please enter all the information.</h2>
+<h2>Wrong email or password, please try again.</h2>--%>
 <script>
+    function refreshPage(){
+        location.reload()
+    }
     function redirectBrowse(){
         window.location.href="https://phabpharmacy.herokuapp.com/browse"
     }

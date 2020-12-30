@@ -21,14 +21,14 @@ public class ServletOrder extends HttpServlet {
         Double totalBasket = LoginDAO.getBasketTotal();
         String total = df.format(totalBasket);
         resp.getWriter().write("<div class=\"addressContainer\">\n" +
-                "  <form id=\"updateBasket\" method=\"post\"> \n" +
+                "  <form id=\"updateBasket\" action=\"order\" method=\"post\"> \n" +
                 "  <p style=\"display: inline-block; margin-bottom: 0px;\"><b>Shipping Address</b></p>\n" +
                 "  <p>Name<br>Shipping Address<br>Payment</p>\n" +
                 "  <button href=\"https://phabpharmacy.herokuapp.com/basket\" class=\"buttonStyle\">Edit Details</button>\n" +
                 "  </form>\n" +
                 "  <div class=\"confirmContainer\">\n" +
                 "  <p>Total Cost: <b>£" + total +"</b></p>\n" +
-                "  <form action=\"/order\" method=\"post\">\n" +
+                "  <form action=\"order\" method=\"post\">\n" +
                 "    <input type=\"submit\" class=\"buttonStyle\" value=\"Confirm Order\">\n" +
                 "  </form>\n" +
                 "  </div>\n" +
@@ -92,9 +92,7 @@ public class ServletOrder extends HttpServlet {
                 "    <meta charset=\"utf-8\">\n" +
                 "    <meta name=\"viewport\" content=\"width=device-width\">\n" +
                 "    <title>Confirm Order</title>\n" +
-                "    <!-- Import Icon Library -->\n" +
                 "    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">\n" +
-                "    <!-- Creates navigation bar -->\n" +
                 "    <style>\n" +
                 "        body {font-family: Arial, Helvetica, sans-serif;}\n" +
                 "        .navbar {\n" +
@@ -206,20 +204,6 @@ public class ServletOrder extends HttpServlet {
                 "        .tooltip{\n" +
                 "          position: relative;\n" +
                 "          display: inline;\n" +
-                "        }\n" +
-                "        .tooltip .tooltiptext {\n" +
-                "          visibility: hidden;\n" +
-                "          width: 120px;\n" +
-                "          background-color: black;\n" +
-                "          color: #fff;\n" +
-                "          text-align: center;\n" +
-                "          border-radius: 6px;\n" +
-                "          padding: 5px 0px;\n" +
-                "          position: absolute;\n" +
-                "          z-index: 1;\n" +
-                "        }\n" +
-                "        .tooltip:hover .tooltiptext {\n" +
-                "          visibility: visible;\n" +
                 "        }\n" +
                 "    </style>\n" +
                 "</head>\n" +

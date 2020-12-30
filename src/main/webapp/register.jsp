@@ -74,7 +74,7 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
-        .button2{
+        .buttonStyle{
             background-color: #00B8C5;
             border: none;
             color: white;
@@ -87,7 +87,6 @@
             cursor: pointer;
         }
     </style>
-
 </head>
 <body>
 <div class="navbar">
@@ -105,10 +104,10 @@
     </div>
     <a href="https://phabpharmacy.herokuapp.com/login"><i class="fa fa-fw fa-user"></i>Login</a>
     <a style="background-color: #00B8C5"><i class="fa fa-fw fa-user-plus"></i>Register</a>
-    <a style="float: right;" href="https://phabpharmacy.herokuapp.com/basket" class="fa fa-fw fa-shopping-basket"><b id="basket"></b></a>
+    <a href="https://phabpharmacy.herokuapp.com/basket" style="width: 35px;" class="fa fa-fw fa-shopping-basket"><b id="basket"></b></a>
+    <div class="currentUser"><!--current user's name--><i class="fa fa-fw fa-user"></i></div>
 </div>
-
-<h1><center>Register</center></h1>
+<h1>>Register</h1>
 <p> Register below. If you already have an account, <a href="https://phabpharmacy.herokuapp.com/login"> login here.</a>
     <form name="registerForm" action="registration_status" method="post">
         <input type="text" size="30" class="form-control" name="fname" placeholder="First Name*"><br>
@@ -120,9 +119,13 @@
         <input type="text" size="30" class="form-control" name="sortcode" placeholder="Sort Code*"><br>
         <input type="text" size="30" class="form-control" name="cardno" placeholder="Card Number*"><br>
         <input type="text" size="30" class="form-control" name="address" placeholder="Postcode*"><br>
-        <input type="submit" class="button2" value="Submit">
+        <input type="submit" class="buttonStyle" value="Submit">
     </form>
-<p id="demo"></p>
+<%-- doPost response
+<h2>There is an existing account with the email entered. Please log in.</h2>
+<h2>Incomplete fields, please enter all the information.</h2>
+<h2>Passwords don't match, please try again.</h2>
+<h2>Successful registration. Welcome, " + currentUser.fname + "!</h2>--%>
 
 <script>
     function redirectBrowse(){

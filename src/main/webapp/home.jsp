@@ -101,11 +101,11 @@
     </div>
     <a href="https://phabpharmacy.herokuapp.com/login"><i class="fa fa-fw fa-user"></i>Login</a>
     <a href="https://phabpharmacy.herokuapp.com/register"><i class="fa fa-fw fa-user-plus"></i>Register</a>
-    <a style="float: right;" href="https://phabpharmacy.herokuapp.com/basket" class="fa fa-fw fa-shopping-basket"><b id="basket"></b></a>
-    <div class="currentUser">name<i class="fa fa-fw fa-user"></i></div>
+    <a href="https://phabpharmacy.herokuapp.com/basket" style="width: 35px;" class="fa fa-fw fa-shopping-basket"><b id="basket"></b></a>
+    <div class="currentUser"><!--current user's name--><i class="fa fa-fw fa-user"></i></div>
 </div>
 <h1><center> PhabPharmacy </center></h1>
-
+<h2><center> Welcome to the PhabPharmacy's home page!<br>Please login or register to create an account.</center></h2>
 <script>
     function redirectBrowse(){
         window.location.href="https://phabpharmacy.herokuapp.com/browse"

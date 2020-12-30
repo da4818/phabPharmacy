@@ -36,12 +36,12 @@ public class ServletRegister extends HttpServlet {
             resp.getWriter().write("<h2>Incomplete fields, please enter all the information.</h2>");
         }
         else if (!pw.equals(vpw)){
-            resp.getWriter().write("<h2> Passwords don't match. Please try again.</h2>");
+            resp.getWriter().write("<h2> Passwords don't match, please try again.</h2>");
         }
         else{
             LoginDAO.addUser(fn,ln,em,pw,cn,ad);
             User currentUser = LoginDAO.getUser(em,pw);
-            resp.getWriter().write("<h2>Succesful registration. Welcome, " + currentUser.fname + "</h2>");
+            resp.getWriter().write("<h2>Successful registration. Welcome, " + currentUser.fname + "</h2>");
             LoginDAO.setLoggedInUser(currentUser);
         }
     }
@@ -63,9 +63,7 @@ public class ServletRegister extends HttpServlet {
                 "    <meta charset=\"utf-8\">\n" +
                 "    <meta name=\"viewport\" content=\"width=device-width\">\n" +
                 "    <title>Register</title>\n" +
-                "    <!-- Import Icon Library -->\n" +
                 "    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">\n" +
-                "    <!-- Creates navigation bar -->\n" +
                 "    <style>\n" +
                 "        body {font-family: Arial, Helvetica, sans-serif;}\n" +
                 "        .navbar {\n" +
@@ -138,7 +136,6 @@ public class ServletRegister extends HttpServlet {
                 "            cursor: pointer;\n" +
                 "        }\n" +
                 "    </style>\n" +
-                "\n" +
                 "</head>\n" +
                 "<body>\n" +
                 "<div class=\"navbar\">\n" +
@@ -173,8 +170,6 @@ public class ServletRegister extends HttpServlet {
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"postcode\" placeholder=\"Postcode*\"><br>\n" +
                 "        <input type=\"submit\" class=\"buttonStyle\" value=\"Submit\">\n" +
                 "    </form>\n" +
-                "<p id=\"demo\"></p>\n" +
-                "\n" +
                 "<script>\n" +
                 "    function redirectBrowse(){\n" +
                 "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +

@@ -33,7 +33,7 @@ public class ServletBasket extends HttpServlet {
                 int max = b.limited ? 1 : 5;
                 resp.getWriter().write("<section>" +
                         "<div class=\"basketContainer\" id=\"cont1\">\n" +
-                        "  <p style=\"display: inline-block;\"><b>" + b.name + "</b><br>" + b.description + "<br>£<output class=\\\"cost\\\" type=\"number\">" + price + "</output></p>\n" +
+                        "  <p style=\"display: inline-block;\"><b>" + b.name + "</b><br>" + b.description + "<br>£<output type=\"number\">" + price + "</output></p>\n" +
                         "  <div class=\"quant\">\n" +
                         "    <form id=\"updateBasket\" action=\"basket\" method=\"post\"> \n" +
                         "    <label for=\"itemQuantity\">Qty</label><br>\n" +
@@ -44,9 +44,7 @@ public class ServletBasket extends HttpServlet {
                         "    <button name=\"update\" type=\"submit\" class=\"buttonStyle\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button>\n" +
                         "    </form>\n" +
                         "  </div>\n" +
-                        "  <div class=\"price\">\n" +
-                        "    <p>£<output></output>" + subtotal + "</p>\n" +
-                        "  </div>\n" +
+                        "  <div class=\"price\"><p>£<output></output>" + subtotal + "</p></div>\n" +
                         "</div>\n" +
                         "</section>");
             }
@@ -93,19 +91,17 @@ public class ServletBasket extends HttpServlet {
                 int max = b.limited ? 1 : 5;
                 resp.getWriter().write("<section>" +
                         "<div class=\"basketContainer\" id=\"cont1\">\n" +
-                        "  <p style=\"display: inline-block;\"><b>" + b.name + "</b><br>" + b.description + "<br>£<output class=\\\"cost\\\" type=\"number\">" + price + "</output></p>\n" +
+                        "  <p style=\"display: inline-block;\"><b>" + b.name + "</b><br>" + b.description + "<br>£<output type=\"number\">" + price + "</output></p>\n" +
                         "  <div class=\"quant\">\n" +
-                        "    <form id=\"updateBasket\" action=\"basket\" method=\"post\"> \n" +
+                        "    <form id=\"updateBasket\" action=\"basket\" method=\"post\">\n" +
                         "    <label for=\"itemQuantity\">Qty</label><br>\n" +
-                        "    <input type=\"number\" name=\"itemQuantity\" class=\"quantity\" size=\"3\" min=\"1\" max=\"" + max + "\" value=\"" + b.quantity + "\">\n" +
+                        "    <input type=\"number\" id=\"itemQuantity\" name=\"itemQuantity\" class=\"quantity\" size=\"3\" min=\"1\" max=\"" + max + "\" value=\"" + b.quantity + "\">\n" +
                         "    <input name=\"basketNumber\" type=\"hidden\"value=\"" + b.name + "\">\n" +
                         "    <input name=\"update\" style=\"margin-left: 0px;\" type=\"submit\" class=\"buttonStyle\" value=\"Update\">\n" +
                         "    <button name=\"update\" type=\"submit\" class=\"buttonStyle\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button>\n" +
                         "    </form>\n" +
                         "  </div>\n" +
-                        "  <div class=\"price\">\n" +
-                        "    <p>£<output></output>" + subtotal + "</p>\n" +
-                        "  </div>\n" +
+                        "  <div class=\"price\"><p>£<output></output>" + subtotal + "</p></div>\n" +
                         "</div>\n" +
                         "</section>");
             }
@@ -137,9 +133,7 @@ public class ServletBasket extends HttpServlet {
                 "    <meta charset=\"utf-8\">\n" +
                 "    <meta name=\"viewport\" content=\"width=device-width\">\n" +
                 "    <title>Basket</title>\n" +
-                "    <!-- Import Icon Library -->\n" +
                 "    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">\n" +
-                "    <!-- Creates navigation bar -->\n" +
                 "    <style>\n" +
                 "        body {font-family: Arial, Helvetica, sans-serif;}\n" +
                 "        .navbar {\n" +
@@ -153,9 +147,6 @@ public class ServletBasket extends HttpServlet {
                 "            color: white;\n" +
                 "            text-decoration: none;\n" +
                 "            font-size: 17px;\n" +
-                "        }\n" +
-                "        .active {\n" +
-                "            background-color: #51B5C2;\n" +
                 "        }\n" +
                 "        @media screen and (max-width: 500px) {\n" +
                 "            .navbar a {\n" +
@@ -235,7 +226,7 @@ public class ServletBasket extends HttpServlet {
                 "            height: 50px;\n" +
                 "            padding-left: 20px;\n" +
                 "            padding-top: 5px;\n" +
-                "            border: 1px solid black" +
+                "            border: 1px solid black\n" +
                 "        }\n" +
                 "        div.price {\n" +
                 "            position: absolute;\n" +

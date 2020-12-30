@@ -29,9 +29,6 @@
             text-decoration: none;
             font-size: 17px;
         }
-        .active {
-            background-color: #51B5C2;
-        }
         @media screen and (max-width: 500px) {
             .navbar a {
                 float: none;
@@ -77,30 +74,50 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
-        .container{
+        .currentUser{
+            float: right;
+            font-size: 16px;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .totalContainer{
             position: relative;
-            width: auto;
-            height: 100px;
+            loat: right;
+            width: 170px;
+            height: 70px;
+            border: 1px solid black;
+            margin: 0px 50px 0px 0px;
+            padding: 0px 0px 10px 20px;
+        }
+        .basketContainer{
+            position: relative;
+            width: 350px;
+            height: 140px;
             border: 1px solid black;
             margin: 5px;
             padding: 0px 0px 0px 20px;
         }
         div.quant {
             position: absolute;
-            top: -1px;
-            right: 150px;
-            width: 100px;
-            height: 100px;
+            bottom: -1px;
+            left: -1px;
+            width: 350px;
+            height: 50px;
+            padding-left: 20px;
+            padding-top: 5px;
+            border: 1px solid black
         }
         div.price {
             position: absolute;
-            top: -1px;
-            right: 50px;
-            width: 70px;
-            height: 100px;
+            bottom: -1px;
+            right: -1px;
+            width: 80px;
+            height: 45px;
         }
 
-        .button2{
+        .buttonStyle{
             background-color: #51B5C2;
             border: none;
             color: white;
@@ -135,40 +152,9 @@
         }
     </style>
     <script>
-        function total(){
-            var num=document.getElementById("number1").value;
-            document.getElementById("basket").innerHTML = num
-            document.getElementById("basket").style.fontFamily ="Arial, Helvetica, sans-serif";
+        function redirectBrowse(){
+            window.location.href="https://phabpharmacy.herokuapp.com/browse"
         }
-        function showPrice(){
-            var c = document.getElementsByClassName("cost");
-            var q = document.getElementsByClassName("quantity");
-            var d = document.getElementsByClassName("demo");
-            for(var i=0;i<c.length;i++){
-                d[i].innerHTML = parseFloat(c[i].value).toFixed(2)*parseFloat(q[i].value).toFixed(2)
-                d[i].innerHTML=parseFloat(d[i].innerHTML).toFixed(2)
-            }
-        }
-
-        function loadPrice(){
-            var c = document.getElementsByClassName("cost");
-            var q = document.getElementsByClassName("quantity");
-            var d = document.getElementsByClassName("demo");
-            for(var i=0;i<c.length;i++){
-                d[i].innerHTML = parseFloat(c[i].value).toFixed(2)*parseFloat(q[i].value).toFixed(2)
-                d[i].innerHTML=parseFloat(d[i].innerHTML).toFixed(2)
-            }
-        }
-        window.onload = loadPrice;
-        function passVal(n){
-            removeItem(n);
-        }
-        function removeItem(n){
-            var q = document.getElementsByClassName("quantity");
-            q[n].value = 0;
-            showPrice();
-        }
-
     </script>
 </head>
 <body>
@@ -187,25 +173,34 @@
     </div>
     <a href="https://phabpharmacy.herokuapp.com/login"><i class="fa fa-fw fa-user"></i>Login</a>
     <a href="https://phabpharmacy.herokuapp.com/register"><i class="fa fa-fw fa-user-plus"></i>Register</a>
-    a style="float: right; background-color: #00B8C5;" class="fa fa-fw fa-shopping-basket"><b id="basket"></b></a><
+    <a href="https://phabpharmacy.herokuapp.com/basket" style="background-color: #00B8C5; width: 35px;" class="fa fa-fw fa-shopping-basket"><b style="font-family: Arial;" id="basket">basketSize</b></a>
+    <div class="currentUser"><!--current user's name--><i class="fa fa-fw fa-user"></i></div>
 </div>
 <h1>Shopping Basket</h1>
 
-<pre>
-<script>
-  for(var i=0;i<3;i++){
-      document.write("<style>p{font-family: Arial, Helvetica, sans-serif;}</style>"+
-          "<div class=\"container\" +id=\"cont1\">"+
-          "<p style=\"display: inline-block;\"><b>Vicks Vaporub</b><br>100g<br>£<output class=\"cost\" type=\"number\">4.50</output></p>" +
-          "<div class=\"quant\">" +
-          "<p>Quantity</p><input class=\"quantity\" onclick=\"showPrice()\" type=\"number\" min=\"1\" max=\"5\" value=\"2\"><button onclick=\"passVal("+i+")\" class=\"button2\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button>" +
-          "</div>" +
-          "<div class=\"price\">" +
-          "<p>Price<br><br>£<output class=\"demo\"></output></p>" +
-          "</div>"+
-          "</div>");
-  }
-</script>
-</pre>
+<div class="totalContainer">
+    <p style="padding-top: 5px;">Total: £<!--total of basket--><br><button href="https://phabpharmacy.herokuapp.com/order" class="buttonStyle">Proceed to Checkout</button></p>
+</div>
+<!-- Repeat function for number of items in basket -->
+<section>
+    "<div class="basketContainer" id="cont1">
+         <p style="display: inline-block;"><b><!--basket item name--></b><br><!--basket item description--><br>£<output type="number"><!--basket item price --></output></p>
+         <div class="quant">
+             <form id="updateBasket" action="basket" method="post">
+                 <label for="itemQuantity">Qty</label><br>
+                 <input type="number" id="itemQuantity" name="itemQuantity" class="quantity" size="3" min="1" max="<!-- max item quantity-->" value="basketQuantity">
+                 <input name="basketNumber" type="hidden"value="basketName">
+                 <input name="update" style="margin-left: 0px;" type="submit" class="buttonStyle" value="Update">
+                 <button name="update" type="submit" class="buttonStyle"><i class="fa fa-trash" aria-hidden="true"></i></button>
+             </form>
+         </div>
+        <div class="price"><p>£<output></output><!--subtotal for basket item (price*quantity)--></p></div>
+    </div>
+</section>
+<!-- If Basket is empty -->
+<p>Empty Basket</p>
+<div class="totalContainer">
+    <p>Total: £0.00</p>
+</div>
 </body>
 </html>
