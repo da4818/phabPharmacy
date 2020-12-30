@@ -103,6 +103,25 @@ public class LoginDAO {
             c.close();
         }catch(Exception e){System.out.println(e);}
     }
+    // Display size of table - i.e. number of entries - used in displaying all the products in the browse page
+    public static int tableSize(String tableName){
+        int n=0;
+        try{
+            String dbUrl = System.getenv("JDBC_DATABASE_URL");
+            Class.forName("org.postgresql.Driver");
+            Connection c = DriverManager.getConnection(dbUrl);
+            String sql = "select count(*) from '" + tableName + "';";
+            Statement s = c.createStatement();
+            ResultSet rs = s.executeQuery(sql);
+            while(rs.next()){
+                String p = rs.getString(1);
+                n=Integer.parseInt(p);
+            }
+            s.close();
+            c.close();
+        }catch(Exception e){System.out.println(e);}
+        return n;
+    }
     // Functions to execute queries, or amend to the database content //
     // Checking if user is logging in with an existing account
     public static boolean validateLogin(String email_in,String pass_in){
@@ -137,7 +156,7 @@ public class LoginDAO {
         }catch(Exception e){System.out.println(e);}
         return status;
     }
-
+// USER FUNCTIONS //
     public static User getUser(String email_in,String pass_in){
         User u = new User();
         try{
@@ -201,7 +220,7 @@ public class LoginDAO {
         }catch(Exception e){System.out.println(e);}
         return u;
     }
-    public static void setLoggedInUser(User loggedInuser){
+    public static void setLoggedInUser(User loggedInUser){
         try{
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
@@ -209,12 +228,12 @@ public class LoginDAO {
             Statement s = c.createStatement();
             //s.executeUpdate("truncate table logged;");
             PreparedStatement ps=c.prepareStatement("insert into logged (fname,lname,email,passw,cardno,postcode) values(?,?,?,?,?,?)");
-            ps.setString(1,loggedInuser.fname);
-            ps.setString(2,loggedInuser.lname);
-            ps.setString(3, loggedInuser.email);
-            ps.setString(4,loggedInuser.password);
-            ps.setString(5, loggedInuser.cardno);
-            ps.setString(6, loggedInuser.postcode);
+            ps.setString(1,loggedInUser.fname);
+            ps.setString(2,loggedInUser.lname);
+            ps.setString(3, loggedInUser.email);
+            ps.setString(4,loggedInUser.password);
+            ps.setString(5, loggedInUser.cardno);
+            ps.setString(6, loggedInUser.postcode);
             ps.executeUpdate();
             s.close();
             ps.close();
@@ -222,6 +241,7 @@ public class LoginDAO {
         }catch(Exception e){System.out.println(e);}
     }
 
+    // PRODUCT/BROWSE FUNCTIONS //
     // Gets product attributes to display on browse page
     public static Product getProduct(int n){
         Product p = new Product();
@@ -245,7 +265,7 @@ public class LoginDAO {
         }catch(Exception e){System.out.println(e);}
         return p;
     }
-
+    // BASKET FUNCTIONS //
     // Adds product to a basket table
     public static void addToBasket(Product p_in, int quantity_in){
         try{
@@ -329,25 +349,6 @@ public class LoginDAO {
 
             s.close();
         }catch(Exception e){System.out.println(e);}
-    }
-    // Display size of table - i.e. number of entries - used in displaying all the products in the browse page
-    public static int tableSize(String tableName){
-        int n=0;
-        try{
-            String dbUrl = System.getenv("JDBC_DATABASE_URL");
-            Class.forName("org.postgresql.Driver");
-            Connection c = DriverManager.getConnection(dbUrl);
-            String sql = "select count(*) from " + tableName;
-            Statement s = c.createStatement();
-            ResultSet rs = s.executeQuery(sql);
-            while(rs.next()){
-                String p = rs.getString(1);
-                n=Integer.parseInt(p);
-            }
-            s.close();
-            c.close();
-        }catch(Exception e){System.out.println(e);}
-        return n;
     }
     // To return the number of items in the basket - to be displayed on the navigation bar header
     public static int getBasketSize(){
