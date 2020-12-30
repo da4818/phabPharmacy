@@ -74,6 +74,14 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
+        .currentUser{
+        float: right;
+        font-size: 16px;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        }
     </style>
 
 </head>
@@ -94,6 +102,7 @@
     <a href="https://phabpharmacy.herokuapp.com/login"><i class="fa fa-fw fa-user"></i>Login</a>
     <a href="https://phabpharmacy.herokuapp.com/register"><i class="fa fa-fw fa-user-plus"></i>Register</a>
     <a style="float: right;" href="https://phabpharmacy.herokuapp.com/basket" class="fa fa-fw fa-shopping-basket"><b id="basket"></b></a>
+    <div class="currentUser">name<i class="fa fa-fw fa-user"></i></div>
 </div>
 <h1><center> PhabPharmacy </center></h1>
 
