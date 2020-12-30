@@ -85,7 +85,7 @@ public class LoginDAO {
                         " SUBTOTAL TEXT NOT NULL, " +
                         " LIMITED BOOLEAN NOT NULL)";
                 s.executeUpdate(sql);
-                s1.executeUpdate("INSERT INTO ORDER(ID,NAME,DESCRIPTION,PRICE,QUANTITY,SUBTOTAL,LIMITED) SELECT * FROM BASKET;");
+                s1.executeUpdate("INSERT INTO ORDER(ID,NAME,DESCRIPTION,PRICE,QUANTITY,SUBTOTAL,LIMITED) SELECT ID,NAME,DESCRIPTION,PRICE,QUANTITY,SUBTOTAL,LIMITED FROM BASKET;");
             }
             else if(tableName.equals("logged")) {
                 String sql ="CREATE TABLE LOGGED " +
