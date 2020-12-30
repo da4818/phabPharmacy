@@ -125,7 +125,7 @@ public class ServletHome extends HttpServlet {
                 "    <a href=\"https://phabpharmacy.herokuapp.com/login\"><i class=\"fa fa-fw fa-user\"></i>Login</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" style=\"width: 35px;\" class=\"fa fa-fw fa-shopping-basket\"><b style=\"font-family: Arial;\" id=\"basket\">" + basketSizeOut + "</b></a>\n" +
-                "<a style=\"float: right; font-size: 15px;\">" + userMessage + "<i class=\"fa fa-fw fa-user\"></i></a>\n" +
+                "    <div class=\"currentUser\">" + userMessage + "<i class=\"fa fa-fw fa-user\"></i></a>\n</div>\n" +
                 "</div>\n" +
                 "<h1><center>PhabPharmacy</center></h1>\n" +
                 "<h2><center> Welcome to the PhabPharmacy's home page!<br>Please login or register to create an account.</center></h2>\n" +
