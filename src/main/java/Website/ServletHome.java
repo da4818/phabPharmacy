@@ -21,8 +21,9 @@ public class ServletHome extends HttpServlet {
         // Finds size of items in basket to display on navigation bar. This happens for each servlet subpage
         boolean userLoggedIn = LoginDAO.checkLoggedIn();
         String userMessage = "test";
+        User cUser = null;
         if (userLoggedIn == true) {
-            User cUser = LoginDAO.getCurrentUser();
+            cUser = LoginDAO.getCurrentUser();
             userMessage = cUser.fname;
         }
         int basketSize = LoginDAO.getBasketSize();
@@ -33,7 +34,7 @@ public class ServletHome extends HttpServlet {
                 "<head>\n" +
                 "    <meta charset=\"utf-8\">\n" +
                 "    <meta name=\"viewport\" content=\"width=device-width\">\n" +
-                "    <title>Home"+userLoggedIn+"</title>\n" +
+                "    <title>Home</title>\n" +
                 "    <!-- Import Icon Library -->\n" +
                 "    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">\n" +
                 "    <!-- Creates navigation bar -->\n" +
