@@ -1,4 +1,4 @@
-package Website;
+package Website.Entities;
 
 public class User {
     public int id;

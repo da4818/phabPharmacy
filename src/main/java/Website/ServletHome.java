@@ -1,5 +1,7 @@
 package Website;
 
+import Website.Entities.User;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,6 +19,8 @@ public class ServletHome extends HttpServlet {
         LoginDAO.createTable("basket");
         LoginDAO.createTable("products");
         LoginDAO.createTable("logged");*/
+        LoginDAO.resetTable("logged");
+        LoginDAO.resetTable("basket");
         resp.setContentType("text/html");
         String HTML=htmlOutput();
         resp.getWriter().write(HTML);

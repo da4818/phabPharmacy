@@ -1,5 +1,5 @@
 
-package Website;
+package Website.Entities;
 
 public class BasketItem {
     public String name;

@@ -1,4 +1,4 @@
-package Website;
+package Website.Entities;
 
 import javax.swing.text.html.HTML;
 import java.sql.*;

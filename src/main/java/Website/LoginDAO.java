@@ -1,5 +1,8 @@
 package Website;
 
+import Website.Entities.Product;
+import Website.Entities.User;
+
 import java.sql.*;
 
 // DAO = data access object //
@@ -138,7 +141,7 @@ public class LoginDAO {
         return status;
     }
 
-    public static User getUser(String email_in,String pass_in){
+    public static User getUser(String email_in, String pass_in){
         User u = new User();
         try{
             String dbUrl = System.getenv("JDBC_DATABASE_URL");

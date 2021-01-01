@@ -1,6 +1,6 @@
 package Website;
 
-import sun.rmi.runtime.Log;
+import Website.Entities.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
