@@ -106,11 +106,12 @@ public class ServletOrder extends HttpServlet {
                 "            overflow: auto;\n" +
                 "        }\n" +
                 "        .navbar a {\n" +
-                "            float: left;\n" +
-                "            padding: 12px;\n" +
-                "            color: white;\n" +
-                "            text-decoration: none;\n" +
-                "            font-size: 17px;\n" +
+                "          float: left;\n" +
+                "          font-size: 16px;\n" +
+                "          color: white;\n" +
+                "          text-align: center;\n" +
+                "          padding: 14px 16px;\n" +
+                "          text-decoration: none;\n" +
                 "        }\n" +
                 "        .active {\n" +
                 "            background-color: #51B5C2;\n" +
@@ -228,7 +229,7 @@ public class ServletOrder extends HttpServlet {
                 "    </div>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/login\"><i class=\"fa fa-fw fa-user\"></i>Login</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
-                "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" style=\"background-color: #00B8C5; width: 35px;\" class=\"fa fa-fw fa-shopping-basket\"><b style=\"font-family: Arial;\" id=\"basket\">" + basketSizeOut + "</b></a>\n" +
+                "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" style=\"background-color: #00B8C5; width: 35px;\"><i style=\"width: 35px;\" class=\"fa fa-fw fa-shopping-basket\"><p style=\"display: inline; font-family: Arial; font-weight: bold\" id=\"basket\"> " + basketSizeOut + "</p></i></a>\n" +
                 "    <div class=\"currentUser\">" + userMessage + "<i class=\"fa fa-fw fa-user\"></i></div>\n" +
                 "</div>\n" +
                 "<h1>Confirm Order</h1>\n";

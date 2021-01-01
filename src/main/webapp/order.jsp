@@ -22,13 +22,11 @@
       }
       .navbar a {
           float: left;
-          padding: 12px;
+          font-size: 16px;
           color: white;
+          text-align: center;
+          padding: 14px 16px;
           text-decoration: none;
-          font-size: 17px;
-      }
-      .active {
-          background-color: #51B5C2;
       }
       @media screen and (max-width: 500px) {
           .navbar a {
