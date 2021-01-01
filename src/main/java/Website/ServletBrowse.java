@@ -135,7 +135,7 @@ public class ServletBrowse extends HttpServlet {
 
     public String htmlOutput(){
         boolean userLoggedIn = LoginDAO.checkLoggedIn();
-        String userMessage = "test";
+        String userMessage = "";
         User cUser = null;
         if (userLoggedIn == true) {
             cUser = LoginDAO.getCurrentUser();
