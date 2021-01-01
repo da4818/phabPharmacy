@@ -1,11 +1,10 @@
-import Website.ServletLogin;
+import Website.Servlets.ServletLogin;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import sun.reflect.annotation.ExceptionProxy;
-import javax.servlet.Servlet;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +15,7 @@ import java.io.StringWriter;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.when;
-import Website.*;
+
 public class TestServletLogin extends ServletLogin{
     @Mock
     HttpServletRequest request;

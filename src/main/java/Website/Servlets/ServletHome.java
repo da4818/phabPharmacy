@@ -1,6 +1,7 @@
-package Website;
+package Website.Servlets;
 
 import Website.Entities.User;
+import Website.LoginDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,63 +10,48 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/register", loadOnStartup = 0)
-public class ServletRegister extends HttpServlet {
+@WebServlet(urlPatterns ={"/home"},loadOnStartup = 1)
+public class ServletHome extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //UserDB udb = new UserDB();
+        // Creating/resetting database tables if necessary //
+        /*LoginDAO.resetTable("logged");
+        LoginDAO.createTable("users");
+        LoginDAO.createTable("basket");
+        LoginDAO.createTable("products");
+        LoginDAO.createTable("logged");*/
         resp.setContentType("text/html");
-        String output = htmlOutput();
-        resp.getWriter().write(output);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        String HTML = htmlOutput();
-        String fn = req.getParameter("fname");
-        String ln = req.getParameter("lname");
-        String em = req.getParameter("email");
-        String pw = req.getParameter("pass");
-        String vpw = req.getParameter("verifyPass");
-        String cn = req.getParameter("cardno");
-        String ad = req.getParameter("postcode");
+        String HTML=htmlOutput();
         resp.getWriter().write(HTML);
-        if(LoginDAO.validateRegister(em)){ //create validation to see if email exists
-            resp.getWriter().write("<h2> There is an existing account with the email entered. Please log in.</h2>");
-        }
-        else if (fn.isEmpty() || ln.isEmpty() || em.isEmpty() || pw.isEmpty() || vpw.isEmpty() || cn.isEmpty() || ad.isEmpty()){
-            resp.getWriter().write("<h2>Incomplete fields, please enter all the information.</h2>");
-        }
-        else if (!pw.equals(vpw)){
-            resp.getWriter().write("<h2> Passwords don't match, please try again.</h2>");
-        }
-        else{
-            LoginDAO.addUser(fn,ln,em,pw,cn,ad);
-            User currentUser = LoginDAO.getUser(em,pw);
-            LoginDAO.setLoggedInUser(currentUser);
-            LoginDAO.resetTable("basket");
-            resp.getWriter().write("<h2>Successful registration. Welcome, " + currentUser.fname + "</h2>");
-        }
+    }
+    @Override
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     }
 
-    public String htmlOutput(){
+    //Creating a function to return a string literal of the HTML code to put into the doGet and doPost functions uses fewer lines of code and is easier to amend
+    public String htmlOutput() {
+        //Checks if a user is currently logged in
         boolean userLoggedIn = LoginDAO.checkLoggedIn();
         String userMessage = "";
         User cUser = null;
         if (userLoggedIn == true) {
             cUser = LoginDAO.getCurrentUser();
-            userMessage = cUser.fname;
+            userMessage = cUser.fname; //If a user is logged in, userMessage will be displayed on the header (see line 144)
         }
+
+        // Finds size of items in basket to display on navigation bar. This happens for each servlet subpage
         int basketSize = LoginDAO.getBasketSize();
-        String basketSizeOut="";
-        if (basketSize != 0){ basketSizeOut = String.valueOf(basketSize);}
+        String basketSizeOut = "";
+        if (basketSize != 0) {
+            basketSizeOut = String.valueOf(basketSize); //similar to line 39
+        }
+        //HTML comments are on the respective .jsp files
         return "<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "<head>\n" +
                 "    <meta charset=\"utf-8\">\n" +
                 "    <meta name=\"viewport\" content=\"width=device-width\">\n" +
-                "    <title>Register</title>\n" +
+                "    <title>Home</title>\n" +
                 "    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">\n" +
                 "    <style>\n" +
                 "        body {font-family: Arial, Helvetica, sans-serif;}\n" +
@@ -126,23 +112,20 @@ public class ServletRegister extends HttpServlet {
                 "        .dropdown:hover .dropdown-content {\n" +
                 "            display: block;\n" +
                 "        }\n" +
-                "        .buttonStyle{\n" +
-                "            background-color: #00B8C5;\n" +
-                "            border: none;\n" +
-                "            color: white;\n" +
-                "            padding: 5px 25px;\n" +
-                "            text-align: center;\n" +
-                "            text-decoration: none;\n" +
-                "            display: inline-block;\n" +
-                "            font-size: 16px;\n" +
-                "            margin: 4px 2px;\n" +
-                "            cursor: pointer;\n" +
+                "        .currentUser{\n" +
+                "           float: right;\n" +
+                "           font-size: 16px;\n" +
+                "           color: white;\n" +
+                "           text-align: center;\n" +
+                "           padding: 14px 16px;\n" +
+                "           text-decoration: none;\n" +
                 "        }\n" +
                 "    </style>\n" +
+                "\n" +
                 "</head>\n" +
                 "<body>\n" +
                 "<div class=\"navbar\">\n" +
-                "    <a href=\"https://phabpharmacywebsite.herokuapp.com/home\"><i class=\"fa fa-fw fa-home\"></i>Home</a>\n" +
+                "    <a style=\"background-color: #00B8C5;\"><i class=\"fa fa-fw fa-home\"></i>Home</a>\n" +
                 "    <div class=\"dropdown\">\n" +
                 "        <button style=\"cursor: pointer;\" class= \"dropbtn\" onclick=\"redirectBrowse()\"><i class=\"fa fa-fw fa-search\"></i>Browse<i class=\"fa fa-caret-down\"></i></button>\n" +
                 "        <div class=\"dropdown-content\">\n" +
@@ -155,24 +138,13 @@ public class ServletRegister extends HttpServlet {
                 "        </div>\n" +
                 "    </div>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/login\"><i class=\"fa fa-fw fa-user\"></i>Login</a>\n" +
-                "    <a style=\"background-color: #00B8C5;\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
+                "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" style=\"width: 35px;\" class=\"fa fa-fw fa-shopping-basket\"><b style=\"font-family: Arial;\" id=\"basket\">" + basketSizeOut + "</b></a>\n" +
                 "    <div class=\"currentUser\">" + userMessage + "<i class=\"fa fa-fw fa-user\"></i></div>\n" +
                 "</div>\n" +
+                "<h1><center>PhabPharmacy</center></h1>\n" +
+                "<h2><center> Welcome to the PhabPharmacy's home page!<br>Please login or register to create an account.</center></h2>\n" +
                 "\n" +
-                "<h1>Register</h1>\n" +
-                "<p> Register below. If you already have an account, <a href=\"https://phabpharmacy.herokuapp.com/login\"> login here.</a>\n" +
-                "    <form name=\"registerForm\" action=\"register\" method=\"post\">\n" +
-                "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"fname\" placeholder=\"First Name*\"><br>\n" +
-                "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"lname\" placeholder=\"Last Name*\"><br>\n" +
-                "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"email\" placeholder=\"Email Address*\"><br>\n" +
-                "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"pass\" placeholder=\"Password*\"><br>\n" +
-                "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"verifyPass\" placeholder=\"Verify Password*\"><br>\n" +
-                "        <h3>Order Info</h3>\n" +
-                "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"cardno\" placeholder=\"Card Number*\"><br>\n" +
-                "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"postcode\" placeholder=\"Postcode*\"><br>\n" +
-                "        <input type=\"submit\" class=\"buttonStyle\" value=\"Submit\">\n" +
-                "    </form>\n" +
                 "<script>\n" +
                 "    function redirectBrowse(){\n" +
                 "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
@@ -181,4 +153,7 @@ public class ServletRegister extends HttpServlet {
                 "</body>\n" +
                 "</html>";
     }
+
+
+
 }

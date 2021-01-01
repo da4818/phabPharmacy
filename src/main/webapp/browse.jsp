@@ -123,6 +123,14 @@
         .tooltip:hover .tooltiptext {
             visibility: visible;
         }
+        .currentUser{
+            float: right;
+            font-size: 16px;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
     </style>
 
 </head>
@@ -151,7 +159,7 @@
     <div class ="relative">
         <label><center><!--item name--><br><!--item description--></center></label><br>
     <%-- If item is limited to 1 qty:
-    <label class="tooltip"><center>itemName<br>itemDescription</center></label><br>
+    <label class="tooltip"><center>itemName<br>itemDescription</center><br>
     <span class="tooltiptext"><i>Limited to one per customer</i></span></label><br>--%>
         <label><center><!--item price--></center></label><br>
         <div class="absolute">

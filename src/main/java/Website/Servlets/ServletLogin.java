@@ -1,6 +1,7 @@
-package Website;
+package Website.Servlets;
 
 import Website.Entities.User;
+import Website.LoginDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,17 +27,16 @@ public class ServletLogin extends HttpServlet {
         String em = req.getParameter("email");
         String pw = req.getParameter("pass");
         resp.getWriter().write(HTML);
-        if(LoginDAO.validateLogin(em,pw)){
+        if(LoginDAO.validateLogin(em,pw)){ //Checks that the input variables match existing entries in the customer ('user') database
             User currentUser = LoginDAO.getUser(em,pw); //If the login entries pass the validation checks
-            LoginDAO.setLoggedInUser(currentUser);
+            LoginDAO.setLoggedInUser(currentUser); //This will update the current user database (I've called it 'logged') so they know which customer is currently logged in
             LoginDAO.resetTable("basket");
             resp.getWriter().write("<h2>Welcome back, " + currentUser.fname + "!</h2>");
-
         }
         else if (em.isEmpty() || pw.isEmpty()){
             resp.getWriter().write("<h2>Incomplete fields, please enter all the information.</h2>");
         }
-        else{
+        else{ //If the input variables don't match any existing entries in the customer ('user') database
             resp.getWriter().write("<h2>Wrong email or password, please try again.</h2>");
         }
     }

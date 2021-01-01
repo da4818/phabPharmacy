@@ -1,7 +1,8 @@
-package Website;
+package Website.Servlets;
 
 import Website.Entities.Product;
 import Website.Entities.User;
+import Website.LoginDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

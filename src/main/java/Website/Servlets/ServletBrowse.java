@@ -1,7 +1,8 @@
-package Website;
+package Website.Servlets;
 
 import Website.Entities.Product;
 import Website.Entities.User;
+import Website.LoginDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-
 import static java.lang.String.valueOf;
 
 @WebServlet(urlPatterns = "/browse",loadOnStartup = 0)
@@ -21,30 +21,17 @@ public class ServletBrowse extends HttpServlet {
         resp.setContentType("text/html");
         String HTML= htmlOutput();
         resp.getWriter().write(HTML);
-        int basketSize = LoginDAO.tableSize("basket");
-                ArrayList<String> headers = new ArrayList<>();
-                ArrayList<String> headerURLs = new ArrayList<>();
-                headers.add("Cold and Flu");
-                headers.add("Skincare");
-                headers.add("Headaches and Pain Relief");
-                headers.add("Digestion");
-                headers.add("Allergy");
-                headers.add("First Aid");
-                headerURLs.add("cold_and_flu");
-                headerURLs.add("skincare");
-                headerURLs.add("headaches_and_pain_relief");
-                headerURLs.add("digestion");
-                headerURLs.add("allergy");
-                headerURLs.add("first_aid");
+                ArrayList<String> headers = getHeaderinfo("headers"); //See line 110
+                ArrayList<String> headerURLs = getHeaderinfo("headerURLs"); //See line 110
                 int j=1;
                 Product p = LoginDAO.getProduct(j);
                 for (int i=0;i<6;i++) {
                     resp.getWriter().write("<section>\n" +
-                            "<h2 id=\""+headerURLs.get(i)+"\">" + headers.get(i) + "</h2>\n");
+                            "<h2 id=\""+headerURLs.get(i)+"\">" + headers.get(i) + "</h2>\n"); //See line 110
                     while (p.category.equals(headers.get(i))) {
                         DecimalFormat df = new DecimalFormat("0.00");
-                        String price = valueOf(df.format(p.price));
-                        int max = p.limited ? 1 : 5;
+                        String price = valueOf(df.format(p.price)); //This allows us to output the number in the format of money (2dp)
+                        int max = p.limited ? 1 : 5; //Some products are limited to 1 per customer - if this is the case (i.e. limited is TRUE), max will be set to 1. if limited is FALSE, max is set to 5 (an arbitrary maximum)
                         resp.getWriter().write("<div class=\"relative\">\n");
                         if (p.limited){
                             resp.getWriter().write("<label class=\"tooltip\"><center>" + p.name + "<br>" + p.description + "</center>\n" +
@@ -76,29 +63,21 @@ public class ServletBrowse extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        int pos = Integer.parseInt(req.getParameter("buttonNumber"));
-        int q = Integer.parseInt(req.getParameter("basketQuantity"));
-        Product p = LoginDAO.getProduct(pos);
-        LoginDAO.addToBasket(p,q);
-        //resp.getWriter().write("<p> Item:" + p.name +"Quantity:" + q + "</p>");
+        if (!LoginDAO.checkLoggedIn()){ //If no one is logged in, it will prevent them from adding items to their basket
+            resp.getWriter().write("alert(\"Please ensure that you have created an account and logged in before adding items to your basket.\");");
+        }
+        else{
+            int pos = Integer.parseInt(req.getParameter("buttonNumber"));
+            int q = Integer.parseInt(req.getParameter("basketQuantity"));
+            Product pBasket = LoginDAO.getProduct(pos);
+            LoginDAO.addToBasket(pBasket,q);
+        }
         String HTML= htmlOutput();
         resp.getWriter().write(HTML);
-        ArrayList<String> headers = new ArrayList<>();
-        ArrayList<String> headerURLs = new ArrayList<>();
-        headers.add("Cold and Flu");
-        headers.add("Skincare");
-        headers.add("Headaches and Pain Relief");
-        headers.add("Digestion");
-        headers.add("Allergy");
-        headers.add("First Aid");
-        headerURLs.add("cold_and_flu");
-        headerURLs.add("skincare");
-        headerURLs.add("headaches_and_pain_relief");
-        headerURLs.add("digestion");
-        headerURLs.add("allergy");
-        headerURLs.add("first_aid");
+        ArrayList<String> headers = getHeaderinfo("headers");
+        ArrayList<String> headerURLs = getHeaderinfo("headerURLs");
         int j=1;
-         p = LoginDAO.getProduct(j);
+         Product p = LoginDAO.getProduct(j);
         for (int i=0;i<6;i++) {
             resp.getWriter().write("<section>\n" +
                     "<h2 id=\""+headerURLs.get(i)+"\">" + headers.get(i) + "</h2>\n");
@@ -133,6 +112,26 @@ public class ServletBrowse extends HttpServlet {
                 "</html>");
     }
 
+    public ArrayList <String> getHeaderinfo(String info_in){
+        ArrayList <String> output = new ArrayList<>();
+        if (info_in.equals("headers")){ //This is the categories to be displayed
+            output.add("Cold and Flu"); //The headers will correspond to the anchor link URL (see line 120)
+            output.add("Skincare");
+            output.add("Headaches and Pain Relief");
+            output.add("Digestion");
+            output.add("Allergy");
+            output.add("First Aid");
+        }
+        else if (info_in.equals("headerURLs")){ //These are the names to hyperlink to a specific part of the page (termed an 'anchor link')
+            output.add("cold_and_flu"); //Each anchor link is named in the 'id' section of the header tag (line 30)
+            output.add("skincare"); //This anchor link corresponds to the hyperlink URL for each dropdown option in the navigation bar (lines 273-278)
+            output.add("headaches_and_pain_relief");
+            output.add("digestion");
+            output.add("allergy");
+            output.add("first_aid");
+        }
+        return output;
+    }
     public String htmlOutput(){
         boolean userLoggedIn = LoginDAO.checkLoggedIn();
         String userMessage = "";

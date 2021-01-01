@@ -1,7 +1,8 @@
-package Website;
+package Website.Servlets;
 
 import Website.Entities.Product;
 import Website.Entities.User;
+import Website.LoginDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +23,7 @@ public class ServletOrder extends HttpServlet {
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
         DecimalFormat df = new DecimalFormat("0.00");
-        Double totalBasket = LoginDAO.getBasketTotal();
+        Double totalBasket = LoginDAO.getBasketTotal(); //total cost of the basket
         String total = df.format(totalBasket);
         resp.getWriter().write("<div class=\"addressContainer\">\n" +
                 "  <form id=\"updateBasket\" action=\"order\" method=\"post\"> \n" +
