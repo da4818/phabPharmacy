@@ -25,10 +25,11 @@ public class ServletOrder extends HttpServlet {
         DecimalFormat df = new DecimalFormat("0.00");
         Double totalBasket = LoginDAO.getBasketTotal(); //total cost of the basket
         String total = df.format(totalBasket);
+        User u = LoginDAO.getCurrentUser();
         resp.getWriter().write("<div class=\"addressContainer\">\n" +
                 "  <form id=\"updateBasket\" action=\"order\" method=\"post\"> \n" +
                 "  <p style=\"display: inline-block; margin-bottom: 0px;\"><b>Shipping Address</b></p>\n" +
-                "  <p>Name<br>Shipping Address<br>Payment</p>\n" +
+                "  <p>" + u.fname + " " + u.lname + "<br>" + u.postcode + "<br>Payment</p>\n" +
                 "  <button href=\"https://phabpharmacy.herokuapp.com/basket\" class=\"buttonStyle\">Edit Details</button>\n" +
                 "  </form>\n" +
                 "  <div class=\"confirmContainer\">\n" +
@@ -69,6 +70,8 @@ public class ServletOrder extends HttpServlet {
         resp.setContentType("text/html");
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
+        LoginDAO.createTable("orders");
+        LoginDAO.resetTable("basket");
         resp.getWriter().write("<h2>Order confirmed!</h2>");
         resp.getWriter().write("<script>\n" +
                 "    function redirectBrowse(){\n" +
@@ -77,8 +80,7 @@ public class ServletOrder extends HttpServlet {
                 "</script>\n" +
                 "</body>\n" +
                 "</html>");
-        LoginDAO.createTable("orders");
-        LoginDAO.resetTable("basket");
+
     }
     public String htmlOutput(){
         boolean userLoggedIn = LoginDAO.checkLoggedIn();
