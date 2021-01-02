@@ -180,7 +180,7 @@
 <h1>Shopping Basket</h1>
 
 <div class="totalContainer">
-    <p style="padding-top: 5px;">Total: £<!--total of basket--><br><button href="https://phabpharmacy.herokuapp.com/order" class="buttonStyle">Proceed to Checkout</button></p>
+    <p style="margin-bottom: 10px;">Total: £0.00<br></p><a href="https://phabpharmacy.herokuapp.com/order" class="buttonStyle">Proceed to Checkout</a>
 </div>
 <!-- Repeat function for number of items in basket -->
 <section>

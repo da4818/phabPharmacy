@@ -62,8 +62,6 @@ public class ServletBrowse extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        String HTML= htmlOutput();
-        resp.getWriter().write(HTML);
         if (!LoginDAO.checkLoggedIn()){ //If no one is logged in, it will prevent them from adding items to their basket
             resp.getWriter().write("<pre><script>alert(\"Please ensure that you have created an account and logged in before adding items to your basket.\");</script></pre>");
         }
@@ -73,7 +71,8 @@ public class ServletBrowse extends HttpServlet {
             Product pBasket = LoginDAO.getProduct(pos);
             LoginDAO.addToBasket(pBasket,q);
         }
-
+        String HTML= htmlOutput();
+        resp.getWriter().write(HTML);
         ArrayList<String> headers = getHeaderinfo("headers");
         ArrayList<String> headerURLs = getHeaderinfo("headerURLs");
         int j=1;
@@ -289,24 +288,8 @@ public class ServletBrowse extends HttpServlet {
                 "        }\n" +
                 "    </style>\n" +
                 "\n" +
-                "<script>\n" +
-                "    var mybutton = document.getElementById(\"scrollBtn\");\n" +
-                "    window.onscroll = function() {scrollFunction()};\n" +
-                "    function scrollFunction() {\n" +
-                "        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {\n" +
-                "            mybutton.style.display = \"block\";\n" +
-                "        } else {\n" +
-                "            mybutton.style.display = \"none\";\n" +
-                "        }\n" +
-                "    }\n" +
-                "    function topFunction() {\n" +
-                "        document.body.scrollTop = 0;\n" +
-                "        document.documentElement.scrollTop = 0;\n" +
-                "    }\n" +
-                "</script>" +
                 "</head>\n" +
                 "<body>\n" +
-                "<button onclick=\"topFunction()\" class=\"scrollBtn\" id=\"scrollBtn\" title=\"Go to top\">Top</button>" +
                 "<div class=\"navbar\">\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/home\"><i class=\"fa fa-fw fa-home\"></i>Home</a>\n" +
                 "    <div class=\"dropdown\">\n" +
