@@ -352,7 +352,7 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            String sql = "select count(*) from '" + tableName + "';"; //'select count(*)' gets the number of entries
+            String sql = "select count(*) from " + tableName + ";"; //'select count(*)' gets the number of entries
             Statement s = c.createStatement();
             ResultSet rs = s.executeQuery(sql);
             while(rs.next()){

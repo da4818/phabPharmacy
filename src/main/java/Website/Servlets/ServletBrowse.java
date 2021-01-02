@@ -54,9 +54,23 @@ public class ServletBrowse extends HttpServlet {
                     }
                     resp.getWriter().write("</section>");
                 }
-
-        resp.getWriter().write("</body>\n" +
-                        "</html>");
+        resp.getWriter().write("<script>\n" +
+                "    var mybutton = document.getElementById(\"scrollBtn\");\n" +
+                "    window.onscroll = function() {scrollFunction()};\n" +
+                "    function scrollFunction() {\n" +
+                "        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {\n" +
+                "            mybutton.style.display = \"block\";\n" +
+                "        } else {\n" +
+                "            mybutton.style.display = \"none\";\n" +
+                "        }\n" +
+                "    }\n" +
+                "    function topFunction() {\n" +
+                "        document.body.scrollTop = 0;\n" +
+                "        document.documentElement.scrollTop = 0;\n" +
+                "    }\n" +
+                "</script>" +
+                "</body>\n" +
+                "</html>");
 
     }
 
