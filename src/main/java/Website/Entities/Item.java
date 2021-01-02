@@ -8,7 +8,6 @@ public class Item {
     protected String category;
     protected Boolean limited;
     public Item(){
-
     }
     public Item(String name, String description, Double price, Integer quantity, String category, Boolean limited) {
         this.name=name;

@@ -42,7 +42,7 @@ public class ServletBasket extends HttpServlet {
                         "    <label for=\"itemQuantity\">Qty</label><br>\n" +
                         "    <input type=\"number\" name=\"itemQuantity\" class=\"quantity\" size=\"3\" min=\"1\" max=\"" + max + "\" value=\"" + b.quantity + "\">\n" +
                         "    <input name=\"basketNumber\" type=\"hidden\"value=\"" + i + "\">\n" +
-                        "    <input name=\"basketName\" type=\"hidden\"value=\"" + b.name + "\">\n" +
+                        "    <input name=\"basketName\" type=\"hidden\"value=\"" + b.id + "\">\n" +
                         "    <input name=\"update\" style=\"margin-left: 0px;\" type=\"submit\" class=\"buttonStyle\" value=\"Update\">\n" +
                         "    <button name=\"update\" type=\"submit\" class=\"buttonStyle\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button>\n" +
                         "    </form>\n" +
@@ -65,7 +65,7 @@ public class ServletBasket extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         String t = req.getParameter("update");
-        String basketItemName = req.getParameter("basketName");
+        int basketItemId = Integer.parseInt(req.getParameter("basketName"));
         String basketQuantity = req.getParameter("itemQuantity");
         String basketID = req.getParameter("basketNumber");
         if (t.equals("Update")) {
@@ -75,7 +75,7 @@ public class ServletBasket extends HttpServlet {
             LoginDAO.addToBasket(modifiedItem,q);
         }
         else {
-            LoginDAO.removeFromBasket(basketItemName);
+            LoginDAO.removeFromBasket(basketItemId);
         }
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);

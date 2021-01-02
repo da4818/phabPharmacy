@@ -302,6 +302,7 @@ public class LoginDAO {
             ps.setInt(1,n); //If one item is removed, the IDs aren't automatically updated e.g. if i remove item ID=2, table's ID will read as 1,3,4,5... this poses problems when using a for loop to display the information
             ResultSet rs=ps.executeQuery(); //SQL has no easy way to select item based on row number rather than an existing column - this is one solution
             while(rs.next()){ // If int n = 2 (i.e. the second item in the basket), this will correspond to the 2nd entry in the basket table based on alphabetical order ('order by name asc' gives alphabetical order)
+                bProduct.id = rs.getInt("id");
                 bProduct.name = rs.getString("name");
                 bProduct.description =rs.getString("description");
                 bProduct.price = rs.getDouble("price");
@@ -332,13 +333,13 @@ public class LoginDAO {
         return total;
     }
     //Removes item from the basket database when trash icon is pressed
-    public static void removeFromBasket(String name_in){
+    public static void removeFromBasket(int id_in){
         try{
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
             Statement s = c.createStatement();
-            String sql = "delete from basket where name='" + name_in +"';"; //removes the item entry from the table
+            String sql = "delete from basket where id=" + id_in; //removes the item entry from the table
             s.executeUpdate(sql);
 
             s.close();
