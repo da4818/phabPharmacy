@@ -43,7 +43,7 @@ public class ServletBrowse extends HttpServlet {
                         resp.getWriter().write("<label><center>£" + price + "</label></center><br>\n" +
                                 "<div class=\"absolute\">\n" +
                                 "<form action=\"browse\" method=\"post\">\n" +
-                                "<input name=\"basketQuantity\" type=\"number\" size=\"5\" min=\"0\" max=\"" + max + "\">\n" +
+                                "<input name=\"basketQuantity\" type=\"number\" size=\"5\" min=\"1\" max=\"" + max + "\">\n" +
                                 "<input name=\"buttonNumber\" type=\"hidden\"value=\"" + j + "\">\n" +
                                 "<input type=\"submit\" class=\"buttonStyle\" value=\"Add to Basket\">\n" +
                                 "</form>\n" +
@@ -62,6 +62,8 @@ public class ServletBrowse extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
+        String HTML= htmlOutput();
+        resp.getWriter().write(HTML);
         if (!LoginDAO.checkLoggedIn()){ //If no one is logged in, it will prevent them from adding items to their basket
             resp.getWriter().write("<pre><script>alert(\"Please ensure that you have created an account and logged in before adding items to your basket.\");</script></pre>");
         }
@@ -71,8 +73,7 @@ public class ServletBrowse extends HttpServlet {
             Product pBasket = LoginDAO.getProduct(pos);
             LoginDAO.addToBasket(pBasket,q);
         }
-        String HTML= htmlOutput();
-        resp.getWriter().write(HTML);
+
         ArrayList<String> headers = getHeaderinfo("headers");
         ArrayList<String> headerURLs = getHeaderinfo("headerURLs");
         int j=1;

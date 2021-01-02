@@ -111,7 +111,7 @@ public class ServletBasket extends HttpServlet {
         else{
             resp.getWriter().write("<p>Empty Basket</p>");
             resp.getWriter().write("<div class=\"totalContainer\">\n" +
-                    "  <p>Total: £0.00</p>\n" +
+                    "  <p style=\"padding-top: 5px;\">Total: £0.00<br><button href=\"https://phabpharmacy.herokuapp.com/order\" class=\"buttonStyle\">Proceed to Checkout</button></p>\n" +
                     "</div>\n");
         }
         resp.getWriter().write("</body>\n</html>");
