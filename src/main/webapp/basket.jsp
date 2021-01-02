@@ -185,6 +185,8 @@
 <!-- Repeat function for number of items in basket -->
 <section>
     "<div class="basketContainer" id="cont1">
+        <%--If product is limited:
+        <p class=\"tooltip\" style=\"display: inline-block;\"><b>" + b.name + "</b><br>" + b.description + "<br>£<output type=\"number\">" + price + "</output><span class=\"tooltiptext\"><i>Limited to one per customer</i></span></p>--%>
          <p style="display: inline-block;"><b><!--basket item name--></b><br><!--basket item description--><br>£<output type="number"><!--basket item price --></output></p>
          <div class="quant">
              <form id="updateBasket" action="basket" method="post">
