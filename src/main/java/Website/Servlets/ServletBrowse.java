@@ -61,93 +61,55 @@ public class ServletBrowse extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String HTML= htmlOutput();
         resp.setContentType("text/html");
+        String notLoggedInMessage="";
         if (!LoginDAO.checkLoggedIn()){ //If no one is logged in, it will prevent them from adding items to their basket
-
-            resp.getWriter().write(HTML);
-            ArrayList<String> headers = getHeaderinfo("headers");
-            ArrayList<String> headerURLs = getHeaderinfo("headerURLs");
-            int j=1;
-            Product p = LoginDAO.getProduct(j);
-            for (int i=0;i<6;i++) {
-                resp.getWriter().write("<section>\n" +
-                        "<h2 id=\""+headerURLs.get(i)+"\">" + headers.get(i) + "</h2>\n");
-                while (p.category.equals(headers.get(i))) {
-                    DecimalFormat df = new DecimalFormat("0.00");
-                    String price = valueOf(df.format(p.price));
-                    int max = p.limited ? 1 : 5;
-                    resp.getWriter().write("<div class=\"relative\">\n");
-                    if (p.limited){
-                        resp.getWriter().write("<label class=\"tooltip\"><center>" + p.name + "<br>" + p.description + "</center>\n" +
-                                "<span class=\"tooltiptext\"><i>Limited to one per customer</i></span></label><br>\n");
-                    }
-                    else{
-                        resp.getWriter().write("<label><center>" + p.name + "<br>" + p.description + "</center></label><br>\n");
-                    }
-                    resp.getWriter().write("<label><center>£" + price + "</label></center><br>\n" +
-                            "<div class=\"absolute\">\n" +
-                            "<form action=\"browse\" method=\"post\">\n" +
-                            "<input name=\"basketQuantity\" type=\"number\" size=\"5\" min=\"0\" max=\"" + max + "\">\n" +
-                            "<input name=\"buttonNumber\" type=\"hidden\"value=\"" + j + "\">\n" +
-                            "<input type=\"submit\"class=\"buttonStyle\" value=\"Add to Basket\">\n" +
-                            "</form>\n" +
-                            "</div>\n" +
-                            "</div>");
-                    j++;
-                    p = LoginDAO.getProduct(j);
-                }
-                resp.getWriter().write("</section>");
-            }
-            resp.getWriter().write("<pre><script>alert(\"Please ensure that you have created an account and logged in before adding items to your basket.\");</script></pre>");
-            resp.getWriter().write("</body>\n" +
-                    "</html>");
+            notLoggedInMessage = "<script>window.onload(alert(\"Please ensure that you have created an account and logged in before adding items to your basket.\"));</script>";
         }
         else{
             int pos = Integer.parseInt(req.getParameter("buttonNumber"));
             int q = Integer.parseInt(req.getParameter("basketQuantity"));
             Product pBasket = LoginDAO.getProduct(pos);
             LoginDAO.addToBasket(pBasket,q);
-            resp.getWriter().write(HTML);
-            ArrayList<String> headers = getHeaderinfo("headers");
-            ArrayList<String> headerURLs = getHeaderinfo("headerURLs");
-            int j=1;
-            Product p = LoginDAO.getProduct(j);
-            for (int i=0;i<6;i++) {
-                resp.getWriter().write("<section>\n" +
-                        "<h2 id=\""+headerURLs.get(i)+"\">" + headers.get(i) + "</h2>\n");
-                while (p.category.equals(headers.get(i))) {
-                    DecimalFormat df = new DecimalFormat("0.00");
-                    String price = valueOf(df.format(p.price));
-                    int max = p.limited ? 1 : 5;
-                    resp.getWriter().write("<div class=\"relative\">\n");
-                    if (p.limited){
-                        resp.getWriter().write("<label class=\"tooltip\"><center>" + p.name + "<br>" + p.description + "</center>\n" +
-                                "<span class=\"tooltiptext\"><i>Limited to one per customer</i></span></label><br>\n");
-                    }
-                    else{
-                        resp.getWriter().write("<label><center>" + p.name + "<br>" + p.description + "</center></label><br>\n");
-                    }
-                    resp.getWriter().write("<label><center>£" + price + "</label></center><br>\n" +
-                            "<div class=\"absolute\">\n" +
-                            "<form action=\"browse\" method=\"post\">\n" +
-                            "<input name=\"basketQuantity\" type=\"number\" size=\"5\" min=\"0\" max=\"" + max + "\">\n" +
-                            "<input name=\"buttonNumber\" type=\"hidden\"value=\"" + j + "\">\n" +
-                            "<input type=\"submit\"class=\"buttonStyle\" value=\"Add to Basket\">\n" +
-                            "</form>\n" +
-                            "</div>\n" +
-                            "</div>");
-                    j++;
-                    p = LoginDAO.getProduct(j);
-                }
-                resp.getWriter().write("</section>");
-            }
-
-            resp.getWriter().write("</body>\n" +
-                    "</html>");
         }
-
-
+        String HTML= htmlOutput();
+        resp.getWriter().write(HTML);
+        ArrayList<String> headers = getHeaderinfo("headers");
+        ArrayList<String> headerURLs = getHeaderinfo("headerURLs");
+        int j=1;
+         Product p = LoginDAO.getProduct(j);
+        for (int i=0;i<6;i++) {
+            resp.getWriter().write("<section>\n" +
+                    "<h2 id=\""+headerURLs.get(i)+"\">" + headers.get(i) + "</h2>\n");
+            while (p.category.equals(headers.get(i))) {
+                DecimalFormat df = new DecimalFormat("0.00");
+                String price = valueOf(df.format(p.price));
+                int max = p.limited ? 1 : 5;
+                resp.getWriter().write("<div class=\"relative\">\n");
+                if (p.limited){
+                    resp.getWriter().write("<label class=\"tooltip\"><center>" + p.name + "<br>" + p.description + "</center>\n" +
+                            "<span class=\"tooltiptext\"><i>Limited to one per customer</i></span></label><br>\n");
+                }
+                else{
+                    resp.getWriter().write("<label><center>" + p.name + "<br>" + p.description + "</center></label><br>\n");
+                }
+                resp.getWriter().write("<label><center>£" + price + "</label></center><br>\n" +
+                        "<div class=\"absolute\">\n" +
+                        "<form action=\"browse\" method=\"post\">\n" +
+                        "<input name=\"basketQuantity\" type=\"number\" size=\"5\" min=\"0\" max=\"" + max + "\">\n" +
+                        "<input name=\"buttonNumber\" type=\"hidden\"value=\"" + j + "\">\n" +
+                        "<input type=\"submit\"class=\"buttonStyle\" value=\"Add to Basket\">\n" +
+                        "</form>\n" +
+                        "</div>\n" +
+                        "</div>");
+                j++;
+                p = LoginDAO.getProduct(j);
+            }
+            resp.getWriter().write("</section>");
+        }
+        resp.getWriter().write(notLoggedInMessage);
+        resp.getWriter().write("</body>\n" +
+                "</html>");
     }
 
     public ArrayList <String> getHeaderinfo(String info_in){
