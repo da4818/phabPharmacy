@@ -195,7 +195,7 @@ public class LoginDAO {
             while(rs.next()){
                 u.id = rs.getInt("id");
                 u.fname = rs.getString("fname");
-                u.lname = rs.getString("name");
+                u.lname = rs.getString("lname");
                 u.email = rs.getString("email");
                 u.password = rs.getString("passw");
                 u.cardno = rs.getString("cardno");

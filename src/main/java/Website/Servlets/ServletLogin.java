@@ -30,7 +30,6 @@ public class ServletLogin extends HttpServlet {
         if(LoginDAO.validateLogin(em,pw)){ //Checks that the input variables match existing entries in the customer ('user') database
             User currentUser = LoginDAO.getUser(em,pw); //If the login entries pass the validation checks
             LoginDAO.setLoggedInUser(currentUser); //This will update the current user database (I've called it 'logged') so they know which customer is currently logged in
-            LoginDAO.resetTable("basket");
             resp.getWriter().write("<h2>Welcome back, " + currentUser.fname + "!</h2>");
         }
         else if (em.isEmpty() || pw.isEmpty()){
