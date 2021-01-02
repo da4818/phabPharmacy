@@ -62,9 +62,7 @@ public class ServletBrowse extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        String notLoggedInMessage="";
         if (!LoginDAO.checkLoggedIn()){ //If no one is logged in, it will prevent them from adding items to their basket
-            notLoggedInMessage = "<script>window.onload(alert(\"Please ensure that you have created an account and logged in before adding items to your basket.\"));</script>";
         }
         else{
             int pos = Integer.parseInt(req.getParameter("buttonNumber"));
@@ -107,7 +105,6 @@ public class ServletBrowse extends HttpServlet {
             }
             resp.getWriter().write("</section>");
         }
-        resp.getWriter().write(notLoggedInMessage);
         resp.getWriter().write("</body>\n" +
                 "</html>");
     }
@@ -134,8 +131,11 @@ public class ServletBrowse extends HttpServlet {
     }
     public String htmlOutput(){
         boolean userLoggedIn = LoginDAO.checkLoggedIn();
+        String notLoggedInMessage="";
+        if (!LoginDAO.checkLoggedIn()){ //If no one is logged in, it will prevent them from adding items to their basket
+            notLoggedInMessage = "onload=\"notLoggedIn()\";";
+        }
         String userMessage = "";
-        String basketWarning = "";
         User cUser = null;
         if (userLoggedIn == true) {
             cUser = LoginDAO.getCurrentUser();
@@ -289,9 +289,13 @@ public class ServletBrowse extends HttpServlet {
                 "           text-decoration: none;\n" +
                 "        }\n" +
                 "    </style>\n" +
-                "\n" +
+                "<script>\n" +
+                "  function notLoggedIn(){\n" +
+                "    alert(\"Please ensure that you have created an account and logged in before adding items to your basket.\");\n" +
+                "  }\n" +
+                "</script>" +
                 "</head>\n" +
-                "<body>\n" +
+                "<body" + notLoggedInMessage + ">\n" +
                 "<div class=\"navbar\">\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/home\"><i class=\"fa fa-fw fa-home\"></i>Home</a>\n" +
                 "    <div class=\"dropdown\">\n" +
