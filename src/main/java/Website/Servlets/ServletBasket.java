@@ -36,13 +36,13 @@ public class ServletBasket extends HttpServlet {
                 int max = b.limited ? 1 : 5;
                 resp.getWriter().write("<section>" +
                         "<div class=\"basketContainer\" id=\"cont1\">\n" +
-                        "  <p style=\"display: inline-block;\"><b>" + b.name +" id-"+b.id + "</b><br>" + b.description + "<br>£<output type=\"number\">" + price + "</output></p>\n" +
+                        "  <p style=\"display: inline-block;\"><b>" + b.name + "</b><br>" + b.description + "<br>£<output type=\"number\">" + price + "</output></p>\n" +
                         "  <div class=\"quant\">\n" +
                         "    <form id=\"updateBasket\" action=\"basket\" method=\"post\"> \n" +
-                        "    <label for=\"itemQuantity\">Qty</label><br>\n" +
-                        "    <input type=\"number\" name=\"itemQuantity\" class=\"quantity\" size=\"3\" min=\"1\" max=\"" + max + "\" value=\"" + b.quantity + "\">\n" +
-                        "    <input name=\"basketNumber\" type=\"hidden\"value=\"" + i + "\">\n" +
-                        "    <input name=\"basketName\" type=\"hidden\"value=\"" + b.id + "\">\n" +
+                        "    <label for=\"basketItemQuantity\">Qty</label><br>\n" +
+                        "    <input type=\"number\" name=\"basketItemQuantity\" class=\"quantity\" size=\"3\" min=\"1\" max=\"" + max + "\" value=\"" + b.quantity + "\">\n" +
+                        "    <input name=\"basketButtonNumber\" type=\"hidden\"value=\"" + i + "\">\n" +
+                        "    <input name=\"basketItemId\" type=\"hidden\"value=\"" + b.id + "\">\n" +
                         "    <input name=\"update\" style=\"margin-left: 0px;\" type=\"submit\" class=\"buttonStyle\" value=\"Update\">\n" +
                         "    <button name=\"update\" type=\"submit\" class=\"buttonStyle\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button>\n" +
                         "    </form>\n" +
@@ -66,14 +66,11 @@ public class ServletBasket extends HttpServlet {
         resp.setContentType("text/html");
         String t = req.getParameter("update");
 
-        /*int basketItemId = Integer.parseInt(req.getParameter("basketName"));
-        String basketQuantity = req.getParameter("itemQuantity");
-        String basketID = req.getParameter("basketNumber");
-        int q = Integer.parseInt(basketQuantity);
-        int basketPos = Integer.parseInt(basketID);
-        Product modifiedItem = LoginDAO.getBasketInfo(basketPos);
-
-        if (t.equals("Update")) {
+        int basketItemId = Integer.parseInt(req.getParameter("basketItemId"));
+        int q = Integer.parseInt(req.getParameter("basketItemQuantity"));
+        int basketButtonNumber = Integer.parseInt(req.getParameter("basketButtonNumber"));
+        Product modifiedItem = LoginDAO.getBasketInfo(basketButtonNumber);
+        /*if (t.equals("Update")) {
             LoginDAO.addToBasket(modifiedItem,q);
         }
         else {
@@ -81,6 +78,7 @@ public class ServletBasket extends HttpServlet {
         }*/
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
+        resp.getWriter().write("<p>id value:"+basketItemId+" should be equal to:"+modifiedItem.id+"</p>");
         int n = LoginDAO.tableSize("basket");
         DecimalFormat df = new DecimalFormat("0.00");
         if(n > 0){
@@ -98,10 +96,11 @@ public class ServletBasket extends HttpServlet {
                         "<div class=\"basketContainer\" id=\"cont1\">\n" +
                         "  <p style=\"display: inline-block;\"><b>" + b.name + "</b><br>" + b.description + "<br>£<output type=\"number\">" + price + "</output></p>\n" +
                         "  <div class=\"quant\">\n" +
-                        "    <form id=\"updateBasket\" action=\"basket\" method=\"post\">\n" +
-                        "    <label for=\"itemQuantity\">Qty</label><br>\n" +
-                        "    <input type=\"number\" id=\"itemQuantity\" name=\"itemQuantity\" class=\"quantity\" size=\"3\" min=\"1\" max=\"" + max + "\" value=\"" + b.quantity + "\">\n" +
-                        "    <input name=\"basketNumber\" type=\"hidden\"value=\"" + b.name + "\">\n" +
+                        "    <form id=\"updateBasket\" action=\"basket\" method=\"post\"> \n" +
+                        "    <label for=\"basketItemQuantity\">Qty</label><br>\n" +
+                        "    <input type=\"number\" name=\"basketItemQuantity\" class=\"quantity\" size=\"3\" min=\"1\" max=\"" + max + "\" value=\"" + b.quantity + "\">\n" +
+                        "    <input name=\"basketButtonNumber\" type=\"hidden\"value=\"" + i + "\">\n" +
+                        "    <input name=\"basketItemId\" type=\"hidden\"value=\"" + b.id + "\">\n" +
                         "    <input name=\"update\" style=\"margin-left: 0px;\" type=\"submit\" class=\"buttonStyle\" value=\"Update\">\n" +
                         "    <button name=\"update\" type=\"submit\" class=\"buttonStyle\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button>\n" +
                         "    </form>\n" +
