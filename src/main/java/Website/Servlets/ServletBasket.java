@@ -36,7 +36,7 @@ public class ServletBasket extends HttpServlet {
                 int max = b.limited ? 1 : 5;
                 resp.getWriter().write("<section>" +
                         "<div class=\"basketContainer\" id=\"cont1\">\n" +
-                        "  <p style=\"display: inline-block;\"><b>" + b.name + "</b><br>" + b.description + "<br>£<output type=\"number\">" + price + "</output></p>\n" +
+                        "  <p style=\"display: inline-block;\"><b>" + b.name +" id-"+b.id + "</b><br>" + b.description + "<br>£<output type=\"number\">" + price + "</output></p>\n" +
                         "  <div class=\"quant\">\n" +
                         "    <form id=\"updateBasket\" action=\"basket\" method=\"post\"> \n" +
                         "    <label for=\"itemQuantity\">Qty</label><br>\n" +
@@ -68,14 +68,15 @@ public class ServletBasket extends HttpServlet {
         int basketItemId = Integer.parseInt(req.getParameter("basketName"));
         String basketQuantity = req.getParameter("itemQuantity");
         String basketID = req.getParameter("basketNumber");
+        int q = Integer.parseInt(basketQuantity);
+        int basketPos = Integer.parseInt(basketID);
+        Product modifiedItem = LoginDAO.getBasketInfo(basketPos);
+
         if (t.equals("Update")) {
-            int q = Integer.parseInt(basketQuantity);
-            int basketPos = Integer.parseInt(basketID);
-            Product modifiedItem = LoginDAO.getBasketInfo(basketPos);
             LoginDAO.addToBasket(modifiedItem,q);
         }
         else {
-            LoginDAO.removeFromBasket(basketItemId);
+            LoginDAO.removeFromBasket(modifiedItem.id);
         }
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
