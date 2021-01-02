@@ -237,7 +237,7 @@ public class ServletBrowse extends HttpServlet {
                 "            margin: 4px 2px;\n" +
                 "            cursor: pointer;\n" +
                 "        }\n" +
-                "        #scrollBtn {\n" +
+                "        .scrollBtn {\n" +
                 "            display: none;\n" +
                 "            position: fixed;\n" +
                 "            bottom: 20px;\n" +
@@ -254,7 +254,7 @@ public class ServletBrowse extends HttpServlet {
                 "            margin: 4px 2px;\n" +
                 "            cursor: pointer;\n" +
                 "        }\n" +
-                "        #scrollBtn:hover {\n" +
+                "        .scrollBtn:hover {\n" +
                 "            background-color: #00B8C5;\n" +
                 "        }\n" +
                 "        section{\n" +
@@ -305,7 +305,7 @@ public class ServletBrowse extends HttpServlet {
                 "</script>" +
                 "</head>\n" +
                 "<body>\n" +
-                "<button onclick=\"topFunction()\" id=\"scrollBtn\" title=\"Go to top\">Top</button>" +
+                "<button onclick=\"topFunction()\" class=\"scrollBtn\" id=\"scrollBtn\" title=\"Go to top\">Top</button>" +
                 "<div class=\"navbar\">\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/home\"><i class=\"fa fa-fw fa-home\"></i>Home</a>\n" +
                 "    <div class=\"dropdown\">\n" +
