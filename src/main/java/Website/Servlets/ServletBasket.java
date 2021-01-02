@@ -91,9 +91,14 @@ public class ServletBasket extends HttpServlet {
                 String subtotal = valueOf(df.format(b.price*b.quantity));
                 int max = b.limited ? 1 : 5;
                 resp.getWriter().write("<section>" +
-                        "<div class=\"basketContainer\" id=\"cont1\">\n" +
-                        "  <p style=\"display: inline-block;\"><b>" + b.name + "</b><br>" + b.description + "<br>£<output type=\"number\">" + price + "</output></p>\n" +
-                        "  <div class=\"quant\">\n" +
+                        "<div class=\"basketContainer\" id=\"cont1\">\n");
+                if(b.limited){
+                    resp.getWriter().write("  <p class=\"tooltip\" style=\"display: inline-block;\"><b>" + b.name + "</b><br>" + b.description + "<br>£<output type=\"number\">" + price + "</output><span class=\"tooltiptext\"><i>Limited to one per customer</i></span></p>\n");
+                }
+                else{
+                    resp.getWriter().write("  <p style=\"display: inline-block;\"><b>" + b.name + "</b><br>" + b.description + "<br>£<output type=\"number\">" + price + "</output></p>\n");
+                }
+                resp.getWriter().write("  <div class=\"quant\">\n" +
                         "    <form id=\"updateBasket\" action=\"basket\" method=\"post\"> \n" +
                         "    <label for=\"basketItemQuantity\">Qty</label><br>\n" +
                         "    <input type=\"number\" name=\"basketItemQuantity\" class=\"quantity\" size=\"3\" min=\"1\" max=\"" + max + "\" value=\"" + b.quantity + "\">\n" +
@@ -265,6 +270,7 @@ public class ServletBasket extends HttpServlet {
                 "          text-align: center;\n" +
                 "          border-radius: 6px;\n" +
                 "          padding: 5px 0;\n" +
+                "          margin: 5px;\n" +
                 "          position: absolute;\n" +
                 "          z-index: 1;\n" +
                 "        }\n" +
