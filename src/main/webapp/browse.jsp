@@ -103,6 +103,26 @@
             margin: 4px 2px;
             cursor: pointer;
         }
+        #scrollBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            z-index: 99;
+            outline: none;
+            background-color: #555;
+            border: none;
+            color: white;
+            padding: 5px 25px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        #scrollBtn:hover {
+            background-color: #00B8C5;
+        }
         section{
             display: table-row;
         }
@@ -136,6 +156,7 @@
 
 </head>
 <body>
+<button onclick="topFunction()" id="scrollBtn" title="Go to top">Top</button>
 <div class="navbar">
     <a href="https://phabpharmacy.herokuapp.com/home"><i class="fa fa-fw fa-home"></i>Home</a>
     <div class="dropdown">
@@ -172,5 +193,20 @@
         </div>
     </div>
 </section>
+<script>
+    var mybutton = document.getElementById("scrollBtn");
+    window.onscroll = function() {scrollFunction()};
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    }
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+</script>
 </body>
 </html>
