@@ -134,10 +134,14 @@ public class ServletBrowse extends HttpServlet {
     public String htmlOutput(){
         boolean userLoggedIn = LoginDAO.checkLoggedIn();
         String userMessage = "";
+        String basketWarning = "";
         User cUser = null;
         if (userLoggedIn == true) {
             cUser = LoginDAO.getCurrentUser();
             userMessage = cUser.fname;
+        }
+        else if(userLoggedIn == false){
+            basketWarning = "<pre><script>alert(\"Please ensure that you have created an account and logged in before adding items to your basket.\");</script></pre>";
         }
         int basketSize = LoginDAO.getBasketSize();
         String basketSizeOut="";
@@ -307,6 +311,7 @@ public class ServletBrowse extends HttpServlet {
                 "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/basket\"><i style=\"width: 35px;\" class=\"fa fa-fw fa-shopping-basket\"><p style=\"display: inline; font-family: Arial; font-weight: bold\" id=\"basket\"> " + basketSizeOut + "</p></i></a>\n" +
                 "    <div class=\"currentUser\">" + userMessage + "<i class=\"fa fa-fw fa-user\"></i></div>\n" +
-                "</div>";
+                "</div>\n" +
+                basketWarning;
     }
 }
