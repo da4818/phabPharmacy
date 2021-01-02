@@ -69,7 +69,7 @@ public class LoginDAO {
             }
             else if(tableName.equals("basket")){ //*rename to 'ordered_products' (i think)
                 String sql ="CREATE TABLE BASKET " +
-                        "(ID SERIAL PRIMARY KEY NOT NULL," +
+                        "(ID INT NOT NULL," +
                         " NAME TEXT NOT NULL, " +
                         " DESCRIPTION TEXT NOT NULL, " +
                         " PRICE DOUBLE PRECISION NOT NULL, " + //* rename to 'sell_price'
@@ -247,6 +247,7 @@ public class LoginDAO {
             ps.setInt(1,n);
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
+                p.id = rs.getInt("id");
                 p.name = rs.getString("name");
                 p.description = rs.getString("description");
                 p.price = rs.getDouble("price");
@@ -256,6 +257,7 @@ public class LoginDAO {
             }
             ps.close();
             c.close();
+
         }catch(Exception e){System.out.println(e);}
         return p;
     }
@@ -276,13 +278,14 @@ public class LoginDAO {
                 s1.close();
             }
             else { //if they haven't previously added the item to the basket, it will create a new entry in the table
-                PreparedStatement ps = c.prepareStatement("insert into basket (name,description,price,quantity,subtotal,limited) values(?,?,?,?,?,?)");
-                ps.setString(1, p_in.name);
-                ps.setString(2, p_in.description);
-                ps.setDouble(3, p_in.price);
-                ps.setInt(4, quantity_in); //Quantity added to basket rather than full stock quantity
-                ps.setDouble(5, p_in.price * quantity_in);
-                ps.setBoolean(6, p_in.limited);
+                PreparedStatement ps = c.prepareStatement("insert into basket (id,name,description,price,quantity,subtotal,limited) values(?,?,?,?,?,?,?)");
+                ps.setInt(1,p_in.id);
+                ps.setString(2, p_in.name);
+                ps.setString(3, p_in.description);
+                ps.setDouble(4, p_in.price);
+                ps.setInt(5, quantity_in); //Quantity added to basket rather than full stock quantity
+                ps.setDouble(6, p_in.price * quantity_in);
+                ps.setBoolean(7, p_in.limited);
                 ps.executeUpdate();
                 ps.close();
             }
@@ -299,6 +302,28 @@ public class LoginDAO {
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
             PreparedStatement ps=c.prepareStatement("with temp as (select row_number() over (order by name asc) as rownum, * from basket) select * from temp where rownum=?");
+            ps.setInt(1,n); //If one item is removed, the IDs aren't automatically updated e.g. if i remove item ID=2, table's ID will read as 1,3,4,5... this poses problems when using a for loop to display the information
+            ResultSet rs=ps.executeQuery(); //SQL has no easy way to select item based on row number rather than an existing column - this is one solution
+            while(rs.next()){ // If int n = 2 (i.e. the second item in the basket), this will correspond to the 2nd entry in the basket table based on alphabetical order ('order by name asc' gives alphabetical order)
+                bProduct.id = rs.getInt("id");
+                bProduct.name = rs.getString("name");
+                bProduct.description =rs.getString("description");
+                bProduct.price = rs.getDouble("price");
+                bProduct.quantity = rs.getInt("quantity");
+                bProduct.limited = rs.getBoolean("limited");
+            }
+            ps.close();
+            c.close();
+        }catch(Exception e){System.out.println(e);}
+        return bProduct;
+    }
+    public static Product returnBasketInfo(int n){
+        Product bProduct= new Product();
+        try{
+            String dbUrl = System.getenv("JDBC_DATABASE_URL");
+            Class.forName("org.postgresql.Driver");
+            Connection c = DriverManager.getConnection(dbUrl);
+            PreparedStatement ps=c.prepareStatement(" select * from basket where id=?");
             ps.setInt(1,n); //If one item is removed, the IDs aren't automatically updated e.g. if i remove item ID=2, table's ID will read as 1,3,4,5... this poses problems when using a for loop to display the information
             ResultSet rs=ps.executeQuery(); //SQL has no easy way to select item based on row number rather than an existing column - this is one solution
             while(rs.next()){ // If int n = 2 (i.e. the second item in the basket), this will correspond to the 2nd entry in the basket table based on alphabetical order ('order by name asc' gives alphabetical order)
