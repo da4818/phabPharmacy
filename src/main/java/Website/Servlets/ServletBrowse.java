@@ -64,7 +64,7 @@ public class ServletBrowse extends HttpServlet {
         String HTML= htmlOutput();
         resp.setContentType("text/html");
         if (!LoginDAO.checkLoggedIn()){ //If no one is logged in, it will prevent them from adding items to their basket
-            resp.getWriter().write("<pre><script>alert(\"Please ensure that you have created an account and logged in before adding items to your basket.\");</script></pre>");
+
             resp.getWriter().write(HTML);
             ArrayList<String> headers = getHeaderinfo("headers");
             ArrayList<String> headerURLs = getHeaderinfo("headerURLs");
@@ -99,7 +99,7 @@ public class ServletBrowse extends HttpServlet {
                 }
                 resp.getWriter().write("</section>");
             }
-
+            resp.getWriter().write("<pre><script>alert(\"Please ensure that you have created an account and logged in before adding items to your basket.\");</script></pre>");
             resp.getWriter().write("</body>\n" +
                     "</html>");
         }
