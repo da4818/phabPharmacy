@@ -8,7 +8,7 @@ public class TestEmailValidation {
         // INVALID ENTRIES //
         //invalid character i.e. not '.' , '_' , '-' or any alphanumeric characters
         Email e = new Email("te(st@gmail.com");
-        Email ea = new Email("t*est@gmail.com");
+        Email ea = new Email("test@gmail.com");
         Assert.assertEquals(e.validEmail(),false);
         Assert.assertEquals(ea.validEmail(),false);
 
