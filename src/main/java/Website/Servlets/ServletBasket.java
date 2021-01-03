@@ -73,6 +73,7 @@ public class ServletBasket extends HttpServlet {
         String logOut = req.getParameter("logOut");
         if (logOut.equals("Log Out")){
            LoginDAO.resetTable("logged");
+            LoginDAO.resetTable("basket");
         }
         String updateBasket = req.getParameter("update");
         int q = Integer.parseInt(req.getParameter("basketItemQuantity"));

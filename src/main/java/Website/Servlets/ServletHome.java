@@ -32,6 +32,7 @@ public class ServletHome extends HttpServlet {
         String logOut = req.getParameter("logOut");
         if (logOut.equals("Log Out")){
             LoginDAO.resetTable("logged");
+            LoginDAO.resetTable("basket");
         }
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);

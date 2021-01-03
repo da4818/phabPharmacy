@@ -27,6 +27,7 @@ public class ServletRegister extends HttpServlet {
         String logOut = req.getParameter("logOut");
         if (logOut.equals("Log Out")){
             LoginDAO.resetTable("logged");
+            LoginDAO.resetTable("basket");
         }
         String HTML = htmlOutput();
         String fn = req.getParameter("fname");
