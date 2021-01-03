@@ -20,19 +20,6 @@ public class EmailValidation extends Email{
         }
     }
 
-    public String validRegistration(){
-        if (validEmail()){
-            if(validPassword().equals("Invalid password")){
-                return "Invalid registration";
-            }
-            else{
-                return "Valid registration";
-            }
-        }
-        else{
-            return "Invalid registration";
-        }
-    }
     public boolean validLogin(){
         if(validEmail()){
             return true;

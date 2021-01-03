@@ -1,5 +1,6 @@
 package Website.Servlets;
 
+import Website.Entities.EmailValidation;
 import Website.Entities.User;
 import Website.LoginDAO;
 
@@ -32,6 +33,7 @@ public class ServletRegister extends HttpServlet {
         String cn = req.getParameter("card_no");
         String ad = req.getParameter("postcode");
         resp.getWriter().write(HTML);
+        EmailValidation emailCheck = new EmailValidation(em,pw,vpw);
         if(LoginDAO.validateRegister(em)){ //checks database see if email exists in use database
             resp.getWriter().write("<h2> There is an existing account with the email entered. Please log in.</h2>");
         }
@@ -40,6 +42,9 @@ public class ServletRegister extends HttpServlet {
         }
         else if (!pw.equals(vpw)){
             resp.getWriter().write("<h2> Passwords don't match, please try again.</h2>");
+        }
+        else if(!emailCheck.validEmail()){
+            resp.getWriter().write(emailCheck.getErrorMessage());
         }
         else{
             LoginDAO.addUser(fn,ln,em,pw,cn,ad);
