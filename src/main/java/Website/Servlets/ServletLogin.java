@@ -22,6 +22,10 @@ public class ServletLogin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
+        String logOut = req.getParameter("logOut");
+        if (logOut.equals("Log Out")){
+            LoginDAO.resetTable("logged");
+        }
         String HTML = htmlOutput();
         //Retrieves info that user has entered - in HTML code, the input tags are named "email" and "pass" (lines 160-161)
         String em = req.getParameter("email");
@@ -42,11 +46,20 @@ public class ServletLogin extends HttpServlet {
 
     public String htmlOutput(){
         boolean userLoggedIn = LoginDAO.checkLoggedIn();
-        String userMessage = "";
+        String displayCurrentUser = "";
         User cUser = null;
         if (userLoggedIn == true) {
             cUser = LoginDAO.getCurrentUser();
-            userMessage = cUser.fname;
+            displayCurrentUser = "     <form name=\"logOut\" action=\"home\" method=\"post\">\n" +
+                    "       <div style=\"float: right;\" class=\"currentUser\">" + cUser.fname + "<i class=\"fa fa-fw fa-user\"></i>\n" +
+                    "           <div class=\"logOut\">\n" +
+                    "               <input class=\"logOutButton\" type=\"submit\" value=\"Log Out\">\n" +
+                    "           </div>\n" +
+                    "       </div>\n" +
+                    "    </form>\n";
+        }
+        else if (userLoggedIn == false){
+            displayCurrentUser = "<div class=\"currentUser\"><i class=\"fa fa-fw fa-user\"></i></div>";
         }
         int basketSize = LoginDAO.getBasketSize();
         String basketSizeOut="";
@@ -126,6 +139,33 @@ public class ServletLogin extends HttpServlet {
                 "           padding: 14px 16px;\n" +
                 "           text-decoration: none;\n" +
                 "        }\n" +
+                "        .currentUser{\n" +
+                "            position: relative;\n" +
+                "            float: right;\n" +
+                "            font-size: 16px;\n" +
+                "            color: white;\n" +
+                "            text-align: center;\n" +
+                "            padding: 14px 16px 4px 16px;\n" +
+                "            text-decoration: none;\n" +
+                "        }\n" +
+                "        .logOut{\n" +
+                "            position: absolute:\n" +
+                "            height: 10px;\n" +
+                "            bottom: 0px;\n" +
+                "            margin: 0px;\n" +
+                "            border: none;\n" +
+                "            background-color: transparent;\n" +
+                "            border: none;\n" +
+                "            font-size: 8px;\n" +
+                "            color: white;\n" +
+                "        }\n" +
+                "        .logOutButton{\n" +
+                "            background-color: transparent;\n" +
+                "            font-size: 8px;\n" +
+                "            color: white;\n" +
+                "            margin: 0px;\n" +
+                "            border: none;\n" +
+                "        }\n" +
                 "        .buttonStyle{\n" +
                 "            background-color: #00B8C5;\n" +
                 "            border: none;\n" +
@@ -157,7 +197,7 @@ public class ServletLogin extends HttpServlet {
                 "    <a style=\"background-color: #00B8C5;\"><i class=\"fa fa-fw fa-user\"></i>Login</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/basket\"><i style=\"width: 35px;\" class=\"fa fa-fw fa-shopping-basket\"><p style=\"display: inline; font-family: Arial; font-weight: bold\" id=\"basket\"> " + basketSizeOut + "</p></i></a>\n" +
-                "    <div class=\"currentUser\">" + userMessage + "<i class=\"fa fa-fw fa-user\"></i></div>\n" +
+                displayCurrentUser +
                 "</div>\n" +
                 "\n" +
                 "<h1>Login</h1>\n" +
