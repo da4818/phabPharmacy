@@ -68,7 +68,7 @@ public class ServletRegister extends HttpServlet {
             displayCurrentUser = "     <form name=\"logOut\" action=\"home\" method=\"post\">\n" +
                     "       <div style=\"float: right;\" class=\"currentUser\">" + cUser.fname + "<i class=\"fa fa-fw fa-user\"></i>\n" +
                     "           <div class=\"logOut\">\n" +
-                    "               <input class=\"logOutButton\" type=\"submit\" name=\"Log Out\" value=\"Log Out\">\n" +
+                    "               <input class=\"logOutButton\" type=\"submit\" name=\"logOut\" value=\"Log Out\">\n" +
                     "           </div>\n" +
                     "       </div>\n" +
                     "    </form>\n";
@@ -184,24 +184,6 @@ public class ServletRegister extends HttpServlet {
                 "            font-size: 16px;\n" +
                 "            margin: 4px 2px;\n" +
                 "            cursor: pointer;\n" +
-                "        }\n" +
-                "        .logOut{\n" +
-                "            position: absolute:\n" +
-                "            height: 10px;\n" +
-                "            bottom: 0px;\n" +
-                "            margin: 0px;\n" +
-                "            border: none;\n" +
-                "            background-color: transparent;\n" +
-                "            border: none;\n" +
-                "            font-size: 8px;\n" +
-                "            color: white;\n" +
-                "        }\n" +
-                "        .logOutButton{\n" +
-                "            background-color: transparent;\n" +
-                "            font-size: 8px;\n" +
-                "            color: white;\n" +
-                "            margin: 0px;\n" +
-                "            border: none;\n" +
                 "        }\n" +
                 "        input, textarea{\n" +
                 "            font-family: Arial, Helvetica, sans-serif;\n" +

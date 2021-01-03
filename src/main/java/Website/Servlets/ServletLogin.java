@@ -53,7 +53,7 @@ public class ServletLogin extends HttpServlet {
             displayCurrentUser = "     <form name=\"logOut\" action=\"home\" method=\"post\">\n" +
                     "       <div style=\"float: right;\" class=\"currentUser\">" + cUser.fname + "<i class=\"fa fa-fw fa-user\"></i>\n" +
                     "           <div class=\"logOut\">\n" +
-                    "               <input class=\"logOutButton\" type=\"submit\" name=\"Log Out\" value=\"Log Out\">\n" +
+                    "               <input class=\"logOutButton\" type=\"submit\" name=\"logOut\" value=\"Log Out\">\n" +
                     "           </div>\n" +
                     "       </div>\n" +
                     "    </form>\n";
@@ -187,6 +187,12 @@ public class ServletLogin extends HttpServlet {
                 "            font-size: 16px;\n" +
                 "            margin: 4px 2px;\n" +
                 "            cursor: pointer;\n" +
+                "        }\n" +
+                "        input{\n" +
+                "            font-family: Arial, Helvetica, sans-serif;\n" +
+                "            font-size: 16px;\n" +
+                "            width: 26em; \n" +
+                "            width: 40ch; \n" +
                 "        }\n" +
                 "    </style>\n" +
                 "</head>\n" +
