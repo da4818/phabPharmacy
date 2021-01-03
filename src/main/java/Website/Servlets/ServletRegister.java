@@ -1,5 +1,6 @@
 package Website.Servlets;
 
+import Website.Entities.EmailValidation;
 import Website.Entities.User;
 import Website.LoginDAO;
 
@@ -23,6 +24,10 @@ public class ServletRegister extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
+        String logOut = req.getParameter("logOut");
+        if (logOut.equals("Log Out")){
+            LoginDAO.resetTable("logged");
+        }
         String HTML = htmlOutput();
         String fn = req.getParameter("fname");
         String ln = req.getParameter("lname");
@@ -32,6 +37,7 @@ public class ServletRegister extends HttpServlet {
         String cn = req.getParameter("card_no");
         String ad = req.getParameter("postcode");
         resp.getWriter().write(HTML);
+        EmailValidation emailCheck = new EmailValidation(em,pw,vpw);
         if(LoginDAO.validateRegister(em)){ //checks database see if email exists in use database
             resp.getWriter().write("<h2> There is an existing account with the email entered. Please log in.</h2>");
         }
@@ -40,6 +46,9 @@ public class ServletRegister extends HttpServlet {
         }
         else if (!pw.equals(vpw)){
             resp.getWriter().write("<h2> Passwords don't match, please try again.</h2>");
+        }
+        else if(!emailCheck.validEmail()){
+            resp.getWriter().write(emailCheck.getErrorMessage());
         }
         else{
             LoginDAO.addUser(fn,ln,em,pw,cn,ad);
@@ -138,12 +147,31 @@ public class ServletRegister extends HttpServlet {
                 "            display: block;\n" +
                 "        }\n" +
                 "        .currentUser{\n" +
-                "           float: right;\n" +
-                "           font-size: 16px;\n" +
-                "           color: white;\n" +
-                "           text-align: center;\n" +
-                "           padding: 14px 16px;\n" +
-                "           text-decoration: none;\n" +
+                "            position: relative;\n" +
+                "            float: right;\n" +
+                "            font-size: 16px;\n" +
+                "            color: white;\n" +
+                "            text-align: center;\n" +
+                "            padding: 14px 16px 4px 16px;\n" +
+                "            text-decoration: none;\n" +
+                "        }\n" +
+                "        .logOut{\n" +
+                "            position: absolute:\n" +
+                "            height: 10px;\n" +
+                "            bottom: 0px;\n" +
+                "            margin: 0px;\n" +
+                "            border: none;\n" +
+                "            background-color: transparent;\n" +
+                "            border: none;\n" +
+                "            font-size: 8px;\n" +
+                "            color: white;\n" +
+                "        }\n" +
+                "        .logOutButton{\n" +
+                "            background-color: transparent;\n" +
+                "            font-size: 8px;\n" +
+                "            color: white;\n" +
+                "            margin: 0px;\n" +
+                "            border: none;\n" +
                 "        }\n" +
                 "        .buttonStyle{\n" +
                 "            background-color: #00B8C5;\n" +

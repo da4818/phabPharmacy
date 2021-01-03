@@ -22,6 +22,10 @@ public class ServletLogin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
+        String logOut = req.getParameter("logOut");
+        if (logOut.equals("Log Out")){
+            LoginDAO.resetTable("logged");
+        }
         String HTML = htmlOutput();
         //Retrieves info that user has entered - in HTML code, the input tags are named "email" and "pass" (lines 160-161)
         String em = req.getParameter("email");
@@ -126,6 +130,33 @@ public class ServletLogin extends HttpServlet {
                 "        }\n" +
                 "        .dropdown:hover .dropdown-content {\n" +
                 "            display: block;\n" +
+                "        }\n" +
+                "        .logOut{\n" +
+                "            position: absolute:\n" +
+                "            height: 10px;\n" +
+                "            bottom: 0px;\n" +
+                "            margin: 0px;\n" +
+                "            border: none;\n" +
+                "            background-color: transparent;\n" +
+                "            border: none;\n" +
+                "            font-size: 8px;\n" +
+                "            color: white;\n" +
+                "        }\n" +
+                "        .logOutButton{\n" +
+                "            background-color: transparent;\n" +
+                "            font-size: 8px;\n" +
+                "            color: white;\n" +
+                "            margin: 0px;\n" +
+                "            border: none;\n" +
+                "        }\n" +
+                "        .currentUser{\n" +
+                "            position: relative;\n" +
+                "            float: right;\n" +
+                "            font-size: 16px;\n" +
+                "            color: white;\n" +
+                "            text-align: center;\n" +
+                "            padding: 14px 16px 4px 16px;\n" +
+                "            text-decoration: none;\n" +
                 "        }\n" +
                 "        .logOut{\n" +
                 "            position: absolute:\n" +

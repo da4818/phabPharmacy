@@ -62,6 +62,10 @@ public class ServletBrowse extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
+        String logOut = req.getParameter("logOut");
+        if (logOut.equals("Log Out")){
+            LoginDAO.resetTable("logged");
+        }
         if (!LoginDAO.checkLoggedIn()){ //If no one is logged in, it will prevent them from adding items to their basket
             resp.getWriter().write("window.onload(alert(\"Please ensure that you have created an account and logged in before adding items to your basket.\"));");
         }
@@ -130,6 +134,7 @@ public class ServletBrowse extends HttpServlet {
         }
         return output;
     }
+
     public String htmlOutput(){
         boolean userLoggedIn = LoginDAO.checkLoggedIn();
         String displayCurrentUser = "";
@@ -232,6 +237,33 @@ public class ServletBrowse extends HttpServlet {
                 "            padding: 15px;\n" +
                 "            margin: 5px;\n" +
                 "            float: left;\n" +
+                "        }\n" +
+                "        .currentUser{\n" +
+                "            position: relative;\n" +
+                "            float: right;\n" +
+                "            font-size: 16px;\n" +
+                "            color: white;\n" +
+                "            text-align: center;\n" +
+                "            padding: 14px 16px 4px 16px;\n" +
+                "            text-decoration: none;\n" +
+                "        }\n" +
+                "        .logOut{\n" +
+                "            position: absolute:\n" +
+                "            height: 10px;\n" +
+                "            bottom: 0px;\n" +
+                "            margin: 0px;\n" +
+                "            border: none;\n" +
+                "            background-color: transparent;\n" +
+                "            border: none;\n" +
+                "            font-size: 8px;\n" +
+                "            color: white;\n" +
+                "        }\n" +
+                "        .logOutButton{\n" +
+                "            background-color: transparent;\n" +
+                "            font-size: 8px;\n" +
+                "            color: white;\n" +
+                "            margin: 0px;\n" +
+                "            border: none;\n" +
                 "        }\n" +
                 "        .buttonStyle{\n" +
                 "            background-color: #00B8C5;\n" +
