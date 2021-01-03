@@ -87,6 +87,15 @@
             margin: 4px 2px;
             cursor: pointer;
         }
+        input, textarea{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            width: 26em; /* fallback for the next one, for browsers not recognizing ch */
+            width: 40ch; /* sets the width to 40 times the width of the digit “0” */
+        }
+        textarea::placeholder {
+            font-family: Arial, Helvetica, sans-serif;
+        }
     </style>
 </head>
 <body>
@@ -110,18 +119,26 @@
 </div>
 <h1>>Register</h1>
 <p> Register below. If you already have an account, <a href="https://phabpharmacy.herokuapp.com/login"> login here.</a>
-    <form name="registerForm" action="registration_status" method="post">
-        <input type="text" size="30" class="form-control" name="fname" placeholder="First Name*"><br>
-        <input type="text" size="30" class="form-control" name="lname" placeholder="Last Name*"><br>
-        <input type="text" size="30" class="form-control" name="email" placeholder="Email Address*"><br>
-        <input type="text" size="30" class="form-control" name="pass" placeholder="Password*"><br>
-        <input type="text" size="30" class="form-control" name="verifyPass" placeholder="Verify Password*"><br>
-        <h3>Order Info</h3>
-        <input type="text" size="30" class="form-control" name="sortcode" placeholder="Sort Code*"><br>
-        <input type="text" size="30" class="form-control" name="cardno" placeholder="Card Number*"><br>
-        <input type="text" size="30" class="form-control" name="address" placeholder="Postcode*"><br>
-        <input type="submit" class="buttonStyle" value="Submit">
-    </form>
+<form name="registerForm" action="register" method="post">
+    <input type="text" size="30" class="form-control" name="fname" placeholder="First Name*"><br>
+    <input type="text" size="30" class="form-control" name="lname" placeholder="Last Name*"><br>
+    <input type="text" size="30" class="form-control" name="email" placeholder="Email Address*"><br>
+    <input type="text" size="30" class="form-control" name="pass" placeholder="Password*"><br>
+    <input type="text" size="30" class="form-control" name="verify_pass" placeholder="Verify Password*"><br>
+    <h3>Order Information<br><b style="font-size: 15px;">Payment Information</b></h3>
+
+    <input type="text" size="30" class="form-control" name="card_no" placeholder="Card Number*"><br>
+    <input type="text" size="30" class="form-control" name="sort_code" placeholder="Sort Code*"><br>
+    <input type="text" size="30" class="form-control" name="account_no" placeholder="Account Number*"><br>
+    <input type="text" size="30" class="form-control" name="cvv" placeholder="CVV*"><br>
+
+    <h3 style="font-size: 15px;">Shipping Information</h3>
+    <textarea name="addresss" cols="30" rows="4" placeholder="Address"></textarea><br>
+    <input type="text" size="30" class="form-control" name="postcode" placeholder="Postcode*"><br>
+    <input type="text" size="30" class="form-control" name="phone_no" placeholder="Phone Number"><br>
+
+    <input type="submit" class="buttonStyle" value="Submit">
+</form>
 <%-- doPost response
 <h2>There is an existing account with the email entered. Please log in.</h2>
 <h2>Incomplete fields, please enter all the information.</h2>

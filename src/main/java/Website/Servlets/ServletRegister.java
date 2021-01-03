@@ -148,6 +148,15 @@ public class ServletRegister extends HttpServlet {
                 "            margin: 4px 2px;\n" +
                 "            cursor: pointer;\n" +
                 "        }\n" +
+                "        input, textarea{\n" +
+                "            font-family: Arial, Helvetica, sans-serif;\n" +
+                "            font-size: 16px;\n" +
+                "            width: 26em; \n" +
+                "            width: 40ch; \n" +
+                "        }\n" +
+                "        textarea::placeholder {\n" +
+                "            font-family: Arial, Helvetica, sans-serif;\n" +
+                "        }\n" +
                 "    </style>\n" +
                 "</head>\n" +
                 "<body>\n" +
