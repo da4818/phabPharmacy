@@ -33,6 +33,8 @@ public class ServletHome extends HttpServlet {
         if (logOut.equals("Log Out")){
             LoginDAO.resetTable("logged");
         }
+        String HTML = htmlOutput();
+        resp.getWriter().write(HTML);
     }
 
     //Creating a function to return a string literal of the HTML code to put into the doGet and doPost functions uses fewer lines of code and is easier to amend
