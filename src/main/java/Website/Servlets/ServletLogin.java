@@ -64,7 +64,7 @@ public class ServletLogin extends HttpServlet {
         int basketSize = LoginDAO.getBasketSize();
         String basketSizeOut="";
         if (basketSize != 0){ basketSizeOut = String.valueOf(basketSize);}
-        return "<!DOCTYPE html>\n" +
+        return "<!DOCTYPE html>\n" + //HTML comments are on the respective .jsp files
                 "<html>\n" +
                 "<head>\n" +
                 "    <title>Login</title>\n" +

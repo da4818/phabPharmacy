@@ -35,13 +35,16 @@ public class ServletRegister extends HttpServlet {
         String pw = req.getParameter("pass");
         String vpw = req.getParameter("verify_pass");
         String cn = req.getParameter("card_no");
+        String cvv = req.getParameter("cvv");
+        String sc = req.getParameter("sort_code");
+        String an = req.getParameter("account_no");
         String ad = req.getParameter("postcode");
         resp.getWriter().write(HTML);
         EmailValidation emailCheck = new EmailValidation(em,pw,vpw);
-        if(LoginDAO.validateRegister(em)){ //checks database see if email exists in use database
+        if(LoginDAO.validateRegister(em)){ //Checks database to see if email exists in use database
             resp.getWriter().write("<h2> There is an existing account with the email entered. Please log in.</h2>");
         }
-        else if (fn.isEmpty() || ln.isEmpty() || em.isEmpty() || pw.isEmpty() || vpw.isEmpty() || cn.isEmpty() || ad.isEmpty()){
+        else if (fn.isEmpty() || ln.isEmpty() || em.isEmpty() || pw.isEmpty() || vpw.isEmpty() || cn.isEmpty() || cvv.isEmpty()|| sc.isEmpty() || an.isEmpty() || ad.isEmpty()){ //Checks if any of the required fields are empty
             resp.getWriter().write("<h2>Incomplete fields, please enter all the information.</h2>");
         }
         else if (!pw.equals(vpw)){
@@ -63,7 +66,7 @@ public class ServletRegister extends HttpServlet {
         boolean userLoggedIn = LoginDAO.checkLoggedIn();
         String displayCurrentUser = "";
         User cUser = null;
-        if (userLoggedIn == true) { //If a user is logged in, userMessage will be displayed on the header (see line 144)
+        if (userLoggedIn == true) { //If a user is logged in, the current user and a 'log out' button will be displayed on the header (see line 144)
             cUser = LoginDAO.getCurrentUser();
             displayCurrentUser = "     <form name=\"logOut\" action=\"home\" method=\"post\">\n" +
                     "       <div style=\"float: right;\" class=\"currentUser\">" + cUser.fname + "<i class=\"fa fa-fw fa-user\"></i>\n" +
@@ -73,13 +76,13 @@ public class ServletRegister extends HttpServlet {
                     "       </div>\n" +
                     "    </form>\n";
         }
-        else if (userLoggedIn == false){
+        else if (userLoggedIn == false){ //If no user is logged in, a blank icon image will be displayed
             displayCurrentUser = "<div class=\"currentUser\"><i class=\"fa fa-fw fa-user\"></i></div>";
         }
         int basketSize = LoginDAO.getBasketSize();
         String basketSizeOut="";
         if (basketSize != 0){ basketSizeOut = String.valueOf(basketSize);}
-        return "<!DOCTYPE html>\n" +
+        return "<!DOCTYPE html>\n" + //HTML comments are on the respective .jsp files
                 "<html>\n" +
                 "<head>\n" +
                 "    <meta charset=\"utf-8\">\n" +
