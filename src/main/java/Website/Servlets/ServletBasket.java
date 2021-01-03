@@ -49,6 +49,7 @@ public class ServletBasket extends HttpServlet {
                         "    <input name=\"basketButtonNumber\" type=\"hidden\"value=\"" + i + "\">\n" +
                         "    <input name=\"basketItemId\" type=\"hidden\"value=\"" + b.id + "\">\n" +
                         "    <input name=\"update\" style=\"margin-left: 0px;\" type=\"submit\" class=\"buttonStyle\" value=\"Update\">\n" +
+                        "    <input type=\"hidden\" name=\"logOut\" value=\"false\">\n" +
                         "    <button name=\"update\" type=\"submit\" class=\"buttonStyle\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button>\n" +
                         "    </form>\n" +
                         "  </div>\n" +

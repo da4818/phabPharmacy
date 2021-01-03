@@ -22,7 +22,7 @@ public class ServletLogin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        String logOut = req.getParameter("logOut");
+        String logOut = req.getParameter("logOut"); //If this input button doesn't exist, it will result in a nullPointerException error - line 225
         if (logOut.equals("Log Out")){
             LoginDAO.resetTable("logged");
         }
@@ -222,7 +222,7 @@ public class ServletLogin extends HttpServlet {
                 "<form name=\"loginForm\" action=\"login\" method=\"post\">\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"email\" placeholder=\"Email Address*\"><br>\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"pass\" placeholder=\"Password*\"><br>\n" +
-                "        <input type=\"hidden\" name=\"logOut\" value=\"false\">\n" +
+                "        <input type=\"hidden\" name=\"logOut\" value=\"false\">\n" + // a hidden input tag is added to prevent nullPointer errors (line 25)
                 "        <input type=\"submit\" class=\"buttonStyle\" value=\"Submit\">\n" +
                 "</form>\n" +
                 "<script>\n" +
