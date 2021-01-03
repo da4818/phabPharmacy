@@ -52,11 +52,20 @@ public class ServletRegister extends HttpServlet {
 
     public String htmlOutput(){
         boolean userLoggedIn = LoginDAO.checkLoggedIn();
-        String userMessage = "";
+        String displayCurrentUser = "";
         User cUser = null;
-        if (userLoggedIn == true) {
+        if (userLoggedIn == true) { //If a user is logged in, userMessage will be displayed on the header (see line 144)
             cUser = LoginDAO.getCurrentUser();
-            userMessage = cUser.fname;
+            displayCurrentUser = "     <form name=\"logOut\" action=\"home\" method=\"post\">\n" +
+                    "       <div style=\"float: right;\" class=\"currentUser\">" + cUser.fname + "<i class=\"fa fa-fw fa-user\"></i>\n" +
+                    "           <div class=\"logOut\">\n" +
+                    "               <input class=\"logOutButton\" type=\"submit\" value=\"Log Out\">\n" +
+                    "           </div>\n" +
+                    "       </div>\n" +
+                    "    </form>\n";
+        }
+        else if (userLoggedIn == false){
+            displayCurrentUser = "<div class=\"currentUser\"><i class=\"fa fa-fw fa-user\"></i></div>";
         }
         int basketSize = LoginDAO.getBasketSize();
         String basketSizeOut="";
@@ -148,6 +157,24 @@ public class ServletRegister extends HttpServlet {
                 "            margin: 4px 2px;\n" +
                 "            cursor: pointer;\n" +
                 "        }\n" +
+                "        .logOut{\n" +
+                "            position: absolute:\n" +
+                "            height: 10px;\n" +
+                "            bottom: 0px;\n" +
+                "            margin: 0px;\n" +
+                "            border: none;\n" +
+                "            background-color: transparent;\n" +
+                "            border: none;\n" +
+                "            font-size: 8px;\n" +
+                "            color: white;\n" +
+                "        }\n" +
+                "        .logOutButton{\n" +
+                "            background-color: transparent;\n" +
+                "            font-size: 8px;\n" +
+                "            color: white;\n" +
+                "            margin: 0px;\n" +
+                "            border: none;\n" +
+                "        }\n" +
                 "        input, textarea{\n" +
                 "            font-family: Arial, Helvetica, sans-serif;\n" +
                 "            font-size: 16px;\n" +
@@ -176,7 +203,7 @@ public class ServletRegister extends HttpServlet {
                 "    <a href=\"https://phabpharmacy.herokuapp.com/login\"><i class=\"fa fa-fw fa-user\"></i>Login</a>\n" +
                 "    <a style=\"background-color: #00B8C5;\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/basket\"><i style=\"width: 35px;\" class=\"fa fa-fw fa-shopping-basket\"><p style=\"display: inline; font-family: Arial; font-weight: bold\" id=\"basket\"> " + basketSizeOut + "</p></i></a>\n" +
-                "    <div class=\"currentUser\">" + userMessage + "<i class=\"fa fa-fw fa-user\"></i></div>\n" +
+                displayCurrentUser +
                 "</div>\n" +
                 "\n" +
                 "<h1>Register</h1>\n" +
