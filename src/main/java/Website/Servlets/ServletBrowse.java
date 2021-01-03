@@ -63,7 +63,7 @@ public class ServletBrowse extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         if (!LoginDAO.checkLoggedIn()){ //If no one is logged in, it will prevent them from adding items to their basket
-            resp.getWriter().write("window.onload(alert(\"Please ensure that you have created an account and logged in before adding items to your basket.\"))");
+            resp.getWriter().write("window.onload(alert(\"Please ensure that you have created an account and logged in before adding items to your basket.\"));");
         }
         if(LoginDAO.checkLoggedIn()){
             int pos = Integer.parseInt(req.getParameter("buttonNumber"));

@@ -23,7 +23,7 @@ public class ServletHome extends HttpServlet {
         //LoginDAO.resetTable("logged");
         //LoginDAO.resetTable("basket");
         resp.setContentType("text/html");
-        String HTML=htmlOutput();
+        String HTML = htmlOutput();
         resp.getWriter().write(HTML);
     }
     @Override
