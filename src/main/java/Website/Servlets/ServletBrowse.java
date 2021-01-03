@@ -105,9 +105,9 @@ public class ServletBrowse extends HttpServlet {
         }
         if (!LoginDAO.checkLoggedIn()){ //If no one is logged in, it will prevent them from adding items to their basket
             //resp.getWriter().write("window.onload(alert(\"Please ensure that you have created an account and logged in before adding items to your basket.\"))");
-            resp.getWriter().write("<script>window.onload = function() {\n" +
+            resp.getWriter().write("<pre><script>window.onload = function() {\n" +
                     "  alert('Page is loaded');\n" +
-                    "});\n</script>");
+                    "});\n</script></pre>");
         }
         resp.getWriter().write("</body>\n" +
                 "</html>");
