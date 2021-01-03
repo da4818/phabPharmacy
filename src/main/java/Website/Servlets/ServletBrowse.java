@@ -144,7 +144,7 @@ public class ServletBrowse extends HttpServlet {
             displayCurrentUser = "     <form name=\"logOut\" action=\"home\" method=\"post\">\n" +
                     "       <div style=\"float: right;\" class=\"currentUser\">" + cUser.fname + "<i class=\"fa fa-fw fa-user\"></i>\n" +
                     "           <div class=\"logOut\">\n" +
-                    "               <input class=\"logOutButton\" type=\"submit\" value=\"Log Out\">\n" +
+                    "               <input class=\"logOutButton\" type=\"submit\" name=\"Log Out\" value=\"Log Out\">\n" +
                     "           </div>\n" +
                     "       </div>\n" +
                     "    </form>\n";
