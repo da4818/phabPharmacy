@@ -63,6 +63,10 @@ public class ServletBrowse extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         if (!LoginDAO.checkLoggedIn()){ //If no one is logged in, it will prevent them from adding items to their basket
+            //resp.getWriter().write("window.onload(alert(\"Please ensure that you have created an account and logged in before adding items to your basket.\"))");
+            resp.getWriter().write("<script>window.addEventListener(\"load\", function() {\n" +
+                    "  alert('Page is loaded');\n" +
+                    "});\n</script>");
         }
         else{
             int pos = Integer.parseInt(req.getParameter("buttonNumber"));
@@ -131,10 +135,6 @@ public class ServletBrowse extends HttpServlet {
     }
     public String htmlOutput(){
         boolean userLoggedIn = LoginDAO.checkLoggedIn();
-        String notLoggedInMessage="";
-        if (!LoginDAO.checkLoggedIn()){ //If no one is logged in, it will prevent them from adding items to their basket
-            notLoggedInMessage = "onload=\"notLoggedIn()\";";
-        }
         String userMessage = "";
         User cUser = null;
         if (userLoggedIn == true) {
@@ -289,13 +289,8 @@ public class ServletBrowse extends HttpServlet {
                 "           text-decoration: none;\n" +
                 "        }\n" +
                 "    </style>\n" +
-                "<script>\n" +
-                "  function notLoggedIn(){\n" +
-                "    alert(\"Please ensure that you have created an account and logged in before adding items to your basket.\");\n" +
-                "  }\n" +
-                "</script>" +
                 "</head>\n" +
-                "<body" + notLoggedInMessage + ">\n" +
+                "<body>\n" +
                 "<div class=\"navbar\">\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/home\"><i class=\"fa fa-fw fa-home\"></i>Home</a>\n" +
                 "    <div class=\"dropdown\">\n" +
