@@ -32,7 +32,8 @@ public class ServletRegister extends HttpServlet {
         String cn = req.getParameter("card_no");
         String ad = req.getParameter("postcode");
         resp.getWriter().write(HTML);
-        if(LoginDAO.validateRegister(em)){ //checks database see if email exists in use database
+        boolean validRegistration = true;
+        if(validRegistration){ //checks database see if email exists in use database
             resp.getWriter().write("<h2> There is an existing account with the email entered. Please log in.</h2>");
         }
         else if (fn.isEmpty() || ln.isEmpty() || em.isEmpty() || pw.isEmpty() || vpw.isEmpty() || cn.isEmpty() || ad.isEmpty()){
@@ -43,7 +44,8 @@ public class ServletRegister extends HttpServlet {
         }
         else{
             LoginDAO.addUser(fn,ln,em,pw,cn,ad);
-            User currentUser = LoginDAO.getUser(em,pw);
+            User currentUser = new User(); //function that returns entries from customer into DB
+            currentUser.fname = "tim";
             LoginDAO.setLoggedInUser(currentUser);
             LoginDAO.resetTable("basket");
             resp.getWriter().write("<h2>Successful registration. Welcome, " + currentUser.fname + "</h2>");
@@ -52,7 +54,7 @@ public class ServletRegister extends HttpServlet {
 
     public String htmlOutput(){
         boolean userLoggedIn = LoginDAO.checkLoggedIn();
-        String userMessage = " ";
+        String userMessage = "";
         User cUser = null;
         if (userLoggedIn == true) {
             cUser = LoginDAO.getCurrentUser();
