@@ -62,13 +62,7 @@ public class ServletBrowse extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        if (!LoginDAO.checkLoggedIn()){ //If no one is logged in, it will prevent them from adding items to their basket
-            //resp.getWriter().write("window.onload(alert(\"Please ensure that you have created an account and logged in before adding items to your basket.\"))");
-            resp.getWriter().write("<script>window.addEventListener(\"load\", function() {\n" +
-                    "  alert('Page is loaded');\n" +
-                    "});\n</script>");
-        }
-        else{
+        if(LoginDAO.checkLoggedIn()){
             int pos = Integer.parseInt(req.getParameter("buttonNumber"));
             int q = Integer.parseInt(req.getParameter("basketQuantity"));
             Product pBasket = LoginDAO.getProduct(pos);
@@ -108,6 +102,12 @@ public class ServletBrowse extends HttpServlet {
                 p = LoginDAO.getProduct(j);
             }
             resp.getWriter().write("</section>");
+        }
+        if (!LoginDAO.checkLoggedIn()){ //If no one is logged in, it will prevent them from adding items to their basket
+            //resp.getWriter().write("window.onload(alert(\"Please ensure that you have created an account and logged in before adding items to your basket.\"))");
+            resp.getWriter().write("<script>window.onload = function() {\n" +
+                    "  alert('Page is loaded');\n" +
+                    "});\n</script>");
         }
         resp.getWriter().write("</body>\n" +
                 "</html>");
