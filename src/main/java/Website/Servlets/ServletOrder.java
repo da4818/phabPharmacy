@@ -71,7 +71,7 @@ public class ServletOrder extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException { //No logout feature when confirming order
         resp.setContentType("text/html");
         String HTML = htmlOutput();
-        resp.getWriter().write(HTML); //There is no information request in the ServletOrder doPost - there is only one button (the only possible way) that will redirect to this doPost in particular
+        resp.getWriter().write(HTML); //There is no information request in the ServletOrder doPost - the only possible way to redirect to this doPost in particular is through clicking 'Confirm Order' button
         LoginDAO.resetTable("basket");
         resp.getWriter().write("<h2>Order confirmed!</h2>");
 
@@ -175,7 +175,7 @@ public class ServletOrder extends HttpServlet {
                 "            text-decoration: none;\n" +
                 "        }\n" +
                 "        .logOut{\n" +
-                "            position: absolute:\n" +
+                "            position: absolute;\n" +
                 "            height: 10px;\n" +
                 "            bottom: 0px;\n" +
                 "            margin: 0px;\n" +

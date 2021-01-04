@@ -74,12 +74,31 @@
           display: block;
       }
       .currentUser{
-         float: right;
-         font-size: 16px;
-         color: white;
-         text-align: center;
-         padding: 14px 16px;
-         text-decoration: none;
+           position: relative;
+           float: right;
+           font-size: 16px;
+           color: white;
+           text-align: center;
+           padding: 14px 16px 4px 16px;
+           text-decoration: none;
+      }
+      .logOut{
+           position: absolute;
+           height: 10px;
+           bottom: 0px;
+           margin: 0px;
+           border: none;
+           background-color: transparent;
+           border: none;
+           font-size: 8px;
+           color: white;
+      }
+      .logOutButton{
+           background-color: transparent;
+           font-size: 8px;
+           color: white;
+           margin: 0px;
+           border: none;
       }
       div.confirmContainer{
         position: absolute;
@@ -141,10 +160,10 @@
     </div>
     <a href="https://phabpharmacy.herokuapp.com/login"><i class="fa fa-fw fa-user"></i>Login</a>
     <a href="https://phabpharmacy.herokuapp.com/register"><i class="fa fa-fw fa-user-plus"></i>Register</a>
-    <a href="https://phabpharmacy.herokuapp.com/basket" style="background-color: #00B8C5; width: 35px;" class="fa fa-fw fa-shopping-basket"><b id="basket"></b></a>
-    <div class="currentUser"><!--Current User's name--><i class="fa fa-fw fa-user"></i></div>
+    <a href="https://phabpharmacy.herokuapp.com/basket" style="background-color: #00B8C5; width: 35px;"><i style="width: 35px;" class="fa fa-fw fa-shopping-basket"><p style="display: inline; font-family: Arial; font-weight: bold" id="basket"><!--Basket Quantity--></p></i></a>
+    <div class="currentUser"><!--Current User's Name--><i class="fa fa-fw fa-user"></i></div>
 </div>
-<!-- -->
+
 <h1>Confirm Order</h1>
 <!-- doGet method -->
 <div class="addressContainer">
@@ -175,4 +194,4 @@
 </script>
 </body>
 </html>
-
+<!-- -->
