@@ -15,10 +15,16 @@ import java.io.IOException;
 public class ServletRegister extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //UserDB udb = new UserDB();
         resp.setContentType("text/html");
         String output = htmlOutput();
         resp.getWriter().write(output);
+        resp.getWriter().write("<script>\n" +
+                "    function redirectBrowse(){\n" +
+                "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
+                "    }\n" +
+                "</script>\n" +
+                "</body>\n" +
+                "</html>");
     }
 
     @Override
@@ -63,6 +69,13 @@ public class ServletRegister extends HttpServlet {
             LoginDAO.resetTable("basket");
             resp.getWriter().write("<h2>Successful registration. Welcome, " + currentUser.fname + "</h2>");
         }
+        resp.getWriter().write("<script>\n" +
+                "    function redirectBrowse(){\n" +
+                "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
+                "    }\n" +
+                "</script>\n" +
+                "</body>\n" +
+                "</html>");
     }
 
     public String htmlOutput(){
@@ -244,13 +257,6 @@ public class ServletRegister extends HttpServlet {
                 "  \n" +
                 "  <input type=\"hidden\" name=\"logOut\" value=\"false\">\n" +
                 "  <input type=\"submit\" class=\"buttonStyle\" value=\"Submit\">\n" +
-                "</form>\n" +
-                "<script>\n" +
-                "    function redirectBrowse(){\n" +
-                "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
-                "    }\n" +
-                "</script>\n" +
-                "</body>\n" +
-                "</html>";
+                "</form>\n";
     }
 }

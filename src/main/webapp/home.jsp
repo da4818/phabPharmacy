@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!-- doGet and doPost (display same HTML) -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,20 +76,39 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
-        .currentUser{
-        float: right;
-        font-size: 16px;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
+        .currentUser{ <%-- This is the section to contain the logged in user's icon and name --%>
+            position: relative;
+            float: right;
+            font-size: 16px;
+            color: white;
+            text-align: center;
+            padding: 14px 16px 4px 16px;
+            text-decoration: none;
+        }
+        .logOut{
+            position: absolute;
+            height: 10px;
+            bottom: 0px;
+            margin: 0px;
+            border: none;
+            background-color: transparent;
+            border: none;
+            font-size: 8px;
+            color: white;
+        }
+        .logOutButton{
+            background-color: transparent;
+            font-size: 8px;
+            color: white;
+            margin: 0px;
+            border: none;
         }
     </style>
 
 </head>
 <body>
 <div class="navbar">
-    <a style="background-color: #00B8C5"><i class="fa fa-fw fa-home"></i>Home</a>
+    <a style="background-color: #00B8C5"><i class="fa fa-fw fa-home"></i>Home</a> <%-- Tab coloured in blue to indicate it's the active tab --%>
     <div class="dropdown">
         <button style="cursor: pointer;" class= "dropbtn" onclick="redirectBrowse()"><i class="fa fa-fw fa-search"></i>Browse<i class="fa fa-caret-down"></i></button>
         <div class="dropdown-content">
@@ -103,7 +123,19 @@
     <a href="https://phabpharmacy.herokuapp.com/login"><i class="fa fa-fw fa-user"></i>Login</a>
     <a href="https://phabpharmacy.herokuapp.com/register"><i class="fa fa-fw fa-user-plus"></i>Register</a>
     <a href="https://phabpharmacy.herokuapp.com/basket" style="width: 35px;" class="fa fa-fw fa-shopping-basket"><b id="basket"></b></a>
-    <div class="currentUser"><!--current user's name--><i class="fa fa-fw fa-user"></i></div>
+    <!-- If a user is logged in -->
+    <form name="logOut" action="home" method="post"> <!-- A form is needed to process the log out button -->
+        <div style="float: right;" class="currentUser">" + cUser.fname + "<i class="fa fa-fw fa-user"></i>
+            <div class="logOut">
+                <input class="logOutButton" type="submit" name="logOut" value="Log Out">
+            </div>
+        </div>
+    </form>
+    <!---------------------------->
+
+    <!-- If no one is logged in -->
+    <div class="currentUser"><i class="fa fa-fw fa-user"></i></div>
+    <!---------------------------->
 </div>
 <h1><center> PhabPharmacy </center></h1>
 <h2><center> Welcome to the PhabPharmacy's home page!<br>Please login or register to create an account.</center></h2>

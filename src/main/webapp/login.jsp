@@ -73,6 +73,33 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
+        .currentUser{ <%-- This is the section to contain the logged in user's icon and name --%>
+            position: relative;
+            float: right;
+            font-size: 16px;
+            color: white;
+            text-align: center;
+            padding: 14px 16px 4px 16px;
+            text-decoration: none;
+        }
+        .logOut{
+            position: absolute;
+            height: 10px;
+            bottom: 0px;
+            margin: 0px;
+            border: none;
+            background-color: transparent;
+            border: none;
+            font-size: 8px;
+            color: white;
+        }
+        .logOutButton{
+            background-color: transparent;
+            font-size: 8px;
+            color: white;
+            margin: 0px;
+            border: none;
+        }
         .buttonStyle{
             background-color: #00B8C5;
             border: none;
@@ -84,6 +111,12 @@
             font-size: 16px;
             margin: 4px 2px;
             cursor: pointer;
+        }
+        input{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            width: 26em; 
+            width: 40ch; 
         }
     </style>
 </head>
@@ -101,10 +134,22 @@
             <a href="https://phabpharmacy.herokuapp.com/browse#first_aid">First Aid</a>
         </div>
     </div>
-    <a style="background-color: #00B8C5"><i class="fa fa-fw fa-user"></i>Login</a>
+    <a style="background-color: #00B8C5"><i class="fa fa-fw fa-user"></i>Login</a> <%-- Tab coloured in blue to indicate it's the active tab --%>
     <a href="https://phabpharmacy.herokuapp.com/register"><i class="fa fa-fw fa-user-plus"></i>Register</a>
     <a href="https://phabpharmacy.herokuapp.com/basket" style="width: 35px;" class="fa fa-fw fa-shopping-basket"><b style="font-family: Arial;" id="basket">basketNumber</b></a>
-    <div class="currentUser"><!--current user's name--><i class="fa fa-fw fa-user"></i></div>
+    <!-- If a user is logged in -->
+    <form name="logOut" action="home" method="post"> <!-- A form is needed to process the log out button -->
+        <div style="float: right;" class="currentUser">" + cUser.fname + "<i class="fa fa-fw fa-user"></i>
+            <div class="logOut">
+                <input class="logOutButton" type="submit" name="logOut" value="Log Out">
+            </div>
+        </div>
+    </form>
+    <!---------------------------->
+
+    <!-- If no one is logged in -->
+    <div class="currentUser"><i class="fa fa-fw fa-user"></i></div>
+    <!---------------------------->
 </div>
 
 <h1><center>Login</center></h1>
@@ -113,12 +158,17 @@
 <form name="loginForm" action="login" method="post">
         <input type="text" size="30" class="form-control" name="email" placeholder="Email Address*"><br>
         <input type="text" size="30" class="form-control" name="pass" placeholder="Password*"><br>
+        <input type="hidden" name="logOut" value="false">  <!--a hidden input tag is added to prevent nullPointer errors (in ServletLogin) -->
         <input type="submit" class="buttonStyle" value="Submit">
 </form>
-<%-- doPost response
-<h2>Welcome back, " + currentUser.fname + "!</h2>
+<!-- doPost -->
+<!-- Passes all checks -->
+<h2>Welcome back, <!-- User's name -->!</h2>
+<!-- Incomplete fields: email and/or password -->
 <h2>Incomplete fields, please enter all the information.</h2>
-<h2>Wrong email or password, please try again.</h2>--%>
+<!-- If email and password don't match with an entry on the database -->
+<h2>Wrong email or password, please try again.</h2>
+<!-- doPost includes lines 172-181 -->
 <script>
     function refreshPage(){
         location.reload()
@@ -129,4 +179,9 @@
 </script>
 </body>
 </html>
+
+
+
+
+
 

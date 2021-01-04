@@ -73,47 +73,38 @@
       .dropdown:hover .dropdown-content {
           display: block;
       }
-      .currentUser{
-           position: relative;
-           float: right;
-           font-size: 16px;
-           color: white;
-           text-align: center;
-           padding: 14px 16px 4px 16px;
-           text-decoration: none;
+      .currentUser{ <%-- This is the section to contain the logged in user's icon and name --%>
+          position: relative;
+          float: right;
+          font-size: 16px;
+          color: white;
+          text-align: center;
+          padding: 14px 16px 4px 16px;
+          text-decoration: none;
       }
       .logOut{
-           position: absolute;
-           height: 10px;
-           bottom: 0px;
-           margin: 0px;
-           border: none;
-           background-color: transparent;
-           border: none;
-           font-size: 8px;
-           color: white;
+          position: absolute;
+          height: 10px;
+          bottom: 0px;
+          margin: 0px;
+          border: none;
+          background-color: transparent;
+          border: none;
+          font-size: 8px;
+          color: white;
       }
       .logOutButton{
-           background-color: transparent;
-           font-size: 8px;
-           color: white;
-           margin: 0px;
-           border: none;
-      }
-      div.confirmContainer{
-        position: absolute;
-        width: 270px;
-        height: 70px;
-        right: -1px;
-        bottom: -87px;
-        padding: 0px 0px 15px 20px;
-        border: 1px solid black;
+          background-color: transparent;
+          font-size: 8px;
+          color: white;
+          margin: 0px;
+          border: none;
       }
       div.basketContainer{
-        width: 350px;
-        margin: 0px;
-        padding: 0px 0px 20px 20px;
-        border: 1px solid black;
+          width: 350px;
+          margin: 0px;
+          padding: 0px 0px 20px 20px;
+          border: 1px solid black;
       }
       div.addressContainer {
         position: relative;
@@ -122,6 +113,15 @@
         padding: 0px 0px 10px 20px;
         margin: 0px 50px 0px 0px;
         border: 1px solid black;
+      }
+      div.confirmContainer{
+          position: absolute; <%-- A section with an 'absolute' position will be placed relatively, when inside a container with a 'relative' position--%>
+          width: 270px;
+          height: 70px;
+          right: -1px; <%-- The RHS will be place exactly on the addressContainer's RH border (the -1px is to account for the 1px thick border) --%>
+          bottom: -87px;<%-- Similar to line above, but relative to bottom of addressContainer (-87px gives aesthetic spacing) --%>
+          padding: 0px 0px 15px 20px;
+          border: 1px solid black;
       }
       .buttonStyle{
           background-color: #51B5C2; 
@@ -137,10 +137,6 @@
       }
       section{
         display: table-row;
-      }
-      .tooltip{
-        position: relative;
-        display: inline;
       }
   </style>
 "</head>
@@ -161,31 +157,44 @@
     <a href="https://phabpharmacy.herokuapp.com/login"><i class="fa fa-fw fa-user"></i>Login</a>
     <a href="https://phabpharmacy.herokuapp.com/register"><i class="fa fa-fw fa-user-plus"></i>Register</a>
     <a href="https://phabpharmacy.herokuapp.com/basket" style="background-color: #00B8C5; width: 35px;"><i style="width: 35px;" class="fa fa-fw fa-shopping-basket"><p style="display: inline; font-family: Arial; font-weight: bold" id="basket"><!--Basket Quantity--></p></i></a>
-    <div class="currentUser"><!--Current User's Name--><i class="fa fa-fw fa-user"></i></div>
+    <%-- Tab coloured in blue to indicate it's the active tab --%>
+    <!-- If a user is logged in -->
+    <form name="logOut" action="home" method="post"> <!-- A form is needed to process the log out button -->
+        <div style="float: right;" class="currentUser">" + cUser.fname + "<i class="fa fa-fw fa-user"></i>
+            <div class="logOut">
+                <input class="logOutButton" type="submit" name="logOut" value="Log Out">
+            </div>
+        </div>
+    </form>
+    <!---------------------------->
+
+    <!-- If no one is logged in -->
+    <div class="currentUser"><i class="fa fa-fw fa-user"></i></div>
+    <!---------------------------->
 </div>
 
 <h1>Confirm Order</h1>
-<!-- doGet method -->
+<!-- doPost -->
+<h2>Order Confirmed!</h2>
+<!-- doPost includes lines 199-205 -->
+
+<!-- doGet -->
 <div class="addressContainer">
-    <form id="updateBasket" action="order" method="post"> 
-        <p style="display: inline-block; margin-bottom: 0px;"><b>Shipping Address</b></p>
-        <p><!--Name--><br><!--Shipping Address--><br><!--Payment details--></p>
-        <button href="https://phabpharmacy.herokuapp.com/basket" class="buttonStyle">Edit Details</button>
-    </form>
+    <p style="display: inline-block; margin-bottom: 0px;"><b>Shipping Address</b></p>
+    <p>" + u.fname + " " + u.lname + "<br>" + u.postcode + "<br>Payment</p>
+    <button onclick="window.location.href='https://phabpharmacy.herokuapp.com/amend_details';"class="buttonStyle">Edit Details</button>
     <div class="confirmContainer">
-        <p>Total Cost: <b>£<!--Final total--></b></p>
-        <form action="order" method="post">
-            <input type="submit" class="buttonStyle" value="Confirm Order">
-        </form>
-    </div>
-</div>
+        <p>Total Cost: <b>£" + total +"</b></p>
+        <form id="confirmOrder" action="order" method="post">
+              <input type="submit" name="orderResponse" class="buttonStyle" value="Confirm Order"> //This is the button that the use confirm the order
+            </form>
+        </div>
+    "</div>
 <!-- Displaying basket items in order summary -->
 <div class="basketContainer">
     <p style="display: inline-block; margin-bottom: 0px;"><b>Order Summary</b></p>
-    <p><!--For loop displaying basket item info <br>--></p>
-    <form action="/basket" method="post">
-        <input type="submit" class="buttonStyle" value="Edit Basket">
-    </form>
+    <p><!-- Product name--> - <!-- Product description--> - x <!-- Product quantity--> - £ <!-- Product subtotal --><br></p>
+    <button onclick="window.location.href='https://phabpharmacy.herokuapp.com/basket';" class="buttonStyle">Edit Basket</button>
 </div>
 <script>
   function redirectBrowse(){
@@ -194,4 +203,4 @@
 </script>
 </body>
 </html>
-<!-- -->
+

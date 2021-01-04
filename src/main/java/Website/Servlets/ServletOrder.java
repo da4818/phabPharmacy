@@ -187,15 +187,6 @@ public class ServletOrder extends HttpServlet {
                 "            margin: 0px;\n" +
                 "            border: none;\n" +
                 "        }\n" +
-                "        div.confirmContainer{\n" +
-                "          position: absolute;\n" +
-                "          width: 270px;\n" +
-                "          height: 70px;\n" +
-                "          right: -1px;\n" +
-                "          bottom: -87px;\n" +
-                "          padding: 0px 0px 15px 20px;\n" +
-                "          border: 1px solid black;\n" +
-                "        }\n" +
                 "        div.basketContainer{\n" +
                 "          width: 350px;\n" +
                 "          margin: 0px;\n" +
@@ -208,6 +199,15 @@ public class ServletOrder extends HttpServlet {
                 "          float: right;\n" +
                 "          padding: 0px 0px 10px 20px;\n" +
                 "          margin: 0px 50px 0px 0px;\n" +
+                "          border: 1px solid black;\n" +
+                "        }\n" +
+                "        div.confirmContainer{\n" +
+                "          position: absolute;\n" +
+                "          width: 270px;\n" +
+                "          height: 70px;\n" +
+                "          right: -1px;\n" +
+                "          bottom: -87px;\n" +
+                "          padding: 0px 0px 15px 20px;\n" +
                 "          border: 1px solid black;\n" +
                 "        }\n" +
                 "        .buttonStyle{\n" +
@@ -224,10 +224,6 @@ public class ServletOrder extends HttpServlet {
                 "        }\n" +
                 "        section{\n" +
                 "          display: table-row;\n" +
-                "        }\n" +
-                "        .tooltip{\n" +
-                "          position: relative;\n" +
-                "          display: inline;\n" +
                 "        }\n" +
                 "    </style>\n" +
                 "</head>\n" +

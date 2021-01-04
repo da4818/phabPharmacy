@@ -75,6 +75,33 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
+        .currentUser{ <%-- This is the section to contain the logged in user's icon and name --%>
+            position: relative;
+            float: right;
+            font-size: 16px;
+            color: white;
+            text-align: center;
+            padding: 14px 16px 4px 16px;
+            text-decoration: none;
+        }
+        .logOut{
+            position: absolute;
+            height: 10px;
+            bottom: 0px;
+            margin: 0px;
+            border: none;
+            background-color: transparent;
+            border: none;
+            font-size: 8px;
+            color: white;
+        }
+        .logOutButton{
+            background-color: transparent;
+            font-size: 8px;
+            color: white;
+            margin: 0px;
+            border: none;
+        }
         .buttonStyle{
             background-color: #00B8C5;
             border: none;
@@ -113,9 +140,21 @@
         </div>
     </div>
     <a href="https://phabpharmacy.herokuapp.com/login"><i class="fa fa-fw fa-user"></i>Login</a>
-    <a style="background-color: #00B8C5"><i class="fa fa-fw fa-user-plus"></i>Register</a>
+    <a style="background-color: #00B8C5"><i class="fa fa-fw fa-user-plus"></i>Register</a> <%-- Tab coloured in blue to indicate it's the active tab --%>
     <a href="https://phabpharmacy.herokuapp.com/basket" style="width: 35px;" class="fa fa-fw fa-shopping-basket"><b id="basket"></b></a>
-    <div class="currentUser"><!--current user's name--><i class="fa fa-fw fa-user"></i></div>
+    <!-- If a user is logged in -->
+    <form name="logOut" action="home" method="post"> <!-- A form is needed to process the log out button -->
+        <div style="float: right;" class="currentUser">" + cUser.fname + "<i class="fa fa-fw fa-user"></i>
+            <div class="logOut">
+                <input class="logOutButton" type="submit" name="logOut" value="Log Out">
+            </div>
+        </div>
+    </form>
+    <!---------------------------->
+
+    <!-- If no one is logged in -->
+    <div class="currentUser"><i class="fa fa-fw fa-user"></i></div>
+    <!---------------------------->
 </div>
 <h1>>Register</h1>
 <p> Register below. If you already have an account, <a href="https://phabpharmacy.herokuapp.com/login"> login here.</a>
@@ -136,15 +175,20 @@
     <textarea name="addresss" cols="30" rows="4" placeholder="Address"></textarea><br>
     <input type="text" size="30" class="form-control" name="postcode" placeholder="Postcode*"><br>
     <input type="text" size="30" class="form-control" name="phone_no" placeholder="Phone Number"><br>
-
+    <input type="hidden" name="logOut" value="false"> <!--a hidden input tag is added to prevent nullPointer errors (in ServletRegister) -->
     <input type="submit" class="buttonStyle" value="Submit">
 </form>
-<%-- doPost response
-<h2>There is an existing account with the email entered. Please log in.</h2>
-<h2>Incomplete fields, please enter all the information.</h2>
-<h2>Passwords don't match, please try again.</h2>
-<h2>Successful registration. Welcome, " + currentUser.fname + "!</h2>--%>
 
+<!-- doPost response -->
+<!-- Passes all checks -->
+<h2>Successful registration. Welcome, <!--Newly registered user's name-->!</h2>
+<!-- If the user logs in with an email that has an existing account -->
+<h2>There is an existing account with the email entered. Please log in.</h2>
+<!-- Incomplete fields: names, email, password (and verification), card details, postcode (full address and phone number are optional) -->
+<h2>Incomplete fields, please enter all the information.</h2>
+<!-- If the password and password verification don't match -->
+<h2>Passwords don't match, please try again.</h2>
+<!-- doPost includes lines 192-198 -->
 <script>
     function redirectBrowse(){
         window.location.href="https://phabpharmacy.herokuapp.com/browse"

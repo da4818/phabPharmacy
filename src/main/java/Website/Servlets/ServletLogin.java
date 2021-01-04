@@ -17,6 +17,16 @@ public class ServletLogin extends HttpServlet {
         resp.setContentType("text/html");
         String output = htmlOutput();
         resp.getWriter().write(output);
+        resp.getWriter().write("<script>\n" +
+                "    function refreshPage(){\n" +
+                "        location.reload()\n" +
+                "    }\n" +
+                "    function redirectBrowse(){\n" +
+                "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
+                "    }\n" +
+                "</script>\n" +
+                "</body>\n" +
+                "</html>");
     }
 
     @Override
@@ -43,6 +53,16 @@ public class ServletLogin extends HttpServlet {
         else{ //If the input variables don't match any existing entries in the customer ('user') database
             resp.getWriter().write("<h2>Wrong email or password, please try again.</h2>");
         }
+        resp.getWriter().write("<script>\n" +
+                "    function refreshPage(){\n" +
+                "        location.reload()\n" +
+                "    }\n" +
+                "    function redirectBrowse(){\n" +
+                "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
+                "    }\n" +
+                "</script>\n" +
+                "</body>\n" +
+                "</html>");
     }
 
     public String htmlOutput(){
@@ -132,24 +152,6 @@ public class ServletLogin extends HttpServlet {
                 "        .dropdown:hover .dropdown-content {\n" +
                 "            display: block;\n" +
                 "        }\n" +
-                "        .logOut{\n" +
-                "            position: absolute:\n" +
-                "            height: 10px;\n" +
-                "            bottom: 0px;\n" +
-                "            margin: 0px;\n" +
-                "            border: none;\n" +
-                "            background-color: transparent;\n" +
-                "            border: none;\n" +
-                "            font-size: 8px;\n" +
-                "            color: white;\n" +
-                "        }\n" +
-                "        .logOutButton{\n" +
-                "            background-color: transparent;\n" +
-                "            font-size: 8px;\n" +
-                "            color: white;\n" +
-                "            margin: 0px;\n" +
-                "            border: none;\n" +
-                "        }\n" +
                 "        .currentUser{\n" +
                 "            position: relative;\n" +
                 "            float: right;\n" +
@@ -225,16 +227,6 @@ public class ServletLogin extends HttpServlet {
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"pass\" placeholder=\"Password*\"><br>\n" +
                 "        <input type=\"hidden\" name=\"logOut\" value=\"false\">\n" + // a hidden input tag is added to prevent nullPointer errors (line 25)
                 "        <input type=\"submit\" class=\"buttonStyle\" value=\"Submit\">\n" +
-                "</form>\n" +
-                "<script>\n" +
-                "    function refreshPage(){\n" +
-                "        location.reload()\n" +
-                "    }\n" +
-                "    function redirectBrowse(){\n" +
-                "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
-                "    }\n" +
-                "</script>\n" +
-                "</body>\n" +
-                "</html>";
+                "</form>";
     }
 }
