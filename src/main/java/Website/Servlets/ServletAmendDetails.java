@@ -25,9 +25,9 @@ public class ServletAmendDetails extends HttpServlet {
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"cvv\" placeholder=\"CVV*\"><br>\n" +
                 "\n" +
                 "  <h3 style=\"font-size: 15px;\">Shipping Information</h3>\n" +
-                "  <textarea name=\"address\" cols=\"30\" rows=\"4\" placeholder=\"Address\"></textarea><br>\n" +
+                "  <textarea name=\"address\" cols=\"30\" rows=\"4\" value=\"\" placeholder=\"Address\"></textarea><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"postcode\" placeholder=\"Postcode*\"><br>\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"phone_no\" placeholder=\"Phone Number\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" value=\"\" name=\"phone_no\" placeholder=\"Phone Number\"><br>\n" +
                 "  \n" +
                 "  <input type=\"submit\" class=\"buttonStyle\" value=\"Update Details\">\n" +
                 "</form>\n" +
@@ -38,20 +38,15 @@ public class ServletAmendDetails extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        String address = null;
-        String pn = null;
         String cn = req.getParameter("card_no");
         String sc = req.getParameter("sort_code");
         String an = req.getParameter("account_no");
         String cvv = req.getParameter("cvv");
         String pc = req.getParameter("postcode");
-        address = req.getParameter("address");
-        pn = req.getParameter("phone_no");
-
-
+        String ads = req.getParameter("address");
+        String pn = req.getParameter("phone_no");
         //Perform checks to make sure user inputs are valid - card number
         resp.getWriter().write("<h2>Information updated.</h2>");
-
     }
 
 

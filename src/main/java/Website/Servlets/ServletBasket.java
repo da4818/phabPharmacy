@@ -101,7 +101,7 @@ public class ServletBasket extends HttpServlet {
                 String subtotal = valueOf(df.format(b.price*b.quantity));
                 int max = b.limited ? 1 : 5;
                 resp.getWriter().write("<section>" +
-                        "<div class=\"basketContainer\" id=\"cont1\">\n");
+                        "<div class=\"basketContainer\">\n");
                 if(b.limited){
                     resp.getWriter().write("  <p class=\"tooltip\" style=\"display: inline-block;\"><b>" + b.name + "</b><br>" + b.description + "<br>£<output type=\"number\">" + price + "</output><span class=\"tooltiptext\"><i>Limited to one per customer</i></span></p>\n");
                 }
@@ -220,14 +220,6 @@ public class ServletBasket extends HttpServlet {
                 "        .dropdown:hover .dropdown-content {\n" +
                 "            display: block;\n" +
                 "        }\n" +
-                "        .currentUser{\n" +
-                "           float: right;\n" +
-                "           font-size: 16px;\n" +
-                "           color: white;\n" +
-                "           text-align: center;\n" +
-                "           padding: 14px 16px;\n" +
-                "           text-decoration: none;\n" +
-                "        }\n" +
                 "        .totalContainer{\n" +
                 "          position: relative;\n" +
                 "          float: right;\n" +
@@ -272,7 +264,7 @@ public class ServletBasket extends HttpServlet {
                 "            text-decoration: none;\n" +
                 "        }\n" +
                 "        .logOut{\n" +
-                "            position: absolute:\n" +
+                "            position: absolute;\n" +
                 "            height: 10px;\n" +
                 "            bottom: 0px;\n" +
                 "            margin: 0px;\n" +

@@ -91,6 +91,33 @@
             margin: 5px;
             float: left;
         }
+        .currentUser{ <%-- This is the section to contain the logged in user's icon and name --%>
+            position: relative;
+            float: right;
+            font-size: 16px;
+            color: white;
+            text-align: center;
+            padding: 14px 16px 4px 16px;
+            text-decoration: none;
+        }
+        .logOut{
+            position: absolute;
+            height: 10px;
+            bottom: 0px;
+            margin: 0px;
+            border: none;
+            background-color: transparent;
+            border: none;
+            font-size: 8px;
+            color: white;
+        }
+        .logOutButton{
+            background-color: transparent;
+            font-size: 8px;
+            color: white;
+            margin: 0px;
+            border: none;
+        }
         .buttonStyle{
             background-color: #00B8C5;
             border: none;
@@ -144,14 +171,6 @@
         .tooltip:hover .tooltiptext {
             visibility: visible;
         }
-        .currentUser{
-            float: right;
-            font-size: 16px;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
     </style>
 
 </head>
@@ -160,8 +179,8 @@
 <div class="navbar">
     <a href="https://phabpharmacy.herokuapp.com/home"><i class="fa fa-fw fa-home"></i>Home</a>
     <div class="dropdown">
-        <button class= "dropbtn"><i class="fa fa-fw fa-search"></i>Browse<i class="fa fa-caret-down"></i></button>
-        <div class="dropdown-content">
+        <button class= "dropbtn" style="background-color: #00B8C5;"><i class="fa fa-fw fa-search"></i>Browse<i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-content"> <%-- Tab coloured in blue to indicate it's the active tab --%>
             <a href="https://phabpharmacy.herokuapp.com/browse#cold_and_flu">Cold and Flu</a>
             <a href="https://phabpharmacy.herokuapp.com/browse#skincare">Skincare</a>
             <a href="https://phabpharmacy.herokuapp.com/browse#headaches_and_pain_relief">Headaches and Pain Relief</a>
@@ -173,26 +192,52 @@
     <a href="https://phabpharmacy.herokuapp.com/login"><i class="fa fa-fw fa-user"></i>Login</a>
     <a href="https://phabpharmacy.herokuapp.com/register"><i class="fa fa-fw fa-user-plus"></i>Register</a>
     <a href="https://phabpharmacy.herokuapp.com/basket" style="width: 35px;" class="fa fa-fw fa-shopping-basket"><b id="basket"></b></a>
-    <div class="currentUser"><!--current user's name--><i class="fa fa-fw fa-user"></i></div>
+    <!-- If a user is logged in -->
+    <form name="logOut" action="home" method="post"> <!-- A form is needed to process the log out button -->
+        <div style="float: right;" class="currentUser">" + cUser.fname + "<i class="fa fa-fw fa-user"></i>
+            <div class="logOut">
+                <input class="logOutButton" type="submit" name="logOut" value="Log Out">
+            </div>
+        </div>
+    </form>
+    <!---------------------------->
+
+    <!-- If no one is logged in -->
+    <div class="currentUser"><i class="fa fa-fw fa-user"></i></div>
+    <!---------------------------->
 </div>
+<!-- doPost -->
+<!-- If the user isn't logged in and tries to add an item to their basket -->
+<pre><script>window.onload(alert("Please ensure that you have created an account and logged in before adding items to your basket."));</script></pre>
+<!-------------------------------------------------------------------------->
+
+<!-- doGet and doPost (display same HTML) -->
 <!-- For loop to display value of each item -->
 <section>
     <h2 id="<!--header URL-->"><!--header name--></h2>
     <div class ="relative">
+        <!-- If the product is limited to 1 item -->
+        <label class="tooltip"><center>itemName<br>itemDescription</center><br>
+            <span class="tooltiptext"><i>Limited to one per customer</i></span>
+        </label><br>
+        <!---------------------------------->
+        
+        <!-- If the product isn't limited to 1 item -->
         <label><center><!--item name--><br><!--item description--></center></label><br>
-    <%-- If item is limited to 1 qty:
-    <label class="tooltip"><center>itemName<br>itemDescription</center><br>
-    <span class="tooltiptext"><i>Limited to one per customer</i></span></label><br>--%>
+        <!-------------------------------------------->
+        
         <label><center><!--item price--></center></label><br>
         <div class="absolute">
             <form action="browse" method="post">
-                <input name="basketQuantity" type="number" size="5" min="0" max="<!--max quantity to buy-->">
-                <input name="buttonNumber" type="hidden"value="itemIdNumber">
-                <input type="submit"class="buttonStyle" value="Add to Basket">
+                <input name="basketQuantity" type="number" size="5" min="1" max="">
+                <input name="buttonNumber" type="hidden"value="">
+                <input type="hidden" name="logOut" value="false">
+                <input type="submit" class="buttonStyle" value="Add to Basket">
             </form>
         </div>
     </div>
 </section>
+
 <script>
     var mybutton = document.getElementById("scrollBtn");
     window.onscroll = function() {scrollFunction()};

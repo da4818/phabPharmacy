@@ -39,13 +39,15 @@ public class ServletRegister extends HttpServlet {
         String cvv = req.getParameter("cvv");
         String sc = req.getParameter("sort_code");
         String an = req.getParameter("account_no");
-        String ad = req.getParameter("postcode");
+        String pc = req.getParameter("postcode");
+        String ad = req.getParameter("address");
+        String pn = req.getParameter("phone_no");
         resp.getWriter().write(HTML);
         EmailValidation emailCheck = new EmailValidation(em,pw,vpw);
         if(LoginDAO.validateRegister(em)){ //Checks database to see if email exists in use database
             resp.getWriter().write("<h2> There is an existing account with the email entered. Please log in.</h2>");
         }
-        else if (fn.isEmpty() || ln.isEmpty() || em.isEmpty() || pw.isEmpty() || vpw.isEmpty() || cn.isEmpty() || cvv.isEmpty()|| sc.isEmpty() || an.isEmpty() || ad.isEmpty()){ //Checks if any of the required fields are empty
+        else if (fn.isEmpty() || ln.isEmpty() || em.isEmpty() || pw.isEmpty() || vpw.isEmpty() || cn.isEmpty() || cvv.isEmpty()|| sc.isEmpty() || an.isEmpty() || pc.isEmpty()){ //Checks if any of the required fields are empty
             resp.getWriter().write("<h2>Incomplete fields, please enter all the information.</h2>");
         }
         else if (!pw.equals(vpw)){
@@ -55,7 +57,7 @@ public class ServletRegister extends HttpServlet {
             resp.getWriter().write(emailCheck.getErrorMessage());
         }
         else{
-            LoginDAO.addUser(fn,ln,em,pw,cn,ad);
+            LoginDAO.addUser(fn,ln,em,pw,cn,pc);
             User currentUser = LoginDAO.getUser(em,pw);
             LoginDAO.setLoggedInUser(currentUser);
             LoginDAO.resetTable("basket");
@@ -236,9 +238,9 @@ public class ServletRegister extends HttpServlet {
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"cvv\" placeholder=\"CVV*\"><br>\n" +
                 "\n" +
                 "  <h3 style=\"font-size: 15px;\">Shipping Information</h3>\n" +
-                "  <textarea name=\"address\" cols=\"30\" rows=\"4\" placeholder=\"Address\"></textarea><br>\n" +
+                "  <textarea name=\"address\" cols=\"30\" rows=\"4\" value=\"\" placeholder=\"Address\"></textarea><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"postcode\" placeholder=\"Postcode*\"><br>\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"phone_no\" placeholder=\"Phone Number\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"phone_no\" value=\"\" placeholder=\"Phone Number\"><br>\n" +
                 "  \n" +
                 "  <input type=\"hidden\" name=\"logOut\" value=\"false\">\n" +
                 "  <input type=\"submit\" class=\"buttonStyle\" value=\"Submit\">\n" +

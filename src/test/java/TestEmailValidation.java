@@ -1,6 +1,6 @@
 import Website.Entities.Email;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test; //Note that import org.junit.Test; will not work
 
 public class TestEmailValidation {
     @Test
@@ -8,7 +8,7 @@ public class TestEmailValidation {
         // INVALID ENTRIES //
         //invalid character i.e. not '.' , '_' , '-' or any alphanumeric characters
         Email e = new Email("te(st@gmail.com");
-        Email ea = new Email("test@gmail.com");
+        Email ea = new Email("te*st@gmail.com");
         Assert.assertEquals(e.validEmail(),false);
         Assert.assertEquals(ea.validEmail(),false);
 

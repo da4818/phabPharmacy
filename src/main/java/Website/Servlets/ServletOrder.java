@@ -27,12 +27,9 @@ public class ServletOrder extends HttpServlet {
         String total = df.format(totalBasket);
         User u = LoginDAO.getCurrentUser();
         resp.getWriter().write("<div class=\"addressContainer\">\n" +
-                //"  <form id=\"updateBasket\" action=\"amend_details\" method=\"post\"> \n" + //'action="amend_details" will redirect the user to ServletAmendDetails and send information to there (in this case no information is needed, it's just a hyperlink)
                 "  <p style=\"display: inline-block; margin-bottom: 0px;\"><b>Shipping Address</b></p>\n" +
                 "  <p>" + u.fname + " " + u.lname + "<br>" + u.postcode + "<br>Payment</p>\n" +
                 "  <button onclick=\"window.location.href='https://phabpharmacy.herokuapp.com/amend_details';\"class=\"buttonStyle\">Edit Details</button>\n" +
-                //"  <input type=\"submit\" name=\"orderResponse\" class=\"buttonStyle\" value=\"Edit Details\">\n" +
-                //"  </form>\n" +
                 "  <div class=\"confirmContainer\">\n" +
                 "  <p>Total Cost: <b>£" + total +"</b></p>\n" +
                 "  <form id=\"confirmOrder\"  action=\"order\" method=\"post\">\n" + //A form allows us to to retrieve information added by the user (e.g. entering information)
@@ -44,22 +41,20 @@ public class ServletOrder extends HttpServlet {
         int n = LoginDAO.tableSize("basket");
         if(n>0) {
             resp.getWriter().write("<div class=\"basketContainer\">\n" +
-                    "  <p style=\"display: inline-block; margin-bottom: 0px;\"><b>Order Summary</b></p>\n" +
-                    "  <p>");
+                    " <p style=\"display: inline-block; margin-bottom: 0px;\"><b>Order Summary</b></p>\n" +
+                    " <p>");
             for(int i=1;i<n+1;i++) {
             Product b = LoginDAO.getBasketInfo(i);
             String subtotal = valueOf(df.format(b.price*b.quantity));
             resp.getWriter().write(b.name + " - " + b.description + " - x" + b.quantity + " - £" + subtotal + "<br>");
             }
             resp.getWriter().write("</p>\n" +
-                    //"<form action=\"basket\" method=\"post\">\n" + //'action="basket" will redirect the user to ServletBasket and send information to there (in this case no information is needed, it's just a hyperlink)
-                    "    <button onclick=\"window.location.href='https://phabpharmacy.herokuapp.com/basket';\" class=\"buttonStyle\" value=\"Edit Basket\">\n" +
-                    //"  </form>\n" +
+                    "    <button onclick=\"window.location.href='https://phabpharmacy.herokuapp.com/basket';\" class=\"buttonStyle\">Edit Basket</button>\n" +
                     "</div>\n");
             resp.getWriter().write("<script>\n" +
-                    "    function redirectBrowse(){\n" +
-                    "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
-                    "    }\n" +
+                    "function redirectBrowse(){\n" +
+                    "   window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
+                    "}\n" +
                     "</script>\n" +
                     "</body>\n" +
                     "</html>");

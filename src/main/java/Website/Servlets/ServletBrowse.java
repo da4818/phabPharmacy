@@ -63,12 +63,14 @@ public class ServletBrowse extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
+        String HTML= htmlOutput();
         String logOut = req.getParameter("logOut");
         if (logOut.equals("Log Out")){
             LoginDAO.resetTable("logged");
             LoginDAO.resetTable("basket");
         }
         if (!LoginDAO.checkLoggedIn()){ //If no one is logged in, it will prevent them from adding items to their basket
+            resp.getWriter().write(HTML);
             resp.getWriter().write("<pre><script>window.onload(alert(\"Please ensure that you have created an account and logged in before adding items to your basket.\"));</script></pre>");
         }
         if(LoginDAO.checkLoggedIn()){
@@ -77,7 +79,6 @@ public class ServletBrowse extends HttpServlet {
             Product pBasket = LoginDAO.getProduct(pos);
             LoginDAO.addToBasket(pBasket,q);
         }
-        String HTML= htmlOutput();
         resp.getWriter().write(HTML);
         ArrayList<String> headers = getHeaderinfo("headers");
         ArrayList<String> headerURLs = getHeaderinfo("headerURLs");
@@ -113,7 +114,22 @@ public class ServletBrowse extends HttpServlet {
             }
             resp.getWriter().write("</section>");
         }
-        resp.getWriter().write("</body>\n" +
+        resp.getWriter().write("<script>\n" +
+                "    var mybutton = document.getElementById(\"scrollBtn\");\n" +
+                "    window.onscroll = function() {scrollFunction()};\n" +
+                "    function scrollFunction() {\n" +
+                "        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {\n" +
+                "            mybutton.style.display = \"block\";\n" +
+                "        } else {\n" +
+                "            mybutton.style.display = \"none\";\n" +
+                "        }\n" +
+                "    }\n" +
+                "    function topFunction() {\n" +
+                "        document.body.scrollTop = 0;\n" +
+                "        document.documentElement.scrollTop = 0;\n" +
+                "    }\n" +
+                "</script>\n" +
+                "</body>\n" +
                 "</html>");
     }
 
@@ -280,7 +296,7 @@ public class ServletBrowse extends HttpServlet {
                 "            margin: 4px 2px;\n" +
                 "            cursor: pointer;\n" +
                 "        }\n" +
-                "        .scrollBtn {\n" +
+                "        #scrollBtn {\n" +
                 "            display: none;\n" +
                 "            position: fixed;\n" +
                 "            bottom: 20px;\n" +
@@ -297,7 +313,7 @@ public class ServletBrowse extends HttpServlet {
                 "            margin: 4px 2px;\n" +
                 "            cursor: pointer;\n" +
                 "        }\n" +
-                "        .scrollBtn:hover {\n" +
+                "        #scrollBtn:hover {\n" +
                 "            background-color: #00B8C5;\n" +
                 "        }\n" +
                 "        section{\n" +
@@ -321,31 +337,14 @@ public class ServletBrowse extends HttpServlet {
                 "        .tooltip:hover .tooltiptext {\n" +
                 "            visibility: visible;\n" +
                 "        }\n" +
-                "        .logOut{\n" +
-                "            position: absolute:\n" +
-                "            height: 10px;\n" +
-                "            bottom: 0px;\n" +
-                "            margin: 0px;\n" +
-                "            border: none;\n" +
-                "            background-color: transparent;\n" +
-                "            border: none;\n" +
-                "            font-size: 8px;\n" +
-                "            color: white;\n" +
-                "        }\n" +
-                "        .logOutButton{\n" +
-                "            background-color: transparent;\n" +
-                "            font-size: 8px;\n" +
-                "            color: white;\n" +
-                "            margin: 0px;\n" +
-                "            border: none;\n" +
-                "        }\n" +
                 "    </style>\n" +
                 "</head>\n" +
                 "<body>\n" +
+                "<button onclick=\"topFunction()\" id=\"scrollBtn\" title=\"Go to top\">Top</button>\n" +
                 "<div class=\"navbar\">\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/home\"><i class=\"fa fa-fw fa-home\"></i>Home</a>\n" +
                 "    <div class=\"dropdown\">\n" +
-                "        <button style=\"background-color: #00B8C5;\" class= \"dropbtn\"><i class=\"fa fa-fw fa-search\"></i>Browse<i class=\"fa fa-caret-down\"></i></button>\n" +
+                "        <button class= \"dropbtn\" style=\"background-color: #00B8C5;\"><i class=\"fa fa-fw fa-search\"></i>Browse<i class=\"fa fa-caret-down\"></i></button>\n" +
                 "        <div class=\"dropdown-content\">\n" +
                 "           <a href=\"https://phabpharmacy.herokuapp.com/browse#cold_and_flu\">Cold and Flu</a>\n" +
                 "           <a href=\"https://phabpharmacy.herokuapp.com/browse#skincare\">Skincare</a>\n" +
