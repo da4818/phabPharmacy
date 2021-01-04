@@ -1,6 +1,5 @@
 package Website.Servlets;
 
-import Website.Entities.Product;
 import Website.Entities.User;
 import Website.LoginDAO;
 
@@ -10,81 +9,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.text.DecimalFormat;
 
-
-import static java.lang.String.valueOf;
-
-@WebServlet(urlPatterns = "/order", loadOnStartup = 0)
-public class ServletOrder extends HttpServlet {
+@WebServlet(urlPatterns = "/amend_details",loadOnStartup = 0)
+public class ServletAmendDetails extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
-        DecimalFormat df = new DecimalFormat("0.00"); //Allows us to output numerical values in a currency format
-        Double totalBasket = LoginDAO.getBasketTotal(); //total cost of the basket
-        String total = df.format(totalBasket);
-        User u = LoginDAO.getCurrentUser();
-        resp.getWriter().write("<div class=\"addressContainer\">\n" +
-                //"  <form id=\"updateBasket\" action=\"amend_details\" method=\"post\"> \n" + //'action="amend_details" will redirect the user to ServletAmendDetails and send information to there (in this case no information is needed, it's just a hyperlink)
-                "  <p style=\"display: inline-block; margin-bottom: 0px;\"><b>Shipping Address</b></p>\n" +
-                "  <p>" + u.fname + " " + u.lname + "<br>" + u.postcode + "<br>Payment</p>\n" +
-                "  <button href=\"https://phabpharmacy.herokuapp.com/amend_details\" class=\"buttonStyle\">Edit Details</button>\n" +
-                //"  <input type=\"submit\" name=\"orderResponse\" class=\"buttonStyle\" value=\"Edit Details\">\n" +
-                //"  </form>\n" +
-                "  <div class=\"confirmContainer\">\n" +
-                "  <p>Total Cost: <b>£" + total +"</b></p>\n" +
-                "  <form id=\"confirmOrder\"  action=\"order\" method=\"post\">\n" + //A form allows us to to retrieve information added by the user (e.g. entering information)
-                // 'action="order"' sends this information to ServletOrder (as its URL pattern is "/order"), 'method="post"' sends this to doPost function
-                "    <input type=\"submit\" name=\"orderResponse\" class=\"buttonStyle\" value=\"Confirm Order\">\n" + //This is the button that the use confirm the order
-                "  </form>\n" +
-                "  </div>\n" +
-                "</div>\n");
-        int n = LoginDAO.tableSize("basket");
-        if(n>0) {
-            resp.getWriter().write("<div class=\"basketContainer\">\n" +
-                    "  <p style=\"display: inline-block; margin-bottom: 0px;\"><b>Order Summary</b></p>\n" +
-                    "  <p>");
-            for(int i=1;i<n+1;i++) {
-            Product b = LoginDAO.getBasketInfo(i);
-            String subtotal = valueOf(df.format(b.price*b.quantity));
-            resp.getWriter().write(b.name + " - " + b.description + " - x" + b.quantity + " - £" + subtotal + "<br>");
-            }
-            resp.getWriter().write("</p>\n" +
-                    "<form action=\"basket\" method=\"post\">\n" + //'action="basket" will redirect the user to ServletBasket and send information to there (in this case no information is needed, it's just a hyperlink)
-                    "    <input type=\"submit\" class=\"buttonStyle\" value=\"Edit Basket\">\n" +
-                    "  </form>\n" +
-                    "</div>\n");
-            resp.getWriter().write("<script>\n" +
-                    "    function redirectBrowse(){\n" +
-                    "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
-                    "    }\n" +
-                    "</script>\n" +
-                    "</body>\n" +
-                    "</html>");
-        }
-
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException { //No logout feature when confirming order
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        String HTML = htmlOutput();
-        resp.getWriter().write(HTML); //There is no information request in the ServletOrder doPost - there is only one button (the only possible way) that will redirect to this doPost in particular
-        LoginDAO.resetTable("basket");
-        resp.getWriter().write("<h2>Order confirmed!</h2>");
-
-        resp.getWriter().write("<script>\n" + //This is to finish of the HTML code initiated in htmlOutput()
-                "    function redirectBrowse(){\n" +
-                "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
-                "    }\n" +
-                "</script>\n" +
-                "</body>\n" +
-                "</html>");
-
     }
-    public String htmlOutput(){
+
+
+
+    String htmlOutput(){
         boolean userLoggedIn = LoginDAO.checkLoggedIn(); //For certain pages (confirming order and amending user details) we do not want them to log out --> this code differs from the other servlets
         String displayCurrentUser = "<div class=\"currentUser\"><i class=\"fa fa-fw fa-user\"></i></div>";;
         User cUser = null;
@@ -95,12 +37,12 @@ public class ServletOrder extends HttpServlet {
         int basketSize = LoginDAO.getBasketSize();
         String basketSizeOut="";
         if (basketSize != 0){ basketSizeOut = String.valueOf(basketSize);}
-        return "<!DOCTYPE html>\n" + //HTML comments are on the respective .jsp files (need updating)
+        return "<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "<head>\n" +
                 "    <meta charset=\"utf-8\">\n" +
                 "    <meta name=\"viewport\" content=\"width=device-width\">\n" +
-                "    <title>Confirm Order</title>\n" +
+                "    <title>Amend Details</title>\n" +
                 "    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">\n" +
                 "    <style>\n" +
                 "        body {font-family: Arial, Helvetica, sans-serif;}\n" +
@@ -110,12 +52,11 @@ public class ServletOrder extends HttpServlet {
                 "            overflow: auto;\n" +
                 "        }\n" +
                 "        .navbar a {\n" +
-                "          float: left;\n" +
-                "          font-size: 16px;\n" +
-                "          color: white;\n" +
-                "          text-align: center;\n" +
-                "          padding: 14px 16px;\n" +
-                "          text-decoration: none;\n" +
+                "            float: left;\n" +
+                "            padding: 12px;\n" +
+                "            color: white;\n" +
+                "            text-decoration: none;\n" +
+                "            font-size: 17px;\n" +
                 "        }\n" +
                 "        .active {\n" +
                 "            background-color: #51B5C2;\n" +
@@ -165,33 +106,6 @@ public class ServletOrder extends HttpServlet {
                 "        .dropdown:hover .dropdown-content {\n" +
                 "            display: block;\n" +
                 "        }\n" +
-                "        .currentUser{\n" +
-                "            position: relative;\n" +
-                "            float: right;\n" +
-                "            font-size: 16px;\n" +
-                "            color: white;\n" +
-                "            text-align: center;\n" +
-                "            padding: 14px 16px 4px 16px;\n" +
-                "            text-decoration: none;\n" +
-                "        }\n" +
-                "        .logOut{\n" +
-                "            position: absolute:\n" +
-                "            height: 10px;\n" +
-                "            bottom: 0px;\n" +
-                "            margin: 0px;\n" +
-                "            border: none;\n" +
-                "            background-color: transparent;\n" +
-                "            border: none;\n" +
-                "            font-size: 8px;\n" +
-                "            color: white;\n" +
-                "        }\n" +
-                "        .logOutButton{\n" +
-                "            background-color: transparent;\n" +
-                "            font-size: 8px;\n" +
-                "            color: white;\n" +
-                "            margin: 0px;\n" +
-                "            border: none;\n" +
-                "        }\n" +
                 "        div.confirmContainer{\n" +
                 "          position: absolute;\n" +
                 "          width: 270px;\n" +
@@ -201,18 +115,18 @@ public class ServletOrder extends HttpServlet {
                 "          padding: 0px 0px 15px 20px;\n" +
                 "          border: 1px solid black;\n" +
                 "        }\n" +
-                "        div.basketContainer{\n" +
-                "          width: 350px;\n" +
-                "          margin: 0px;\n" +
-                "          padding: 0px 0px 20px 20px;\n" +
-                "          border: 1px solid black;\n" +
-                "        }\n" +
                 "        div.addressContainer {\n" +
                 "          position: relative;\n" +
                 "          width: 270px;\n" +
                 "          float: right;\n" +
                 "          padding: 0px 0px 10px 20px;\n" +
                 "          margin: 0px 50px 0px 0px;\n" +
+                "          border: 1px solid black;\n" +
+                "        }\n" +
+                "        div.basketContainer{\n" +
+                "          width: 350px;\n" +
+                "          margin: 0px;\n" +
+                "          padding: 0px 0px 10px 20px;\n" +
                 "          border: 1px solid black;\n" +
                 "        }\n" +
                 "        .buttonStyle{\n" +
@@ -233,6 +147,37 @@ public class ServletOrder extends HttpServlet {
                 "        .tooltip{\n" +
                 "          position: relative;\n" +
                 "          display: inline;\n" +
+                "        }\n" +
+                "        .tooltip .tooltiptext {\n" +
+                "          visibility: hidden;\n" +
+                "          width: 120px;\n" +
+                "          background-color: black;\n" +
+                "          color: #fff;\n" +
+                "          text-align: center;\n" +
+                "          border-radius: 6px;\n" +
+                "          padding: 5px 0px;\n" +
+                "          position: absolute;\n" +
+                "          z-index: 1;\n" +
+                "        }\n" +
+                "        .tooltip:hover .tooltiptext {\n" +
+                "          visibility: visible;\n" +
+                "        }\n" +
+                "        div.currentUser{\n" +
+                "          float: right;\n" +
+                "          font-size: 16px;\n" +
+                "          color: white;\n" +
+                "          text-align: center;\n" +
+                "          padding: 14px 16px;\n" +
+                "          text-decoration: none;\n" +
+                "        }\n" +
+                "        input, textarea{\n" +
+                "          font-family: Arial, Helvetica, sans-serif;\n" +
+                "          font-size: 16px;\n" +
+                "          width: 26em;\n" +
+                "          width: 40ch;\n" +
+                "        }\n" +
+                "        textarea::placeholder {\n" +
+                "          font-family: Arial, Helvetica, sans-serif;\n" +
                 "        }\n" +
                 "    </style>\n" +
                 "</head>\n" +
@@ -255,7 +200,24 @@ public class ServletOrder extends HttpServlet {
                 "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" style=\"background-color: #00B8C5; width: 35px;\"><i style=\"width: 35px;\" class=\"fa fa-fw fa-shopping-basket\"><p style=\"display: inline; font-family: Arial; font-weight: bold\" id=\"basket\"> " + basketSizeOut + "</p></i></a>\n" +
                 displayCurrentUser +
                 "</div>\n" +
-                "<h1>Confirm Order</h1>\n";
-
+                "<h1>Amend Details</h1>\n" +
+                "<form name=\"registerForm\" action=\"register\" method=\"post\">\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"fname\" placeholder=\"First Name*\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"lname\" placeholder=\"Last Name*\"><br>\n" +
+                "  <h3>Order Information<br><b style=\"font-size: 15px;\">Payment Information</b></h3>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"card_no\" placeholder=\"Card Number*\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"sort_code\" placeholder=\"Sort Code*\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"account_no\" placeholder=\"Account Number*\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"cvv\" placeholder=\"CVV*\"><br>\n" +
+                "\n" +
+                "  <h3 style=\"font-size: 15px;\">Shipping Information</h3>\n" +
+                "  <textarea name=\"addresss\" cols=\"30\" rows=\"4\" placeholder=\"Address\"></textarea><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"postcode\" placeholder=\"Postcode*\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"phone_no\" placeholder=\"Phone Number\"><br>\n" +
+                "  \n" +
+                "  <input type=\"submit\" class=\"buttonStyle\" value=\"Update Details\">\n" +
+                "</form>\n" +
+                "</body>\n" +
+                "</html>";
     }
 }
