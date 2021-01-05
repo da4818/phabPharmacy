@@ -9,6 +9,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.*;
+import java.io.File;
 import java.io.IOException;
 
 @WebServlet (urlPatterns = "/map",loadOnStartup = 0)
@@ -18,7 +20,7 @@ public class ServletMap extends HttpServlet {
         resp.setContentType("text/html");
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
-        resp.getWriter().write("  <img class=\"images\" style=\"float: right; margin:\" src=\"../../../Maps/map.png\" alt=\"Paddington Store\" width=\"237\" height=\"300\">\n" +
+        resp.getWriter().write("  <img class=\"images\" style=\"float: right; margin:\" src=\"map.png\" alt=\"Paddington Store\" width=\"237\" height=\"300\">\n" +
                 "\n" +
                 " \n" +
                 "<script>\n" +
