@@ -1,5 +1,9 @@
 package Website.Servlets;
 
+import Website.Entities.Product;
+import Website.Entities.User;
+import Website.LoginDAO;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,15 +18,134 @@ public class ServletMap extends HttpServlet {
         resp.setContentType("text/html");
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
+        resp.getWriter().write("    <section>\n" +
+                "      <div class=\"box\">\n" +
+                "        <h3>Products in Cold and Flu:</h3>\n" +
+                "        <p>Vicks Vaporub 100g<br>Vicks First Defence 15ml<br>Item</p>\n" +
+                "      </div>\n" +
+                "    </section>\n" +
+                "  \n" +
+                "  <img class=\"images\" style=\"float: right; margin:\"src=\"map.png\" alt=\"Paddington Store\" width=\"237\" height=\"300\">\n" +
+                "\n" +
+                " \n" +
+                "<script>\n" +
+                "   document.getElementById(\"cf\").onclick = function() {\n" +
+                "       var x = document.getElementById(\"cf\").innerHTML;\n" +
+                "       document.getElementById(\"category\").value = x\n" +
+                "       document.getElementById(\"findCategory\").submit();\n" +
+                "   }\n" +
+                "   document.getElementById(\"s\").onclick = function() {\n" +
+                "       var x = document.getElementById(\"s\").innerHTML;\n" +
+                "       document.getElementById(\"category\").value = x\n" +
+                "   document.getElementById(\"findCategory\").submit();\n" +
+                "   }\n" +
+                "   document.getElementById(\"hpr\").onclick = function() {\n" +
+                "       var x = document.getElementById(\"hpr\").innerHTML;\n" +
+                "       document.getElementById(\"category\").value = x\n" +
+                "       document.getElementById(\"findCategory\").submit();\n" +
+                "   }\n" +
+                "   document.getElementById(\"d\").onclick = function() {\n" +
+                "       var x = document.getElementById(\"d\").innerHTML;\n" +
+                "       document.getElementById(\"category\").value = x\n" +
+                "       document.getElementById(\"findCategory\").submit();\n" +
+                "   }\n" +
+                "   document.getElementById(\"a\").onclick = function() {\n" +
+                "       var x = document.getElementById(\"a\").innerHTML;\n" +
+                "       document.getElementById(\"category\").value = x\n" +
+                "       document.getElementById(\"findCategory\").submit();\n" +
+                "   }\n" +
+                "   document.getElementById(\"fa\").onclick = function() {\n" +
+                "       var x = document.getElementById(\"fa\").innerHTML;\n" +
+                "       document.getElementById(\"category\").value = x\n" +
+                "       document.getElementById(\"findCategory\").submit();\n" +
+                "   }\n" +
+                "</script>\n" +
+                "</body>\n" +
+                "</html>");
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        String out = req.getParameter("category");
-        resp.getWriter().write("<p>output:" + out + "</p>");
+        String category = req.getParameter("category");
+        String HTML = htmlOutput();
+        resp.getWriter().write(HTML);
+        resp.getWriter().write("    <section>\n" +
+                "      <div class=\"box\">\n" +
+                "        <h3>Products in " + category + ":</h3>\n" +
+                "<p>");
+        int j = 1;
+        Product p = LoginDAO.getProduct(j);
+        while (j < LoginDAO.tableSize("products")){
+            if (p.category.equals(category)) {
+                resp.getWriter().write(p.name + " " + p.description + "<br>");
+            }
+            j++;
+            p = LoginDAO.getProduct(j);
+        }
+                //"        <p>Vicks Vaporub 100g<br>Vicks First Defence 15ml<br>Item</p>\n";
+        resp.getWriter().write("      </div>\n" +
+                "    </section>\n" +
+                "  \n" +
+                "  <img class=\"images\" style=\"float: right; margin:\"src=\"map.png\" alt=\"Paddington Store\" width=\"237\" height=\"300\">\n" +
+                "\n" +
+                " \n" +
+                "<script>\n" +
+                "   document.getElementById(\"cf\").onclick = function() {\n" +
+                "       var x = document.getElementById(\"cf\").innerHTML;\n" +
+                "       document.getElementById(\"category\").value = x\n" +
+                "       document.getElementById(\"findCategory\").submit();\n" +
+                "   }\n" +
+                "   document.getElementById(\"s\").onclick = function() {\n" +
+                "       var x = document.getElementById(\"s\").innerHTML;\n" +
+                "       document.getElementById(\"category\").value = x\n" +
+                "   document.getElementById(\"findCategory\").submit();\n" +
+                "   }\n" +
+                "   document.getElementById(\"hpr\").onclick = function() {\n" +
+                "       var x = document.getElementById(\"hpr\").innerHTML;\n" +
+                "       document.getElementById(\"category\").value = x\n" +
+                "       document.getElementById(\"findCategory\").submit();\n" +
+                "   }\n" +
+                "   document.getElementById(\"d\").onclick = function() {\n" +
+                "       var x = document.getElementById(\"d\").innerHTML;\n" +
+                "       document.getElementById(\"category\").value = x\n" +
+                "       document.getElementById(\"findCategory\").submit();\n" +
+                "   }\n" +
+                "   document.getElementById(\"a\").onclick = function() {\n" +
+                "       var x = document.getElementById(\"a\").innerHTML;\n" +
+                "       document.getElementById(\"category\").value = x\n" +
+                "       document.getElementById(\"findCategory\").submit();\n" +
+                "   }\n" +
+                "   document.getElementById(\"fa\").onclick = function() {\n" +
+                "       var x = document.getElementById(\"fa\").innerHTML;\n" +
+                "       document.getElementById(\"category\").value = x\n" +
+                "       document.getElementById(\"findCategory\").submit();\n" +
+                "   }\n" +
+                "</script>\n" +
+                "</body>\n" +
+                "</html>");
+
     }
     public String htmlOutput(){
+        boolean userLoggedIn = LoginDAO.checkLoggedIn();
+        String displayCurrentUser = "";
+        User cUser = null;
+        if (userLoggedIn == true) {
+            cUser = LoginDAO.getCurrentUser();
+            displayCurrentUser = "     <form name=\"logOut\" action=\"home\" method=\"post\">\n" +
+                    "       <div style=\"float: right;\" class=\"currentUser\">" + cUser.fname + "<i class=\"fa fa-fw fa-user\"></i>\n" +
+                    "           <div class=\"logOut\">\n" +
+                    "               <input class=\"logOutButton\" type=\"submit\" name=\"logOut\" value=\"Log Out\">\n" +
+                    "           </div>\n" +
+                    "       </div>\n" +
+                    "    </form>\n";
+        }
+        else if (userLoggedIn == false){
+            displayCurrentUser = "<div class=\"currentUser\"><i class=\"fa fa-fw fa-user\"></i></div>";
+        }
+        int basketSize = LoginDAO.getBasketSize();
+        String basketSizeOut="";
+        if (basketSize != 0){ basketSizeOut = String.valueOf(basketSize);}
         return "<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "  <head>\n" +
@@ -163,20 +286,10 @@ public class ServletMap extends HttpServlet {
                 "    <a href=\"https://phabpharmacy.herokuapp.com/login\"><i class=\"fa fa-fw fa-user\"></i>Login</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/map\" style=\"background-color: #00B8C5\"><i class=\"fa fa-compass\" aria-hidden=\"true\"></i> In-Store</a>\n" +
-                "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" style=\"width: 35px;\" class=\"fa fa-fw fa-shopping-basket\"><b id=\"basket\"></b></a>\n" +
-                "    <form name=\"logOut\" action=\"home\" method=\"post\"> \n" +
-                "        <div style=\"float: right;\" class=\"currentUser\">Luke<i class=\"fa fa-fw fa-user\"></i>\n" +
-                "            <div class=\"logOut\">\n" +
-                "                <input class=\"logOutButton\" type=\"submit\" name=\"logOut\" value=\"Log Out\">\n" +
-                "            </div>\n" +
-                "        </div>\n" +
-                "    </form>\n" +
-                "    </div>\n" +
-                "    \n" +
+                "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" style=\"background-color: #00B8C5; width: 35px;\"><i style=\"width: 35px;\" class=\"fa fa-fw fa-shopping-basket\"><p style=\"display: inline; font-family: Arial; font-weight: bold\" id=\"basket\"> " + basketSizeOut + "</p></i></a>\n" +
+                displayCurrentUser +
+
                 "    <h1>Find Items in Store</h1>\n" +
-                "    <form id=\"b\">\n" +
-                "    <input id=\"demo\" type=\"text\">\n" +
-                "    </form>\n" +
                 "    <p>Choose a category to see all of items in the section and their in-store (Paddington branch) location.</p>\n" +
                 "    <section>\n" +
                 "      <div class=\"box\" style=\"padding-top: 12px;\">\n" +
@@ -195,50 +308,6 @@ public class ServletMap extends HttpServlet {
                 "          </div>\n" +
                 "        </div>\n" +
                 "    </div>\n" +
-                "    </section>\n" +
-                "    <section>\n" +
-                "      <div class=\"box\">\n" +
-                "        <h3>Products in Cold and Flu:</h3>\n" +
-                "        <p>Vicks Vaporub 100g<br>Vicks First Defence 15ml<br>Item</p>\n" +
-                "      </div>\n" +
-                "    </section>\n" +
-                "  \n" +
-                "  <img class=\"images\" style=\"float: right; margin:\"src=\"map.png\" alt=\"Paddington Store\" width=\"237\" height=\"300\">\n" +
-                "\n" +
-                " \n" +
-                "<script>\n" +
-                "   document.getElementById(\"cf\").onclick = function() {\n" +
-                "       var x = document.getElementById(\"cf\").innerHTML;\n" +
-                "       document.getElementById(\"category\").value = x\n" +
-                "       document.getElementById(\"findCategory\").submit();\n" +
-                "   }\n" +
-                "   document.getElementById(\"s\").onclick = function() {\n" +
-                "       var x = document.getElementById(\"s\").innerHTML;\n" +
-                "       document.getElementById(\"category\").value = x\n" +
-                "   document.getElementById(\"findCategory\").submit();\n" +
-                "   }\n" +
-                "   document.getElementById(\"hpr\").onclick = function() {\n" +
-                "       var x = document.getElementById(\"hpr\").innerHTML;\n" +
-                "       document.getElementById(\"category\").value = x\n" +
-                "       document.getElementById(\"findCategory\").submit();\n" +
-                "   }\n" +
-                "   document.getElementById(\"d\").onclick = function() {\n" +
-                "       var x = document.getElementById(\"d\").innerHTML;\n" +
-                "       document.getElementById(\"category\").value = x\n" +
-                "       document.getElementById(\"findCategory\").submit();\n" +
-                "   }\n" +
-                "   document.getElementById(\"a\").onclick = function() {\n" +
-                "       var x = document.getElementById(\"a\").innerHTML;\n" +
-                "       document.getElementById(\"category\").value = x\n" +
-                "       document.getElementById(\"findCategory\").submit();\n" +
-                "   }\n" +
-                "   document.getElementById(\"fa\").onclick = function() {\n" +
-                "       var x = document.getElementById(\"fa\").innerHTML;\n" +
-                "       document.getElementById(\"category\").value = x\n" +
-                "       document.getElementById(\"findCategory\").submit();\n" +
-                "   }\n" +
-                "</script>\n" +
-                "</body>\n" +
-                "</html>";
+                "    </section>\n";
     }
 }
