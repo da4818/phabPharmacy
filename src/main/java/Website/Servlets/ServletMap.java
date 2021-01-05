@@ -18,7 +18,7 @@ public class ServletMap extends HttpServlet {
         resp.setContentType("text/html");
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
-        resp.getWriter().write("  <img class=\"images\" style=\"float: right; margin:\" src=\"src/Maps/map.png\" alt=\"Paddington Store\" width=\"237\" height=\"300\">\n" +
+        resp.getWriter().write("  <img class=\"images\" style=\"float: right; margin:\" src=\"../../../Maps/map.png\" alt=\"Paddington Store\" width=\"237\" height=\"300\">\n" +
                 "\n" +
                 " \n" +
                 "<script>\n" +
@@ -263,7 +263,7 @@ public class ServletMap extends HttpServlet {
                 "  </head>\n" +
                 "  <body>\n" +
                 "    <div class=\"navbar\">\n" +
-                "    <a><i class=\"fa fa-fw fa-home\"></i>Home</a> \n" +
+                "    <a href=\"https://phabpharmacy.herokuapp.com/home\"><i class=\"fa fa-fw fa-home\"></i>Home</a> \n" +
                 "    <div class=\"dropdown\">\n" +
                 "        <button style=\"cursor: pointer;\" class= \"dropbtn\" onclick=\"redirectBrowse()\"><i class=\"fa fa-fw fa-search\"></i>Browse<i class=\"fa fa-caret-down\"></i></button>\n" +
                 "        <div class=\"dropdown-content\">\n" +
