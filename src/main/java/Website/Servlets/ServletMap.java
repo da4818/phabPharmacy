@@ -18,7 +18,7 @@ public class ServletMap extends HttpServlet {
         resp.setContentType("text/html");
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
-        resp.getWriter().write("  <img class=\"images\" style=\"float: right; margin:\"src=\"map.png\" alt=\"Paddington Store\" width=\"237\" height=\"300\">\n" +
+        resp.getWriter().write("  <img class=\"images\" style=\"float: right; margin:\"src=\"../../../../../Maps/map.png\" alt=\"Paddington Store\" width=\"237\" height=\"300\">\n" +
                 "\n" +
                 " \n" +
                 "<script>\n" +
@@ -69,7 +69,7 @@ public class ServletMap extends HttpServlet {
                 "<p>");
         int j = 1;
         Product p = LoginDAO.getProduct(j);
-        while (j < LoginDAO.tableSize("products")){
+        while (j <= LoginDAO.tableSize("products")){
             if (p.category.equals(category)) {
                 resp.getWriter().write(p.name + " " + p.description + "<br>");
             }
