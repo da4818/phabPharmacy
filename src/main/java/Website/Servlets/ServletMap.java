@@ -20,8 +20,7 @@ public class ServletMap extends HttpServlet {
         resp.setContentType("text/html");
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
-        resp.getWriter().write("  <img class=\"images\" style=\"float: right; margin:\" src=\"map.png\" alt=\"Paddington Store\" width=\"237\" height=\"300\">\n" +
-                "\n" +
+        resp.getWriter().write("  <img class=\"images\" src=\"/Maps/map.png\" alt=\"Paddington Store\" width=\"237\" height=\"300\">\n" +
                 " \n" +
                 "<script>\n" +
                 "   document.getElementById(\"cf\").onclick = function() {\n" +
@@ -82,7 +81,7 @@ public class ServletMap extends HttpServlet {
                 "</div>\n" +
                 "    </section>\n" +
                 "  \n" +
-                "  <img class=\"images\" style=\"float: right; margin:\"src=\"map.png\" alt=\"Paddington Store\" width=\"237\" height=\"300\">\n" +
+                "  <img class=\"images\" src=\"/Maps/map.png\" alt=\"Paddington Store\" width=\"237\" height=\"300\">\n" +
                 "\n" +
                 " \n" +
                 "<script>\n" +
