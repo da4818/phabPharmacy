@@ -83,8 +83,8 @@ public class ServletMap extends HttpServlet {
             j++;
             p = LoginDAO.getProduct(j);
         }
-                //"        <p>Vicks Vaporub 100g<br>Vicks First Defence 15ml<br>Item</p>\n";
-        resp.getWriter().write("      </div>\n" +
+        resp.getWriter().write("</p>\n" +
+                "</div>\n" +
                 "    </section>\n" +
                 "  \n" +
                 "  <img class=\"images\" style=\"float: right; margin:\"src=\"map.png\" alt=\"Paddington Store\" width=\"237\" height=\"300\">\n" +
@@ -288,7 +288,7 @@ public class ServletMap extends HttpServlet {
                 "    <a href=\"https://phabpharmacy.herokuapp.com/map\" style=\"background-color: #00B8C5\"><i class=\"fa fa-compass\" aria-hidden=\"true\"></i> In-Store</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" style=\"background-color: #00B8C5; width: 35px;\"><i style=\"width: 35px;\" class=\"fa fa-fw fa-shopping-basket\"><p style=\"display: inline; font-family: Arial; font-weight: bold\" id=\"basket\"> " + basketSizeOut + "</p></i></a>\n" +
                 displayCurrentUser +
-
+                "</div>\n" +
                 "    <h1>Find Items in Store</h1>\n" +
                 "    <p>Choose a category to see all of items in the section and their in-store (Paddington branch) location.</p>\n" +
                 "    <section>\n" +
