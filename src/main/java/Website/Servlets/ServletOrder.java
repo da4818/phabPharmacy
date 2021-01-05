@@ -46,7 +46,7 @@ public class ServletOrder extends HttpServlet {
             for(int i=1;i<n+1;i++) {
             Product b = LoginDAO.getBasketInfo(i);
             String subtotal = valueOf(df.format(b.price*b.quantity));
-            resp.getWriter().write(b.name + " - " + b.description + " - x" + b.quantity + " - £" + subtotal + "<br>");
+            resp.getWriter().write(b.name + " " + b.description + " - x" + b.quantity + " - £" + subtotal + "<br>");
             }
             resp.getWriter().write("</p>\n" +
                     "    <button onclick=\"window.location.href='https://phabpharmacy.herokuapp.com/basket';\" class=\"buttonStyle\">Edit Basket</button>\n" +
