@@ -1,5 +1,6 @@
 package Website.Servlets;
 
+import Website.Entities.Customer;
 import Website.Entities.Product;
 import Website.Entities.User;
 import Website.LoginDAO;
@@ -10,6 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DecimalFormat;
 
 import static java.lang.String.valueOf;
@@ -121,6 +126,23 @@ public class ServletBasket extends HttpServlet {
                         "  <div class=\"price\"><p>£<output></output>" + subtotal + "</p></div>\n" +
                         "</div>\n" +
                         "</section>");
+
+                User u = LoginDAO.getCurrentUser();
+                String place_order = req.getParameter("orderResponse");
+                if (place_order.equals("orderResponse")){
+                    String dbUrl = System.getenv("JDBC_DATABASE_URL");
+                    try {
+                        Class.forName("org.postgresql.Driver");
+                        Connection db = DriverManager.getConnection(dbUrl);
+                        Statement stmt = db.createStatement();
+                        stmt.execute("INSERT INTO ordered_product (name,quantity,sell_price,orders_id) VALUES(b.name,b.quantity,b.price,u.id)");
+
+                    } catch (ClassNotFoundException | SQLException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
             }
         }
         else{
@@ -130,6 +152,7 @@ public class ServletBasket extends HttpServlet {
                     "</div>\n");
         }
         resp.getWriter().write("</body>\n</html>");
+
     }
 
 

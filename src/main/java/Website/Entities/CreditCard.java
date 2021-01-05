@@ -5,12 +5,14 @@ public class CreditCard {
     public String cvv;
     public String sortCode;
     public String accountNumber;
+    public Customer customer;
 
-    public CreditCard(String cardNumber, String cvv, String sortCode, String accountNumber){
+    public CreditCard(String cardNumber, String cvv, String sortCode, String accountNumber, Customer customer){
         this.cardNumber = cardNumber;
         this.cvv = cvv;
         this.sortCode = sortCode;
         this.accountNumber = accountNumber;
+        this.customer = customer;
     }
 
     public boolean validCardNumber(){

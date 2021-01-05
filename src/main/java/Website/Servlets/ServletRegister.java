@@ -1,7 +1,10 @@
 package Website.Servlets;
 
+import Website.Entities.CreditCard;
+import Website.Entities.Customer;
 import Website.Entities.EmailValidation;
 import Website.Entities.User;
+import Website.Functions.AddCustomer;
 import Website.LoginDAO;
 
 import javax.servlet.ServletException;
@@ -68,6 +71,10 @@ public class ServletRegister extends HttpServlet {
             LoginDAO.setLoggedInUser(currentUser);
             LoginDAO.resetTable("basket");
             resp.getWriter().write("<h2>Successful registration. Welcome, " + currentUser.fname + "</h2>");
+
+            Customer c = new Customer(currentUser.fname, currentUser.lname, currentUser.postcode, currentUser.email, currentUser.address, currentUser.phoneno);
+            CreditCard cc = new CreditCard(cn,cvv, sc, an, c);
+            new AddCustomer(c,cc);
         }
         resp.getWriter().write("<script>\n" +
                 "    function redirectBrowse(){\n" +
