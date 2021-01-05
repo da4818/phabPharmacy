@@ -18,7 +18,7 @@ public class ServletMap extends HttpServlet {
         resp.setContentType("text/html");
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
-        resp.getWriter().write("  <img class=\"images\" style=\"float: right; margin:\"src=\"../../../../../Maps/map.png\" alt=\"Paddington Store\" width=\"237\" height=\"300\">\n" +
+        resp.getWriter().write("  <img class=\"images\" style=\"float: right; margin:\" src=\"src/Maps/map.png\" alt=\"Paddington Store\" width=\"237\" height=\"300\">\n" +
                 "\n" +
                 " \n" +
                 "<script>\n" +
