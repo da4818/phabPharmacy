@@ -203,7 +203,7 @@ public class ServletMap extends HttpServlet {
                 "      </div>\n" +
                 "    </section>\n" +
                 "  \n" +
-                "  <img class=\"images\" style=\"float: right; margin:\"src=\"map.png\" alt=\"Girl in a jacket\" width=\"237\" height=\"300\">\n" +
+                "  <img class=\"images\" style=\"float: right; margin:\"src=\"map.png\" alt=\"Paddington Store\" width=\"237\" height=\"300\">\n" +
                 "\n" +
                 " \n" +
                 "<script>\n" +
