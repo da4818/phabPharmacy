@@ -93,9 +93,10 @@ public class ServletMap extends HttpServlet {
         else if (category.equals("Allergy")){
             imageURL = "<img class=\"images\" src=\"https://bit.ly/allergy_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n";
         }
-        else if (category.equals("Digestion")){
+        else if (category.equals("First Aid")){
             imageURL = "<img class=\"images\" src=\"https://bit.ly/first_aid_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n";
         }
+
         resp.getWriter().write("</p>\n" +
                 "</div>\n" +
                 "    </section>\n" +
