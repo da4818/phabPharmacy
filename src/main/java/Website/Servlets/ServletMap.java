@@ -19,8 +19,8 @@ public class ServletMap extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         String HTML = htmlOutput();
-        resp.getWriter().write(HTML);
-        resp.getWriter().write("  <img class=\"images\" src=\"/Maps/map.png\" alt=\"Paddington Store\" width=\"237\" height=\"300\">\n" +
+        resp.getWriter().write(HTML); //Embed photo url for main store
+        resp.getWriter().write("  <img class=\"images\" src=\"https://bit.ly/main_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
                 " \n" +
                 "<script>\n" +
                 "   document.getElementById(\"cf\").onclick = function() {\n" +
@@ -77,11 +77,30 @@ public class ServletMap extends HttpServlet {
             j++;
             p = LoginDAO.getProduct(j);
         }
+        String imageURL = "<img class=\"images\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n";
+        if (category.equals("Cold and Flu")){
+            imageURL = "<img class=\"images\" src=\"https://bit.ly/cold_flu_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n";
+        }
+        else if (category.equals("Skincare")){
+            imageURL = "<img class=\"images\" src=\"https://bit.ly/skincare_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n";
+        }
+        else if (category.equals("Headaches and Pain Relief")){
+            imageURL = "<img class=\"images\" src=\"https://bit.ly/headache_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n";
+        }
+        else if (category.equals("Digestion")){
+            imageURL = "<img class=\"images\" src=\"https://bit.ly/digestion_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n";
+        }
+        else if (category.equals("Allergy")){
+            imageURL = "<img class=\"images\" src=\"https://bit.ly/allergy_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n";
+        }
+        else if (category.equals("Digestion")){
+            imageURL = "<img class=\"images\" src=\"https://bit.ly/first_aid_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n";
+        }
         resp.getWriter().write("</p>\n" +
                 "</div>\n" +
                 "    </section>\n" +
                 "  \n" +
-                "  <img class=\"images\" src=\"/Maps/map.png\" alt=\"Paddington Store\" width=\"237\" height=\"300\">\n" +
+                imageURL +
                 "\n" +
                 " \n" +
                 "<script>\n" +
