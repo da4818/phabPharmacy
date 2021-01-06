@@ -93,7 +93,7 @@ public class ServletRegister extends HttpServlet {
                     "    </form>\n";
         }
         else if (userLoggedIn == false){ //If no user is logged in, a blank icon image will be displayed
-            displayCurrentUser = "<div class=\"currentUser\"><i class=\"fa fa-fw fa-user\"></i></div>";
+            displayCurrentUser = "<div class=\"currentUser\"><i class=\"fa fa-fw fa-user\"></i></div>\n";
         }
         int basketSize = LoginDAO.getBasketSize();
         String basketSizeOut="";

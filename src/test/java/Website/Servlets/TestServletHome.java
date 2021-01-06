@@ -1,70 +1,38 @@
 package Website.Servlets;
 
-import Website.Entities.User;
 import Website.LoginDAO;
-
+import Website.Servlets.ServletHome;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
-@WebServlet(urlPatterns ={"/home"},loadOnStartup = 1)
-public class ServletHome extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Creating/resetting database tables if necessary //
-        /*LoginDAO.resetTable("logged");
-        LoginDAO.createTable("users");
-        LoginDAO.createTable("basket");
-        LoginDAO.createTable("products");
-        LoginDAO.createTable("logged");*/
-        //LoginDAO.resetTable("logged");
-        //LoginDAO.resetTable("basket");
-        resp.setContentType("text/html");
-        String HTML = htmlOutput();
-        resp.getWriter().write(HTML);
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+//In setting, tests are run using Intellij IDEA rather than Gradle --> this enables testing when the servlet is organised into its own package
+public class TestServletHome {
+    @Mock
+    HttpServletRequest request;
+    @Mock
+    HttpServletResponse response;
+    @Before
+    public void setUp() throws Exception{
+        MockitoAnnotations.initMocks(this);
     }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        String logOut = req.getParameter("logOut");
-        if (logOut.equals("Log Out")){
-            LoginDAO.resetTable("logged");
-            LoginDAO.resetTable("basket");
-        }
-        String HTML = htmlOutput();
-        resp.getWriter().write(HTML);
-    }
-
-    //Creating a function to return a string literal of the HTML code to put into the doGet and doPost functions uses fewer lines of code and is easier to amend
-    public String htmlOutput() {
-        //Checks if a user is currently logged in
-        boolean userLoggedIn = LoginDAO.checkLoggedIn();
-        String displayCurrentUser = "";
-        User cUser = null;
-        if (userLoggedIn == true) { //If a user is logged in, userMessage will be displayed on the header (see line 144)
-            cUser = LoginDAO.getCurrentUser();
-            displayCurrentUser = "     <form name=\"logOut\" action=\"home\" method=\"post\">\n" +
-                    "       <div style=\"float: right;\" class=\"currentUser\">" + cUser.fname + "<i class=\"fa fa-fw fa-user\"></i>\n" +
-                    "           <div class=\"logOut\">\n" +
-                    "               <input class=\"logOutButton\" type=\"submit\" name=\"logOut\" value=\"Log Out\">\n" +
-                    "           </div>\n" +
-                    "       </div>\n" +
-                    "    </form>\n";
-        }
-        else if (userLoggedIn == false){
-            displayCurrentUser = "<div class=\"currentUser\"><i class=\"fa fa-fw fa-user\"></i></div>\n";
-        }
-        // Finds size of items in basket to display on navigation bar. This happens for each servlet subpage
-        int basketSize = LoginDAO.getBasketSize();
-        String basketSizeOut = "";
-        if (basketSize != 0) {
-            basketSizeOut = String.valueOf(basketSize); //similar to line 39
-        }
-        return "<!DOCTYPE html>\n" + //HTML comments are on the respective .jsp files (need updating)
+    @Test
+    public void testHtmlOutput(){
+        when(LoginDAO.checkLoggedIn()).thenReturn(false);
+        when(LoginDAO.getBasketSize()).thenReturn(0);
+        ServletHome sh = new ServletHome();
+        Assert.assertEquals(sh.htmlOutput(),"<!DOCTYPE html>\n" + //HTML comments are on the respective .jsp files (need updating)
                 "<html>\n" +
                 "<head>\n" +
                 "    <meta charset=\"utf-8\">\n" +
@@ -178,8 +146,8 @@ public class ServletHome extends HttpServlet {
                 "    <a href=\"https://phabpharmacy.herokuapp.com/login\"><i class=\"fa fa-fw fa-user\"></i>Login</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/map\"><i class=\"fa fa-compass\" aria-hidden=\"true\"></i> In-Store</a>\n" +
-                "    <a href=\"https://phabpharmacy.herokuapp.com/basket\"><i style=\"width: 35px;\" class=\"fa fa-fw fa-shopping-basket\"><p style=\"display: inline; font-family: Arial; font-weight: bold\" id=\"basket\"> " + basketSizeOut + "</p></i></a>\n" +
-                displayCurrentUser +
+                "    <a href=\"https://phabpharmacy.herokuapp.com/basket\"><i style=\"width: 35px;\" class=\"fa fa-fw fa-shopping-basket\"><p style=\"display: inline; font-family: Arial; font-weight: bold\" id=\"basket\"> </p></i></a>\n" +
+                "    <div class=\"currentUser\"><i class=\"fa fa-fw fa-user\"></i></div>\n" +
                 "</div>\n" +
                 "<h1><center>PhabPharmacy</center></h1>\n" +
                 "<h2><center> Welcome to the PhabPharmacy's home page!<br>Please login or register to create an account.</center></h2>\n" +
@@ -190,9 +158,18 @@ public class ServletHome extends HttpServlet {
                 "    }\n" +
                 "</script>\n" +
                 "</body>\n" +
-                "</html>";
+                "</html>");
+
     }
-
-
+    @Test
+    public void testDoGet() throws IOException, ServletException{
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        when(response.getWriter()).thenReturn(pw);
+        when(request.getServletPath()).thenReturn("/home");
+        ServletHome sh = new ServletHome();
+        sh.doGet(request,response);
+        String output = sw.getBuffer().toString();
+    }
 
 }

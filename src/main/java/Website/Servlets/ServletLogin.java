@@ -80,7 +80,7 @@ public class ServletLogin extends HttpServlet {
                     "    </form>\n";
         }
         else if (userLoggedIn == false){
-            displayCurrentUser = "<div class=\"currentUser\"><i class=\"fa fa-fw fa-user\"></i></div>";
+            displayCurrentUser = "<div class=\"currentUser\"><i class=\"fa fa-fw fa-user\"></i></div>\n";
         }
         int basketSize = LoginDAO.getBasketSize();
         String basketSizeOut="";
