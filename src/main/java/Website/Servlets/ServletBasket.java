@@ -3,6 +3,7 @@ package Website.Servlets;
 import Website.Entities.Customer;
 import Website.Entities.Product;
 import Website.Entities.User;
+import Website.Functions.UpdateQuantity;
 import Website.LoginDAO;
 
 import javax.servlet.ServletException;
@@ -136,7 +137,7 @@ public class ServletBasket extends HttpServlet {
                         Connection db = DriverManager.getConnection(dbUrl);
                         Statement stmt = db.createStatement();
                         stmt.execute("INSERT INTO ordered_product (name,quantity,sell_price,orders_id) VALUES(b.name,b.quantity,b.price,u.id)");
-
+                        UpdateQuantity update = new UpdateQuantity(b.name, b.brand, -b.quantity);
                     } catch (ClassNotFoundException | SQLException e) {
                         e.printStackTrace();
                     }
