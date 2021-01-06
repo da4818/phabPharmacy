@@ -1,7 +1,6 @@
 package Website.Servlets;
 
 import Website.LoginDAO;
-import Website.Servlets.ServletHome;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +14,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 //In setting, tests are run using Intellij IDEA rather than Gradle --> this enables testing when the servlet is organised into its own package
 public class TestServletHome {
@@ -23,16 +21,25 @@ public class TestServletHome {
     HttpServletRequest request;
     @Mock
     HttpServletResponse response;
+    //Need to create a mock database
+    @Mock
+    LoginDAO lDAO;
     @Before
     public void setUp() throws Exception{
         MockitoAnnotations.initMocks(this);
     }
+
+    //When no one is logged in, and the basket is empty - unable to change
     @Test
-    public void testHtmlOutput(){
-        when(LoginDAO.checkLoggedIn()).thenReturn(false);
-        when(LoginDAO.getBasketSize()).thenReturn(0);
+    public void testDoGet() throws IOException, ServletException{
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        when(response.getWriter()).thenReturn(pw);
+        when(request.getServletPath()).thenReturn("/home");
         ServletHome sh = new ServletHome();
-        Assert.assertEquals(sh.htmlOutput(),"<!DOCTYPE html>\n" + //HTML comments are on the respective .jsp files (need updating)
+        sh.doGet(request,response);
+        String output = sw.getBuffer().toString();
+        Assert.assertThat(output,is(equalTo("<!DOCTYPE html>\n" + //HTML comments are on the respective .jsp files (need updating)
                 "<html>\n" +
                 "<head>\n" +
                 "    <meta charset=\"utf-8\">\n" +
@@ -147,7 +154,7 @@ public class TestServletHome {
                 "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/map\"><i class=\"fa fa-compass\" aria-hidden=\"true\"></i> In-Store</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/basket\"><i style=\"width: 35px;\" class=\"fa fa-fw fa-shopping-basket\"><p style=\"display: inline; font-family: Arial; font-weight: bold\" id=\"basket\"> </p></i></a>\n" +
-                "    <div class=\"currentUser\"><i class=\"fa fa-fw fa-user\"></i></div>\n" +
+                "<div class=\"currentUser\"><i class=\"fa fa-fw fa-user\"></i></div>\n" +
                 "</div>\n" +
                 "<h1><center>PhabPharmacy</center></h1>\n" +
                 "<h2><center> Welcome to the PhabPharmacy's home page!<br>Please login or register to create an account.</center></h2>\n" +
@@ -158,18 +165,7 @@ public class TestServletHome {
                 "    }\n" +
                 "</script>\n" +
                 "</body>\n" +
-                "</html>");
-
-    }
-    @Test
-    public void testDoGet() throws IOException, ServletException{
-        StringWriter sw = new StringWriter();
-        PrintWriter pw = new PrintWriter(sw);
-        when(response.getWriter()).thenReturn(pw);
-        when(request.getServletPath()).thenReturn("/home");
-        ServletHome sh = new ServletHome();
-        sh.doGet(request,response);
-        String output = sw.getBuffer().toString();
+                "</html>")));
     }
 
 }
