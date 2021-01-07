@@ -35,8 +35,8 @@ public class ServletRegister extends HttpServlet {
         resp.setContentType("text/html");
         String logOut = req.getParameter("logOut");
         if (logOut.equals("Log Out")){
-            LoginDAO.resetTable("logged");
-            LoginDAO.resetTable("basket");
+            LoginDAO.resetTable("logged_in_customer");
+            LoginDAO.resetTable("customer_basket");
         }
         String HTML = htmlOutput();
         String fn = req.getParameter("fname");
@@ -69,11 +69,11 @@ public class ServletRegister extends HttpServlet {
             LoginDAO.addUser(fn,ln,em,pw,cn,pc);
             User currentUser = LoginDAO.getUser(em,pw);
             LoginDAO.setLoggedInUser(currentUser);
-            LoginDAO.resetTable("basket");
+            LoginDAO.resetTable("customer_basket");
             resp.getWriter().write("<h2>Successful registration. Welcome, " + currentUser.fname + "</h2>");
 
             Customer c = new Customer(currentUser.fname, currentUser.lname, currentUser.postcode, currentUser.email, currentUser.address, currentUser.phoneno);
-            CreditCard cc = new CreditCard(cn,cvv, sc, an, c);
+            CreditCard cc = new CreditCard(cn,cvv,sc,an,c);
             new AddCustomer(c,cc);
         }
         resp.getWriter().write("<script>\n" +

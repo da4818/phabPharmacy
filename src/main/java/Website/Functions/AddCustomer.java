@@ -11,23 +11,38 @@ public class AddCustomer {
     public AddCustomer(Customer cust, CreditCard cc) {
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try {
+
             Class.forName("org.postgresql.Driver");
             Connection db = DriverManager.getConnection(dbUrl);
-            Statement stmt = db.createStatement();
+            //Statement stmt = db.createStatement();
             Statement stmt1 = db.createStatement();
-            Statement stmt2 = db.createStatement();
-            stmt.execute("INSERT INTO customer (first_name,last_name,email,postcode,address,phone_no) VALUES (cust.first_name,cust.last_name,cust.email,cust.postcode,cust.address,cust.phone_number);");
-
+            //Statement stmt2 = db.createStatement();
+            PreparedStatement pStmt = db.prepareStatement("INSERT INTO customer (first_name,last_name,email,postcode,address,phone_no) VALUES (?,?,?,?,?,?);");
+            pStmt.setString(1,cust.first_name);
+            pStmt.setString(2,cust.last_name);
+            pStmt.setString(3,cust.email);
+            pStmt.setString(4,cust.postcode);
+            pStmt.setString(5,cust.address);
+            pStmt.setString(6,cust.phone_number);
+            pStmt.executeUpdate();
             String sqlStr = "SELECT * FROM customer WHERE first_name = cust.first_name() AND email = cust.email;";
             ResultSet rs = stmt1.executeQuery(sqlStr);
+            int id = Integer.parseInt(null);
             if (rs.next()) {
-                int id = rs.getInt("id");
+                id = rs.getInt("id");
             }
 
-            stmt2.execute("INSERT INTO card_details (card_no,cvv,sort_code,account_no,customer_id) VALUES(cc.cardNumber,cc.cvv,cc.sortCode,cc.accountNumber,id);");
-            stmt.close();
+            PreparedStatement pStmt2 = db.prepareStatement("INSERT INTO card_details (card_no,cvv,sort_code,account_no,customer_id) VALUES(?,?,?,?,?);");
+            pStmt2.setString(1,cc.cardNumber);
+            pStmt2.setString(2,cc.cvv);
+            pStmt2.setString(3,cc.sortCode);
+            pStmt2.setString(4,cc.accountNumber);
+            pStmt2.setInt(5,id);
+            pStmt2.executeUpdate();
+            pStmt.close();
+            pStmt2.close();
             stmt1.close();
-            stmt2.close();
+
             rs.close();
             db.close();
         } catch (ClassNotFoundException | SQLException e) {

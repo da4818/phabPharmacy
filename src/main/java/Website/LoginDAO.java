@@ -26,79 +26,114 @@ public class LoginDAO {
             Connection c = DriverManager.getConnection(dbUrl);
             Statement s = c.createStatement();
             Statement s1 = c.createStatement();
-            if(tableName.equals("users")) { //* rename to 'customers'
-                String sql ="CREATE TABLE USERS " +
-                        "(ID SERIAL PRIMARY KEY NOT NULL," +
-                        " FNAME TEXT NOT NULL, " +
-                        " LNAME TEXT NOT NULL, " +
-                        " EMAIL TEXT NOT NULL, " +
-                        " PASSW TEXT NOT NULL, " + //*add password to 'customer' table
-                        " CARDNO TEXT NOT NULL, " +
-                        " POSTCODE TEXT NOT NULL)"; //*add phone_no VARCHAR(12), address VARCHAR(128) to table
+            if(tableName.equals("customer")) { //* rename to 'customers'
+                String sql ="CREATE TABLE CUSTOMER (" +
+                        "ID SERIAL PRIMARY KEY NOT NULL," +
+                        " FIRST_NAME VARCHAR(36) NOT NULL, " +
+                        " LAST_NAME VARCHAR(36) NOT NULL, " +
+                        " EMAIL VARCHAR(256) NOT NULL, " +
+                        " PASS_WORD VARCHAR(256) NOT NULL, " +
+                        " POSTCODE VARCHAR(8) NOT NULL, " +
+                        " ADDRESS VARCHAR(128)," +
+                        " PHONE_NO VARCHAR(12))";
                 s.executeUpdate(sql);
-                s1.executeUpdate("INSERT INTO USERS (FNAME,LNAME,EMAIL,PASSW,CARDNO,POSTCODE) VALUES ('John','Doe','email1','pass1','cardno1','SW72AZ');");
-                s1.executeUpdate("INSERT INTO USERS (FNAME,LNAME,EMAIL,PASSW,CARDNO,POSTCODE) VALUES ('Mia','Stewart','email2','pass2','cardno2','SW65TD');");
+                s1.executeUpdate("INSERT INTO CUSTOMER(FIRST_NAME,LAST_NAME,EMAIL,PASS_WORD,POSTCODE)  VALUES ('John','Doe','email1','pass1','cardno1','SW72AZ');");
+                s1.executeUpdate("INSERT INTO CUSTOMER(FIRST_NAME,LAST_NAME,EMAIL,PASS_WORD,POSTCODE) VALUES ('Mia','Stewart','email2','pass2','cardno2','SW65TD');");
             }
-            else if(tableName.equals("products")){ //*rename to 'shop_products'
-                String sql ="CREATE TABLE PRODUCTS " +
-                        "(ID SERIAL PRIMARY KEY NOT NULL," +
-                        " NAME TEXT NOT NULL, " + // *separate into 'brand' and 'name'
-                        " DESCRIPTION TEXT NOT NULL, " + //*rename to 'amount'
-                        " PRICE DOUBLE PRECISION NOT NULL, " +
-                        " QUANTITY INTEGER NOT NULL, " +
-                        " CATEGORY TEXT NOT NULL, " +
-                        " LIMITED BOOLEAN NOT NULL)"; //*I think boolean may be easier to manage than SMALLINT
-                //*add other columns (buy_price,soft/hard min)
+            else if(tableName.equals("shop_product")){
+                String sql ="CREATE TABLE SHOP_PRODUCT (" +
+                        "BARCODE SERIAL PRIMARY KEY NOT NULL, " +
+                        " CATEGORY VARCHAR(36) NOT NULL, " +
+                        " BRAND VARCHAR(36) NOT NULL, " +
+                        " NAME VARCHAR(36) NOT NULL, " +
+                        " SELL_PRICE DECIMAL(10,2) NOT NULL, " +
+                        " BUY_PRICE DECIMAL(10,2) NOT NULL, " +
+                        " QUANTITY SMALLINT NOT NULL, " +
+                        " FULL_STOCK SMALLINT NOT NULL, " +
+                        " LIMIT_OF_1 BOOLEAN NOT NULL," +
+                        "SOFT_MIN DECIMAL (10,2)," +
+                        "HARD_MIN DECIMAL(10,2)," +
+                        "BRANCH_ID INT REFERENCES BRANCH (ID))";
+
                 s.executeUpdate(sql);
-                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Vicks Vaporub','100g',4.50,15,'Cold and Flu',false);");
-                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Vicks First Defence','15ml',6.80,20,'Cold and Flu',false);");
-                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Gsk Night Nurse','160ml',8.50,30,'Cold and Flu',false);");
-                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Gsk Night Nurse','160ml',9.00,30,'Cold and Flu',false);");
-                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Lemsip Max','16 caps',4.20,25,'Cold and Flu',false);");
-                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Lemsip Standard','10 sachets',4.50,25,'Cold and Flu',false);");
-                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Sudafed Day & Night','16 caps',4.20,30,'Cold and Flu',true);");
-                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Sudafed Max','16 caps',4.80,30,'Cold and Flu',true);");
-                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Benylin Mucus Relief','16 caps',4.80,20,'Cold and Flu',false);");
-                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Benylin 4 Flu','24 caps',6.00,20,'Cold and Flu',false);");
-                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('E45 Psoriasis Cream','50ml',20.00,15,'Skincare',false);");
-                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Eurax Skin Cream','100g',5.70,15,'Skincare',false);");
-                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Nurofen Meltlets','16 caps',4.00,40,'Headaches and Pain Relief',false);");
-                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Dioralyte Blackcurrant','12 sachets',8.00,20,'Digestion',false);");
-                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Benadryl Relief','24 caps',9.00,20,'Allergy',false);");
-                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Dettol Antiseptic','500ml',3.20,20,'First Aid',false);");
+                s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Cold and Flu','Vicks','First Defence','15ml',6.8,5,20,20,false)," +
+                        "    ('Cold and Flu','Gsk','Night Nurse','160ml',8.5,7,30,30,false)," +
+                        "    ('Cold and Flu','Gsk','Night Nurse','160ml',9,7.5,30,30,false)," +
+                        "    ('Cold and Flu','Lemsip','Max','16 caps',4.2,3.7,25,25,false)," +
+                        "    ('Cold and Flu','Lemsip','Standard','10 sachets',4.5,3.5,25,25,false)," +
+                        "    ('Cold and Flu','Sudafed','Day and Night','16 caps',4.5,3.2,30,30,true)," +
+                        "    ('Cold and Flu','Sudafed','Max','16 caps',4.2,3.2,30,30,true)," +
+                        "    ('Cold and Flu','Benylin','Mucus relief','16 caps',4.8,3.2,20,20,false)," +
+                        "    ('Cold and Flu','Benylin','4 flu','24 caps',6,4.9,20,20,false);");
+
+                s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Skincare','E45','Psoriasis cream','50ml',20,16,15,15,false)," +
+                        "    ('Skincare','Eurax','Skin cream','100g',5.7,4.2,15,15,false)," +
+                        "    ('Skincare','Eucerin','Skin relief cream','50ml',9,7,20,20,false)," +
+                        "    ('Skincare','Eucerin','Face scrub','100ml',7.5,6,20,20,false)," +
+                        "    ('Skincare','Dermalex','Psoriasis cream','150ml',30,25,10,10,false)," +
+                        "    ('Skincare','Dermalex','Repair and Restore','100g',12,10,10,10,false)," +
+                        "    ('Skincare','Dermalex','Eczema cream','100g',25,22.2,5,5,false)," +
+                        "    ('Skincare','Cetaphil','Moisturising cream','50ml',10,7.6,20,20,false)," +
+                        "    ('Skincare','Cetaphil','Exfoliating cleanser','180ml',12,10.1,20,20,false);");
+
+                s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Headaches and pain relief','Nurofen','Meltlets','16 caps',4,3.7,40,40,false)," +
+                        "    ('Headaches and pain relief','Nurofen','Express','16 caps',4,3.5,30,30,false)," +
+                        "    ('Headaches and pain relief','Nurofen','Max strength','32 caps',7,6.2,25,25,false)," +
+                        "    ('Headaches and pain relief','Nurofen','Standard','16 caps',4,3.2,30,30,false)," +
+                        "    ('Headaches and pain relief','Cuprofen ','Max strength','96 caps',11,9,20,20,true)," +
+                        "    ('Headaches and pain relief','Solpadeine','Headache','16 caps',2,1.6,20,20,true)," +
+                        "    ('Headaches and pain relief','Anadin','Extra','16 caps',2.3,2,30,30,true)," +
+                        "    ('Headaches and pain relief','Anadin','Triple action','12 caps',2,1.9,30,30,true)," +
+                        "    ('Headaches and pain relief','Anadin','Original','16 caps',1.8,1.5,30,30,true)," +
+                        "    ('Headaches and pain relief','Disprin','Soluble','32 tablets',3.6,2.8,20,20,true);");
+
+                s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Digestion','Dioralyte','Blackcurrant','12 sachets',8,7.3,20,20,false)," +
+                        "    ('Digestion','Dioralyte','Lemon','12 sachets',8,7.3,20,20,false)," +
+                        "    ('Digestion','Gaviscon','Chewable','24 tablets',4.2,3.5,25,25,false)," +
+                        "    ('Digestion','Senokot','Max','10 tablets',3,2.7,10,10,false)," +
+                        "    ('Digestion','Gaviscon','Advance','300ml',10,8.1,10,10,false);");
+
+                s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Allergy','Benadryl','Relief','24 caps',9,7.1,20,20,false)," +
+                        "    ('Allergy','Piriteze','tabs','7 tablets',3,2.3,20,20,false)," +
+                        "    ('Allergy','Beconase','Relief','100 sprays',6,4,20,20,false);");
+
+                s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('First aid','Dettol','Antiseptic','500ml',3.2,3,20,20,false)," +
+                        "    ('First aid','Dettol','Hand sanitizer','500ml',7,6.3,50,50,false)," +
+                        "    ('First aid','Elastoplast','plasters','20 plasters',3,2,30,30,v)," +
+                        "    ('First aid','TCP','Liquid','200ml',4,3.2,20,20,false);");
+                s1.executeUpdate("UPDATE shop_product SET branch_id = 1;");
+                s1.executeUpdate("INSERT INTO shop_product (category,brand,name,amount,sell_price,buy_price,quantity,full_stock,limit_of_1)");
+                s1.executeUpdate("SELECT category,brand,name,amount,sell_price,buy_price,quantity,full_stock,limit_of_1 FROM shop_product WHERE branch_id=1;");
+                s1.executeUpdate("UPDATE shop_product SET branch_id=2 WHERE barcode>41;");
+                s1.executeUpdate("UPDATE shop_product SET sell_price=sell_price*2 WHERE barcode>41;");
+                s1.executeUpdate("INSERT INTO shop_product (category,brand,name,amount,sell_price,buy_price,quantity,full_stock,limit_of_1)");
+                s1.executeUpdate("SELECT category,brand,name,amount,sell_price,buy_price,quantity,full_stock,limit_of_1 FROM shop_product WHERE branch_id=1;");
+                s1.executeUpdate("UPDATE shop_product SET branch_id=3 WHERE barcode>82;");
+                s1.executeUpdate("UPDATE shop_product SET sell_price=sell_price/1.3 WHERE barcode>82;");
             }
-            else if(tableName.equals("basket")){ //*rename to 'ordered_products' (i think)
-                String sql ="CREATE TABLE BASKET " +
-                        "(ID INT NOT NULL," +
-                        " NAME TEXT NOT NULL, " +
-                        " DESCRIPTION TEXT NOT NULL, " +
-                        " PRICE DOUBLE PRECISION NOT NULL, " + //* rename to 'sell_price'
-                        " QUANTITY INTEGER NOT NULL, " +
-                        " SUBTOTAL TEXT NOT NULL, " +
-                        " LIMITED BOOLEAN NOT NULL)";
-                s.executeUpdate(sql); //*we may need to add the customer's name to this table so that we can manage multiple baskets at once
-            }
-            else if(tableName.equals("orders")){ //*this orders table may be redundant as the values are the same as the basket
-                String sql ="CREATE TABLE ORDERS " +
-                        "(ID SERIAL PRIMARY KEY NOT NULL," +
-                        " NAME TEXT NOT NULL, " +
-                        " DESCRIPTION TEXT NOT NULL, " +
-                        " PRICE DOUBLE PRECISION NOT NULL, " +
-                        " QUANTITY INTEGER NOT NULL, " +
-                        " SUBTOTAL TEXT NOT NULL, " +
-                        " LIMITED BOOLEAN NOT NULL)";
+            else if(tableName.equals("customer_basket")){ //*rename to 'ordered_products' (i think)
+                String sql ="CREATE TABLE CUSTOMER_BASKET (" +
+                        "    BARCODE SERIAL PRIMARY KEY NOT NULL," +
+                        "    CATEGORY VARCHAR(36) NOT NULL," +
+                        "    BRAND VARCHAR(36) NOT NULL," +
+                        "    NAME VARCHAR(36) NOT NULL," +
+                        "    AMOUNT VARCHAR(36)," +
+                        "    SELL_PRICE DECIMAL(10,2) NOT NULL," +
+                        "    QUANTITY SMALLINT NOT NULL," +
+                        "    LIMIT_OF_1 BOOLEAN NOT NULL," +
+                        "    CUSTOMER_ID INT REFERENCES LOGGED_IN_CUSTOMER (CUSTOMER_ID))";
                 s.executeUpdate(sql);
-                s1.executeUpdate("INSERT INTO ORDERS (ID,NAME,DESCRIPTION,PRICE,QUANTITY,SUBTOTAL,LIMITED) SELECT ID,NAME,DESCRIPTION,PRICE,QUANTITY,SUBTOTAL,LIMITED FROM BASKET;");
             }
-            else if(tableName.equals("logged")) { //this table is so that we can see which customer is currently logged in - there will only be at most 1 entry in this table, and will be updated when a new user logs in
-                String sql ="CREATE TABLE LOGGED " +
-                        "(ID SERIAL PRIMARY KEY NOT NULL," +
-                        " FNAME TEXT NOT NULL, " +
-                        " LNAME TEXT NOT NULL, " +
-                        " EMAIL TEXT NOT NULL, " +
-                        " PASSW TEXT NOT NULL, " +
-                        " CARDNO TEXT NOT NULL, " +
-                        " POSTCODE TEXT NOT NULL)";
+            else if(tableName.equals("logged_in_customer")) { //this table is so that we can see which customer is currently logged in - there will only be at most 1 entry in this table, and will be updated when a new user logs in
+                String sql ="CREATE TABLE LOGGED_IN_CUSTOMER (" +
+                        "    ID SERIAL PRIMARY KEY NOT NULL," +
+                        "    FIRST_NAME VARCHAR(36) NOT NULL," +
+                        "    LAST_NAME VARCHAR(36) NOT NULL," +
+                        "    EMAIL VARCHAR(256) NOT NULL," +
+                        "    POSTCODE VARCHAR(8) NOT NULL," +
+                        "    ADDRESS VARCHAR(128)," +
+                        "    PHONE_NO VARCHAR(12)" +
+                        "    CUSTOMER_ID INT REFERENCES CUSTOMER (ID))";
                 s.executeUpdate(sql);
             }
             s.close();
@@ -114,7 +149,7 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            PreparedStatement ps=c.prepareStatement("select * from users where email=? and passw=?");
+            PreparedStatement ps=c.prepareStatement("select * from customer where email=? and pass_word=?");
             ps.setString(1,email_in);
             ps.setString(2,pass_in);
             ResultSet rs = ps.executeQuery();
@@ -130,7 +165,7 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            PreparedStatement ps=c.prepareStatement("select * from users where email=?");
+            PreparedStatement ps=c.prepareStatement("select * from customer where email=?");
             ps.setString(1,email_in);
             ResultSet rs=ps.executeQuery();
             status = rs.next(); //similar to line 121
@@ -147,18 +182,19 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            PreparedStatement ps=c.prepareStatement("select * from users where email=? and passw=?");
+            PreparedStatement ps=c.prepareStatement("select * from customer where email=? and pass_word=?");
             ps.setString(1,email_in);
             ps.setString(2,pass_in);
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
-                u.id = rs.getInt("id");
-                u.fname = rs.getString("fname");
-                u.lname = rs.getString("name");
+                u.customer_id = rs.getInt("id");
+                u.fname = rs.getString("first_name");
+                u.lname = rs.getString("last_name");
                 u.email = rs.getString("email");
-                u.password = rs.getString("passw");
-                u.cardno = rs.getString("cardno");
+                u.password = rs.getString("pass_word");
                 u.postcode = rs.getString("postcode");
+                u.address = rs.getString("address");
+                u.phoneno = rs.getString("phone_no");
             }
             ps.close();
             c.close();
@@ -171,13 +207,12 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            PreparedStatement ps=c.prepareStatement("insert into users (fname,lname,email,passw,cardno,postcode) values(?,?,?,?,?,?)");
+            PreparedStatement ps=c.prepareStatement("insert into customer(first_name,last_name,email,pass_word,postcode) values(?,?,?,?,?)");
             ps.setString(1,fname_in);
             ps.setString(2,lname_in);
             ps.setString(3,email_in);
             ps.setString(4,pass_in);
-            ps.setString(5,cardno_in);
-            ps.setString(6,postcode_in);
+            ps.setString(5,postcode_in);
             ps.executeUpdate();
             ps.close();
             c.close();
@@ -191,14 +226,13 @@ public class LoginDAO {
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
             Statement s=c.createStatement();
-            ResultSet rs=s.executeQuery("select * from logged;");
+            ResultSet rs=s.executeQuery("select * from logged_in_customer;");
             while(rs.next()){
-                u.id = rs.getInt("id");
-                u.fname = rs.getString("fname");
-                u.lname = rs.getString("lname");
+                u.customer_id = rs.getInt("customer_id");
+                u.fname = rs.getString("first_name");
+                u.lname = rs.getString("last_name");
                 u.email = rs.getString("email");
-                u.password = rs.getString("passw");
-                u.cardno = rs.getString("cardno");
+                u.password = rs.getString("pass_word");
                 u.postcode = rs.getString("postcode");
             }
             s.close();
@@ -213,8 +247,8 @@ public class LoginDAO {
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
             Statement s=c.createStatement();
-            s.executeUpdate("truncate table logged"); //instead of updating the table it will just empty it and add a new entry
-            String sql = "INSERT INTO LOGGED (ID,FNAME,LNAME,EMAIL,PASSW,CARDNO,POSTCODE) SELECT ID,FNAME,LNAME,EMAIL,PASSW,CARDNO,POSTCODE FROM USERS WHERE ID=" +loggedInUser.id +";";
+            s.executeUpdate("truncate table logged_in_customer"); //instead of updating the table it will just empty it and add a new entry
+            String sql = "insert into logged_in_customer (first_name,last_name,email,pass_word,postcode,customer_id) SELECT first_name,last_name,email,pass_word,postcode,id FROM customer WHERE id=" +loggedInUser.customer_id +";";
             s.executeUpdate(sql);
             s.close();
             c.close();
@@ -228,10 +262,9 @@ public class LoginDAO {
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
             Statement s=c.createStatement();
-            ResultSet rs=s.executeQuery("select * from logged");
+            ResultSet rs=s.executeQuery("select * from logged_in_user");
             status=rs.next(); //Status is now true if an entry with the email and password exists (i.e. the only entry in the table)
             c.close();
-
         }catch(Exception e){System.out.println(e);}
         return status;
     }
@@ -243,18 +276,20 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            PreparedStatement ps=c.prepareStatement("select * from products where id=?");
+            PreparedStatement ps=c.prepareStatement("select * from shop_product where barcode=?");
             ps.setInt(1,n);
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
-                p.id = rs.getInt("id");
-                p.name = rs.getString("name");
-                p.description = rs.getString("description");
-                p.price = rs.getDouble("price");
-                p.quantity = rs.getInt("quantity");
+                p.barcode = rs.getInt("barcode");
                 p.category = rs.getString("category");
+                p.brand = rs.getString("brand");
+                p.name = rs.getString("name");
+                p.amount = rs.getString("amount");
+                p.price = rs.getDouble("sell_price");
+                p.quantity = rs.getInt("quantity");
                 p.limited = rs.getBoolean("limited");
             }
+
             ps.close();
             c.close();
 
@@ -268,24 +303,33 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            String sql = "select * from basket where name='" + p_in.name + "';"; //we check if the user has previous added the item to the basket before
             Statement s = c.createStatement();
+            String sql = "select customer_id from logged_in_customer;";
             ResultSet rs = s.executeQuery(sql);
-            if(rs.next()){ //if they have, we will update the quantity to the most recent value they have chosen (it won't add the amount e.g. if they click x1 and then x3 it updates to x3, not x4 - this is for simplicity)
-                Statement s1 = c.createStatement();
-                String sql1 = "update basket set quantity =" + quantity_in + "where name='" + p_in.name+ "'";
-                s1.executeUpdate(sql1);
-                s1.close();
+            int cust_id = Integer.parseInt(null);
+            while(rs.next()){
+                cust_id = rs.getInt("customer_id");
+            }
+            String sql1 = "select * from customer_basket where name='" + p_in.name + "' and customer_id=;" + cust_id + ";"; //we check if the user has previously added the item to the basket before
+            Statement s1 = c.createStatement();
+            ResultSet rs1 = s1.executeQuery(sql1);
+            if(rs1.next()){ //if they have, we will update the quantity to the most recent value they have chosen (it won't add the amount e.g. if they click x1 and then x3 it updates to x3, not x4 - this is for simplicity)
+                Statement s2 = c.createStatement();
+                String sql2 = "update customer_basket set quantity =" + quantity_in + "where name='" + p_in.name + "' and customer_id=" + cust_id + ";";
+                s2.executeUpdate(sql2);
+                s2.close();
             }
             else { //if they haven't previously added the item to the basket, it will create a new entry in the table
-                PreparedStatement ps = c.prepareStatement("insert into basket (id,name,description,price,quantity,subtotal,limited) values(?,?,?,?,?,?,?)");
-                ps.setInt(1,p_in.id);
-                ps.setString(2, p_in.name);
-                ps.setString(3, p_in.description);
-                ps.setDouble(4, p_in.price);
-                ps.setInt(5, quantity_in); //Quantity added to basket rather than full stock quantity
-                ps.setDouble(6, p_in.price * quantity_in);
-                ps.setBoolean(7, p_in.limited);
+                PreparedStatement ps = c.prepareStatement("insert into customer_basket (barcode,category,brand,name,amount,sell_price,quantity,limit_of_1,customer_id) values(?,?,?,?,?,?,?,?,?)");
+                ps.setInt(1,p_in.barcode);
+                ps.setString(2, p_in.category);
+                ps.setString(3, p_in.brand);
+                ps.setString(4, p_in.name);
+                ps.setString(5, p_in.amount);
+                ps.setDouble(6, p_in.price);
+                ps.setInt(7, quantity_in); //Quantity added to basket rather than full stock quantity
+                ps.setBoolean(8, p_in.limited);
+                ps.setInt(9,cust_id);
                 ps.executeUpdate();
                 ps.close();
             }
@@ -296,63 +340,56 @@ public class LoginDAO {
 
     // Gets info from products added to basket to display on basket page, based on the position it appears on the page (line 301)
     public static Product getBasketInfo(int n){
-        Product bProduct= new Product();
+        Product p = new Product();
         try{
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            PreparedStatement ps=c.prepareStatement("with temp as (select row_number() over (order by name asc) as rownum, * from basket) select * from temp where rownum=?");
-            ps.setInt(1,n); //If one item is removed, the IDs aren't automatically updated e.g. if i remove item ID=2, table's ID will read as 1,3,4,5... this poses problems when using a for loop to display the information
-            ResultSet rs=ps.executeQuery(); //SQL has no easy way to select item based on row number rather than an existing column - this is one solution
-            while(rs.next()){ // If int n = 2 (i.e. the second item in the basket), this will correspond to the 2nd entry in the basket table based on alphabetical order ('order by name asc' gives alphabetical order)
-                bProduct.id = rs.getInt("id");
-                bProduct.name = rs.getString("name");
-                bProduct.description =rs.getString("description");
-                bProduct.price = rs.getDouble("price");
-                bProduct.quantity = rs.getInt("quantity");
-                bProduct.limited = rs.getBoolean("limited");
+            Statement s = c.createStatement();
+            String sql = "select customer_id from logged_in_customer;";
+            ResultSet rs = s.executeQuery(sql);
+            int cust_id = Integer.parseInt(null);
+            while(rs.next()){
+                cust_id = rs.getInt("customer_id");
             }
+            PreparedStatement ps=c.prepareStatement("with temp as (select row_number() over (order by name asc) as rownum, * from customer_basket where customer_id=" + cust_id + ") select * from temp where rownum=?");
+            ps.setInt(1,n); //If one item is removed, the IDs aren't automatically updated e.g. if i remove item ID=2, table's ID will read as 1,3,4,5... this poses problems when using a for loop to display the information
+            ResultSet rs1=ps.executeQuery(); //SQL has no easy way to select item based on row number rather than an existing column - this is one solution
+            while(rs1.next()){ // If int n = 2 (i.e. the second item in the basket), this will correspond to the 2nd entry in the basket table based on alphabetical order ('order by name asc' gives alphabetical order)
+                p.barcode = rs.getInt("barcode");
+                p.brand = rs.getString("brand");
+                p.name = rs.getString("name");
+                p.price = rs.getDouble("price");
+                p.quantity = rs.getInt("quantity");
+                p.limited = rs.getBoolean("limited");
+            }
+            s.close();
             ps.close();
             c.close();
         }catch(Exception e){System.out.println(e);}
-        return bProduct;
+        return p;
     }
-    public static Product returnBasketInfo(int n){
-        Product bProduct= new Product();
-        try{
-            String dbUrl = System.getenv("JDBC_DATABASE_URL");
-            Class.forName("org.postgresql.Driver");
-            Connection c = DriverManager.getConnection(dbUrl);
-            PreparedStatement ps=c.prepareStatement(" select * from basket where id=?");
-            ps.setInt(1,n); //If one item is removed, the IDs aren't automatically updated e.g. if i remove item ID=2, table's ID will read as 1,3,4,5... this poses problems when using a for loop to display the information
-            ResultSet rs=ps.executeQuery(); //SQL has no easy way to select item based on row number rather than an existing column - this is one solution
-            while(rs.next()){ // If int n = 2 (i.e. the second item in the basket), this will correspond to the 2nd entry in the basket table based on alphabetical order ('order by name asc' gives alphabetical order)
-                bProduct.id = rs.getInt("id");
-                bProduct.name = rs.getString("name");
-                bProduct.description =rs.getString("description");
-                bProduct.price = rs.getDouble("price");
-                bProduct.quantity = rs.getInt("quantity");
-                bProduct.limited = rs.getBoolean("limited");
-            }
-            ps.close();
-            c.close();
-        }catch(Exception e){System.out.println(e);}
-        return bProduct;
-    }
-
     public static Double getBasketTotal(){
         double total = 0;
         try{
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            String sql = "select sum(price*quantity) from basket"; //For some reason it won't return the existing value in the subtotal column
             Statement s = c.createStatement();
+            String sql = "select customer_id from logged_in_customer;";
             ResultSet rs = s.executeQuery(sql);
+            int cust_id = Integer.parseInt(null);
+            while(rs.next()){
+                cust_id = rs.getInt("customer_id");
+            }
+            String sql1 = "select sum(price*quantity) from customer_basket where customer_id=" +cust_id; //For some reason it won't return the existing value in the subtotal column
+            Statement s1 = c.createStatement();
+            ResultSet rs1 = s.executeQuery(sql1);
             while(rs.next()){
                 total = rs.getDouble(1);
             }
             s.close();
+            s1.close();
             c.close();
         }catch(Exception e){System.out.println(e);}
         return total;
@@ -364,10 +401,18 @@ public class LoginDAO {
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
             Statement s = c.createStatement();
-            String sql = "delete from basket where id=" + id_in; //removes the item entry from the table
-            s.executeUpdate(sql);
+            String sql = "select customer_id from logged_in_customer;";
+            ResultSet rs = s.executeQuery(sql);
+            int cust_id = Integer.parseInt(null);
+            while(rs.next()){
+                cust_id = rs.getInt("customer_id");
+            }
+            Statement s1 = c.createStatement();
+            String sql1 = "delete from customer_basket where customer_id=" + cust_id + "and barcode=" + id_in; //removes the item entry from the table
+            s1.executeUpdate(sql1);
 
             s.close();
+            s1.close();
         }catch(Exception e){System.out.println(e);}
     }
     // Display size of table - i.e. number of entries - used as a for loop in displaying all the products in the browse page

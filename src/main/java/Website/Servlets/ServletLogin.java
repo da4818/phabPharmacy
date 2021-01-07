@@ -34,8 +34,8 @@ public class ServletLogin extends HttpServlet {
         resp.setContentType("text/html");
         String logOut = req.getParameter("logOut"); //If this input button doesn't exist, it will result in a nullPointerException error - line 225
         if (logOut.equals("Log Out")){
-            LoginDAO.resetTable("logged");
-            LoginDAO.resetTable("basket");
+            LoginDAO.resetTable("logged_in_customer");
+            LoginDAO.resetTable("customer_basket");
         }
         String HTML = htmlOutput();
         //Retrieves info that user has entered - in HTML code, the input tags are named "email" and "pass" (lines 160-161)

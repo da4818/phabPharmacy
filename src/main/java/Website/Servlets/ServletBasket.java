@@ -28,7 +28,7 @@ public class ServletBasket extends HttpServlet {
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
         DecimalFormat df = new DecimalFormat("0.00");
-        int n = LoginDAO.tableSize("basket");
+        int n = LoginDAO.tableSize("customer_basket");
         if(n > 0){
             Double totalBasket = LoginDAO.getBasketTotal();
             String total = df.format(totalBasket);
@@ -43,17 +43,17 @@ public class ServletBasket extends HttpServlet {
                 resp.getWriter().write("<section>" +
                         "<div class=\"basketContainer\" id=\"cont1\">\n");
                 if(b.limited){
-                    resp.getWriter().write("  <p class=\"tooltip\" style=\"display: inline-block;\"><b>" + b.name + "</b><br>" + b.description + "<br>£<output type=\"number\">" + price + "</output><span class=\"tooltiptext\"><i>Limited to one per customer</i></span></p>\n");
+                    resp.getWriter().write("  <p class=\"tooltip\" style=\"display: inline-block;\"><b>" + b.brand + " " + b.name + "</b><br>" + b.amount + "<br>£<output type=\"number\">" + price + "</output><span class=\"tooltiptext\"><i>Limited to one per customer</i></span></p>\n");
                 }
                 else{
-                    resp.getWriter().write("  <p style=\"display: inline-block;\"><b>" + b.name + "</b><br>" + b.description + "<br>£<output type=\"number\">" + price + "</output></p>\n");
+                    resp.getWriter().write("  <p style=\"display: inline-block;\"><b>" + b.brand + " " + b.name +"</b><br>" + b.amount + "<br>£<output type=\"number\">" + price + "</output></p>\n");
                 }
                 resp.getWriter().write("  <div class=\"quant\">\n" +
                         "    <form id=\"updateBasket\" action=\"basket\" method=\"post\"> \n" +
                         "    <label for=\"basketItemQuantity\">Qty</label><br>\n" +
                         "    <input type=\"number\" name=\"basketItemQuantity\" class=\"quantity\" size=\"3\" min=\"1\" max=\"" + max + "\" value=\"" + b.quantity + "\">\n" +
                         "    <input name=\"basketButtonNumber\" type=\"hidden\"value=\"" + i + "\">\n" +
-                        "    <input name=\"basketItemId\" type=\"hidden\"value=\"" + b.id + "\">\n" +
+                        "    <input name=\"basketItemId\" type=\"hidden\"value=\"" + b.barcode + "\">\n" +
                         "    <input name=\"update\" style=\"margin-left: 0px;\" type=\"submit\" class=\"buttonStyle\" value=\"Update\">\n" +
                         "    <input type=\"hidden\" name=\"logOut\" value=\"false\">\n" +
                         "    <button name=\"update\" type=\"submit\" class=\"buttonStyle\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button>\n" +
@@ -78,8 +78,8 @@ public class ServletBasket extends HttpServlet {
         resp.setContentType("text/html");
         String logOut = req.getParameter("logOut");
         if (logOut.equals("Log Out")){
-           LoginDAO.resetTable("logged");
-            LoginDAO.resetTable("basket");
+           LoginDAO.resetTable("logged_in_customer");
+            LoginDAO.resetTable("customer_basket");
         }
         String updateBasket = req.getParameter("update");
         int q = Integer.parseInt(req.getParameter("basketItemQuantity"));
@@ -89,11 +89,11 @@ public class ServletBasket extends HttpServlet {
             LoginDAO.addToBasket(modifiedItem,q);
         }
         else {
-            LoginDAO.removeFromBasket(modifiedItem.id);
+            LoginDAO.removeFromBasket(modifiedItem.barcode);
         }
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
-        int n = LoginDAO.tableSize("basket");
+        int n = LoginDAO.tableSize("customer_basket");
         DecimalFormat df = new DecimalFormat("0.00");
         if(n > 0){
             Double totalBasket = LoginDAO.getBasketTotal();
@@ -109,17 +109,17 @@ public class ServletBasket extends HttpServlet {
                 resp.getWriter().write("<section>" +
                         "<div class=\"basketContainer\">\n");
                 if(b.limited){
-                    resp.getWriter().write("  <p class=\"tooltip\" style=\"display: inline-block;\"><b>" + b.name + "</b><br>" + b.description + "<br>£<output type=\"number\">" + price + "</output><span class=\"tooltiptext\"><i>Limited to one per customer</i></span></p>\n");
+                    resp.getWriter().write("  <p class=\"tooltip\" style=\"display: inline-block;\"><b>" + b.brand + " " + b.name + "</b><br>" + b.amount + "<br>£<output type=\"number\">" + price + "</output><span class=\"tooltiptext\"><i>Limited to one per customer</i></span></p>\n");
                 }
                 else{
-                    resp.getWriter().write("  <p style=\"display: inline-block;\"><b>" + b.name + "</b><br>" + b.description + "<br>£<output type=\"number\">" + price + "</output></p>\n");
+                    resp.getWriter().write("  <p style=\"display: inline-block;\"><b>" + b.brand + " " + b.name + "</b><br>" + b.amount + "<br>£<output type=\"number\">" + price + "</output></p>\n");
                 }
                 resp.getWriter().write("  <div class=\"quant\">\n" +
                         "    <form id=\"updateBasket\" action=\"basket\" method=\"post\"> \n" +
                         "    <label for=\"basketItemQuantity\">Qty</label><br>\n" +
                         "    <input type=\"number\" name=\"basketItemQuantity\" class=\"quantity\" size=\"3\" min=\"1\" max=\"" + max + "\" value=\"" + b.quantity + "\">\n" +
                         "    <input name=\"basketButtonNumber\" type=\"hidden\"value=\"" + i + "\">\n" +
-                        "    <input name=\"basketItemId\" type=\"hidden\"value=\"" + b.id + "\">\n" +
+                        "    <input name=\"basketItemId\" type=\"hidden\"value=\"" + b.barcode + "\">\n" +
                         "    <input name=\"update\" style=\"margin-left: 0px;\" type=\"submit\" class=\"buttonStyle\" value=\"Update\">\n" +
                         "    <button name=\"update\" type=\"submit\" class=\"buttonStyle\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button>\n" +
                         "    </form>\n" +

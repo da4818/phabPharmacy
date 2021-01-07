@@ -72,7 +72,7 @@ public class ServletMap extends HttpServlet {
         Product p = LoginDAO.getProduct(j);
         while (j <= LoginDAO.tableSize("products")){
             if (p.category.equals(category)) {
-                resp.getWriter().write(p.name + " " + p.description + "<br>");
+                resp.getWriter().write(p.brand + " " + p.name + " - " + p.amount + "<br>");
             }
             j++;
             p = LoginDAO.getProduct(j);

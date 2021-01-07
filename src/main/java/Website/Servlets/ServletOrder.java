@@ -38,7 +38,7 @@ public class ServletOrder extends HttpServlet {
                 "  </form>\n" +
                 "  </div>\n" +
                 "</div>\n");
-        int n = LoginDAO.tableSize("basket");
+        int n = LoginDAO.tableSize("customer_basket");
         if(n>0) {
             resp.getWriter().write("<div class=\"basketContainer\">\n" +
                     " <p style=\"display: inline-block; margin-bottom: 0px;\"><b>Order Summary</b></p>\n" +
@@ -46,7 +46,7 @@ public class ServletOrder extends HttpServlet {
             for(int i=1;i<n+1;i++) {
             Product b = LoginDAO.getBasketInfo(i);
             String subtotal = valueOf(df.format(b.price*b.quantity));
-            resp.getWriter().write(b.name + " " + b.description + " - x" + b.quantity + " - £" + subtotal + "<br>");
+            resp.getWriter().write(b.brand + " " + b.name + " " + b.amount + " - x" + b.quantity + " - £" + subtotal + "<br>");
             }
             resp.getWriter().write("</p>\n" +
                     "    <button onclick=\"window.location.href='https://phabpharmacy.herokuapp.com/basket';\" class=\"buttonStyle\">Edit Basket</button>\n" +
@@ -67,7 +67,7 @@ public class ServletOrder extends HttpServlet {
         resp.setContentType("text/html");
         String HTML = htmlOutput();
         resp.getWriter().write(HTML); //There is no information request in the ServletOrder doPost - the only possible way to redirect to this doPost in particular is through clicking 'Confirm Order' button
-        LoginDAO.resetTable("basket");
+        LoginDAO.resetTable("customer_basket");
         resp.getWriter().write("<h2>Order confirmed!</h2>");
 
         resp.getWriter().write("<script>\n" + //This is to finish of the HTML code initiated in htmlOutput()

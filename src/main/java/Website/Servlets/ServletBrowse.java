@@ -34,11 +34,11 @@ public class ServletBrowse extends HttpServlet {
                         int max = p.limited ? 1 : 5; //Some products are limited to 1 per customer - if this is the case (i.e. limited is TRUE), max will be set to 1. if limited is FALSE, max is set to 5 (an arbitrary maximum)
                         resp.getWriter().write("<div class=\"relative\">\n");
                         if (p.limited){
-                            resp.getWriter().write("<label class=\"tooltip\"><center>" + p.name + "<br>" + p.description + "</center>\n" +
+                            resp.getWriter().write("<label class=\"tooltip\"><center>" + p.brand + " " + p.name + "<br>" + p.amount +"</center>\n" +
                                     "<span class=\"tooltiptext\"><i>Limited to one per customer</i></span></label><br>\n");
                         }
                         else{
-                            resp.getWriter().write("<label><center>" + p.name + "<br>" + p.description + "</center></label><br>\n");
+                            resp.getWriter().write("<label><center>" + p.brand + " " + p.name + "<br>" + p.amount + "</center></label><br>\n");
                         }
                         resp.getWriter().write("<label><center>£" + price + "</label></center><br>\n" +
                                 "<div class=\"absolute\">\n" +
@@ -66,8 +66,8 @@ public class ServletBrowse extends HttpServlet {
         String HTML= htmlOutput();
         String logOut = req.getParameter("logOut");
         if (logOut.equals("Log Out")){
-            LoginDAO.resetTable("logged");
-            LoginDAO.resetTable("basket");
+            LoginDAO.resetTable("logged_in_customer");
+            LoginDAO.resetTable("customer_basket");
         }
         if (!LoginDAO.checkLoggedIn()){ //If no one is logged in, it will prevent them from adding items to their basket
             resp.getWriter().write("<pre><script>window.onload(alert(\"Please ensure that you have created an account and logged in before adding items to your basket.\"));</script></pre>");
@@ -92,11 +92,11 @@ public class ServletBrowse extends HttpServlet {
                 int max = p.limited ? 1 : 5;
                 resp.getWriter().write("<div class=\"relative\">\n");
                 if (p.limited){
-                    resp.getWriter().write("<label class=\"tooltip\"><center>" + p.name + "<br>" + p.description + "</center>\n" +
+                    resp.getWriter().write("<label class=\"tooltip\"><center>" + p.brand + " " + p.name + "<br>" + p.amount + "</center>\n" +
                             "<span class=\"tooltiptext\"><i>Limited to one per customer</i></span></label><br>\n");
                 }
                 else{
-                    resp.getWriter().write("<label><center>" + p.name + "<br>" + p.description + "</center></label><br>\n");
+                    resp.getWriter().write("<label><center>" + p.brand + " " + p.name + "<br>" + p.amount + "</center></label><br>\n");
                 }
                 resp.getWriter().write("<label><center>£" + price + "</label></center><br>\n" +
                         "<div class=\"absolute\">\n" +

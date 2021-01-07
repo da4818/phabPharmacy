@@ -2,29 +2,36 @@ package Website.Entities;
 
 
 public class Product {
-    public int id;
+    public int barcode; // is this the equivalent to the barcode?
+    public String category;
+    public String brand;
     public String name;
-    public String description;
+    public String amount;
     public Double price;
     public Integer quantity;
-    public String category;
     public Boolean limited;
-    public String brand;
+
     public int change;
     public String saleLimit;
-    public String amount;
 
+    public Product(){ //useful in getProduct function
+
+    }
     public Product(String name,String brand, int change){
         this.name = name;
         this.brand = brand;
-        this.change = change;
+        this.change = change; //what is change?
     }
-    public Product(String name, String brand, String saleLimit, Double price, String amount){
-        this.name = name;
+    public Product(String category, String brand, String name, String amount,Double price, boolean limited) {
+        this.category = category;
         this.brand = brand;
-        this.saleLimit = saleLimit;
-        this.price = price;
+        this.name = name;
         this.amount = amount;
+        this.price = price;
+        this.limited = limited;
+        //this.saleLimit = saleLimit; //what is saleLimit?
+
+
     }
 
 }
