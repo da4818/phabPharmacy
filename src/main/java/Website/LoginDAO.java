@@ -14,10 +14,11 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            Statement s =c.createStatement();
-            String sql="truncate table " + tableName + ";";
+            Statement s = c.createStatement();
+            String sql = "truncate table " + tableName + ";";
             s.executeUpdate(sql);
             s.close();
+            c.close();
         }catch(Exception e){System.out.println(e);}
     }
     public static void createTable(String tableName){
@@ -27,6 +28,7 @@ public class LoginDAO {
             Connection c = DriverManager.getConnection(dbUrl);
             Statement s = c.createStatement();
             Statement s1 = c.createStatement();
+
             if(tableName.equals("customer")) {
                 String sql = "CREATE TABLE CUSTOMER (" +
                         "ID SERIAL PRIMARY KEY NOT NULL," +
@@ -41,6 +43,7 @@ public class LoginDAO {
                 s1.executeUpdate("INSERT INTO CUSTOMER(FIRST_NAME,LAST_NAME,EMAIL,PASS_WORD,POSTCODE) VALUES('John','Doe','email1','pass1','SW72AZ');");
                 s1.executeUpdate("INSERT INTO CUSTOMER(FIRST_NAME,LAST_NAME,EMAIL,PASS_WORD,POSTCODE) VALUES('Mia','Stewart','email2','pass2','SW65TD');");
             }
+
             else if(tableName.equals("shop_product")){
                 String sql0 = "CREATE TABLE BRANCH (" +
                         "ID SERIAL PRIMARY KEY NOT NULL, " +
@@ -112,6 +115,7 @@ public class LoginDAO {
                 s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('First Aid','Dettol','Hand sanitizer','500ml',7,6.3,50,50,false);");
                 s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('First Aid','Elastoplast','plasters','20 plasters',3,2,30,30,false);");
                 s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('First Aid','TCP','Liquid','200ml',4,3.2,20,20,false);");
+
                 s1.executeUpdate("UPDATE SHOP_PRODUCT SET BRANCH_ID = 1;");
                 s1.executeUpdate("INSERT INTO SHOP_PRODUCT (CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1)");
                 s1.executeUpdate("SELECT CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1 FROM SHOP_PRODUCT WHERE BRANCH_ID=1;");
@@ -121,8 +125,8 @@ public class LoginDAO {
                 s1.executeUpdate("SELECT CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1 FROM SHOP_PRODUCT WHERE BRANCH_ID=1;");
                 s1.executeUpdate("UPDATE SHOP_PRODUCT SET BRANCH_ID=3 WHERE BARCODE>82;");
                 s1.executeUpdate("UPDATE SHOP_PRODUCT SET SELL_PRICE=SELL_PRICE/1.3 WHERE BARCODE>82;");
-
             }
+
             else if(tableName.equals("customer_basket")){
                 String sql ="CREATE TABLE CUSTOMER_BASKET (" +
                         "BARCODE SERIAL PRIMARY KEY NOT NULL," +
@@ -136,6 +140,7 @@ public class LoginDAO {
                         "CUSTOMER_ID INT REFERENCES CUSTOMER (ID))";
                 s.executeUpdate(sql);
             }
+
             else if(tableName.equals("logged_in_customer")) { //this table is so that we can see which customer is currently logged in - there will only be at most 1 entry in this table, and will be updated when a new user logs in
                 String sql ="CREATE TABLE LOGGED_IN_CUSTOMER (" +
                         "ID SERIAL PRIMARY KEY NOT NULL," +
@@ -149,6 +154,7 @@ public class LoginDAO {
                         "CUSTOMER_ID INT REFERENCES CUSTOMER (ID))";
                 s.executeUpdate(sql);
             }
+
             s.close();
             s1.close();
             c.close();
@@ -157,7 +163,7 @@ public class LoginDAO {
     // Functions to execute queries, or amend to the database content //
     // Checking if user is logging in with an existing account
     public static boolean validateLogin(String email_in,String pass_in){
-        boolean status=false;
+        boolean status = false;
         try{
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
@@ -173,9 +179,10 @@ public class LoginDAO {
         }catch(Exception e){System.out.println(e);}
         return status;
     }
+
     // Checking if user is registering with an existing email address
     public static boolean validateRegister(String email_in){
-        boolean status=false;
+        boolean status = false;
         try{
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
@@ -209,8 +216,8 @@ public class LoginDAO {
                 u.email = rs.getString("email");
                 u.password = rs.getString("pass_word");
                 u.postcode = rs.getString("postcode");
-                //u.address = rs.getString("address");
-                //u.phoneno = rs.getString("phone_no");
+                u.address = rs.getString("address");
+                u.phoneno = rs.getString("phone_no");
             }
             ps.close();
             rs.close();
@@ -219,17 +226,19 @@ public class LoginDAO {
         return u;
     }
     //If registration is valid, the customer's information will be added to the database
-    public static void addUser(String fname_in,String lname_in, String email_in,String pass_in, String cardno_in, String postcode_in){
+    public static void addUser(String fname_in,String lname_in, String email_in,String pass_in, String cardno_in, String postcode_in, String address_in, String phoneno_in){
         try{
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            PreparedStatement ps=c.prepareStatement("insert into customer(first_name,last_name,email,pass_word,postcode) values(?,?,?,?,?)");
+            PreparedStatement ps = c.prepareStatement("insert into customer(first_name,last_name,email,pass_word,postcode,address,phone_no) values(?,?,?,?,?,?,?)");
             ps.setString(1,fname_in);
             ps.setString(2,lname_in);
             ps.setString(3,email_in);
             ps.setString(4,pass_in);
             ps.setString(5,postcode_in);
+            ps.setString(6,address_in);
+            ps.setString(6,phoneno_in);
             ps.executeUpdate();
             ps.close();
             c.close();
@@ -375,7 +384,7 @@ public class LoginDAO {
             while(rs.next()){
                 cust_id = rs.getInt("customer_id");
             }
-            PreparedStatement ps=c.prepareStatement("with temp as (select row_number() over (order by name asc) as rownum, * from customer_basket where customer_id=" + cust_id + ") select * from temp where rownum=?");
+            PreparedStatement ps = c.prepareStatement("with temp as (select row_number() over (order by name asc) as rownum, * from customer_basket where customer_id=" + cust_id + ") select * from temp where rownum=?");
             ps.setInt(1,n); //If one item is removed, the IDs aren't automatically updated e.g. if i remove item ID=2, table's ID will read as 1,3,4,5... this poses problems when using a for loop to display the information
             ResultSet rs1 = ps.executeQuery(); //SQL has no easy way to select item based on row number rather than an existing column - this is one solution
             while(rs1.next()){ // If int n = 2 (i.e. the second item in the basket), this will correspond to the 2nd entry in the basket table based on alphabetical order ('order by name asc' gives alphabetical order)
@@ -477,7 +486,7 @@ public class LoginDAO {
     // Display size of table - i.e. number of entries - used as a for loop in displaying all the products in the browse page
     //Also useful when determining whether tables are empty
     public static int tableSize(String tableName){
-        int n=0; //base case - n = 0 tells us the table is empty or something has gone wrong
+        int n = 0; //Base case: n = 0 tells us the table is empty or something has gone wrong
         try{
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");

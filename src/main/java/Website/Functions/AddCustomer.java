@@ -39,10 +39,10 @@ public class AddCustomer {
             pStmt2.setString(4,cc.accountNumber);
             pStmt2.setInt(5,id);
             pStmt2.executeUpdate();
+
             pStmt.close();
             pStmt2.close();
             stmt1.close();
-
             rs.close();
             db.close();
         } catch (ClassNotFoundException | SQLException e) {
