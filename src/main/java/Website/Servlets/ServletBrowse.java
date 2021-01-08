@@ -26,7 +26,7 @@ public class ServletBrowse extends HttpServlet {
         int j=1;
         for (int i=0;i<24;i++){
             Product p = LoginDAO.getProduct(i);
-            resp.getWriter().write(p.brand + " " + p.name);
+            resp.getWriter().write("<p>"+p.brand + " " + p.name+"</p>");
 
             }
 
