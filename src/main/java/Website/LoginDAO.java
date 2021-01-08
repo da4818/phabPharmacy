@@ -38,8 +38,8 @@ public class LoginDAO {
                         " ADDRESS VARCHAR(128)," +
                         " PHONE_NO VARCHAR(12))";
                 s.executeUpdate(sql);
-                s1.executeUpdate("INSERT INTO CUSTOMER(FIRST_NAME,LAST_NAME,EMAIL,PASS_WORD,POSTCODE) VALUES ('John','Doe','email1','pass1','cardno1','SW72AZ');");
-                s1.executeUpdate("INSERT INTO CUSTOMER(FIRST_NAME,LAST_NAME,EMAIL,PASS_WORD,POSTCODE) VALUES ('Mia','Stewart','email2','pass2','cardno2','SW65TD');");
+                s1.executeUpdate("INSERT INTO CUSTOMER(FIRST_NAME,LAST_NAME,EMAIL,PASS_WORD,POSTCODE) VALUES ('John','Doe','email1','pass1','SW72AZ');");
+                s1.executeUpdate("INSERT INTO CUSTOMER(FIRST_NAME,LAST_NAME,EMAIL,PASS_WORD,POSTCODE) VALUES ('Mia','Stewart','email2','pass2','SW65TD');");
             }
             else if(tableName.equals("shop_product")){
                 String sql ="CREATE TABLE SHOP_PRODUCT (" +
