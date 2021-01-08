@@ -15,10 +15,10 @@ public class ServletHome extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Creating/resetting database tables if necessary //
-        //LoginDAO.resetTable("logged_in_customer");
+        LoginDAO.resetTable("customer");
         LoginDAO.createTable("customer");
         LoginDAO.createTable("customer_basket");
-        LoginDAO.createTable("shop_products");
+        LoginDAO.createTable("shop_product");
         LoginDAO.createTable("logged_in_customer");
         //LoginDAO.resetTable("customer_basket");
         resp.setContentType("text/html");

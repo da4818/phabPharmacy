@@ -27,7 +27,7 @@ public class LoginDAO {
             Connection c = DriverManager.getConnection(dbUrl);
             Statement s = c.createStatement();
             Statement s1 = c.createStatement();
-            if(tableName.equals("customer")) { //* rename to 'customers'
+            if(tableName.equals("customer")) {
                 String sql ="CREATE TABLE CUSTOMER (" +
                         "ID SERIAL PRIMARY KEY NOT NULL," +
                         " FIRST_NAME VARCHAR(36) NOT NULL, " +
