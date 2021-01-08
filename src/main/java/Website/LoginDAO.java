@@ -43,8 +43,8 @@ public class LoginDAO {
             }
             else if(tableName.equals("shop_product")){
                 String sql0 = "CREATE TABLE BRANCH (" +
-                        "    ID SERIAL PRIMARY KEY NOT NULL, " +
-                        "    NAME VARCHAR(36) NOT NULL );";
+                        "ID SERIAL PRIMARY KEY NOT NULL, " +
+                        "NAME VARCHAR(36) NOT NULL );";
                 s.executeUpdate(sql0);
                 s.executeUpdate("INSERT INTO BRANCH(NAME) VALUES('Paddington');" +
                         "INSERT INTO BRANCH(NAME) VALUES('Green Park');" +
@@ -54,7 +54,7 @@ public class LoginDAO {
                         "BARCODE SERIAL PRIMARY KEY NOT NULL, " +
                         "CATEGORY VARCHAR(36) NOT NULL, " +
                         "BRAND VARCHAR(36) NOT NULL, " +
-                        "NAME VARCHAR(36) NOT NULL, " +
+                        "PRODUCT_NAME VARCHAR(36) NOT NULL, " +
                         "AMOUNT VARCHAR(36) NOT NULL, " +
                         "SELL_PRICE DECIMAL(10,2) NOT NULL, " +
                         "BUY_PRICE DECIMAL(10,2) NOT NULL, " +
@@ -66,7 +66,7 @@ public class LoginDAO {
                         "BRANCH_ID INT REFERENCES BRANCH (ID))";
 
                 s.executeUpdate(sql); //for some reason it will not load the sql command
-                s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Cold and Flu','Vicks','Vaporub','100g',4.5,3.7,15,15,false);");
+                s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Cold and Flu','Vicks','Vaporub','100g',4.5,3.7,15,15,false);");
                         /*"    ('Cold and Flu','Vicks','First Defence','15ml',6.8,5,20,20,false)," +
                         "    ('Cold and Flu','Gsk','Night Nurse','160ml',8.5,7,30,30,false)," +
                         "    ('Cold and Flu','Gsk','Night Nurse','160ml',9,7.5,30,30,false)," +
@@ -124,29 +124,29 @@ public class LoginDAO {
                 s1.executeUpdate("UPDATE SHOP_PRODUCT SET SELL_PRICE=SELL_PRICE/1.3 WHERE BARCODE>82;");*/
 
             }
-            else if(tableName.equals("customer_basket")){ //*rename to 'ordered_products' (i think)
+            else if(tableName.equals("customer_basket")){
                 String sql ="CREATE TABLE CUSTOMER_BASKET (" +
-                        "    BARCODE SERIAL PRIMARY KEY NOT NULL," +
-                        "    CATEGORY VARCHAR(36) NOT NULL," +
-                        "    BRAND VARCHAR(36) NOT NULL," +
-                        "    NAME VARCHAR(36) NOT NULL," +
-                        "    AMOUNT VARCHAR(36)," +
-                        "    SELL_PRICE DECIMAL(10,2) NOT NULL," +
-                        "    QUANTITY SMALLINT NOT NULL," +
-                        "    LIMIT_OF_1 BOOLEAN NOT NULL," +
-                        "    CUSTOMER_ID INT REFERENCES CUSTOMER (ID))";
+                        "BARCODE SERIAL PRIMARY KEY NOT NULL," +
+                        "CATEGORY VARCHAR(36) NOT NULL," +
+                        "BRAND VARCHAR(36) NOT NULL," +
+                        "NAME VARCHAR(36) NOT NULL," +
+                        "AMOUNT VARCHAR(36)," +
+                        "SELL_PRICE DECIMAL(10,2) NOT NULL," +
+                        "QUANTITY SMALLINT NOT NULL," +
+                        "LIMIT_OF_1 BOOLEAN NOT NULL," +
+                        "CUSTOMER_ID INT REFERENCES CUSTOMER (ID))";
                 s.executeUpdate(sql);
             }
             else if(tableName.equals("logged_in_customer")) { //this table is so that we can see which customer is currently logged in - there will only be at most 1 entry in this table, and will be updated when a new user logs in
                 String sql ="CREATE TABLE LOGGED_IN_CUSTOMER (" +
-                        "    ID SERIAL PRIMARY KEY NOT NULL," +
-                        "    FIRST_NAME VARCHAR(36) NOT NULL," +
-                        "    LAST_NAME VARCHAR(36) NOT NULL," +
-                        "    EMAIL VARCHAR(256) NOT NULL," +
-                        "    POSTCODE VARCHAR(8) NOT NULL," +
-                        "    ADDRESS VARCHAR(128)," +
-                        "    PHONE_NO VARCHAR(12)" +
-                        "    CUSTOMER_ID INT REFERENCES CUSTOMER (ID))";
+                        "ID SERIAL PRIMARY KEY NOT NULL," +
+                        "FIRST_NAME VARCHAR(36) NOT NULL," +
+                        "LAST_NAME VARCHAR(36) NOT NULL," +
+                        "EMAIL VARCHAR(256) NOT NULL," +
+                        "POSTCODE VARCHAR(8) NOT NULL," +
+                        "ADDRESS VARCHAR(128)," +
+                        "PHONE_NO VARCHAR(12)," +
+                        "CUSTOMER_ID INT REFERENCES CUSTOMER (ID))";
                 s.executeUpdate(sql);
             }
             s.close();
