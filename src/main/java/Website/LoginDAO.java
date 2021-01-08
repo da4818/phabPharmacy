@@ -65,9 +65,9 @@ public class LoginDAO {
                         "HARD_MIN DECIMAL(10,2)," +
                         "BRANCH_ID INT REFERENCES BRANCH (ID))";
 
-                s.executeUpdate(sql); //for some reason it will not load the sql command
-                s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Cold and Flu','Vicks','Vaporub','100g',4.5,3.7,15,15,false);");
-                        /*"    ('Cold and Flu','Vicks','First Defence','15ml',6.8,5,20,20,false)," +
+                s.executeUpdate(sql); //"NAME" appears to be a keyword in SQL (highlighted in orange for the "insert into" command), so it won't allow me to create the table with it for some reason (works with branch table though)
+                s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Cold and Flu','Vicks','Vaporub','100g',4.5,3.7,15,15,false)," +
+                        "    ('Cold and Flu','Vicks','First Defence','15ml',6.8,5,20,20,false)," +
                         "    ('Cold and Flu','Gsk','Night Nurse','160ml',8.5,7,30,30,false)," +
                         "    ('Cold and Flu','Gsk','Night Nurse','160ml',9,7.5,30,30,false)," +
                         "    ('Cold and Flu','Lemsip','Max','16 caps',4.2,3.7,25,25,false)," +
@@ -121,7 +121,7 @@ public class LoginDAO {
                 s1.executeUpdate("INSERT INTO SHOP_PRODUCT (CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1)");
                 s1.executeUpdate("SELECT CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1 FROM SHOP_PRODUCT WHERE BRANCH_ID=1;");
                 s1.executeUpdate("UPDATE SHOP_PRODUCT SET BRANCH_ID=3 WHERE BARCODE>82;");
-                s1.executeUpdate("UPDATE SHOP_PRODUCT SET SELL_PRICE=SELL_PRICE/1.3 WHERE BARCODE>82;");*/
+                s1.executeUpdate("UPDATE SHOP_PRODUCT SET SELL_PRICE=SELL_PRICE/1.3 WHERE BARCODE>82;");
 
             }
             else if(tableName.equals("customer_basket")){
