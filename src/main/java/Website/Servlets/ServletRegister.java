@@ -49,6 +49,7 @@ public class ServletRegister extends HttpServlet {
         String ad = req.getParameter("address");
         String pn = req.getParameter("phone_no");
         resp.getWriter().write(HTML);
+        resp.getWriter().write("<p>values:" + ad + "and " +pn+"</p>");
         EmailValidation emailCheck = new EmailValidation(em,pw,vpw);
         if(LoginDAO.validateRegister(em)){ //Checks database to see if email exists in use database
             resp.getWriter().write("<h2> There is an existing account with the email entered. Please log in.</h2>");
@@ -60,7 +61,7 @@ public class ServletRegister extends HttpServlet {
             resp.getWriter().write("<h2> Passwords don't match, please try again.</h2>");
         }
         else if(!emailCheck.validEmail()){
-            resp.getWriter().write(emailCheck.getErrorMessage());
+            resp.getWriter().write("<h2>Invalid Email</h2>");
         }
         else{
             LoginDAO.addUser(fn,ln,em,pw,cn,pc);
