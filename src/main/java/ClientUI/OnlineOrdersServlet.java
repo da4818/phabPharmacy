@@ -1,7 +1,7 @@
-package ClientUI;
+/*package ClientUI;
 import Website.Entities.Customer;
 import Website.Entities.Product;
-import Website.Functions.MailSender;
+//import Website.Functions.MailSender;
 import Website.Functions.UpdateQuantity;
 import com.google.gson.Gson;
 
@@ -52,3 +52,4 @@ public class OnlineOrdersServlet extends HttpServlet {
     }
 }
 
+*/

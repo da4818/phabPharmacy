@@ -62,7 +62,7 @@ public class UpdateQuantity {
                     }
                 }
                 //output the orders list to the wholesaler or email
-                MailSender newMail = new MailSender(order);
+                //MailSender newMail = new MailSender(order);
             }
             rs.close();
             stmt.close();
