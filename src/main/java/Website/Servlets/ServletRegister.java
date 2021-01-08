@@ -66,7 +66,7 @@ public class ServletRegister extends HttpServlet {
             resp.getWriter().write(emailCheck.getErrorMessage());
         }
         else{
-            LoginDAO.addUser(fn,ln,em,pw,cn,pc,ad,pn);
+            LoginDAO.addUser(fn,ln,em,pw,pc,ad,pn);
             User currentUser = LoginDAO.getUser(em,pw); //*rewrite to constructor with string values
             LoginDAO.setLoggedInUser(currentUser);
             LoginDAO.resetTable("customer_basket");
