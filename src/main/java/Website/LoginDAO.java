@@ -274,7 +274,7 @@ public class LoginDAO {
             ps.setString(4,pass_in);
             ps.setString(5,postcode_in);
             ps.setString(6,address_in);
-            ps.setString(6,phoneno_in);
+            ps.setString(7,phoneno_in);
             ps.executeUpdate();
             
             ps.close();
