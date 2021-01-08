@@ -13,8 +13,8 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            Statement s =c.createStatement();
-            String sql="truncate table " + tableName + ";";
+            Statement s = c.createStatement();
+            String sql = "truncate table " + tableName + ";";
             s.executeUpdate(sql);
             s.close();
         }catch(Exception e){System.out.println(e);}
