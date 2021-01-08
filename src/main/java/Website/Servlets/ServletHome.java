@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns ={"/home"},loadOnStartup = 1)
+@WebServlet(urlPatterns ={"/home", ""},loadOnStartup = 1)
 public class ServletHome extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Creating/resetting database tables if necessary //
-        //LoginDAO.createTable("customer");
-        //LoginDAO.createTable("customer_basket");
-        //LoginDAO.createTable("shop_product");
-        //LoginDAO.createTable("logged_in_customer");
-        //LoginDAO.resetTable("customer_basket");
+        LoginDAO.createTable("customer");
+        LoginDAO.createTable("customer_basket");
+        LoginDAO.createTable("shop_product");
+        LoginDAO.createTable("logged_in_customer");
+
         resp.setContentType("text/html");
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);

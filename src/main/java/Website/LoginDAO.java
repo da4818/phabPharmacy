@@ -161,7 +161,7 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            PreparedStatement ps=c.prepareStatement("select * from customer where email=? and pass_word=?");
+            PreparedStatement ps = c.prepareStatement("select * from customer where email=? and pass_word=?");
             ps.setString(1,email_in);
             ps.setString(2,pass_in);
             ResultSet rs = ps.executeQuery();
@@ -179,7 +179,7 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            PreparedStatement ps=c.prepareStatement("select * from customer where email=?");
+            PreparedStatement ps = c.prepareStatement("select * from customer where email=?");
             ps.setString(1,email_in);
             ResultSet rs = ps.executeQuery();
             status = rs.next(); //similar to line 121
@@ -197,10 +197,10 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            PreparedStatement ps=c.prepareStatement("select * from customer where email=? and pass_word=?");
+            PreparedStatement ps = c.prepareStatement("select * from customer where email=? and pass_word=?");
             ps.setString(1,email_in);
             ps.setString(2,pass_in);
-            ResultSet rs= ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 u.customer_id = rs.getInt("id");
                 u.fname = rs.getString("first_name");
@@ -279,7 +279,7 @@ public class LoginDAO {
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
             Statement s = c.createStatement();
-            ResultSet rs = s.executeQuery("select * from logged_in_user");
+            ResultSet rs = s.executeQuery("select * from logged_in_customer");
             status = rs.next(); //Status is now true if an entry with the email and password exists (i.e. the only entry in the table)
             s.close();
             rs.close();
@@ -336,9 +336,7 @@ public class LoginDAO {
                 Statement s2 = c.createStatement();
                 String sql2 = "update customer_basket set quantity =" + quantity_in + "where name='" + p_in.name + "' and customer_id=" + cust_id + ";";
                 s2.executeUpdate(sql2);
-                s1.close();
                 s2.close();
-                rs1.close();
             }
             else { //if they haven't previously added the item to the basket, it will create a new entry in the table
                 PreparedStatement ps = c.prepareStatement("insert into customer_basket (barcode,category,brand,name,amount,sell_price,quantity,limit_of_1,customer_id) values(?,?,?,?,?,?,?,?,?)");
@@ -355,7 +353,9 @@ public class LoginDAO {
                 ps.close();
             }
             s.close();
+            s1.close();
             rs.close();
+            rs1.close();
             c.close();
         }catch(Exception e){System.out.println(e);}
     }
@@ -381,7 +381,7 @@ public class LoginDAO {
                 p.barcode = rs1.getInt("barcode");
                 p.brand = rs1.getString("brand");
                 p.name = rs1.getString("name");
-                p.price = rs1.getDouble("price");
+                p.price = rs1.getDouble("sell_price");
                 p.quantity = rs1.getInt("quantity");
                 p.limited = rs1.getBoolean("limited");
             }
@@ -406,7 +406,7 @@ public class LoginDAO {
             while(rs.next()){
                 cust_id = rs.getInt("customer_id");
             }
-            String sql1 = "select sum(price*quantity) from customer_basket where customer_id=" +cust_id; //For some reason it won't return the existing value in the subtotal column
+            String sql1 = "select sum(sell_price*quantity) from customer_basket where customer_id=" +cust_id; //For some reason it won't return the existing value in the subtotal column
             Statement s1 = c.createStatement();
             ResultSet rs1 = s.executeQuery(sql1);
             while(rs1.next()){
@@ -501,7 +501,7 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            String sql = "select sum(quantity) from product_basket";//although similar to 'tableSize()', this counts the number of items, not just the number of different products
+            String sql = "select sum(quantity) from customer_basket";//although similar to 'tableSize()', this counts the number of items, not just the number of different products
             Statement s = c.createStatement(); //i.e. x3 vicks and x2 dettol is 5 items comprised of 2 different products - the basket displays 5
             ResultSet rs = s.executeQuery(sql);
             while(rs.next()){
