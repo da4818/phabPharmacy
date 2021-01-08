@@ -65,16 +65,16 @@ public class LoginDAO {
                         "BRANCH_ID INT REFERENCES BRANCH (ID))";
 
                 s.executeUpdate(sql);
-                s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Cold and Flu','Vicks','Vaporub','100g',4.5,3.7,15,15,false);";
-                s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Cold and Flu','Vicks','First Defence','15ml',6.8,5,20,20,false);";
+                s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Cold and Flu','Vicks','Vaporub','100g',4.5,3.7,15,15,false);");
+                s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Cold and Flu','Vicks','First Defence','15ml',6.8,5,20,20,false);");
                 s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Cold and Flu','Gsk','Night Nurse','160ml',8.5,7,30,30,false);");
                 s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Cold and Flu','Gsk','Night Nurse','160ml',9,7.5,30,30,false);");
-                        "    ('Cold and Flu','Lemsip','Max','16 caps',4.2,3.7,25,25,false)," +
-                        "    ('Cold and Flu','Lemsip','Standard','10 sachets',4.5,3.5,25,25,false)," +
-                        "    ('Cold and Flu','Sudafed','Day and Night','16 caps',4.5,3.2,30,30,true)," +
-                        "    ('Cold and Flu','Sudafed','Max','16 caps',4.2,3.2,30,30,true)," +
-                        "    ('Cold and Flu','Benylin','Mucus relief','16 caps',4.8,3.2,20,20,false)," +
-                        "    ('Cold and Flu','Benylin','4 flu','24 caps',6,4.9,20,20,false);");
+                s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Cold and Flu','Lemsip','Max','16 caps',4.2,3.7,25,25,false);");
+                s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES'Cold and Flu','Lemsip','Standard','10 sachets',4.5,3.5,25,25,false);");
+                s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Cold and Flu','Sudafed','Day and Night','16 caps',4.5,3.2,30,30,true);");
+                s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Cold and Flu','Sudafed','Max','16 caps',4.2,3.2,30,30,true);");
+                s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Cold and Flu','Benylin','Mucus relief','16 caps',4.8,3.2,20,20,false);");
+                s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Cold and Flu','Benylin','4 flu','24 caps',6,4.9,20,20,false);");
 
                 s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Skincare','E45','Psoriasis cream','50ml',20,16,15,15,false)," +
                         "    ('Skincare','Eurax','Skin cream','100g',5.7,4.2,15,15,false)," +
