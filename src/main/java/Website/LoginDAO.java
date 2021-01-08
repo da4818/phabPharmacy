@@ -30,7 +30,7 @@ public class LoginDAO {
             if(tableName.equals("customer")) {
                 String sql ="CREATE TABLE CUSTOMER (" +
                         "ID SERIAL PRIMARY KEY NOT NULL," +
-                        " FIRST_NAME VARCHAR(36) NOT NULL, " +
+                        " FIRST_NAME TEXT NOT NULL, " +
                         " LAST_NAME VARCHAR(36) NOT NULL, " +
                         " EMAIL VARCHAR(256) NOT NULL, " +
                         " PASS_WORD VARCHAR(256) NOT NULL, " +
