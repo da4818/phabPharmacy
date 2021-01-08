@@ -358,15 +358,14 @@ public class LoginDAO {
     public static Product getProduct(int n){
         Product p = new Product();
         Connection c = null;
-        PreparedStatement ps = null;
+        Statement s = null;
         ResultSet rs = null;
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{
             Class.forName("org.postgresql.Driver");
             c = DriverManager.getConnection(dbUrl);
-            ps = c.prepareStatement("select * from shop_product where branch_id = 1 and barcode=?");
-            ps.setInt(1,n);
-            rs = ps.executeQuery();
+            s = c.createStatement();;
+            rs = s.executeQuery("select * from shop_product where branch_id = 1 and barcode=" + n);
             while(rs.next()){
                 p.barcode = rs.getInt("barcode");
                 p.category = rs.getString("category");
@@ -377,9 +376,8 @@ public class LoginDAO {
                 p.quantity = rs.getInt("quantity");
                 p.limited = rs.getBoolean("limited");
             }
-
             rs.close();
-            ps.close();
+            s.close();
             c.close();
         }catch(Exception e){
             System.err.println(e.getClass().getName()+": " + e.getMessage());
