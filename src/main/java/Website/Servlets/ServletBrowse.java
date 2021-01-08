@@ -93,7 +93,7 @@ public class ServletBrowse extends HttpServlet {
                     "<h2 id=\""+headerURLs.get(i)+"\">" + headers.get(i) + "</h2>\n");
             while (p.category.equals(headers.get(i))) {
                 DecimalFormat df = new DecimalFormat("0.00");
-                String price = valueOf(df.format(p.price));
+                String price = df.format(p.price);
                 int max = p.limited ? 1 : 5;
                 resp.getWriter().write("<div class=\"relative\">\n");
                 if (p.limited){
