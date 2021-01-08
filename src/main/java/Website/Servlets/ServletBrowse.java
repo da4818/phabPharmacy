@@ -24,7 +24,7 @@ public class ServletBrowse extends HttpServlet {
         ArrayList<String> headers = getHeaderinfo("headers"); //See line 110
         ArrayList<String> headerURLs = getHeaderinfo("headerURLs"); //See line 110
         int j=1;
-        for (int i=0;i<42;i++){
+        for (int i=0;i<24;i++){
             Product p = LoginDAO.getProduct(i);
             resp.getWriter().write(p.brand + " " + p.name);
 
