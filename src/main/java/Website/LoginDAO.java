@@ -29,15 +29,16 @@ public class LoginDAO {
             if(tableName.equals("users")) { //* rename to 'customers'
                 String sql ="CREATE TABLE USERS " +
                         "(ID SERIAL PRIMARY KEY NOT NULL," +
-                        " FNAME TEXT NOT NULL, " +
-                        " LNAME TEXT NOT NULL, " +
-                        " EMAIL TEXT NOT NULL, " +
-                        " PASSW TEXT NOT NULL, " + //*add password to 'customer' table
-                        " CARDNO TEXT NOT NULL, " +
-                        " POSTCODE TEXT NOT NULL)"; //*add phone_no VARCHAR(12), address VARCHAR(128) to table
+                        " FIRST_NAME VARCHAR(36) NOT NULL, " +
+                        " LAST_NAME VARCHAR(36) NOT NULL, " +
+                        " EMAIL VARCHAR(256) NOT NULL, " +
+                        " PASS_WORD VARCHAR(256) NOT NULL, " + //*add password to 'customer' table
+                        " POSTCODE VARCHAR(8) NOT NULL," +
+                        " ADDRESS VARCHAR(128)," +
+                        " PHONE_NO VARCHAR(12))"; //*add phone_no VARCHAR(12), address VARCHAR(128) to table
                 s.executeUpdate(sql);
-                s1.executeUpdate("INSERT INTO USERS (FNAME,LNAME,EMAIL,PASSW,CARDNO,POSTCODE) VALUES ('John','Doe','email1','pass1','cardno1','SW72AZ');");
-                s1.executeUpdate("INSERT INTO USERS (FNAME,LNAME,EMAIL,PASSW,CARDNO,POSTCODE) VALUES ('Mia','Stewart','email2','pass2','cardno2','SW65TD');");
+                s1.executeUpdate("INSERT INTO USERS (FIRST_NAME,LAST_NAME,EMAIL,PASS_WORD,POSTCODE,ADDRESS) VALUES ('John','Doe','email1','pass1','SW72AZ','Exhibiton Road');");
+                s1.executeUpdate("INSERT INTO USERS (FIRST_NAME,LAST_NAME,EMAIL,PASS_WORD,POSTCODE) VALUES ('Mia','Stewart','email2','pass2','SW65TD');");
             }
             else if(tableName.equals("products")){ //*rename to 'shop_products'
                 String sql ="CREATE TABLE PRODUCTS " +
@@ -93,18 +94,30 @@ public class LoginDAO {
             else if(tableName.equals("logged")) { //this table is so that we can see which customer is currently logged in - there will only be at most 1 entry in this table, and will be updated when a new user logs in
                 String sql ="CREATE TABLE LOGGED " +
                         "(ID SERIAL PRIMARY KEY NOT NULL," +
-                        " FNAME TEXT NOT NULL, " +
-                        " LNAME TEXT NOT NULL, " +
-                        " EMAIL TEXT NOT NULL, " +
-                        " PASSW TEXT NOT NULL, " +
-                        " CARDNO TEXT NOT NULL, " +
-                        " POSTCODE TEXT NOT NULL)";
+                        " FIRST_NAME VARCHAR(36) NOT NULL, " +
+                        " LAST_NAME VARCHAR(36) NOT NULL, " +
+                        " EMAIL VARCHAR(256) NOT NULL, " +
+                        " PASS_WORD VARCHAR(256) NOT NULL, " +
+                        " POSTCODE VARCHAR(8) NOT NULL," +
+                        " ADDRESS VARCHAR(128)," +
+                        " PHONE_NO VARCHAR(12))";
+                s.executeUpdate(sql);
+            }
+            else if(tableName.equals("card_details")) { //this table is so that we can see which customer is currently logged in - there will only be at most 1 entry in this table, and will be updated when a new user logs in
+                String sql ="CREATE TABLE CARD_DETAILS " +
+                        "(ID SERIAL PRIMARY KEY NOT NULL," +
+                        " CARD_NO TEXT NOT NULL, " +
+                        " CVV TEXT NOT NULL, " +
+                        " SORT_CODE TEXT NOT NULL, " +
+                        " ACCOUNT_NO TEXT NOT NULL, " +
+                        " CUSTOMER_ID INT NOT NULL)";
                 s.executeUpdate(sql);
             }
             s.close();
             s1.close();
             c.close();
         }catch(Exception e){System.out.println(e);}
+
     }
     // Functions to execute queries, or amend to the database content //
     // Checking if user is logging in with an existing account
@@ -147,17 +160,16 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            PreparedStatement ps=c.prepareStatement("select * from users where email=? and passw=?");
+            PreparedStatement ps=c.prepareStatement("select * from users where email=? and pass_word=?");
             ps.setString(1,email_in);
             ps.setString(2,pass_in);
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
                 u.id = rs.getInt("id");
-                u.fname = rs.getString("fname");
-                u.lname = rs.getString("name");
+                u.fname = rs.getString("first_name");
+                u.lname = rs.getString("last_name");
                 u.email = rs.getString("email");
-                u.password = rs.getString("passw");
-                u.cardno = rs.getString("cardno");
+                u.password = rs.getString("pass_word");
                 u.postcode = rs.getString("postcode");
             }
             ps.close();
@@ -166,18 +178,33 @@ public class LoginDAO {
         return u;
     }
     //If registration is valid, the customer's information will be added to the database
-    public static void addUser(String fname_in,String lname_in, String email_in,String pass_in, String cardno_in, String postcode_in){
+    public static void addUser(String fname_in,String lname_in, String email_in,String pass_in, String postcode_in){
         try{
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            PreparedStatement ps=c.prepareStatement("insert into users (fname,lname,email,passw,cardno,postcode) values(?,?,?,?,?,?)");
+            PreparedStatement ps=c.prepareStatement("insert into users (first_name,last_name,email,pass_word,postcode) values(?,?,?,?,?)");
             ps.setString(1,fname_in);
             ps.setString(2,lname_in);
             ps.setString(3,email_in);
             ps.setString(4,pass_in);
-            ps.setString(5,cardno_in);
-            ps.setString(6,postcode_in);
+            ps.setString(5,postcode_in);
+            ps.executeUpdate();
+            ps.close();
+            c.close();
+        }catch(Exception e){System.out.println(e);}
+    }
+    public static void addCard(String card_no_in,String cvv_in, String sort_code_in,String account_no_in, int id_in){
+        try{
+            String dbUrl = System.getenv("JDBC_DATABASE_URL");
+            Class.forName("org.postgresql.Driver");
+            Connection c = DriverManager.getConnection(dbUrl);
+            PreparedStatement ps=c.prepareStatement("insert into card_details (card_no,cvv,sort_code,account_no,customer_id) values(?,?,?,?,?)");
+            ps.setString(1,card_no_in);
+            ps.setString(2,cvv_in);
+            ps.setString(3,sort_code_in);
+            ps.setString(4,account_no_in);
+            ps.setInt(5,id_in);
             ps.executeUpdate();
             ps.close();
             c.close();
@@ -194,11 +221,10 @@ public class LoginDAO {
             ResultSet rs=s.executeQuery("select * from logged;");
             while(rs.next()){
                 u.id = rs.getInt("id");
-                u.fname = rs.getString("fname");
-                u.lname = rs.getString("lname");
+                u.fname = rs.getString("first_name");
+                u.lname = rs.getString("last_name");
                 u.email = rs.getString("email");
-                u.password = rs.getString("passw");
-                u.cardno = rs.getString("cardno");
+                u.password = rs.getString("pass_word");
                 u.postcode = rs.getString("postcode");
             }
             s.close();
@@ -214,7 +240,7 @@ public class LoginDAO {
             Connection c = DriverManager.getConnection(dbUrl);
             Statement s=c.createStatement();
             s.executeUpdate("truncate table logged"); //instead of updating the table it will just empty it and add a new entry
-            String sql = "INSERT INTO LOGGED (ID,FNAME,LNAME,EMAIL,PASSW,CARDNO,POSTCODE) SELECT ID,FNAME,LNAME,EMAIL,PASSW,CARDNO,POSTCODE FROM USERS WHERE ID=" +loggedInUser.id +";";
+            String sql = "insert into logged (id,first_name,last_name,email,pass_word,postcode) SELECT id,first_name,last_name,email,pass_word,postcode FROM users WHERE id=" +loggedInUser.id +";";
             s.executeUpdate(sql);
             s.close();
             c.close();

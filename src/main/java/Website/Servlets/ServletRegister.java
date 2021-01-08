@@ -62,10 +62,11 @@ public class ServletRegister extends HttpServlet {
         else if(emailCheck.validEmail() == false){
             resp.getWriter().write("<h2>Invalid Email</h2>");
         }
-        else if (emailCheck.validEmail() == true){
-            LoginDAO.addUser(fn,ln,em,pw,cn,pc);
+        else {
+            LoginDAO.addUser(fn,ln,em,pw,pc);
             User currentUser = LoginDAO.getUser(em,pw);
             LoginDAO.setLoggedInUser(currentUser);
+
             LoginDAO.resetTable("basket");
             resp.getWriter().write("<h2>Successful registration. Welcome, " + currentUser.fname + "</h2>");
         }
@@ -243,7 +244,7 @@ public class ServletRegister extends HttpServlet {
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"lname\" placeholder=\"Last Name*\"><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"email\" placeholder=\"Email Address*\"><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"pass\" placeholder=\"Password*\"><br>\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"verifyPass\" placeholder=\"Verify Password*\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"verify_pass\" placeholder=\"Verify Password*\"><br>\n" +
                 "  <h3>Order Information<br><b style=\"font-size: 15px;\">Payment Information</b></h3>\n" +
                 "\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"card_no\" placeholder=\"Card Number*\"><br>\n" +
