@@ -70,7 +70,7 @@ public class ServletMap extends HttpServlet {
                 "<p>");
         int j = 1;
         Product p = LoginDAO.getProduct(j);
-        while (j <= LoginDAO.tableSize("products")){
+        while (j < 42){ //Number of items in Paddington branch store
             if (p.category.equals(category)) {
                 resp.getWriter().write(p.brand + " " + p.name + " - " + p.amount + "<br>");
             }

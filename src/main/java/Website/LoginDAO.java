@@ -29,8 +29,8 @@ public class LoginDAO {
         Connection c = null;
         Statement s = null;
         Statement s1 = null;
+        String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{
-            String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             c = DriverManager.getConnection(dbUrl);
 
@@ -179,8 +179,8 @@ public class LoginDAO {
         Connection c = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
+        String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{
-            String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             c = DriverManager.getConnection(dbUrl);
             ps = c.prepareStatement("select * from customer where email=? and pass_word=?");
@@ -204,8 +204,8 @@ public class LoginDAO {
         Connection c = null;
         PreparedStatement ps = null;    
         ResultSet rs = null;
+        String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{
-            String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             c = DriverManager.getConnection(dbUrl);
             ps = c.prepareStatement("select * from customer where email=?");
@@ -227,8 +227,8 @@ public class LoginDAO {
         Connection c = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
+        String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{
-            String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             c = DriverManager.getConnection(dbUrl);
             ps = c.prepareStatement("select * from customer where email=? and pass_word=?");
@@ -257,8 +257,8 @@ public class LoginDAO {
     public static void addUser(String fname_in,String lname_in, String email_in,String pass_in, String postcode_in, String address_in, String phoneno_in){
         Connection c = null;
         PreparedStatement ps = null;
+        String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{
-            String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             c = DriverManager.getConnection(dbUrl);
             ps = c.prepareStatement("insert into customer(first_name,last_name,email,pass_word,postcode,address,phone_no) values(?,?,?,?,?,?,?)");
@@ -283,8 +283,8 @@ public class LoginDAO {
         Connection c = null;
         Statement s = null;
         ResultSet rs = null;
+        String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{
-            String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             c = DriverManager.getConnection(dbUrl);
             s = c.createStatement();
@@ -310,8 +310,8 @@ public class LoginDAO {
     public static void setLoggedInUser(User loggedInUser){
         Connection c = null;
         Statement s = null;
+        String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{
-            String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             c = DriverManager.getConnection(dbUrl);
             s = c.createStatement();
@@ -327,12 +327,12 @@ public class LoginDAO {
     }
     //this is to see the customer is currently logged in
     public static boolean checkLoggedIn(){
-        boolean status=false;
+        boolean status = false;
         Connection c = null;
         Statement s = null;
         ResultSet rs = null;
+        String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{
-            String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             c = DriverManager.getConnection(dbUrl);
             s = c.createStatement();
@@ -354,11 +354,11 @@ public class LoginDAO {
         Connection c = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
+        String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{
-            String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             c = DriverManager.getConnection(dbUrl);
-            ps = c.prepareStatement("select * from shop_product where barcode=?");
+            ps = c.prepareStatement("select * from shop_product where branch_id = 1 and barcode=?");
             ps.setInt(1,n);
             rs = ps.executeQuery();
             while(rs.next()){
@@ -389,8 +389,8 @@ public class LoginDAO {
         Statement s1 = null;
         ResultSet rs = null;
         ResultSet rs1 = null;
+        String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{ //if the customer adds Vicks vaporub x1 and then adds the same product but x2 again, we want it to display 'x2' rather than 'x1' and 'x2' appearing separately
-            String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             c = DriverManager.getConnection(dbUrl);
             s = c.createStatement();
@@ -441,8 +441,8 @@ public class LoginDAO {
         Statement s = null;
         ResultSet rs = null;
         ResultSet rs1 = null;
+        String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{
-            String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             c = DriverManager.getConnection(dbUrl);
             s = c.createStatement();
@@ -480,8 +480,8 @@ public class LoginDAO {
         Statement s1 = null;
         ResultSet rs = null;
         ResultSet rs1 = null;
+        String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{
-            String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             c = DriverManager.getConnection(dbUrl);
             s = c.createStatement();
@@ -514,8 +514,8 @@ public class LoginDAO {
         Statement s = null;
         Statement s1 = null;
         ResultSet rs = null;
+        String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{
-            String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             c = DriverManager.getConnection(dbUrl);
             s = c.createStatement();
@@ -544,8 +544,8 @@ public class LoginDAO {
         Statement s = null;
         ResultSet rs = null;
         ResultSet rs1 = null;
+        String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{
-            String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             c = DriverManager.getConnection(dbUrl);
             s = c.createStatement();
@@ -563,7 +563,6 @@ public class LoginDAO {
                 cc.sortCode = rs1.getString("sort_code");
                 cc.accountNumber = rs1.getString("account_no");
             }
-
             rs.close();
             rs1.close();
             ps.close();
@@ -582,8 +581,8 @@ public class LoginDAO {
         Connection c = null;
         Statement s = null;
         ResultSet rs = null;
+        String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{
-            String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             c = DriverManager.getConnection(dbUrl);
             String sql = "select count(*) from " + tableName + ";"; //'select count(*)' gets the number of entries
@@ -608,8 +607,8 @@ public class LoginDAO {
         Connection c = null;
         Statement s = null;
         ResultSet rs = null;
+        String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{
-            String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             c = DriverManager.getConnection(dbUrl);
             String sql = "select sum(quantity) from customer_basket";//although similar to 'tableSize()', this counts the number of items, not just the number of different products
