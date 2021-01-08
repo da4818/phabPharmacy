@@ -19,7 +19,7 @@ public class ServletHome extends HttpServlet {
         LoginDAO.createTable("customer_basket");
         LoginDAO.createTable("shop_product");
         LoginDAO.createTable("logged_in_customer");
-        //LoginDAO.resetTable("customer_basket");
+        LoginDAO.resetTable("customer_basket");
         resp.setContentType("text/html");
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
