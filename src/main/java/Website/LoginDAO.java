@@ -35,13 +35,21 @@ public class LoginDAO {
                         " EMAIL VARCHAR(256) NOT NULL, " +
                         " PASS_WORD VARCHAR(256) NOT NULL, " +
                         " POSTCODE VARCHAR(8) NOT NULL, " +
-                        " ADDRESS VARCHAR(128)," +
+                        " ADDRESS VARCHAR(128), " +
                         " PHONE_NO VARCHAR(12))";
                 s.executeUpdate(sql);
-                s1.executeUpdate("INSERT INTO CUSTOMER(FIRST_NAME,LAST_NAME,EMAIL,PASS_WORD,POSTCODE) VALUES ('John','Doe','email1','pass1','SW72AZ');");
-                s1.executeUpdate("INSERT INTO CUSTOMER(FIRST_NAME,LAST_NAME,EMAIL,PASS_WORD,POSTCODE) VALUES ('Mia','Stewart','email2','pass2','SW65TD');");
+                s1.executeUpdate("INSERT INTO CUSTOMER(FIRST_NAME,LAST_NAME,EMAIL,PASS_WORD,POSTCODE) VALUES('John','Doe','email1','pass1','SW72AZ');");
+                s1.executeUpdate("INSERT INTO CUSTOMER(FIRST_NAME,LAST_NAME,EMAIL,PASS_WORD,POSTCODE) VALUES('Mia','Stewart','email2','pass2','SW65TD');");
             }
             else if(tableName.equals("shop_product")){
+                String sql0 = "CREATE TABLE branch (" +
+                        "    ID SERIAL PRIMARY KEY NOT NULL, " +
+                        "    NAME VARCHAR(36) NOT NULL );";
+                s.executeUpdate(sql0);
+                s.executeUpdate("INSERT INTO BRANCH(NAME) VALUES('Paddington');" +
+                        "INSERT INTO BRANCH(NAME) VALUES('Green Park');" +
+                        "INSERT INTO BRANCH(NAME) VALUES('Mile End');");
+
                 String sql ="CREATE TABLE SHOP_PRODUCT (" +
                         "BARCODE SERIAL PRIMARY KEY NOT NULL, " +
                         " CATEGORY VARCHAR(36) NOT NULL, " +
@@ -156,6 +164,7 @@ public class LoginDAO {
             ResultSet rs = ps.executeQuery();
             status = rs.next(); //Status is now true if an entry with the input email and password exists
             ps.close();
+            rs.close();
             c.close();
         }catch(Exception e){System.out.println(e);}
         return status;
@@ -169,9 +178,10 @@ public class LoginDAO {
             Connection c = DriverManager.getConnection(dbUrl);
             PreparedStatement ps=c.prepareStatement("select * from customer where email=?");
             ps.setString(1,email_in);
-            ResultSet rs=ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
             status = rs.next(); //similar to line 121
             ps.close();
+            rs.close();
             c.close();
         }catch(Exception e){System.out.println(e);}
         return status;
@@ -187,7 +197,7 @@ public class LoginDAO {
             PreparedStatement ps=c.prepareStatement("select * from customer where email=? and pass_word=?");
             ps.setString(1,email_in);
             ps.setString(2,pass_in);
-            ResultSet rs=ps.executeQuery();
+            ResultSet rs= ps.executeQuery();
             while(rs.next()){
                 u.customer_id = rs.getInt("id");
                 u.fname = rs.getString("first_name");
@@ -199,6 +209,7 @@ public class LoginDAO {
                 u.phoneno = rs.getString("phone_no");
             }
             ps.close();
+            rs.close();
             c.close();
         }catch(Exception e){System.out.println(e);}
         return u;
@@ -238,6 +249,7 @@ public class LoginDAO {
                 u.postcode = rs.getString("postcode");
             }
             s.close();
+            rs.close();
             c.close();
         }catch(Exception e){System.out.println(e);}
         return u;
@@ -267,6 +279,7 @@ public class LoginDAO {
             ResultSet rs = s.executeQuery("select * from logged_in_user");
             status = rs.next(); //Status is now true if an entry with the email and password exists (i.e. the only entry in the table)
             s.close();
+            rs.close();
             c.close();
         }catch(Exception e){System.out.println(e);}
         return status;
@@ -293,6 +306,7 @@ public class LoginDAO {
                 p.limited = rs.getBoolean("limited");
             }
             ps.close();
+            rs.close();
             c.close();
 
         }catch(Exception e){System.out.println(e);}
@@ -321,6 +335,7 @@ public class LoginDAO {
                 s2.executeUpdate(sql2);
                 s1.close();
                 s2.close();
+                rs1.close();
             }
             else { //if they haven't previously added the item to the basket, it will create a new entry in the table
                 PreparedStatement ps = c.prepareStatement("insert into customer_basket (barcode,category,brand,name,amount,sell_price,quantity,limit_of_1,customer_id) values(?,?,?,?,?,?,?,?,?)");
@@ -337,6 +352,7 @@ public class LoginDAO {
                 ps.close();
             }
             s.close();
+            rs.close();
             c.close();
         }catch(Exception e){System.out.println(e);}
     }
@@ -357,17 +373,19 @@ public class LoginDAO {
             }
             PreparedStatement ps=c.prepareStatement("with temp as (select row_number() over (order by name asc) as rownum, * from customer_basket where customer_id=" + cust_id + ") select * from temp where rownum=?");
             ps.setInt(1,n); //If one item is removed, the IDs aren't automatically updated e.g. if i remove item ID=2, table's ID will read as 1,3,4,5... this poses problems when using a for loop to display the information
-            ResultSet rs1=ps.executeQuery(); //SQL has no easy way to select item based on row number rather than an existing column - this is one solution
+            ResultSet rs1 = ps.executeQuery(); //SQL has no easy way to select item based on row number rather than an existing column - this is one solution
             while(rs1.next()){ // If int n = 2 (i.e. the second item in the basket), this will correspond to the 2nd entry in the basket table based on alphabetical order ('order by name asc' gives alphabetical order)
-                p.barcode = rs.getInt("barcode");
-                p.brand = rs.getString("brand");
-                p.name = rs.getString("name");
-                p.price = rs.getDouble("price");
-                p.quantity = rs.getInt("quantity");
-                p.limited = rs.getBoolean("limited");
+                p.barcode = rs1.getInt("barcode");
+                p.brand = rs1.getString("brand");
+                p.name = rs1.getString("name");
+                p.price = rs1.getDouble("price");
+                p.quantity = rs1.getInt("quantity");
+                p.limited = rs1.getBoolean("limited");
             }
             s.close();
             ps.close();
+            rs.close();
+            rs1.close();
             c.close();
         }catch(Exception e){System.out.println(e);}
         return p;
@@ -389,10 +407,12 @@ public class LoginDAO {
             Statement s1 = c.createStatement();
             ResultSet rs1 = s.executeQuery(sql1);
             while(rs1.next()){
-                total = rs.getDouble(1);
+                total = rs1.getDouble(1);
             }
             s.close();
             s1.close();
+            rs.close();
+            rs1.close();
             c.close();
         }catch(Exception e){System.out.println(e);}
         return total;
@@ -416,6 +436,7 @@ public class LoginDAO {
 
             s.close();
             s1.close();
+            rs.close();
             c.close();
         }catch(Exception e){System.out.println(e);}
     }
@@ -435,13 +456,15 @@ public class LoginDAO {
             PreparedStatement ps = c.prepareStatement("select * from card_details where customer_id=" + cust_id + ";");
             ResultSet rs1 = ps.executeQuery();
             while(rs1.next()){ // If int n = 2 (i.e. the second item in the basket), this will correspond to the 2nd entry in the basket table based on alphabetical order ('order by name asc' gives alphabetical order)
-                cc.cardNumber = rs.getString("card_no");
-                cc.cvv = rs.getString("cvv");
-                cc.sortCode = rs.getString("sort_code");
-                cc.accountNumber = rs.getString("account_no");
+                cc.cardNumber = rs1.getString("card_no");
+                cc.cvv = rs1.getString("cvv");
+                cc.sortCode = rs1.getString("sort_code");
+                cc.accountNumber = rs1.getString("account_no");
             }
             s.close();
             ps.close();
+            rs.close();
+            rs1.close();
             c.close();
         }catch(Exception e){System.out.println(e);}
         return cc;
@@ -463,6 +486,7 @@ public class LoginDAO {
                 n = Integer.parseInt(p); //so we convert that string to an integer
             }
             s.close();
+            rs.close();
             c.close();
         }catch(Exception e){System.out.println(e);}
         return n;
@@ -482,6 +506,7 @@ public class LoginDAO {
                 n=Integer.parseInt(p);
             }
             s.close();
+            rs.close();
             c.close();
         }catch(Exception e){System.out.println(e);}
         return n;
