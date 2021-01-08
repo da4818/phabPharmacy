@@ -24,11 +24,22 @@ public class ServletBrowse extends HttpServlet {
         ArrayList<String> headers = getHeaderinfo("headers"); //See line 110
         ArrayList<String> headerURLs = getHeaderinfo("headerURLs"); //See line 110
         int j=1;
+        for (int i=0;i<6;i++){
+            if(j <41) {
+                resp.getWriter().write("<p>" + headers.get(i) + "</p>");
+                Product p = LoginDAO.getProduct(j);
+                if (p.category.equals(headers.get(i))) {
+                    resp.getWriter().write(p.brand + " " + p.name);
+                }
+                j++;
+            }
 
-        for (j = 1; j < 42; j++){
+        }
+
+        /* //for (j = 1; j < 42; j++){
             Product p = LoginDAO.getProduct(j);
             resp.getWriter().write("<p>"+p.category+" " +p.name+"</p>");
-        }
+        }*/
         /*while (j<42) { //Number of items in paddington store<
             for (int i = 0; i < 6; i++) {
                 resp.getWriter().write("<section>\n" +
