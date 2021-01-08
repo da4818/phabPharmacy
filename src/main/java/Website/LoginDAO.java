@@ -31,12 +31,6 @@ public class LoginDAO {
         Statement sCustomer1 = null;
         Statement sProduct = null;
         Statement sProduct1 = null;
-        Statement sProduct2 = null;
-        Statement sProduct3 = null;
-        Statement sProduct4 = null;
-        Statement sProduct5 = null;
-        Statement sProduct6 = null;
-        Statement sProduct7 = null;
         Statement sBasket = null;
         Statement sLogged = null;
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
@@ -91,43 +85,56 @@ public class LoginDAO {
                 sProduct1 = c.createStatement();
                 sProduct1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Cold and Flu','Vicks','Vaporub','100g',4.5,3.7,15,15,false)," +
                         "('Cold and Flu','Vicks','First Defence','15ml',6.8,5,20,20,false)," +
-                        "('Cold and Flu','Gsk','Night Nurse','160ml',8.5,7,30,30,false),('Cold and Flu','Gsk','Night Nurse','160ml',9,7.5,30,30,false);");
-
-                sProduct2 = c.createStatement();
-                sProduct2.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Skincare','E45','Psoriasis cream','50ml',20,16,15,15,false)," +
+                        "('Cold and Flu','Gsk','Night Nurse','160ml',8.5,7,30,30,false)," +
+                        "('Cold and Flu','Gsk','Night Nurse','160ml',9,7.5,30,30,false)," +
+                        "('Cold and Flu','Lemsip','Max','16 caps',4.2,3.7,25,25,false)," +
+                        "('Cold and Flu','Lemsip','Standard','10 sachets',4.5,3.5,25,25,false)," +
+                        "('Cold and Flu','Sudafed','Day and Night','16 caps',4.5,3.2,30,30,true)," +
+                        "('Cold and Flu','Sudafed','Max','16 caps',4.2,3.2,30,30,true)," +
+                        "('Cold and Flu','Benylin','Mucus relief','16 caps',4.8,3.2,20,20,false)," +
+                        "('Cold and Flu','Benylin','4 flu','24 caps',6,4.9,20,20,false);");
+                
+                sProduct1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Skincare','E45','Psoriasis cream','50ml',20,16,15,15,false)," +
                         "('Skincare','Eurax','Skin cream','100g',5.7,4.2,15,15,false)," +
-                        "('Skincare','Eucerin','Skin relief cream','50ml',9,7,20,20,false);");
-
-                sProduct3 = c.createStatement();
-                sProduct3.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Headaches and Pain Relief','Nurofen','Meltlets','16 caps',4,3.7,40,40,false)," +
+                        "('Skincare','Eucerin','Skin relief cream','50ml',9,7,20,20,false)," +
+                        "('Skincare','Eucerin','Face scrub','100ml',7.5,6,20,20,false)," +
+                        "('Skincare','Dermalex','Psoriasis cream','150ml',30,25,10,10,false)," +
+                        "('Skincare','Dermalex','Repair and Restore','100g',12,10,10,10,false)," +
+                        "('Skincare','Dermalex','Eczema cream','100g',25,22.2,5,5,false)," +
+                        "('Skincare','Cetaphil','Moisturising cream','50ml',10,7.6,20,20,false)," +
+                        "('Skincare','Cetaphil','Exfoliating cleanser','180ml',12,10.1,20,20,false);");
+                
+                sProduct1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Headaches and Pain Relief','Nurofen','Meltlets','16 caps',4,3.7,40,40,false)," +
                         "('Headaches and Pain Relief','Nurofen','Express','16 caps',4,3.5,30,30,false)," +
                         "('Headaches and Pain Relief','Nurofen','Max strength','32 caps',7,6.2,25,25,false)," +
                         "('Headaches and Pain Relief','Nurofen','Standard','16 caps',4,3.2,30,30,false)," +
-                        "('Headaches and Pain Relief','Cuprofen ','Max strength','96 caps',11,9,20,20,true);");
-
-                sProduct4 = c.createStatement();
-                sProduct4.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Digestion','Dioralyte','Blackcurrant','12 sachets',8,7.3,20,20,false)," +
+                        "('Headaches and Pain Relief','Cuprofen ','Max strength','96 caps',11,9,20,20,true)," +
+                        "('Headaches and Pain Relief','Solpadeine','Headache','16 caps',2,1.6,20,20,true)," +
+                        "('Headaches and Pain Relief','Anadin','Extra','16 caps',2.3,2,30,30,true)," +
+                        "('Headaches and Pain Relief','Anadin','Triple action','12 caps',2,1.9,30,30,true)," +
+                        "('Headaches and Pain Relief','Anadin','Original','16 caps',1.8,1.5,30,30,true)," +
+                        "('Headaches and Pain Relief','Disprin','Soluble','32 tablets',3.6,2.8,20,20,true);");
+                
+                sProduct1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Digestion','Dioralyte','Blackcurrant','12 sachets',8,7.3,20,20,false)," +
                         "('Digestion','Dioralyte','Lemon','12 sachets',8,7.3,20,20,false)," +
                         "('Digestion','Gaviscon','Chewable','24 tablets',4.2,3.5,25,25,false)," +
                         "('Digestion','Senokot','Max','10 tablets',3,2.7,10,10,false)," +
                         "('Digestion','Gaviscon','Advance','300ml',10,8.1,10,10,false);");
-                sProduct5 = c.createStatement();
-                sProduct5.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Allergy','Benadryl','Relief','24 caps',9,7.1,20,20,false)," +
+                sProduct1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Allergy','Benadryl','Relief','24 caps',9,7.1,20,20,false)," +
                         "('Allergy','Piriteze','tabs','7 tablets',3,2.3,20,20,false)," +
                         "('Allergy','Beconase','Relief','100 sprays',6,4,20,20,false);");
-                sProduct6 = c.createStatement();
-                sProduct6.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('First Aid','Dettol','Antiseptic','500ml',3.2,3,20,20,false)," +
+                
+                sProduct1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('First Aid','Dettol','Antiseptic','500ml',3.2,3,20,20,false)," +
                         "('First Aid','Dettol','Hand sanitizer','500ml',7,6.3,50,50,false)," +
                         "('First Aid','Elastoplast','plasters','20 plasters',3,2,30,30,false)," +
                         "('First Aid','TCP','Liquid','200ml',4,3.2,20,20,false);");
-                sProduct7 = c.createStatement();
-                sProduct7.executeUpdate("UPDATE SHOP_PRODUCT SET BRANCH_ID = 1;");
-                sProduct7.executeUpdate("INSERT INTO SHOP_PRODUCT (CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) SELECT CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1 FROM SHOP_PRODUCT WHERE BRANCH_ID=1;");
-                sProduct7.executeUpdate("UPDATE SHOP_PRODUCT SET BRANCH_ID=2 WHERE BARCODE>41;");
-                sProduct7.executeUpdate("UPDATE SHOP_PRODUCT SET SELL_PRICE=SELL_PRICE*2 WHERE BARCODE>41;");
-                sProduct7.executeUpdate("INSERT INTO SHOP_PRODUCT (CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) SELECT CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1 FROM SHOP_PRODUCT WHERE BRANCH_ID=1;");
-                sProduct7.executeUpdate("UPDATE SHOP_PRODUCT SET BRANCH_ID=3 WHERE BARCODE>82;");
-                sProduct7.executeUpdate("UPDATE SHOP_PRODUCT SET SELL_PRICE=SELL_PRICE/1.3 WHERE BARCODE>82;");
+                sProduct1.executeUpdate("UPDATE SHOP_PRODUCT SET BRANCH_ID = 1;");
+                sProduct1.executeUpdate("INSERT INTO SHOP_PRODUCT (CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) SELECT CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1 FROM SHOP_PRODUCT WHERE BRANCH_ID=1;");
+                sProduct1.executeUpdate("UPDATE SHOP_PRODUCT SET BRANCH_ID=2 WHERE BARCODE>41;");
+                sProduct1.executeUpdate("UPDATE SHOP_PRODUCT SET SELL_PRICE=SELL_PRICE*2 WHERE BARCODE>41;");
+                sProduct1.executeUpdate("INSERT INTO SHOP_PRODUCT (CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) SELECT CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1 FROM SHOP_PRODUCT WHERE BRANCH_ID=1;");
+                sProduct1.executeUpdate("UPDATE SHOP_PRODUCT SET BRANCH_ID=3 WHERE BARCODE>82;");
+                sProduct1.executeUpdate("UPDATE SHOP_PRODUCT SET SELL_PRICE=SELL_PRICE/1.3 WHERE BARCODE>82;");
             }
 
             else if(tableName.equals("customer_basket")){
@@ -162,12 +169,6 @@ public class LoginDAO {
             }
             sProduct.close();
             sProduct1.close();
-            sProduct2.close();
-            sProduct3.close();
-            sProduct4.close();
-            sProduct5.close();
-            sProduct6.close();
-            sProduct7.close();
             sCustomer.close();
             sCustomer1.close();
             sBasket.close();
