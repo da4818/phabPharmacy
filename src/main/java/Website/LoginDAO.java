@@ -42,7 +42,7 @@ public class LoginDAO {
                 s1.executeUpdate("INSERT INTO CUSTOMER(FIRST_NAME,LAST_NAME,EMAIL,PASS_WORD,POSTCODE) VALUES('Mia','Stewart','email2','pass2','SW65TD');");
             }
             else if(tableName.equals("shop_product")){
-                String sql0 = "CREATE TABLE branch (" +
+                String sql0 = "CREATE TABLE BRANCH (" +
                         "    ID SERIAL PRIMARY KEY NOT NULL, " +
                         "    NAME VARCHAR(36) NOT NULL );";
                 s.executeUpdate(sql0);
