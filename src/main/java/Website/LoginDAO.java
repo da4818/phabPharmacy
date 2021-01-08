@@ -76,7 +76,7 @@ public class LoginDAO {
                 s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Cold and Flu','Benylin','Mucus relief','16 caps',4.8,3.2,20,20,false);");
                 s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Cold and Flu','Benylin','4 flu','24 caps',6,4.9,20,20,false);");
 
-                s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Skincare','E45','Psoriasis cream','50ml',20,16,15,15,false)," +
+                /*s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Skincare','E45','Psoriasis cream','50ml',20,16,15,15,false)," +
                         "    ('Skincare','Eurax','Skin cream','100g',5.7,4.2,15,15,false)," +
                         "    ('Skincare','Eucerin','Skin relief cream','50ml',9,7,20,20,false)," +
                         "    ('Skincare','Eucerin','Face scrub','100ml',7.5,6,20,20,false)," +
@@ -119,7 +119,7 @@ public class LoginDAO {
                 s1.executeUpdate("INSERT INTO SHOP_PRODUCT (CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1)");
                 s1.executeUpdate("SELECT CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1 FROM SHOP_PRODUCT WHERE BRANCH_ID=1;");
                 s1.executeUpdate("UPDATE SHOP_PRODUCT SET BRANCH_ID=3 WHERE BARCODE>82;");
-                s1.executeUpdate("UPDATE SHOP_PRODUCT SET SELL_PRICE=SELL_PRICE/1.3 WHERE BARCODE>82;");
+                s1.executeUpdate("UPDATE SHOP_PRODUCT SET SELL_PRICE=SELL_PRICE/1.3 WHERE BARCODE>82;");*/
 
             }
             else if(tableName.equals("customer_basket")){ //*rename to 'ordered_products' (i think)
