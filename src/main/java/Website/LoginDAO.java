@@ -38,7 +38,7 @@ public class LoginDAO {
                         " ADDRESS VARCHAR(128)," +
                         " PHONE_NO VARCHAR(12))";
                 s.executeUpdate(sql);
-                s1.executeUpdate("INSERT INTO CUSTOMER(FIRST_NAME,LAST_NAME,EMAIL,PASS_WORD,POSTCODE)  VALUES ('John','Doe','email1','pass1','cardno1','SW72AZ');");
+                s1.executeUpdate("INSERT INTO CUSTOMER(FIRST_NAME,LAST_NAME,EMAIL,PASS_WORD,POSTCODE) VALUES ('John','Doe','email1','pass1','cardno1','SW72AZ');");
                 s1.executeUpdate("INSERT INTO CUSTOMER(FIRST_NAME,LAST_NAME,EMAIL,PASS_WORD,POSTCODE) VALUES ('Mia','Stewart','email2','pass2','cardno2','SW65TD');");
             }
             else if(tableName.equals("shop_product")){
@@ -122,7 +122,7 @@ public class LoginDAO {
                         "    SELL_PRICE DECIMAL(10,2) NOT NULL," +
                         "    QUANTITY SMALLINT NOT NULL," +
                         "    LIMIT_OF_1 BOOLEAN NOT NULL," +
-                        "    CUSTOMER_ID INT REFERENCES LOGGED_IN_CUSTOMER (CUSTOMER_ID))";
+                        "    CUSTOMER_ID INT REFERENCES CUSTOMER (ID))";
                 s.executeUpdate(sql);
             }
             else if(tableName.equals("logged_in_customer")) { //this table is so that we can see which customer is currently logged in - there will only be at most 1 entry in this table, and will be updated when a new user logs in
@@ -155,6 +155,7 @@ public class LoginDAO {
             ps.setString(2,pass_in);
             ResultSet rs = ps.executeQuery();
             status = rs.next(); //Status is now true if an entry with the input email and password exists
+            ps.close();
             c.close();
         }catch(Exception e){System.out.println(e);}
         return status;
@@ -226,8 +227,8 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            Statement s=c.createStatement();
-            ResultSet rs=s.executeQuery("select * from logged_in_customer;");
+            Statement s = c.createStatement();
+            ResultSet rs = s.executeQuery("select * from logged_in_customer;");
             while(rs.next()){
                 u.customer_id = rs.getInt("customer_id");
                 u.fname = rs.getString("first_name");
@@ -247,7 +248,7 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            Statement s=c.createStatement();
+            Statement s = c.createStatement();
             s.executeUpdate("truncate table logged_in_customer"); //instead of updating the table it will just empty it and add a new entry
             String sql = "insert into logged_in_customer (first_name,last_name,email,pass_word,postcode,customer_id) SELECT first_name,last_name,email,pass_word,postcode,id FROM customer WHERE id=" +loggedInUser.customer_id +";";
             s.executeUpdate(sql);
@@ -262,9 +263,10 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            Statement s=c.createStatement();
-            ResultSet rs=s.executeQuery("select * from logged_in_user");
-            status=rs.next(); //Status is now true if an entry with the email and password exists (i.e. the only entry in the table)
+            Statement s = c.createStatement();
+            ResultSet rs = s.executeQuery("select * from logged_in_user");
+            status = rs.next(); //Status is now true if an entry with the email and password exists (i.e. the only entry in the table)
+            s.close();
             c.close();
         }catch(Exception e){System.out.println(e);}
         return status;
@@ -277,9 +279,9 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            PreparedStatement ps=c.prepareStatement("select * from shop_product where barcode=?");
+            PreparedStatement ps = c.prepareStatement("select * from shop_product where barcode=?");
             ps.setInt(1,n);
-            ResultSet rs=ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 p.barcode = rs.getInt("barcode");
                 p.category = rs.getString("category");
@@ -290,7 +292,6 @@ public class LoginDAO {
                 p.quantity = rs.getInt("quantity");
                 p.limited = rs.getBoolean("limited");
             }
-
             ps.close();
             c.close();
 
@@ -318,6 +319,7 @@ public class LoginDAO {
                 Statement s2 = c.createStatement();
                 String sql2 = "update customer_basket set quantity =" + quantity_in + "where name='" + p_in.name + "' and customer_id=" + cust_id + ";";
                 s2.executeUpdate(sql2);
+                s1.close();
                 s2.close();
             }
             else { //if they haven't previously added the item to the basket, it will create a new entry in the table
@@ -386,7 +388,7 @@ public class LoginDAO {
             String sql1 = "select sum(price*quantity) from customer_basket where customer_id=" +cust_id; //For some reason it won't return the existing value in the subtotal column
             Statement s1 = c.createStatement();
             ResultSet rs1 = s.executeQuery(sql1);
-            while(rs.next()){
+            while(rs1.next()){
                 total = rs.getDouble(1);
             }
             s.close();
@@ -414,6 +416,7 @@ public class LoginDAO {
 
             s.close();
             s1.close();
+            c.close();
         }catch(Exception e){System.out.println(e);}
     }
     public static CreditCard getCurrentCard(){
@@ -429,8 +432,8 @@ public class LoginDAO {
             while(rs.next()){
                 cust_id = rs.getInt("customer_id");
             }
-            PreparedStatement ps=c.prepareStatement("select * from card_details where customer_id=" + cust_id + ";");
-            ResultSet rs1=ps.executeQuery();
+            PreparedStatement ps = c.prepareStatement("select * from card_details where customer_id=" + cust_id + ";");
+            ResultSet rs1 = ps.executeQuery();
             while(rs1.next()){ // If int n = 2 (i.e. the second item in the basket), this will correspond to the 2nd entry in the basket table based on alphabetical order ('order by name asc' gives alphabetical order)
                 cc.cardNumber = rs.getString("card_no");
                 cc.cvv = rs.getString("cvv");
@@ -457,7 +460,7 @@ public class LoginDAO {
             ResultSet rs = s.executeQuery(sql);
             while(rs.next()){
                 String p = rs.getString(1); //'select count' returns a string value, not a number
-                n=Integer.parseInt(p); //so we convert that string to an integer
+                n = Integer.parseInt(p); //so we convert that string to an integer
             }
             s.close();
             c.close();
@@ -466,7 +469,7 @@ public class LoginDAO {
     }
     // To return the number of items in the basket - to be displayed on the navigation bar header
     public static int getBasketSize(){
-        int n=0;
+        int n = 0;
         try{
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
