@@ -208,8 +208,8 @@ public class LoginDAO {
                 u.email = rs.getString("email");
                 u.password = rs.getString("pass_word");
                 u.postcode = rs.getString("postcode");
-                u.address = rs.getString("address");
-                u.phoneno = rs.getString("phone_no");
+                //u.address = rs.getString("address");
+                //u.phoneno = rs.getString("phone_no");
             }
             ps.close();
             rs.close();
