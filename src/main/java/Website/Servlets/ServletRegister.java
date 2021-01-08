@@ -59,10 +59,10 @@ public class ServletRegister extends HttpServlet {
         else if (!pw.equals(vpw)){
             resp.getWriter().write("<h2> Passwords don't match, please try again.</h2>");
         }
-        else if(!emailCheck.validEmail()){
+        else if(emailCheck.validEmail() == false){
             resp.getWriter().write("<h2>Invalid Email</h2>");
         }
-        else if (emailCheck.validEmail()){
+        else if (emailCheck.validEmail() == true){
             LoginDAO.addUser(fn,ln,em,pw,cn,pc);
             User currentUser = LoginDAO.getUser(em,pw);
             LoginDAO.setLoggedInUser(currentUser);
