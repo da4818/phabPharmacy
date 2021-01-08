@@ -1,4 +1,5 @@
 package Website;
+import Website.Entities.CreditCard;
 import Website.Entities.Product;
 import Website.Entities.User;
 import java.sql.*;
@@ -414,6 +415,34 @@ public class LoginDAO {
             s.close();
             s1.close();
         }catch(Exception e){System.out.println(e);}
+    }
+    public static CreditCard getCurrentCard(){
+        CreditCard cc = new CreditCard();
+        try{
+            String dbUrl = System.getenv("JDBC_DATABASE_URL");
+            Class.forName("org.postgresql.Driver");
+            Connection c = DriverManager.getConnection(dbUrl);
+            Statement s = c.createStatement();
+            String sql = "select customer_id from logged_in_customer;";
+            ResultSet rs = s.executeQuery(sql);
+            int cust_id = Integer.parseInt(null);
+            while(rs.next()){
+                cust_id = rs.getInt("customer_id");
+            }
+            PreparedStatement ps=c.prepareStatement("select * from card_details where customer_id=" + cust_id + ";");
+            ResultSet rs1=ps.executeQuery();
+            while(rs1.next()){ // If int n = 2 (i.e. the second item in the basket), this will correspond to the 2nd entry in the basket table based on alphabetical order ('order by name asc' gives alphabetical order)
+                cc.cardNumber = rs.getString("card_no");
+                cc.cvv = rs.getString("cvv");
+                cc.sortCode = rs.getString("sort_code");
+                cc.accountNumber = rs.getString("account_no");
+            }
+            s.close();
+            ps.close();
+            c.close();
+        }catch(Exception e){System.out.println(e);}
+        return cc;
+
     }
     // Display size of table - i.e. number of entries - used as a for loop in displaying all the products in the browse page
     //Also useful when determining whether tables are empty

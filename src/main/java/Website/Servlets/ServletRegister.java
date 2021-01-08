@@ -71,7 +71,6 @@ public class ServletRegister extends HttpServlet {
             LoginDAO.setLoggedInUser(currentUser);
             LoginDAO.resetTable("customer_basket");
             resp.getWriter().write("<h2>Successful registration. Welcome, " + currentUser.fname + "</h2>");
-
             Customer c = new Customer(currentUser.fname, currentUser.lname, currentUser.postcode, currentUser.email, currentUser.address, currentUser.phoneno);
             CreditCard cc = new CreditCard(cn,cvv,sc,an,c);
             new AddCustomer(c,cc);
@@ -89,7 +88,7 @@ public class ServletRegister extends HttpServlet {
         boolean userLoggedIn = LoginDAO.checkLoggedIn();
         String displayCurrentUser = "";
         User cUser = null;
-        if (userLoggedIn == true) { //If a user is logged in, the current user and a 'log out' button will be displayed on the header (see line 144)
+        if (userLoggedIn) { //If a user is logged in, the current user and a 'log out' button will be displayed on the header (see line 144)
             cUser = LoginDAO.getCurrentUser();
             displayCurrentUser = "     <form name=\"logOut\" action=\"home\" method=\"post\">\n" +
                     "       <div style=\"float: right;\" class=\"currentUser\">" + cUser.fname + "<i class=\"fa fa-fw fa-user\"></i>\n" +
@@ -99,7 +98,7 @@ public class ServletRegister extends HttpServlet {
                     "       </div>\n" +
                     "    </form>\n";
         }
-        else if (userLoggedIn == false){ //If no user is logged in, a blank icon image will be displayed
+        else{ //If no user is logged in, a blank icon image will be displayed
             displayCurrentUser = "<div class=\"currentUser\"><i class=\"fa fa-fw fa-user\"></i></div>\n";
         }
         int basketSize = LoginDAO.getBasketSize();

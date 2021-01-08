@@ -1,4 +1,4 @@
-package Website.Functions;
+/*package Website.Functions;
 import Website.Entities.Email;
 import Website.Entities.Product;
 import com.sendgrid.*;
@@ -38,4 +38,4 @@ public class MailSender {
         }
     }
 }
-
+*/

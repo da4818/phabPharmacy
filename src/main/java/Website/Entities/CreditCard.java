@@ -7,6 +7,8 @@ public class CreditCard {
     public String accountNumber;
     public Customer customer;
 
+    public CreditCard(){
+    }
     public CreditCard(String cardNumber, String cvv, String sortCode, String accountNumber, Customer customer){
         this.cardNumber = cardNumber;
         this.cvv = cvv;
