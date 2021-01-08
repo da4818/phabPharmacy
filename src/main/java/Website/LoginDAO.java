@@ -77,7 +77,7 @@ public class LoginDAO {
                 s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Cold and Flu','Benylin','Mucus relief','16 caps',4.8,3.2,20,20,false);");
                 s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Cold and Flu','Benylin','4 flu','24 caps',6,4.9,20,20,false);");
 
-                s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,PRODUCT_NAME,,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Skincare','E45','Psoriasis cream','50ml',20,16,15,15,false);");
+                s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Skincare','E45','Psoriasis cream','50ml',20,16,15,15,false);");
                 s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Skincare','Eurax','Skin cream','100g',5.7,4.2,15,15,false);");
                 s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Skincare','Eucerin','Skin relief cream','50ml',9,7,20,20,false);");
                 s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Skincare','Eucerin','Face scrub','100ml',7.5,6,20,20,false);");
@@ -142,6 +142,7 @@ public class LoginDAO {
                         "FIRST_NAME VARCHAR(36) NOT NULL," +
                         "LAST_NAME VARCHAR(36) NOT NULL," +
                         "EMAIL VARCHAR(256) NOT NULL," +
+                        "PASS_WORD VARCHAR(256) NOT NULL, " +
                         "POSTCODE VARCHAR(8) NOT NULL," +
                         "ADDRESS VARCHAR(128)," +
                         "PHONE_NO VARCHAR(12)," +
