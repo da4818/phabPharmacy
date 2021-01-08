@@ -25,7 +25,10 @@ public class ServletBrowse extends HttpServlet {
         ArrayList<String> headerURLs = getHeaderinfo("headerURLs"); //See line 110
         int j=1;
         Product p = LoginDAO.getProduct(j);
-        while (j<42) { //Number of items in paddington store
+        for (j = 1; j < 42; j++){
+            resp.getWriter().write("<section>\n" + "<h2>Header</h2>\n" + "<p>"+p.category+" " +p.name+"</p>");
+        }
+        /*while (j<42) { //Number of items in paddington store
             for (int i = 0; i < 6; i++) {
                 resp.getWriter().write("<section>\n" +
                         "<h2 id=\"" + headerURLs.get(i) + "\">" + headers.get(i) + "</h2>\n"); //See line 110
@@ -56,7 +59,7 @@ public class ServletBrowse extends HttpServlet {
                 }
                 resp.getWriter().write("</section>");
             }
-        }
+        }*/
         resp.getWriter().write("</body>\n" + "</html>");
 
     }
