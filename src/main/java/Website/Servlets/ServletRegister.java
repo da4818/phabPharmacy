@@ -49,8 +49,8 @@ public class ServletRegister extends HttpServlet {
         String ad = req.getParameter("address");
         String pn = req.getParameter("phone_no");
         resp.getWriter().write(HTML);
-        resp.getWriter().write("<p>values:" + ad + "and " +pn+"</p>");
         EmailValidation emailCheck = new EmailValidation(em,pw,vpw);
+        resp.getWriter().write("<p>values:" + emailCheck.email + "and " +emailCheck.validEmail()+"</p>");
         if(LoginDAO.validateRegister(em)){ //Checks database to see if email exists in use database
             resp.getWriter().write("<h2> There is an existing account with the email entered. Please log in.</h2>");
         }
