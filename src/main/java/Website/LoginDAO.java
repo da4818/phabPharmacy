@@ -26,10 +26,11 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            Statement s = c.createStatement();
-            Statement s1 = c.createStatement();
+
+
 
             if(tableName.equals("customer")) {
+                Statement s = c.createStatement();
                 String sql = "CREATE TABLE CUSTOMER (" +
                         "ID SERIAL PRIMARY KEY NOT NULL," +
                         "FIRST_NAME VARCHAR(36) NOT NULL, " +
@@ -40,11 +41,15 @@ public class LoginDAO {
                         "ADDRESS VARCHAR(128), " +
                         "PHONE_NO VARCHAR(12))";
                 s.executeUpdate(sql);
+                s.close();
+                Statement s1 = c.createStatement();
                 s1.executeUpdate("INSERT INTO CUSTOMER(FIRST_NAME,LAST_NAME,EMAIL,PASS_WORD,POSTCODE) VALUES('John','Doe','email1','pass1','SW72AZ');");
                 s1.executeUpdate("INSERT INTO CUSTOMER(FIRST_NAME,LAST_NAME,EMAIL,PASS_WORD,POSTCODE) VALUES('Mia','Stewart','email2','pass2','SW65TD');");
+                s1.close();
             }
 
             else if(tableName.equals("shop_product")){
+                Statement s = c.createStatement();
                 String sql0 = "CREATE TABLE BRANCH (" +
                         "ID SERIAL PRIMARY KEY NOT NULL, " +
                         "NAME VARCHAR(36) NOT NULL );";
@@ -69,6 +74,7 @@ public class LoginDAO {
                         "BRANCH_ID INT REFERENCES BRANCH (ID))";
 
                 s.executeUpdate(sql); //"NAME" appears to be a keyword in SQL (highlighted in orange for the "insert into" command), so it won't allow me to create the table with it for some reason (works with branch table though)
+                Statement s1 = c.createStatement();
                 s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Cold and Flu','Vicks','Vaporub','100g',4.5,3.7,15,15,false);");
                 s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Cold and Flu','Vicks','First Defence','15ml',6.8,5,20,20,false);");
                 s1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Cold and Flu','Gsk','Night Nurse','160ml',8.5,7,30,30,false);");
@@ -125,9 +131,12 @@ public class LoginDAO {
                 s1.executeUpdate("SELECT CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1 FROM SHOP_PRODUCT WHERE BRANCH_ID=1;");
                 s1.executeUpdate("UPDATE SHOP_PRODUCT SET BRANCH_ID=3 WHERE BARCODE>82;");
                 s1.executeUpdate("UPDATE SHOP_PRODUCT SET SELL_PRICE=SELL_PRICE/1.3 WHERE BARCODE>82;");
+                s.close();
+                s1.close();
             }
 
             else if(tableName.equals("customer_basket")){
+                Statement s = c.createStatement();
                 String sql ="CREATE TABLE CUSTOMER_BASKET (" +
                         "BARCODE SERIAL PRIMARY KEY NOT NULL," +
                         "CATEGORY VARCHAR(36) NOT NULL," +
@@ -139,9 +148,11 @@ public class LoginDAO {
                         "LIMIT_OF_1 BOOLEAN NOT NULL," +
                         "CUSTOMER_ID INT REFERENCES CUSTOMER (ID))";
                 s.executeUpdate(sql);
+                s.close();
             }
 
             else if(tableName.equals("logged_in_customer")) { //this table is so that we can see which customer is currently logged in - there will only be at most 1 entry in this table, and will be updated when a new user logs in
+                Statement s = c.createStatement();
                 String sql ="CREATE TABLE LOGGED_IN_CUSTOMER (" +
                         "ID SERIAL PRIMARY KEY NOT NULL," +
                         "FIRST_NAME VARCHAR(36) NOT NULL," +
@@ -153,10 +164,8 @@ public class LoginDAO {
                         "PHONE_NO VARCHAR(12)," +
                         "CUSTOMER_ID INT REFERENCES CUSTOMER (ID))";
                 s.executeUpdate(sql);
+                s.close();
             }
-
-            s.close();
-            s1.close();
             c.close();
         }catch(Exception e){System.out.println(e);}
     }
