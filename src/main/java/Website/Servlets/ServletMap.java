@@ -13,7 +13,7 @@ import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 
-@WebServlet (urlPatterns = {"/map", "/map#cold_and_flu", "/map#skincare"},loadOnStartup = 0)
+@WebServlet (urlPatterns = {"/map", "/map/cold_and_flu", "/map/skincare"},loadOnStartup = 0)
 public class ServletMap extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,11 +26,11 @@ public class ServletMap extends HttpServlet {
                     "<script>\n");
         }
 
-        else if(req.getServletPath().equals("/map#cold_and_flu")){
+        else if(req.getServletPath().equals("/map/cold_and_flu")){
             resp.getWriter().write("<h3>Products in Cold and Flu</h3>\n" +
                     "<img class=\"images\" src=\"https://bit.ly/cold_flu_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
         }
-        else if(req.getServletPath().equals("/map#skincare")){
+        else if(req.getServletPath().equals("/map/skincare")){
             resp.getWriter().write("<h3>Products in Skincare</h3>\n" +
                     "<img class=\"images\" src=\"https://bit.ly/skincare_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
         }
@@ -315,8 +315,8 @@ public class ServletMap extends HttpServlet {
                 "          <button class=\"buttonStyle\" style=\"dropbtn; width: 222px;\">Categories</button>\n" +
                 "          <div class=\"dropdown-content\">\n" +
                 "            <form id=\"findCategory\" action=\"map\" method=\"post\">\n" +
-                "            <a id=\"cf\" href=\"https://phabpharmacy.herokuapp.com/map#cold_and_flu\"> Cold and Flu</a>\n" +
-                "            <a id=\"s\" href=\"https://phabpharmacy.herokuapp.com/map#skincare\"> Skincare</a>\n" +
+                "            <a id=\"cf\" href=\"https://phabpharmacy.herokuapp.com/map/cold_and_flu\"> Cold and Flu</a>\n" +
+                "            <a id=\"s\" href=\"https://phabpharmacy.herokuapp.com/map/skincare\"> Skincare</a>\n" +
                 "            <a id=\"hpr\" href=\"https://phabpharmacy.herokuapp.com/map#headaches_and_pain_relief\">Headaches and Pain Relief</a>\n" +
                 "            <a id=\"d\" href=\"https://phabpharmacy.herokuapp.com/map#digestion\">Digestion</a>\n" +
                 "            <a id=\"a\" href=\"https://phabpharmacy.herokuapp.com/map#allergy\">Allergy</a>\n" +
