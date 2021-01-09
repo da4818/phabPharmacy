@@ -162,7 +162,7 @@ public class ServletLogin extends HttpServlet {
                 "            text-decoration: none;\n" +
                 "        }\n" +
                 "        .logOut{\n" +
-                "            position: absolute:\n" +
+                "            position: absolute;\n" +
                 "            height: 10px;\n" +
                 "            bottom: 0px;\n" +
                 "            margin: 0px;\n" +

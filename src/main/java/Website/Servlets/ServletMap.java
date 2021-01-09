@@ -227,7 +227,7 @@ public class ServletMap extends HttpServlet {
                 "        .dropdown:hover .dropdown-content {\n" +
                 "            display: block;\n" +
                 "        }\n" +
-                "        .currentUser{ \n" +
+                "        .currentUser{\n" +
                 "            position: relative;\n" +
                 "            float: right;\n" +
                 "            font-size: 16px;\n" +
