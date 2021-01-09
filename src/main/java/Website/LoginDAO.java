@@ -644,9 +644,15 @@ public class LoginDAO {
         try{
             Class.forName("org.postgresql.Driver");
             c = DriverManager.getConnection(dbUrl);
-            String sql = "select sum(quantity) from ordered_product";//although similar to 'tableSize()', this counts the number of items, not just the number of different products
-            s = c.createStatement(); //i.e. x3 vicks and x2 dettol is 5 items comprised of 2 different products - the basket displays 5
+            String sql = "select customer_id from logged_in_customer;";
             rs = s.executeQuery(sql);
+            int cust_id = 0;
+            while(rs.next()){
+                cust_id = rs.getInt("customer_id");
+            }
+            String sql1 = "select sum(quantity) from ordered_product where customer_id=" + cust_id;//although similar to 'tableSize()', this counts the number of items, not just the number of different products
+            s = c.createStatement(); //i.e. x3 vicks and x2 dettol is 5 items comprised of 2 different products - the basket displays 5
+            rs = s.executeQuery(sql1);
             while(rs.next()){
                 String p = rs.getString(1);
                 n=Integer.parseInt(p);

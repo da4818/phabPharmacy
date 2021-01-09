@@ -155,11 +155,11 @@ public class ServletMap extends HttpServlet {
         if (userLoggedIn) {
             User cUser = LoginDAO.getCurrentUser();
             displayCurrentUser = "     <form name=\"logOut\" action=\"home\" method=\"post\">\n" +
-                    "       <div style=\"float: right;\" class=\"currentUser\">" + cUser.fname + "<i class=\"fa fa-fw fa-user\"></i>\n" +
-                    "           <div class=\"logOut\">\n" +
-                    "               <input class=\"logOutButton\" type=\"submit\" name=\"logOut\" value=\"Log Out\">\n" +
-                    "           </div>\n" +
-                    "       </div>\n" +
+                    "       <div style=\"float: right;\" class=\"currentUser\">" + cUser.fname +"<i class=\"fa fa-fw fa-user\"></i>\n" +
+                    "        <div class=\"logOut\">\n" +
+                    "          <input class=\"logOutButton\" type=\"submit\" value=\"Log Out\">\n" +
+                    "        </div>\n" +
+                    "      </div>\n" +
                     "    </form>\n";
         }
         int basketSize = LoginDAO.getBasketSize();
@@ -232,33 +232,33 @@ public class ServletMap extends HttpServlet {
                 "        .dropdown:hover .dropdown-content {\n" +
                 "            display: block;\n" +
                 "        }\n" +
-                "        .currentUser{ \n" +
-                "            position: relative;\n" +
-                "            float: right;\n" +
-                "            font-size: 16px;\n" +
-                "            color: white;\n" +
-                "            text-align: center;\n" +
-                "            padding: 14px 16px 4px 16px;\n" +
-                "            text-decoration: none;\n" +
-                "        }\n" +
-                "        .logOut{\n" +
-                "            position: absolute;\n" +
-                "            height: 10px;\n" +
-                "            bottom: 0px;\n" +
-                "            margin: 0px;\n" +
-                "            border: none;\n" +
-                "            background-color: transparent;\n" +
-                "            border: none;\n" +
-                "            font-size: 8px;\n" +
-                "            color: white;\n" +
-                "        }\n" +
-                "        .logOutButton{\n" +
-                "            background-color: transparent;\n" +
-                "            font-size: 8px;\n" +
-                "            color: white;\n" +
-                "            margin: 0px;\n" +
-                "            border: none;\n" +
-                "        } \n" +
+                "       .currentUser {\n" +
+                "           position: relative;\n" +
+                "           float: right;\n" +
+                "           font-size: 16px;\n" +
+                "           color: white;\n" +
+                "           text-align: center;\n" +
+                "           padding: 14px 14px 4px 16px;\n" +
+                "           text-decoration: none;\n" +
+                "       }\n" +
+                "       .logOut {\n" +
+                "           height: 10px;\n" +
+                "           bottom: 0px;\n" +
+                "           margin: 0px;\n" +
+                "           border: none;\n" +
+                "           background-color: transparent;\n" +
+                "           border: none;\n" +
+                "           font-size: 8px;\n" +
+                "           color: white;\n" +
+                "       }\n" +
+                "       .logOutButton {\n" +
+                "           background-color: transparent;\n" +
+                "           font-size: 8px;\n" +
+                "           width: 10;\n" +
+                "           color: white;\n" +
+                "           margin: 0px;\n" +
+                "           border: none;\n" +
+                "       }\n" +
                 "      .section{\n" +
                 "        display: table-row;\n" +
                 "      }\n" +
