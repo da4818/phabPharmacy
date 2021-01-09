@@ -47,15 +47,15 @@ public class LoginDAO {
                         "FIRST_NAME VARCHAR(36) NOT NULL, " +
                         "LAST_NAME VARCHAR(36) NOT NULL, " +
                         "EMAIL VARCHAR(256) NOT NULL, " +
-                        "PASS_WORD VARCHAR(256) NOT NULL, " +
+                        "PASSWORD VARCHAR(256) NOT NULL, " +
                         "POSTCODE VARCHAR(8) NOT NULL, " +
                         "ADDRESS VARCHAR(128), " +
                         "PHONE_NO VARCHAR(12))";
                 sCustomer.executeUpdate(sqlCustomer);
 
                 sCustomer1 = c.createStatement();
-                sCustomer1.executeUpdate("INSERT INTO CUSTOMER(FIRST_NAME,LAST_NAME,EMAIL,PASS_WORD,POSTCODE) VALUES('John','Doe','email1','pass1','SW72AZ');");
-                sCustomer1.executeUpdate("INSERT INTO CUSTOMER(FIRST_NAME,LAST_NAME,EMAIL,PASS_WORD,POSTCODE) VALUES('Mia','Stewart','email2','pass2','SW65TD');");
+                sCustomer1.executeUpdate("INSERT INTO CUSTOMER(FIRST_NAME,LAST_NAME,EMAIL,PASSWORD,POSTCODE) VALUES('CW','Yip','cwy@gmail.com','password1','SW7 2AZ');");
+                sCustomer1.executeUpdate("INSERT INTO CUSTOMER(FIRST_NAME,LAST_NAME,EMAIL,PASSWORD,POSTCODE) VALUES('John','Smith','js@hotmail.com','qwerty','TW6 1AP');");
             }
 
             else if(tableName.equals("shop_product")){
@@ -72,7 +72,7 @@ public class LoginDAO {
                         "BARCODE SERIAL PRIMARY KEY NOT NULL, " +
                         "CATEGORY VARCHAR(36) NOT NULL, " +
                         "BRAND VARCHAR(36) NOT NULL, " +
-                        "PRODUCT_NAME VARCHAR(36) NOT NULL, " +
+                        "NAME VARCHAR(36) NOT NULL, " +
                         "AMOUNT VARCHAR(36) NOT NULL, " +
                         "SELL_PRICE DECIMAL(10,2) NOT NULL, " +
                         "BUY_PRICE DECIMAL(10,2) NOT NULL, " +
@@ -85,7 +85,7 @@ public class LoginDAO {
 
                 sProduct.executeUpdate(sqlProduct); //"name" appears to be a keyword in SQL (highlighted in orange for the "insert into" command), so it won't allow me to create the table with it for some reason (works with branch table though)
                 sProduct1 = c.createStatement();
-                sProduct1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Cold and Flu','Vicks','Vaporub','100g',4.5,3.7,15,15,false)," +
+                sProduct1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Cold and Flu','Vicks','Vaporub','100g',4.5,3.7,15,15,false)," +
                         "('Cold and Flu','Vicks','First Defence','15ml',6.8,5,20,20,false)," +
                         "('Cold and Flu','Gsk','Night Nurse','160ml',8.5,7,30,30,false)," +
                         "('Cold and Flu','Gsk','Night Nurse','160ml',9,7.5,30,30,false)," +
@@ -96,7 +96,7 @@ public class LoginDAO {
                         "('Cold and Flu','Benylin','Mucus relief','16 caps',4.8,3.2,20,20,false)," +
                         "('Cold and Flu','Benylin','4 flu','24 caps',6,4.9,20,20,false);");
                 
-                sProduct1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Skincare','E45','Psoriasis cream','50ml',20,16,15,15,false)," +
+                sProduct1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Skincare','E45','Psoriasis cream','50ml',20,16,15,15,false)," +
                         "('Skincare','Eurax','Skin cream','100g',5.7,4.2,15,15,false)," +
                         "('Skincare','Eucerin','Skin relief cream','50ml',9,7,20,20,false)," +
                         "('Skincare','Eucerin','Face scrub','100ml',7.5,6,20,20,false)," +
@@ -106,7 +106,7 @@ public class LoginDAO {
                         "('Skincare','Cetaphil','Moisturising cream','50ml',10,7.6,20,20,false)," +
                         "('Skincare','Cetaphil','Exfoliating cleanser','180ml',12,10.1,20,20,false);");
                 
-                sProduct1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Headaches and Pain Relief','Nurofen','Meltlets','16 caps',4,3.7,40,40,false)," +
+                sProduct1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Headaches and Pain Relief','Nurofen','Meltlets','16 caps',4,3.7,40,40,false)," +
                         "('Headaches and Pain Relief','Nurofen','Express','16 caps',4,3.5,30,30,false)," +
                         "('Headaches and Pain Relief','Nurofen','Max strength','32 caps',7,6.2,25,25,false)," +
                         "('Headaches and Pain Relief','Nurofen','Standard','16 caps',4,3.2,30,30,false)," +
@@ -117,24 +117,24 @@ public class LoginDAO {
                         "('Headaches and Pain Relief','Anadin','Original','16 caps',1.8,1.5,30,30,true)," +
                         "('Headaches and Pain Relief','Disprin','Soluble','32 tablets',3.6,2.8,20,20,true);");
                 
-                sProduct1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Digestion','Dioralyte','Blackcurrant','12 sachets',8,7.3,20,20,false)," +
+                sProduct1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Digestion','Dioralyte','Blackcurrant','12 sachets',8,7.3,20,20,false)," +
                         "('Digestion','Dioralyte','Lemon','12 sachets',8,7.3,20,20,false)," +
                         "('Digestion','Gaviscon','Chewable','24 tablets',4.2,3.5,25,25,false)," +
                         "('Digestion','Senokot','Max','10 tablets',3,2.7,10,10,false)," +
                         "('Digestion','Gaviscon','Advance','300ml',10,8.1,10,10,false);");
-                sProduct1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Allergy','Benadryl','Relief','24 caps',9,7.1,20,20,false)," +
+                sProduct1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Allergy','Benadryl','Relief','24 caps',9,7.1,20,20,false)," +
                         "('Allergy','Piriteze','tabs','7 tablets',3,2.3,20,20,false)," +
                         "('Allergy','Beconase','Relief','100 sprays',6,4,20,20,false);");
                 
-                sProduct1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('First Aid','Dettol','Antiseptic','500ml',3.2,3,20,20,false)," +
+                sProduct1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('First Aid','Dettol','Antiseptic','500ml',3.2,3,20,20,false)," +
                         "('First Aid','Dettol','Hand sanitizer','500ml',7,6.3,50,50,false)," +
                         "('First Aid','Elastoplast','plasters','20 plasters',3,2,30,30,false)," +
                         "('First Aid','TCP','Liquid','200ml',4,3.2,20,20,false);");
                 sProduct1.executeUpdate("UPDATE SHOP_PRODUCT SET BRANCH_ID = 1;");
-                sProduct1.executeUpdate("INSERT INTO SHOP_PRODUCT (CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) SELECT CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1 FROM SHOP_PRODUCT WHERE BRANCH_ID=1;");
+                sProduct1.executeUpdate("INSERT INTO SHOP_PRODUCT (CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) SELECT CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1 FROM SHOP_PRODUCT WHERE BRANCH_ID=1;");
                 sProduct1.executeUpdate("UPDATE SHOP_PRODUCT SET BRANCH_ID=2 WHERE BARCODE>41;");
                 sProduct1.executeUpdate("UPDATE SHOP_PRODUCT SET SELL_PRICE=SELL_PRICE*2 WHERE BARCODE>41;");
-                sProduct1.executeUpdate("INSERT INTO SHOP_PRODUCT (CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) SELECT CATEGORY,BRAND,PRODUCT_NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1 FROM SHOP_PRODUCT WHERE BRANCH_ID=1;");
+                sProduct1.executeUpdate("INSERT INTO SHOP_PRODUCT (CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) SELECT CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1 FROM SHOP_PRODUCT WHERE BRANCH_ID=1;");
                 sProduct1.executeUpdate("UPDATE SHOP_PRODUCT SET BRANCH_ID=3 WHERE BARCODE>82;");
                 sProduct1.executeUpdate("UPDATE SHOP_PRODUCT SET SELL_PRICE=SELL_PRICE/1.3 WHERE BARCODE>82;");
             }
@@ -161,7 +161,7 @@ public class LoginDAO {
                         "FIRST_NAME VARCHAR(36) NOT NULL," +
                         "LAST_NAME VARCHAR(36) NOT NULL," +
                         "EMAIL VARCHAR(256) NOT NULL," +
-                        "PASS_WORD VARCHAR(256) NOT NULL, " +
+                        "PASSWORD VARCHAR(256) NOT NULL, " +
                         "POSTCODE VARCHAR(8) NOT NULL," +
                         "ADDRESS VARCHAR(128)," +
                         "PHONE_NO VARCHAR(12)," +
@@ -202,7 +202,7 @@ public class LoginDAO {
         try{
             Class.forName("org.postgresql.Driver");
             c = DriverManager.getConnection(dbUrl);
-            ps = c.prepareStatement("select * from customer where email=? and pass_word=?;");
+            ps = c.prepareStatement("select * from customer where email=? and password=?;");
             ps.setString(1,email_in);
             ps.setString(2,pass_in);
             rs = ps.executeQuery();
@@ -247,7 +247,7 @@ public class LoginDAO {
         try{
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            PreparedStatement ps = c.prepareStatement("select * from customer where email=? and pass_word=?;");
+            PreparedStatement ps = c.prepareStatement("select * from customer where email=? and password=?;");
             ps.setString(1,email_in);
             ps.setString(2,pass_in);
             ResultSet rs = ps.executeQuery();
@@ -256,7 +256,7 @@ public class LoginDAO {
                 u.fname = rs.getString("first_name");
                 u.lname = rs.getString("last_name");
                 u.email = rs.getString("email");
-                u.password = rs.getString("pass_word");
+                u.password = rs.getString("password");
                 u.postcode = rs.getString("postcode");
                 u.address = rs.getString("address");
                 u.phoneno = rs.getString("phone_no");
@@ -277,7 +277,7 @@ public class LoginDAO {
         try{
             Class.forName("org.postgresql.Driver");
             c = DriverManager.getConnection(dbUrl);
-            ps = c.prepareStatement("insert into customer(first_name,last_name,email,pass_word,postcode,address,phone_no) values(?,?,?,?,?,?,?);");
+            ps = c.prepareStatement("insert into customer(first_name,last_name,email,password,postcode,address,phone_no) values(?,?,?,?,?,?,?);");
             ps.setString(1,fname_in);
             ps.setString(2,lname_in);
             ps.setString(3,email_in);
@@ -329,7 +329,7 @@ public class LoginDAO {
             Connection c = DriverManager.getConnection(dbUrl);
             Statement s  = c.createStatement();
             s.executeUpdate("truncate table logged_in_customer;"); //instead of updating the table it will just empty it and add a new entry
-            //String sql = "insert into logged_in_customer(first_name,last_name,email,pass_word,postcode,customer_id) SELECT first_name,last_name,email,pass_word,postcode,id FROM customer WHERE id=" +loggedInUser.customer_id +";";
+            //String sql = "insert into logged_in_customer(first_name,last_name,email,password,postcode,customer_id) SELECT first_name,last_name,email,password,postcode,id FROM customer WHERE id=" +loggedInUser.customer_id +";";
             PreparedStatement ps = c.prepareStatement("insert into logged_in_customer(first_name,last_name,email,postcode,customer_id) VALUES (?,?,?,?,?);");
             ps.setString(1,loggedInUser.fname);
             ps.setString(2,loggedInUser.lname);
@@ -380,7 +380,7 @@ public class LoginDAO {
                 p.barcode = rs.getInt("barcode");
                 p.category = rs.getString("category");
                 p.brand = rs.getString("brand");
-                p.name = rs.getString("product_name");
+                p.name = rs.getString("name");
                 p.amount = rs.getString("amount");
                 p.price = rs.getDouble("sell_price");
                 p.quantity = rs.getInt("quantity");
