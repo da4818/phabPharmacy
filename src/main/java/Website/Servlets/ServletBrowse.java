@@ -51,7 +51,6 @@ public class ServletBrowse extends HttpServlet {
                     p = LoginDAO.getProduct(j);
                 }
                 resp.getWriter().write("</section>");
-        }
 
         /*while (j<42) { //Number of items in paddington store *41*
             for (int i = 0; i < 6; i++) {
