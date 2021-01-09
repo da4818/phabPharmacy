@@ -52,18 +52,19 @@ public class LoginDAO {
                         " LIMITED BOOLEAN NOT NULL)"; //*I think boolean may be easier to manage than SMALLINT
                 //*add other columns (buy_price,soft/hard min)
                 s.executeUpdate(sql);
-                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Vicks Vaporub','100g',4.50,15,'Cold and Flu',false);");
-                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Vicks First Defence','15ml',6.80,20,'Cold and Flu',false);");
-                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Gsk Night Nurse','160ml',8.50,30,'Cold and Flu',false);");
-                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Gsk Night Nurse','160ml',9.00,30,'Cold and Flu',false);");
-                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Lemsip Max','16 caps',4.20,25,'Cold and Flu',false);");
-                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Lemsip Standard','10 sachets',4.50,25,'Cold and Flu',false);");
-                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Sudafed Day & Night','16 caps',4.20,30,'Cold and Flu',true);");
-                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Sudafed Max','16 caps',4.80,30,'Cold and Flu',true);");
-                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Benylin Mucus Relief','16 caps',4.80,20,'Cold and Flu',false);");
-                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Benylin 4 Flu','24 caps',6.00,20,'Cold and Flu',false);");
-                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('E45 Psoriasis Cream','50ml',20.00,15,'Skincare',false);");
-                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Eurax Skin Cream','100g',5.70,15,'Skincare',false);");
+                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Vicks Vaporub','100g',4.50,15,'Cold and Flu',false)," +
+                        "('Vicks First Defence','15ml',6.80,20,'Cold and Flu',false)," +
+                        "('Gsk Night Nurse','160ml',8.50,30,'Cold and Flu',false)," +
+                        "('Gsk Night Nurse','160ml',9.00,30,'Cold and Flu',false)," +
+                        "('Lemsip Max','16 caps',4.20,25,'Cold and Flu',false)," +
+                        "('Lemsip Standard','10 sachets',4.50,25,'Cold and Flu',false)," +
+                        "('Sudafed Day & Night','16 caps',4.20,30,'Cold and Flu',true)," +
+                        "('Sudafed Max','16 caps',4.80,30,'Cold and Flu',true)," +
+                        "('Benylin Mucus Relief','16 caps',4.80,20,'Cold and Flu',false)," +
+                        "('Benylin 4 Flu','24 caps',6.00,20,'Cold and Flu',false);");
+
+                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('E45 Psoriasis Cream','50ml',20.00,15,'Skincare',false)," +
+                        "('Eurax Skin Cream','100g',5.70,15,'Skincare',false);");
                 s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Nurofen Meltlets','16 caps',4.00,40,'Headaches and Pain Relief',false);");
                 s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Dioralyte Blackcurrant','12 sachets',8.00,20,'Digestion',false);");
                 s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Benadryl Relief','24 caps',9.00,20,'Allergy',false);");
@@ -71,13 +72,13 @@ public class LoginDAO {
             }
             else if(tableName.equals("basket")){
                 String sql ="CREATE TABLE BASKET " +
-                        "(ID INT NOT NULL," +
+                        "(ID SERIAL PRIMARY KEY NOT NULL," +
                         " NAME VARCHAR(36) NOT NULL, " +
                         " DESCRIPTION VARCHAR(36) NOT NULL, " +
                         " PRICE DECIMAL(10,2) PRECISION NOT NULL, " + //* rename to 'sell_price'
                         " QUANTITY SMALLINT NOT NULL, " +
                         " LIMITED BOOLEAN NOT NULL, " +
-                        " CUSTOMER_ID INT NOT NULL)";
+                        " CUSTOMER_ID SMALLINT NOT NULL)";
                 s.executeUpdate(sql);
             }
             else if(tableName.equals("orders")){ //*this orders table may be redundant as the values are the same as the basket
