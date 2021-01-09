@@ -69,16 +69,16 @@ public class LoginDAO {
                 s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Benadryl Relief','24 caps',9.00,20,'Allergy',false);");
                 s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Dettol Antiseptic','500ml',3.20,20,'First Aid',false);");
             }
-            else if(tableName.equals("basket")){ //*rename to 'ordered_products' (i think)
+            else if(tableName.equals("basket")){
                 String sql ="CREATE TABLE BASKET " +
                         "(ID INT NOT NULL," +
                         " NAME VARCHAR(36) NOT NULL, " +
                         " DESCRIPTION VARCHAR(36) NOT NULL, " +
                         " PRICE DECIMAL(10,2) PRECISION NOT NULL, " + //* rename to 'sell_price'
                         " QUANTITY SMALLINT NOT NULL, " +
-                        " SUBTOTAL DECIMAL(10,2) NOT NULL, " +
-                        " LIMITED BOOLEAN NOT NULL)";
-                s.executeUpdate(sql); //*we may need to add the customer's name to this table so that we can manage multiple baskets at once
+                        " LIMITED BOOLEAN NOT NULL, " +
+                        " CUSTOMER_ID INT NOT NULL)";
+                s.executeUpdate(sql);
             }
             else if(tableName.equals("orders")){ //*this orders table may be redundant as the values are the same as the basket
                 String sql ="CREATE TABLE ORDERS " +
@@ -306,14 +306,13 @@ public class LoginDAO {
                 s1.close();
             }
             else { //if they haven't previously added the item to the basket, it will create a new entry in the table
-                PreparedStatement ps = c.prepareStatement("insert into basket (id,name,description,price,quantity,subtotal,limited) values(?,?,?,?,?,?,?)");
+                PreparedStatement ps = c.prepareStatement("insert into basket (id,name,description,price,quantity,limited) values(?,?,?,?,?,?)");
                 ps.setInt(1,p_in.id);
                 ps.setString(2, p_in.name);
                 ps.setString(3, p_in.description);
                 ps.setDouble(4, p_in.price);
                 ps.setInt(5, quantity_in); //Quantity added to basket rather than full stock quantity
-                ps.setDouble(6, p_in.price * quantity_in);
-                ps.setBoolean(7, p_in.limited);
+                ps.setBoolean(6, p_in.limited);
                 ps.executeUpdate();
                 ps.close();
             }

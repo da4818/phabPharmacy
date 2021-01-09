@@ -19,6 +19,7 @@ public class ServletBrowse extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
+        LoginDAO.createTable("basket");
         String HTML= htmlOutput();
         resp.getWriter().write(HTML);
                 ArrayList<String> headers = getHeaderinfo("headers"); //See line 110
