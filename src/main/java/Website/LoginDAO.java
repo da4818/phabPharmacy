@@ -415,16 +415,16 @@ public class LoginDAO {
                 cust_id = rs.getInt("customer_id");
             }
 
-            String sql1 = "select * from ordered_product where name='" + p_in.name + "' and customer_id=;" + cust_id + ";"; //we check if the user has previously added the item to the basket before
+            String sql1 = "select * from ordered_product where name='" + p_in.name + "' and customer_id=;" + cust_id + ";"; //We check if the user has previously added the item to the basket before
             s1 = c.createStatement();
             rs1 = s1.executeQuery(sql1);
-            if(rs1.next()){ //if they have, we will update the quantity to the most recent value they have chosen (it won't add the amount e.g. if they click x1 and then x3 it updates to x3, not x4 - this is for simplicity)
+            if(rs1.next()){ //If they have, we will update the quantity to the most recent value they have chosen (it won't add the amount on e.g. if they click x1 and then x3 it updates to x3, not x4 - this is for simplicity)
                 Statement s2 = c.createStatement();
                 String sql2 = "update ordered_product set quantity =" + quantity_in + "where name='" + p_in.name + "' and customer_id=" + cust_id + ";";
                 s2.executeUpdate(sql2);
             }
-            else { //if they haven't previously added the item to the basket, it will create a new entry in the table
-                ps = c.prepareStatement("insert into ordered_product (barcode,category,brand,name,amount,sell_price,quantity,limit_of_1,customer_id) values(?,?,?,?,?,?,?,?,?)");
+            else { //If they haven't previously added the item to the basket, it will create a new entry in the table
+                ps = c.prepareStatement("insert into ordered_product (barcode,category,brand,name,amount,sell_price,quantity,limit_of_1,customer_id) values(?,?,?,?,?,?,?,?,?);");
                 ps.setInt(1,p_in.barcode);
                 ps.setString(2, p_in.category);
                 ps.setString(3, p_in.brand);
