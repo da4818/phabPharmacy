@@ -28,12 +28,12 @@ public class ServletOrder extends HttpServlet {
         Double totalBasket = LoginDAO.getBasketTotal(); //total cost of the basket
         String total = df.format(totalBasket);
         User u = LoginDAO.getCurrentUser();
-        CreditCard cc = LoginDAO.getCardInfo();
+        //CreditCard cc = LoginDAO.getCardInfo();
         resp.getWriter().write("<div class=\"addressContainer\">\n" +
                 "  <p style=\"display: inline-block; margin-bottom: 0px;\"><b>Shipping Address</b></p>\n" +
                 "  <p>" + u.fname + " " + u.lname + "<br>" + u.postcode + "</p>\n" +
                 "  <p><b>Payment Details</b></p>\n" +
-                "  <p>" + cc.getCensoredCardNumber() + " " + cc.sortCode + "<br>" + cc.accountNumber + "<br>" + cc.cvv + "</p>\n" +
+                //"  <p>" + cc.getCensoredCardNumber() + " " + cc.sortCode + "<br>" + cc.accountNumber + "<br>" + cc.cvv + "</p>\n" +
                 "  <button onclick=\"window.location.href='https://phabpharmacy.herokuapp.com/amend_details';\"class=\"buttonStyle\">Edit Details</button>\n" +
                 "  <div class=\"confirmContainer\">\n" +
                 "  <p>Total Cost: <b>£" + total +"</b></p>\n" +
