@@ -13,7 +13,7 @@ import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 
-@WebServlet (urlPatterns = {"/map", "/map/cold_and_flu", "/map/skincare"},loadOnStartup = 0)
+@WebServlet (urlPatterns = {"/map", "/map/cold_and_flu", "/map/skincare","/map/headaches_and_pain_relief","/map/digestion","/map/allergy","/map/first_aid"},loadOnStartup = 0)
 public class ServletMap extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -34,19 +34,19 @@ public class ServletMap extends HttpServlet {
             resp.getWriter().write("<h3>Products in Skincare</h3>\n" +
                     "<img class=\"images\" src=\"https://bit.ly/skincare_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
         }
-        else if(req.getServletPath().equals("/map#headaches_and_pain_relief")){
+        else if(req.getServletPath().equals("/map/headaches_and_pain_relief")){
             resp.getWriter().write("<h3>Products in Headaches and Pain Relief</h3>\n" +
                     "<img class=\"images\" src=\"https://bit.ly/headache_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
         }
-        else if(req.getServletPath().equals("/map#digestion")){
+        else if(req.getServletPath().equals("/map/digestion")){
             resp.getWriter().write("<h3>Products in Digestion</h3>\n" +
                     "<img class=\"images\" src=\"https://bit.ly/digestion_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
         }
-        else if(req.getServletPath().equals("/map#allergy")){
+        else if(req.getServletPath().equals("/map/allergy")){
             resp.getWriter().write("<h3>Products in Allergy</h3>\n" +
                     "<img class=\"images\" src=\"https://bit.ly/allergy_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
         }
-        else if(req.getServletPath().equals("/map#first_aid")){
+        else if(req.getServletPath().equals("/map/first_aid")){
             resp.getWriter().write("<h3>Products in First Aid</h3>\n" +
                     "<img class=\"images\" src=\"https://bit.ly/allergy_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
         }
