@@ -44,11 +44,11 @@ public class LoginDAO {
             else if(tableName.equals("products")){ //*rename to 'shop_products'
                 String sql ="CREATE TABLE PRODUCTS " +
                         "(ID SERIAL PRIMARY KEY NOT NULL," +
-                        " NAME TEXT NOT NULL, " + // *separate into 'brand' and 'name'
-                        " DESCRIPTION TEXT NOT NULL, " + //*rename to 'amount'
-                        " PRICE DOUBLE PRECISION NOT NULL, " +
-                        " QUANTITY INTEGER NOT NULL, " +
-                        " CATEGORY TEXT NOT NULL, " +
+                        " NAME VARCHAR(36) NOT NULL, " + // *separate into 'brand' and 'name'
+                        " DESCRIPTION VARCHAR(36) NOT NULL, " + //*rename to 'amount'
+                        " PRICE DECIMAL(10,2) NOT NULL, " +
+                        " QUANTITY SMALLINT NOT NULL, " +
+                        " CATEGORY VARCHAR(36) NOT NULL, " +
                         " LIMITED BOOLEAN NOT NULL)"; //*I think boolean may be easier to manage than SMALLINT
                 //*add other columns (buy_price,soft/hard min)
                 s.executeUpdate(sql);
@@ -72,11 +72,11 @@ public class LoginDAO {
             else if(tableName.equals("basket")){ //*rename to 'ordered_products' (i think)
                 String sql ="CREATE TABLE BASKET " +
                         "(ID INT NOT NULL," +
-                        " NAME TEXT NOT NULL, " +
-                        " DESCRIPTION TEXT NOT NULL, " +
-                        " PRICE DOUBLE PRECISION NOT NULL, " + //* rename to 'sell_price'
-                        " QUANTITY INTEGER NOT NULL, " +
-                        " SUBTOTAL TEXT NOT NULL, " +
+                        " NAME VARCHAR(36) NOT NULL, " +
+                        " DESCRIPTION VARCHAR(36) NOT NULL, " +
+                        " PRICE DECIMAL(10,2) PRECISION NOT NULL, " + //* rename to 'sell_price'
+                        " QUANTITY SMALLINT NOT NULL, " +
+                        " SUBTOTAL DECIMAL(10,2) NOT NULL, " +
                         " LIMITED BOOLEAN NOT NULL)";
                 s.executeUpdate(sql); //*we may need to add the customer's name to this table so that we can manage multiple baskets at once
             }
@@ -107,12 +107,13 @@ public class LoginDAO {
             else if(tableName.equals("card_details")) { //this table is so that we can see which customer is currently logged in - there will only be at most 1 entry in this table, and will be updated when a new user logs in
                 String sql ="CREATE TABLE CARD_DETAILS " +
                         "(ID SERIAL PRIMARY KEY NOT NULL," +
-                        " CARD_NO TEXT NOT NULL, " +
-                        " CVV TEXT NOT NULL, " +
-                        " SORT_CODE TEXT NOT NULL, " +
-                        " ACCOUNT_NO TEXT NOT NULL, " +
+                        " CARD_NO VARCHAR(16) NOT NULL, " +
+                        " CVV VARCHAR(3) NOT NULL, " +
+                        " SORT_CODE VARCHAR(6) NOT NULL, " +
+                        " ACCOUNT_NO VARCHAR(8) NOT NULL, " +
                         " CUSTOMER_ID INT NOT NULL)";
                 s.executeUpdate(sql);
+                s1.executeUpdate("INSERT INTO CARD_DETAILS (CARD_NO,CVV,SORTCODE,ACCOUNT_NO,CUSTOMER_ID) VALUES ('1111222233334444','435','401020','12345678',1);");
             }
             s.close();
             s1.close();
@@ -128,7 +129,7 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            PreparedStatement ps=c.prepareStatement("select * from users where email=? and passw=?");
+            PreparedStatement ps=c.prepareStatement("select * from users where email=? and pass_word=?");
             ps.setString(1,email_in);
             ps.setString(2,pass_in);
             ResultSet rs = ps.executeQuery();
