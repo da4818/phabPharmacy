@@ -23,10 +23,9 @@ public class ServletBrowse extends HttpServlet {
         ArrayList<String> headers = getHeaderinfo("headers"); //See line 110
         ArrayList<String> headerURLs = getHeaderinfo("headerURLs"); //See line 110
 
-        resp.getWriter().write("<section>\n" + "<h2 id=\"" + headerURLs.get(0) + "\">" + headers.get(0) + "</h2>\n"); //See line 110
+        resp.getWriter().write("<section>\n" + "<h2 id=\"" + headerURLs.get(1) + "\">" + headers.get(1) + "</h2>\n"); //See line 110
         DecimalFormat df = new DecimalFormat("0.00");
-        for (int j=1;j<11;j++) {
-            Product p = LoginDAO.getProduct(1);
+            Product p = LoginDAO.getProduct(11);
             String price = df.format(p.price); //This allows us to output the number in the format of money (2dp)
             int max = p.limited ? 1 : 5; //Some products are limited to 1 per customer - if this is the case (i.e. limited is TRUE), max will be set to 1. if limited is FALSE, max is set to 5 (an arbitrary maximum)
             resp.getWriter().write("<div class=\"relative\">\n");
@@ -40,13 +39,12 @@ public class ServletBrowse extends HttpServlet {
                     "<div class=\"absolute\">\n" +
                     "<form action=\"browse\" method=\"post\">\n" +
                     "<input name=\"basketQuantity\" type=\"number\" size=\"5\" min=\"1\" max=\"" + max + "\">\n" +
-                    "<input name=\"buttonNumber\" type=\"hidden\"value=\"" + j + "\">\n" +
+                    "<input name=\"buttonNumber\" type=\"hidden\"value=\"" + 11 + "\">\n" +
                     "<input type=\"hidden\" name=\"logOut\" value=\"false\">\n" +
                     "<input type=\"submit\" class=\"buttonStyle\" value=\"Add to Basket\">\n" +
                     "</form>\n" +
                     "</div>\n" +
                     "</div>");
-        }
         resp.getWriter().write("</section>");
 
         /*while (j<42) { //Number of items in paddington store *41*
