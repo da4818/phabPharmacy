@@ -397,17 +397,14 @@ public class LoginDAO {
 
     // Adds product to a basket table
     public static void addToBasket(Product p_in, int quantity_in){
-        Connection c = null;
-        PreparedStatement ps = null;
-        Statement s = null;
-        Statement s1 = null;
         ResultSet rs = null;
         ResultSet rs1 = null;
+        PreparedStatement ps = null;
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{ //if the customer adds Vicks vaporub x1 and then adds the same product but x2 again, we want it to display 'x2' rather than 'x1' and 'x2' appearing separately
             Class.forName("org.postgresql.Driver");
-            c = DriverManager.getConnection(dbUrl);
-            s = c.createStatement();
+            Connection c = DriverManager.getConnection(dbUrl);
+            Statement s = c.createStatement();
             String sql = "select customer_id from logged_in_customer;";
             rs = s.executeQuery(sql);
             int cust_id = 0;
@@ -416,7 +413,7 @@ public class LoginDAO {
             }
 
             String sql1 = "select * from ordered_product where name='" + p_in.name + "' and customer_id=;" + cust_id + ";"; //We check if the user has previously added the item to the basket before
-            s1 = c.createStatement();
+            Statement s1 = c.createStatement();
             rs1 = s1.executeQuery(sql1);
             if(rs1.next()){ //If they have, we will update the quantity to the most recent value they have chosen (it won't add the amount on e.g. if they click x1 and then x3 it updates to x3, not x4 - this is for simplicity)
                 Statement s2 = c.createStatement();

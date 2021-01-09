@@ -21,14 +21,14 @@ public class ServletMap extends HttpServlet {
         String HTML = htmlOutput();
         resp.getWriter().write(HTML); //Embed photo url for main store
         if(req.getServletPath().equals("/map")){
-            resp.getWriter().write("<img class=\"images\" src=\"https://bit.ly/main_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
+            resp.getWriter().write("<br>" +
+                    "<img class=\"images\" src=\"https://bit.ly/main_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
                     " \n" +
                     "<script>\n");
         }
-
         else if(req.getServletPath().equals("/map/cold_and_flu")){
-            resp.getWriter().write("<img class=\"images\" src=\"https://bit.ly/cold_flu_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
-                    "<h3>Products in Cold and Flu</h3>\n");
+            resp.getWriter().write("<h3>Products in Cold and Flu</h3>\n" +
+                    "<img class=\"images\" src=\"https://bit.ly/cold_flu_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
         }
         else if(req.getServletPath().equals("/map/skincare")){
             resp.getWriter().write("<h3>Products in Skincare</h3>\n" +
@@ -48,7 +48,7 @@ public class ServletMap extends HttpServlet {
         }
         else if(req.getServletPath().equals("/map/first_aid")){
             resp.getWriter().write("<h3>Products in First Aid</h3>\n" +
-                    "<img class=\"images\" src=\"https://bit.ly/allergy_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
+                    "<img class=\"images\" src=\"https://bit.ly/first_aid_map_\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
         }
         resp.getWriter().write("<script>\n" +
                 "function redirectBrowse(){\n" +

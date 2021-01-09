@@ -13,10 +13,13 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+import static java.lang.System.err;
+
 @WebServlet(urlPatterns = {"/browse"},loadOnStartup = 0)
 public class ServletBrowse extends HttpServlet {
     ArrayList<String> headers = getHeaderinfo("headers"); //See line 110
     ArrayList<String> headerURLs = getHeaderinfo("headerURLs"); //See line 110
+    DecimalFormat df = new DecimalFormat("0.00");
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
@@ -25,10 +28,8 @@ public class ServletBrowse extends HttpServlet {
         int j=1;
         Product p = LoginDAO.getProduct(j);
         for (int i=0;i<6;i++) {
-            resp.getWriter().write("<section>\n" +
-                    "<h2 id=\""+headerURLs.get(i)+"\">" + headers.get(i) + "</h2>\n");
+            resp.getWriter().write("<section>\n" + "<h2 id=\""+headerURLs.get(i)+"\">" + headers.get(i) + "</h2>\n");
             while (p.category.equals(headers.get(i))) {
-                DecimalFormat df = new DecimalFormat("0.00");
                 String price = df.format(p.price);
                 int max = p.limited ? 1 : 5;
                 resp.getWriter().write("<div class=\"relative\">\n");
@@ -37,7 +38,7 @@ public class ServletBrowse extends HttpServlet {
                             "<span class=\"tooltiptext\"><i>Limited to one per customer</i></span></label><br>\n");
                 }
                 else{
-                    resp.getWriter().write("<label><center>" + p.brand + " " + p.name + "<br>" + p.amount + "</center></label><br>\n");
+                        resp.getWriter().write("<label><center>" + p.brand + " " + p.name + "<br>" + p.amount + "</center></label><br>\n");
                 }
                 resp.getWriter().write("<label><center>£" + price + "</label></center><br>\n" +
                         "<div class=\"absolute\">\n" +
@@ -74,7 +75,7 @@ public class ServletBrowse extends HttpServlet {
             int q = Integer.parseInt(req.getParameter("basketQuantity"));
             Product pBasket = LoginDAO.getProduct(pos);
             resp.getWriter().write("<p>" + pBasket.name +": " + q +"</p>");
-            //LoginDAO.addToBasket(pBasket,q);
+            LoginDAO.addToBasket(pBasket,q);
         }
         resp.getWriter().write(HTML);
         //ArrayList<String> headers = getHeaderinfo("headers");
@@ -82,10 +83,8 @@ public class ServletBrowse extends HttpServlet {
         int j=1;
         Product p = LoginDAO.getProduct(j);
         for (int i=0;i<6;i++) {
-            resp.getWriter().write("<section>\n" +
-                    "<h2 id=\""+headerURLs.get(i)+"\">" + headers.get(i) + "</h2>\n");
+            resp.getWriter().write("<section>\n" + "<h2 id=\""+headerURLs.get(i)+"\">" + headers.get(i) + "</h2>\n");
             while (p.category.equals(headers.get(i))) {
-                DecimalFormat df = new DecimalFormat("0.00");
                 String price = df.format(p.price);
                 int max = p.limited ? 1 : 5;
                 resp.getWriter().write("<div class=\"relative\">\n");
