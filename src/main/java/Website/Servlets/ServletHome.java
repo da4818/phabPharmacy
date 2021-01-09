@@ -20,7 +20,7 @@ public class ServletHome extends HttpServlet {
         //LoginDAO.createTable("products");
         //LoginDAO.createTable("logged");
         //LoginDAO.createTable("card_details");
-        LoginDAO.createTable("baskets");
+        //LoginDAO.createTable("baskets");
         LoginDAO.createTable("orders");
         //LoginDAO.resetTable("logged");
         //LoginDAO.resetTable("baskets");
@@ -35,7 +35,7 @@ public class ServletHome extends HttpServlet {
         String logOut = req.getParameter("logOut");
         if (logOut.equals("Log Out")){
             LoginDAO.resetTable("logged");
-            LoginDAO.resetTable("baskets");
+            LoginDAO.resetTable("orders");
         }
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
