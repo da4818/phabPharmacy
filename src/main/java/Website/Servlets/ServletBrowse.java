@@ -22,37 +22,15 @@ public class ServletBrowse extends HttpServlet {
         resp.getWriter().write(HTML);
         ArrayList<String> headers = getHeaderinfo("headers"); //See line 110
         ArrayList<String> headerURLs = getHeaderinfo("headerURLs"); //See line 110
-
-        resp.getWriter().write("<section>\n" + "<h2 id=\"" + headerURLs.get(0) + "\">" + headers.get(0) + "</h2>\n"); //See line 110
         DecimalFormat df = new DecimalFormat("0.00");
+        resp.getWriter().write("<section>\n" + "<h2 id=\"" + headerURLs.get(0) + "\">" + headers.get(0) + "</h2>\n"); //See line 110
+        int j=1;
         Product p = LoginDAO.getProduct(1);
-        String price = df.format(p.price);
-        int max = p.limited ? 1 : 5; //Some products are limited to 1 per customer - if this is the case (i.e. limited is TRUE), max will be set to 1. if limited is FALSE, max is set to 5 (an arbitrary maximum)
-        resp.getWriter().write("<div class=\"relative\">\n");
-        if (p.limited) {
-            resp.getWriter().write("<label class=\"tooltip\"><center>Brand name<br>amount</center>\n" +
-                        "<span class=\"tooltiptext\"><i>Limited to one per customer</i></span></label><br>\n");
-        } else {
-            resp.getWriter().write("<label><center>brand name<br>amount</center></label><br>\n");
-        }
-        resp.getWriter().write("<label><center>£" + price + "</label></center><br>\n" +
-                "<div class=\"absolute\">\n" +
-                "<form action=\"browse\" method=\"post\">\n" +
-                "<input name=\"basketQuantity\" type=\"number\" size=\"5\" min=\"1\" max=\"" + max + "\">\n" +
-                "<input name=\"buttonNumber\" type=\"hidden\"value=\"" + 11 + "\">\n" +
-                "<input type=\"hidden\" name=\"logOut\" value=\"false\">\n" +
-                "<input type=\"submit\" class=\"buttonStyle\" value=\"Add to Basket\">\n" +
-                "</form>\n" +
-                "</div>\n" +
-                "</div>");
-        resp.getWriter().write("</section>");
-
-        /*while (j<42) { //Number of items in paddington store *41*
+        while (j<42) { //Number of items in paddington store *41*
             for (int i = 0; i < 6; i++) {
                 resp.getWriter().write("<section>\n" +
                         "<h2 id=\"" + headerURLs.get(i) + "\">" + headers.get(i) + "</h2>\n"); //See line 110
                 while (p.category.equals(headers.get(i))) {
-                    DecimalFormat df = new DecimalFormat("0.00");
                     String price = df.format(p.price); //This allows us to output the number in the format of money (2dp)
                     int max = p.limited ? 1 : 5; //Some products are limited to 1 per customer - if this is the case (i.e. limited is TRUE), max will be set to 1. if limited is FALSE, max is set to 5 (an arbitrary maximum)
                     resp.getWriter().write("<div class=\"relative\">\n");
@@ -78,7 +56,7 @@ public class ServletBrowse extends HttpServlet {
                 }
                 resp.getWriter().write("</section>");
             }
-        }*/
+        }
         resp.getWriter().write("</body>\n" + "</html>");
     }
 
