@@ -20,7 +20,6 @@ public class ServletHome extends HttpServlet {
         LoginDAO.createTable("products");
         LoginDAO.createTable("logged");
         LoginDAO.createTable("card_details");
-        LoginDAO.createTable("baskets");
         LoginDAO.createTable("orders");
         //LoginDAO.resetTable("logged");
         //LoginDAO.resetTable("baskets");

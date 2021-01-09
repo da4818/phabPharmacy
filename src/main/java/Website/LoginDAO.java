@@ -70,17 +70,6 @@ public class LoginDAO {
                 s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Benadryl Relief','24 caps',9.00,20,'Allergy',false);");
                 s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Dettol Antiseptic','500ml',3.20,20,'First Aid',false);");
             }
-            else if(tableName.equals("baskets")){
-                String sql ="CREATE TABLE BASKETS " +
-                        "(ID SERIAL PRIMARY KEY NOT NULL," +
-                        " NAME VARCHAR(36) NOT NULL, " +
-                        " DESCRIPTION VARCHAR(36) NOT NULL, " +
-                        " PRICE DECIMAL(10,2) PRECISION NOT NULL, " + //* rename to 'sell_price'
-                        " QUANTITY SMALLINT NOT NULL, " +
-                        " LIMITED BOOLEAN NOT NULL, " +
-                        " CUSTOMER_ID SMALLINT NOT NULL)";
-                s.executeUpdate(sql);
-            }
             else if(tableName.equals("orders")){ //*this orders table may be redundant as the values are the same as the basket
                 String sql ="CREATE TABLE ORDERS " +
                         "(ID SERIAL PRIMARY KEY NOT NULL," +
