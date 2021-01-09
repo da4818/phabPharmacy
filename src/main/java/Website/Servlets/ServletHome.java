@@ -17,9 +17,9 @@ public class ServletHome extends HttpServlet {
         // Creating/resetting database tables if necessary //
         //LoginDAO.resetTable("logged");
         LoginDAO.createTable("users");
-        //LoginDAO.createTable("products");
+        LoginDAO.createTable("products");
         LoginDAO.createTable("logged");
-        //LoginDAO.createTable("card_details");
+        LoginDAO.createTable("card_details");
         //LoginDAO.createTable("orders");
         //LoginDAO.resetTable("logged");
         //LoginDAO.resetTable("baskets");
