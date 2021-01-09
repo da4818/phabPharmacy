@@ -137,9 +137,9 @@ public class LoginDAO {
                 sProduct1.executeUpdate("UPDATE SHOP_PRODUCT SET SELL_PRICE=SELL_PRICE/1.3 WHERE BARCODE>82;");
             }
 
-            else if(tableName.equals("customer_basket")){
+            else if(tableName.equals("order_product")){
                 sBasket = c.createStatement();
-                String sql ="CREATE TABLE CUSTOMER_BASKET (" +
+                String sql ="CREATE TABLE ORDER_PRODUCT (" +
                         "BARCODE SERIAL PRIMARY KEY NOT NULL," +
                         "CATEGORY VARCHAR(36) NOT NULL," +
                         "BRAND VARCHAR(36) NOT NULL," +
@@ -405,16 +405,16 @@ public class LoginDAO {
                 cust_id = rs.getInt("customer_id");
             }
 
-            String sql1 = "select * from customer_basket where name='" + p_in.name + "' and customer_id=;" + cust_id + ";"; //we check if the user has previously added the item to the basket before
+            String sql1 = "select * from ordered_products where name='" + p_in.name + "' and customer_id=;" + cust_id + ";"; //we check if the user has previously added the item to the basket before
             s1 = c.createStatement();
             rs1 = s1.executeQuery(sql1);
             if(rs1.next()){ //if they have, we will update the quantity to the most recent value they have chosen (it won't add the amount e.g. if they click x1 and then x3 it updates to x3, not x4 - this is for simplicity)
                 Statement s2 = c.createStatement();
-                String sql2 = "update customer_basket set quantity =" + quantity_in + "where name='" + p_in.name + "' and customer_id=" + cust_id + ";";
+                String sql2 = "update ordered_products set quantity =" + quantity_in + "where name='" + p_in.name + "' and customer_id=" + cust_id + ";";
                 s2.executeUpdate(sql2);
             }
             else { //if they haven't previously added the item to the basket, it will create a new entry in the table
-                ps = c.prepareStatement("insert into customer_basket (barcode,category,brand,name,amount,sell_price,quantity,limit_of_1,customer_id) values(?,?,?,?,?,?,?,?,?)");
+                ps = c.prepareStatement("insert into ordered_products (barcode,category,brand,name,amount,sell_price,quantity,limit_of_1,customer_id) values(?,?,?,?,?,?,?,?,?)");
                 ps.setInt(1,p_in.barcode);
                 ps.setString(2, p_in.category);
                 ps.setString(3, p_in.brand);
@@ -456,7 +456,7 @@ public class LoginDAO {
             while(rs.next()){
                 cust_id = rs.getInt("customer_id");
             }
-            ps = c.prepareStatement("with temp as (select row_number() over (order by name asc) as rownum, * from customer_basket where customer_id=" + cust_id + ") select * from temp where rownum=?");
+            ps = c.prepareStatement("with temp as (select row_number() over (order by name asc) as rownum, * from ordered_products where customer_id=" + cust_id + ") select * from temp where rownum=?");
             ps.setInt(1,n); //If one item is removed, the IDs aren't automatically updated e.g. if i remove item ID=2, table's ID will read as 1,3,4,5... this poses problems when using a for loop to display the information
             rs1 = ps.executeQuery(); //SQL has no easy way to select item based on row number rather than an existing column - this is one solution
             while(rs1.next()){ // If int n = 2 (i.e. the second item in the basket), this will correspond to the 2nd entry in the basket table based on alphabetical order ('order by name asc' gives alphabetical order)
@@ -495,7 +495,7 @@ public class LoginDAO {
             while(rs.next()){
                 cust_id = rs.getInt("customer_id");
             }
-            String sql1 = "select sum(sell_price*quantity) from customer_basket where customer_id=" +cust_id; //For some reason it won't return the existing value in the subtotal column
+            String sql1 = "select sum(sell_price*quantity) from ordered_products where customer_id=" +cust_id; //For some reason it won't return the existing value in the subtotal column
             s1 = c.createStatement();
             rs1 = s.executeQuery(sql1);
             while(rs1.next()){
@@ -530,7 +530,7 @@ public class LoginDAO {
                 cust_id = rs.getInt("customer_id");
             }
             s1 = c.createStatement();
-            String sql1 = "delete from customer_basket where customer_id=" + cust_id + "and barcode=" + id_in; //removes the item entry from the table
+            String sql1 = "delete from ordered_products where customer_id=" + cust_id + "and barcode=" + id_in; //removes the item entry from the table
             s1.executeUpdate(sql1);
 
             rs.close();
@@ -615,7 +615,7 @@ public class LoginDAO {
         try{
             Class.forName("org.postgresql.Driver");
             c = DriverManager.getConnection(dbUrl);
-            String sql = "select sum(quantity) from customer_basket";//although similar to 'tableSize()', this counts the number of items, not just the number of different products
+            String sql = "select sum(quantity) from ordered_products";//although similar to 'tableSize()', this counts the number of items, not just the number of different products
             s = c.createStatement(); //i.e. x3 vicks and x2 dettol is 5 items comprised of 2 different products - the basket displays 5
             rs = s.executeQuery(sql);
             while(rs.next()){

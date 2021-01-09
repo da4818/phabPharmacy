@@ -42,7 +42,7 @@ public class ServletOrder extends HttpServlet {
                 "  </form>\n" +
                 "  </div>\n" +
                 "</div>\n");
-        int n = LoginDAO.tableSize("customer_basket");
+        int n = LoginDAO.tableSize("ordered_products");
         if(n>0) {
             resp.getWriter().write("<div class=\"basketContainer\">\n" +
                     " <p style=\"display: inline-block; margin-bottom: 0px;\"><b>Order Summary</b></p>\n" +
@@ -71,7 +71,7 @@ public class ServletOrder extends HttpServlet {
         resp.setContentType("text/html");
         String HTML = htmlOutput();
         resp.getWriter().write(HTML); //There is no information request in the ServletOrder doPost - the only possible way to redirect to this doPost in particular is through clicking 'Confirm Order' button
-        LoginDAO.resetTable("customer_basket");
+        LoginDAO.resetTable("ordered_products");
         resp.getWriter().write("<h2>Order confirmed!</h2>");
 
         resp.getWriter().write("<script>\n" + //This is to finish of the HTML code initiated in htmlOutput()

@@ -16,8 +16,8 @@ public class ServletHome extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Creating/resetting database tables if necessary //
         LoginDAO.createTable("customer");
-        //LoginDAO.createTable("customer_basket");
-        //LoginDAO.createTable("shop_product");
+        LoginDAO.createTable("ordered_product");
+        LoginDAO.createTable("shop_product");
         LoginDAO.createTable("logged_in_customer");
 
         resp.setContentType("text/html");
@@ -31,7 +31,7 @@ public class ServletHome extends HttpServlet {
         String logOut = req.getParameter("logOut");
         if (logOut.equals("Log Out")){
             LoginDAO.resetTable("logged_in_customer");
-            LoginDAO.resetTable("customer_basket");
+            LoginDAO.resetTable("ordered_products");
         }
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
