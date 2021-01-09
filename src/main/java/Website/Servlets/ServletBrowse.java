@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import static java.lang.String.valueOf;
 
 @WebServlet(urlPatterns = "/browse",loadOnStartup = 0)
 public class ServletBrowse extends HttpServlet {
@@ -23,25 +22,15 @@ public class ServletBrowse extends HttpServlet {
         resp.getWriter().write(HTML);
         ArrayList<String> headers = getHeaderinfo("headers"); //See line 110
         ArrayList<String> headerURLs = getHeaderinfo("headerURLs"); //See line 110
-        //int j=1;
-        //Product p = LoginDAO.getProduct(j);
-        int i =1;
-        for (int j=1;j<42;j++){
-            Product p = LoginDAO.getProduct(j);
-            resp.getWriter().write("<h2>"+headers.get(i)+"</h2");
-            if (!p.category.equals(headers.get(i)) && i<6){
-                i++;
-            }
-            resp.getWriter().write("<p>"+p.brand + " " + p.name+"</p>");
-        }
-
-        /*while (j<42) { //Number of items in paddington store *41*
+        int j=1;
+        Product p = LoginDAO.getProduct(j);
+        while (j<42) { //Number of items in paddington store *41*
             for (int i = 0; i < 6; i++) {
                 resp.getWriter().write("<section>\n" +
                         "<h2 id=\"" + headerURLs.get(i) + "\">" + headers.get(i) + "</h2>\n"); //See line 110
                 while (p.category.equals(headers.get(i))) {
                     DecimalFormat df = new DecimalFormat("0.00");
-                    String price = valueOf(df.format(p.price)); //This allows us to output the number in the format of money (2dp)
+                    String price = df.format(p.price); //This allows us to output the number in the format of money (2dp)
                     int max = p.limited ? 1 : 5; //Some products are limited to 1 per customer - if this is the case (i.e. limited is TRUE), max will be set to 1. if limited is FALSE, max is set to 5 (an arbitrary maximum)
                     resp.getWriter().write("<div class=\"relative\">\n");
                     if (p.limited) {
@@ -66,7 +55,7 @@ public class ServletBrowse extends HttpServlet {
                 }
                 resp.getWriter().write("</section>");
             }
-        }*/
+        }
         resp.getWriter().write("</body>\n" + "</html>");
     }
 
@@ -165,10 +154,9 @@ public class ServletBrowse extends HttpServlet {
 
     public String htmlOutput(){
         boolean userLoggedIn = LoginDAO.checkLoggedIn();
-        String displayCurrentUser = "";
-        User cUser = null;
-        if (userLoggedIn == true) { //If a user is logged in, userMessage will be displayed on the header (see line 144)
-            cUser = LoginDAO.getCurrentUser();
+        String displayCurrentUser = "<div class=\"currentUser\"><i class=\"fa fa-fw fa-user\"></i></div>\n";
+        if (userLoggedIn) { //If a user is logged in, userMessage will be displayed on the header (see line 144)
+            User cUser = LoginDAO.getCurrentUser();
             displayCurrentUser = "     <form name=\"logOut\" action=\"home\" method=\"post\">\n" +
                     "       <div style=\"float: right;\" class=\"currentUser\">" + cUser.fname + "<i class=\"fa fa-fw fa-user\"></i>\n" +
                     "           <div class=\"logOut\">\n" +
@@ -176,9 +164,6 @@ public class ServletBrowse extends HttpServlet {
                     "           </div>\n" +
                     "       </div>\n" +
                     "    </form>\n";
-        }
-        else if (userLoggedIn == false){
-            displayCurrentUser = "<div class=\"currentUser\"><i class=\"fa fa-fw fa-user\"></i></div>\n";
         }
         int basketSize = LoginDAO.getBasketSize();
         String basketSizeOut="";

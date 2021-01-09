@@ -78,23 +78,25 @@ public class ServletMap extends HttpServlet {
             p = LoginDAO.getProduct(j);
         }
         String imageURL = "<img class=\"images\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n";
-        if (category.equals("Cold and Flu")){
-            imageURL = "<img class=\"images\" src=\"https://bit.ly/cold_flu_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n";
-        }
-        else if (category.equals("Skincare")){
-            imageURL = "<img class=\"images\" src=\"https://bit.ly/skincare_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n";
-        }
-        else if (category.equals("Headaches and Pain Relief")){
-            imageURL = "<img class=\"images\" src=\"https://bit.ly/headache_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n";
-        }
-        else if (category.equals("Digestion")){
-            imageURL = "<img class=\"images\" src=\"https://bit.ly/digestion_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n";
-        }
-        else if (category.equals("Allergy")){
-            imageURL = "<img class=\"images\" src=\"https://bit.ly/allergy_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n";
-        }
-        else if (category.equals("First Aid")){
-            imageURL = "<img class=\"images\" src=\"https://bit.ly/first_aid_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n";
+        switch (category) {
+            case "Cold and Flu":
+                imageURL = "<img class=\"images\" src=\"https://bit.ly/cold_flu_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n";
+                break;
+            case "Skincare":
+                imageURL = "<img class=\"images\" src=\"https://bit.ly/skincare_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n";
+                break;
+            case "Headaches and Pain Relief":
+                imageURL = "<img class=\"images\" src=\"https://bit.ly/headache_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n";
+                break;
+            case "Digestion":
+                imageURL = "<img class=\"images\" src=\"https://bit.ly/digestion_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n";
+                break;
+            case "Allergy":
+                imageURL = "<img class=\"images\" src=\"https://bit.ly/allergy_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n";
+                break;
+            case "First Aid":
+                imageURL = "<img class=\"images\" src=\"https://bit.ly/first_aid_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n";
+                break;
         }
 
         resp.getWriter().write("</p>\n" +
@@ -142,10 +144,10 @@ public class ServletMap extends HttpServlet {
     }
     public String htmlOutput(){
         boolean userLoggedIn = LoginDAO.checkLoggedIn();
-        String displayCurrentUser = "";
-        User cUser = null;
-        if (userLoggedIn == true) {
-            cUser = LoginDAO.getCurrentUser();
+        String displayCurrentUser = "<div class=\"currentUser\"><i class=\"fa fa-fw fa-user\"></i></div>\n";
+
+        if (userLoggedIn) {
+            User cUser = LoginDAO.getCurrentUser();
             displayCurrentUser = "     <form name=\"logOut\" action=\"home\" method=\"post\">\n" +
                     "       <div style=\"float: right;\" class=\"currentUser\">" + cUser.fname + "<i class=\"fa fa-fw fa-user\"></i>\n" +
                     "           <div class=\"logOut\">\n" +
@@ -153,9 +155,6 @@ public class ServletMap extends HttpServlet {
                     "           </div>\n" +
                     "       </div>\n" +
                     "    </form>\n";
-        }
-        else if (userLoggedIn == false){
-            displayCurrentUser = "<div class=\"currentUser\"><i class=\"fa fa-fw fa-user\"></i></div>\n";
         }
         int basketSize = LoginDAO.getBasketSize();
         String basketSizeOut="";
