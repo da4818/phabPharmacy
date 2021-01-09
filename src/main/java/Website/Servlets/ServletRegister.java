@@ -42,18 +42,13 @@ public class ServletRegister extends HttpServlet {
         String pw = req.getParameter("pass");
         String vpw = req.getParameter("verify_pass");
         String cn = req.getParameter("card_no");
-        String cvv = req.getParameter("cvv");
-        String sc = req.getParameter("sort_code");
-        String an = req.getParameter("account_no");
-        String pc = req.getParameter("postcode");
-        String ad = req.getParameter("address");
-        String pn = req.getParameter("phone_no");
+        String ad = req.getParameter("postcode");
         resp.getWriter().write(HTML);
         EmailValidation emailCheck = new EmailValidation(em,pw,vpw);
         if(LoginDAO.validateRegister(em)){ //Checks database to see if email exists in use database
             resp.getWriter().write("<h2> There is an existing account with the email entered. Please log in.</h2>");
         }
-        else if (fn.isEmpty() || ln.isEmpty() || em.isEmpty() || pw.isEmpty() || vpw.isEmpty() || cn.isEmpty() || cvv.isEmpty()|| sc.isEmpty() || an.isEmpty() || pc.isEmpty()){ //Checks if any of the required fields are empty
+        else if (fn.isEmpty() || ln.isEmpty() || em.isEmpty() || pw.isEmpty() || vpw.isEmpty() || cn.isEmpty() || ad.isEmpty()){
             resp.getWriter().write("<h2>Incomplete fields, please enter all the information.</h2>");
         }
         else if (!pw.equals(vpw)){
@@ -62,11 +57,10 @@ public class ServletRegister extends HttpServlet {
         else if(emailCheck.validEmail() == false){
             resp.getWriter().write("<h2>Invalid Email</h2>");
         }
-        else {
-            LoginDAO.addUser(fn,ln,em,pw,pc);
+        else{
+            LoginDAO.addUser(fn,ln,em,pw,cn,ad);
             User currentUser = LoginDAO.getUser(em,pw);
             LoginDAO.setLoggedInUser(currentUser);
-
             LoginDAO.resetTable("basket");
             resp.getWriter().write("<h2>Successful registration. Welcome, " + currentUser.fname + "</h2>");
         }

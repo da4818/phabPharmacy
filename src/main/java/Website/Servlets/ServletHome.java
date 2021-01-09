@@ -15,26 +15,23 @@ public class ServletHome extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Creating/resetting database tables if necessary //
-        //LoginDAO.resetTable("logged");
+        LoginDAO.resetTable("logged");
         LoginDAO.createTable("users");
+        LoginDAO.createTable("basket");
         LoginDAO.createTable("products");
         LoginDAO.createTable("logged");
-        LoginDAO.createTable("card_details");
-        //LoginDAO.createTable("orders");
         //LoginDAO.resetTable("logged");
-        //LoginDAO.resetTable("baskets");
+        //LoginDAO.resetTable("basket");
         resp.setContentType("text/html");
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
     }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         String logOut = req.getParameter("logOut");
         if (logOut.equals("Log Out")){
             LoginDAO.resetTable("logged");
-            LoginDAO.resetTable("orders");
         }
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
