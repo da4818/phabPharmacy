@@ -176,9 +176,9 @@ public class LoginDAO {
                         " CVV VARCHAR(3) NOT NULL, " +
                         " SORT_CODE VARCHAR(6) NOT NULL, " +
                         " ACCOUNT_NO VARCHAR(8) NOT NULL, " +
-                        " CUSTOMER_ID INT NOT NULL)";
+                        " CUSTOMER_ID INT REFERENCES CUSTOMER (ID))";
                 s.executeUpdate(sql);
-                s1.executeUpdate("INSERT INTO CARD_DETAILS (CARD_NO,CVV,SORTCODE,ACCOUNT_NO,CUSTOMER_ID) VALUES ('1111222233334444','435','401020','12345678',1);");
+                s1.executeUpdate("INSERT INTO CARD_DETAILS (CARD_NO,CVV,SORT_CODE,ACCOUNT_NO,CUSTOMER_ID) VALUES ('1111222233334444','435','401020','12345678',1);");
             }
             sProduct.close();
             sProduct1.close();
