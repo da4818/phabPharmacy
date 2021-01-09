@@ -25,11 +25,37 @@ public class ServletBrowse extends HttpServlet {
         DecimalFormat df = new DecimalFormat("0.00");
 
         //int j=1;
-        int i=0;
+        /*int i=0;
         resp.getWriter().write("<section>\n" + "<h2 id=\"" + headerURLs.get(i) + "\">" + headers.get(i) + "</h2>\n"); //See line 110
         for (int j=1; j<11; j++) { //Number of items in paddington store *41*
             Product p = LoginDAO.getProduct(j);
             resp.getWriter().write("<p>" + p.category + " " + p.brand + " " + p.name + "</p>");
+        }
+        resp.getWriter().write("</section>");*/
+        int i=0;
+        resp.getWriter().write("<section>\n" + "<h2 id=\"" + headerURLs.get(i) + "\">" + headers.get(i) + "</h2>\n"); //See line 110
+        for (int j=1; j<11; j++) { //Number of items in paddington store *41*
+            Product p = LoginDAO.getProduct(j);
+            String price = df.format(p.price); //This allows us to output the number in the format of money (2dp)
+            int max = p.limited ? 1 : 5; //Some products are limited to 1 per customer - if this is the case (i.e. limited is TRUE), max will be set to 1. if limited is FALSE, max is set to 5 (an arbitrary maximum)
+            resp.getWriter().write("<div class=\"relative\">\n");
+            if (p.limited) {
+                resp.getWriter().write("<label class=\"tooltip\"><center>" + p.brand + " " + p.name + "<br>" + p.amount + "</center>\n" +
+                        "<span class=\"tooltiptext\"><i>Limited to one per customer</i></span></label><br>\n");
+            }
+            else {
+                resp.getWriter().write("<label><center>" + p.brand + " " + p.name + "<br>" + p.amount + "</center></label><br>\n");
+            }
+            resp.getWriter().write("<label><center>£" + price + "</label></center><br>\n" +
+                    "<div class=\"absolute\">\n" +
+                    "<form action=\"browse\" method=\"post\">\n" +
+                    "<input name=\"basketQuantity\" type=\"number\" size=\"5\" min=\"1\" max=\"" + max + "\">\n" +
+                    "<input name=\"buttonNumber\" type=\"hidden\"value=\"" + j + "\">\n" +
+                    "<input type=\"hidden\" name=\"logOut\" value=\"false\">\n" +
+                    "<input type=\"submit\" class=\"buttonStyle\" value=\"Add to Basket\">\n" +
+                    "</form>\n" +
+                    "</div>\n" +
+                    "</div>");
         }
         resp.getWriter().write("</section>");
 

@@ -27,7 +27,7 @@ public class ServletMap extends HttpServlet {
         }
 
         else if(req.getServletPath().equals("/map/cold_and_flu")){
-            resp.getWriter().write("<h3>Products in Cold and Flu</h3>\n" +
+            resp.getWriter().write("<br><h3>Products in Cold and Flu</h3>\n" +
                     "<img class=\"images\" src=\"https://bit.ly/cold_flu_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
         }
         else if(req.getServletPath().equals("/map/skincare")){
@@ -80,7 +80,8 @@ public class ServletMap extends HttpServlet {
                 "       document.getElementById(\"category\").value = x\n" +
                 "       document.getElementById(\"findCategory\").submit();\n" +
                 "   }\n" +*/
-        resp.getWriter().write("    function redirectBrowse(){\n" +
+        resp.getWriter().write("<script>\n" +
+                "function redirectBrowse(){\n" +
                 "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
                 "    }\n" +
                 "</script>\n" +
