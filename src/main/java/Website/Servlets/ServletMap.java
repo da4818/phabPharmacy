@@ -23,7 +23,7 @@ public class ServletMap extends HttpServlet {
         resp.getWriter().write("  <img class=\"images\" src=\"https://bit.ly/main_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
                 " \n" +
                 "<script>\n" +
-                "   document.getElementById(\"cf\").onclick = function() {\n" +
+                /*"   document.getElementById(\"cf\").onclick = function() {\n" +
                 "       var x = document.getElementById(\"cf\").innerHTML;\n" +
                 "       document.getElementById(\"category\").value = x\n" +
                 "       document.getElementById(\"findCategory\").submit();\n" +
@@ -52,7 +52,7 @@ public class ServletMap extends HttpServlet {
                 "       var x = document.getElementById(\"fa\").innerHTML;\n" +
                 "       document.getElementById(\"category\").value = x\n" +
                 "       document.getElementById(\"findCategory\").submit();\n" +
-                "   }\n" +
+                "   }\n" +*/
                 "    function redirectBrowse(){\n" +
                 "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
                 "    }\n" +
@@ -70,6 +70,10 @@ public class ServletMap extends HttpServlet {
         if(req.getServletPath().equals("/map#cold_and_flu")){
             resp.getWriter().write("<h3>Cold and Flu</h3>\n" +
                     "<img class=\"images\" src=\"https://bit.ly/cold_flu_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
+        }
+        else if(req.getServletPath().equals("/map#skincare")){
+            resp.getWriter().write("<h3>Skincare</h3>\n" +
+                    "<img class=\"images\" src=\"https://bit.ly/skincare_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
         }
         /*resp.getWriter().write("    <section>\n" +
                 "      <div class=\"box\">\n" +
@@ -113,7 +117,7 @@ public class ServletMap extends HttpServlet {
                 //imageURL +
                 " \n" +
                 "<script>\n" +
-                "   document.getElementById(\"cf\").onclick = function() {\n" +
+                /*"   document.getElementById(\"cf\").onclick = function() {\n" +
                 "       var x = document.getElementById(\"cf\").innerHTML;\n" +
                 "       document.getElementById(\"category\").value = x\n" +
                 "       document.getElementById(\"findCategory\").submit();\n" +
@@ -142,7 +146,7 @@ public class ServletMap extends HttpServlet {
                 "       var x = document.getElementById(\"fa\").innerHTML;\n" +
                 "       document.getElementById(\"category\").value = x\n" +
                 "       document.getElementById(\"findCategory\").submit();\n" +
-                "   }\n" +
+                "   }\n" +*/
                 "    function redirectBrowse(){\n" +
                 "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
                 "    }\n" +
@@ -321,10 +325,10 @@ public class ServletMap extends HttpServlet {
                 "            <form id=\"findCategory\" action=\"map\" method=\"post\">\n" +
                 "            <a id=\"cf\" href=\"https://phabpharmacy.herokuapp.com/map#cold_and_flu\"> Cold and Flu</a>\n" +
                 "            <a id=\"s\" href=\"https://phabpharmacy.herokuapp.com/map#skincare\"> Skincare</a>\n" +
-                "            <a id=\"hpr\" href=\"https://phabpharmacy.herokuapp.com/map#Headaches and Pain Relief\">Headaches and Pain Relief</a>\n" +
-                "            <a id=\"d\" href=\"https://phabpharmacy.herokuapp.com/map#Digestion\">Digestion</a>\n" +
-                "            <a id=\"a\" href=\"https://phabpharmacy.herokuapp.com/map#Allergy\">Allergy</a>\n" +
-                "            <a id=\"fa\" href=\"https://phabpharmacy.herokuapp.com/map#First Aid\">First Aid</a>\n" +
+                "            <a id=\"hpr\" href=\"https://phabpharmacy.herokuapp.com/map#headaches_and_pain_relief\">Headaches and Pain Relief</a>\n" +
+                "            <a id=\"d\" href=\"https://phabpharmacy.herokuapp.com/map#digestion\">Digestion</a>\n" +
+                "            <a id=\"a\" href=\"https://phabpharmacy.herokuapp.com/map#allergy\">Allergy</a>\n" +
+                "            <a id=\"fa\" href=\"https://phabpharmacy.herokuapp.com/map#first_aid\">First Aid</a>\n" +
                 "            <input id=\"category\" name=\"category\" type=\"hidden\">\n" +
                 "            </form>  \n" +
                 "          </div>\n" +

@@ -24,15 +24,24 @@ public class ServletBrowse extends HttpServlet {
         ArrayList<String> headerURLs = getHeaderinfo("headerURLs"); //See line 110
         DecimalFormat df = new DecimalFormat("0.00");
 
-        int j=1;
-        Product p = LoginDAO.getProduct(j);
-        while (j<42) { //Number of items in paddington store *41*
-            for (int i = 0; i < 6; i++) {
-                resp.getWriter().write("<section>\n" +
-                        "<h2 id=\"" + headerURLs.get(i) + "\">" + headers.get(i) + "</h2>\n"); //See line 110
-                resp.getWriter().write("<p>"+p.category + " " +p.brand + " " + p.name +"</p>");
-                j++;
-                p = LoginDAO.getProduct(j);
+        //int j=1;
+        int i=0;
+        resp.getWriter().write("<section>\n" +
+                "<h2 id=\"" + headerURLs.get(i) + "\">" + headers.get(i) + "</h2>\n"); //See line 110
+        for (int j=1; j<11; j++) { //Number of items in paddington store *41*
+            Product p = LoginDAO.getProduct(j);
+            resp.getWriter().write("<p>" + p.category + " " + p.brand + " " + p.name + "</p>");
+        }
+        resp.getWriter().write("</section>");
+        i++;
+        resp.getWriter().write("<section>\n" +
+                "<h2 id=\"" + headerURLs.get(i) + "\">" + headers.get(i) + "</h2>\n"); //See line 110
+        for (int j=11; j<21; j++) { //Number of items in paddington store *41*
+            Product p = LoginDAO.getProduct(j);
+            resp.getWriter().write("<p>" + p.category + " " + p.brand + " " + p.name + "</p>");
+        }
+        resp.getWriter().write("</section>");
+
                 /*while (p.category.equals(headers.get(i))) {
                     String price = df.format(p.price); //This allows us to output the number in the format of money (2dp)
                     int max = p.limited ? 1 : 5; //Some products are limited to 1 per customer - if this is the case (i.e. limited is TRUE), max will be set to 1. if limited is FALSE, max is set to 5 (an arbitrary maximum)
@@ -56,10 +65,10 @@ public class ServletBrowse extends HttpServlet {
                             "</div>");
                     j++;
                     p = LoginDAO.getProduct(j);
-                }*/
-                resp.getWriter().write("</section>");
-            }
-        }
+                }
+                    resp.getWriter().write("</section>");
+            }*/
+
         resp.getWriter().write("</body>\n" + "</html>");
     }
 
