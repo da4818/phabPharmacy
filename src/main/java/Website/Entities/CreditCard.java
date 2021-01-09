@@ -5,7 +5,9 @@ public class CreditCard {
     public String cvv;
     public String sortCode;
     public String accountNumber;
+    public CreditCard(){
 
+    }
     public CreditCard(String cardNumber, String cvv, String sortCode, String accountNumber){
         this.cardNumber = cardNumber.replaceAll("\\s",""); //Removes any spaces
         this.cvv = cvv;

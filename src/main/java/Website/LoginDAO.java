@@ -1,4 +1,5 @@
 package Website;
+import Website.Entities.CreditCard;
 import Website.Entities.Product;
 import Website.Entities.User;
 import java.sql.*;
@@ -365,7 +366,27 @@ public class LoginDAO {
         }catch(Exception e){System.out.println(e);}
         return bProduct;
     }
-
+  public static CreditCard getCardInfo(){
+      CreditCard cc = new CreditCard();
+      try{
+          String dbUrl = System.getenv("JDBC_DATABASE_URL");
+          Class.forName("org.postgresql.Driver");
+          Connection c = DriverManager.getConnection(dbUrl);
+          Statement s = c.createStatement();
+          String sql = " select * from card_details";
+          ResultSet rs = s.executeQuery(sql);
+          while(rs.next()){
+              cc.cardNumber = rs.getString("card_no");
+              cc.cvv = rs.getString("cvv");
+              cc.sortCode = rs.getString("sort_code");
+              cc.accountNumber = rs.getString("account_no");
+          }
+          rs.close();
+          s.close();
+          c.close();
+      }catch(Exception e){System.out.println(e);}
+      return cc;
+  }
     public static Double getBasketTotal(){
         double total = 0;
         try{
