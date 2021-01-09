@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-@WebServlet(urlPatterns = "/browse",loadOnStartup = 0)
+@WebServlet(urlPatterns = {"/browse"},loadOnStartup = 0)
 public class ServletBrowse extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,21 +26,13 @@ public class ServletBrowse extends HttpServlet {
 
         //int j=1;
         int i=0;
-        resp.getWriter().write("<section>\n" +
-                "<h2 id=\"" + headerURLs.get(i) + "\">" + headers.get(i) + "</h2>\n"); //See line 110
+        resp.getWriter().write("<section>\n" + "<h2 id=\"" + headerURLs.get(i) + "\">" + headers.get(i) + "</h2>\n"); //See line 110
         for (int j=1; j<11; j++) { //Number of items in paddington store *41*
             Product p = LoginDAO.getProduct(j);
             resp.getWriter().write("<p>" + p.category + " " + p.brand + " " + p.name + "</p>");
         }
         resp.getWriter().write("</section>");
-        i++;
-        resp.getWriter().write("<section>\n" +
-                "<h2 id=\"" + headerURLs.get(i) + "\">" + headers.get(i) + "</h2>\n"); //See line 110
-        for (int j=11; j<21; j++) { //Number of items in paddington store *41*
-            Product p = LoginDAO.getProduct(j);
-            resp.getWriter().write("<p>" + p.category + " " + p.brand + " " + p.name + "</p>");
-        }
-        resp.getWriter().write("</section>");
+
 
                 /*while (p.category.equals(headers.get(i))) {
                     String price = df.format(p.price); //This allows us to output the number in the format of money (2dp)

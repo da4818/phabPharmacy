@@ -13,7 +13,7 @@ import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 
-@WebServlet (urlPatterns = "/map",loadOnStartup = 0)
+@WebServlet (urlPatterns = {"/map", "/map#cold_and_flu", "/map#skincare"},loadOnStartup = 0)
 public class ServletMap extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

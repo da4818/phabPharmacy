@@ -20,7 +20,7 @@ import java.text.DecimalFormat;
 
 import static java.lang.String.valueOf;
 
-@WebServlet(urlPatterns = "/basket",loadOnStartup = 0)
+@WebServlet(urlPatterns = {"/basket"},loadOnStartup = 0)
 public class ServletBasket extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
