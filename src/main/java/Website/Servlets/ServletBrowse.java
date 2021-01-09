@@ -71,10 +71,11 @@ public class ServletBrowse extends HttpServlet {
             resp.getWriter().write("<pre><script>window.onload(alert(\"Please ensure that you have created an account and logged in before adding items to your basket.\"));</script></pre>");
         }
         if(LoginDAO.checkLoggedIn()){
-            int pos = Integer.parseInt(req.getParameter("buttonNumber"));
+            /*int pos = Integer.parseInt(req.getParameter("buttonNumber"));
             int q = Integer.parseInt(req.getParameter("basketQuantity"));
             Product pBasket = LoginDAO.getProduct(pos);
-            LoginDAO.addToBasket(pBasket,q);
+            LoginDAO.addToBasket(pBasket,q);*/
+            resp.getWriter().write("button pressed");
         }
         resp.getWriter().write(HTML);
         //ArrayList<String> headers = getHeaderinfo("headers");
