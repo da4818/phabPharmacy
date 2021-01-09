@@ -310,7 +310,6 @@ public class LoginDAO {
                 u.fname = rs.getString("first_name");
                 u.lname = rs.getString("last_name");
                 u.email = rs.getString("email");
-                u.password = rs.getString("pass_word");
                 u.postcode = rs.getString("postcode");
             }
 
