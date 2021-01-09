@@ -333,10 +333,17 @@ public class LoginDAO {
             Connection c = DriverManager.getConnection(dbUrl);
             Statement s  = c.createStatement();
             s.executeUpdate("truncate table logged_in_customer"); //instead of updating the table it will just empty it and add a new entry
-            String sql = "insert into logged_in_customer (first_name,last_name,email,pass_word,postcode,customer_id) SELECT first_name,last_name,email,pass_word,postcode,id FROM customer WHERE id=" +loggedInUser.customer_id +";";
-            s.executeUpdate(sql);
+            //String sql = "insert into logged_in_customer(first_name,last_name,email,pass_word,postcode,customer_id) SELECT first_name,last_name,email,pass_word,postcode,id FROM customer WHERE id=" +loggedInUser.customer_id +";";
+            PreparedStatement ps =c.prepareStatement("insert into logged_in_customer(first_name,last_name,email,pass_word,postcode,customer_id) VALUES (?,?,?,?,?,?)");
+            ps.setString(1,loggedInUser.fname);
+            ps.setString(2,loggedInUser.lname);
+            ps.setString(3,loggedInUser.email);
+            ps.setString(4,loggedInUser.password);
+            ps.setString(5,loggedInUser.postcode);
+            ps.setInt(6,loggedInUser.customer_id);
+            ps.executeUpdate();
 
-            s.close();
+            ps.close();
             c.close();
         }catch(Exception e){
             System.err.println(e.getClass().getName()+": " + e.getMessage());
