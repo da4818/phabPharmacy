@@ -77,7 +77,7 @@ public class ServletMap extends HttpServlet {
             j++;
             p = LoginDAO.getProduct(j);
         }
-        String imageURL = "<img class=\"images\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n";
+        String imageURL = "<img class=\"images\" src=\"https://bit.ly/main_map\" width=\"316\" height=\"400\">\n";
         switch (category) {
             case "Cold and Flu":
                 imageURL = "<img class=\"images\" src=\"https://bit.ly/cold_flu_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n";
