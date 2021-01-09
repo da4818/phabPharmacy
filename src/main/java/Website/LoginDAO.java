@@ -385,7 +385,7 @@ public class LoginDAO {
                 p.amount = rs.getString("amount");
                 p.price = rs.getDouble("sell_price");
                 p.quantity = rs.getInt("quantity");
-                p.limited = rs.getBoolean("limited");
+                p.limited = rs.getBoolean("limit_of_1");
             }
             rs.close();
             s.close();
@@ -476,7 +476,7 @@ public class LoginDAO {
                 p.name = rs1.getString("name");
                 p.price = rs1.getDouble("sell_price");
                 p.quantity = rs1.getInt("quantity");
-                p.limited = rs1.getBoolean("limited");
+                p.limited = rs1.getBoolean("limit_of_1");
             }
             rs.close();
             rs1.close();
