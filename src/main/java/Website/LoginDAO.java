@@ -33,6 +33,8 @@ public class LoginDAO {
         Statement sProduct1 = null;
         Statement sBasket = null;
         Statement sLogged = null;
+        Statement s = null;
+        Statement s1 = null;
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{
             Class.forName("org.postgresql.Driver");
@@ -166,6 +168,17 @@ public class LoginDAO {
                         "CUSTOMER_ID INT REFERENCES CUSTOMER (ID))";
                 sLogged.executeUpdate(sql);
 
+            }
+            else if(tableName.equals("card_details")) { //this table is so that we can see which customer is currently logged in - there will only be at most 1 entry in this table, and will be updated when a new user logs in
+                String sql ="CREATE TABLE CARD_DETAILS " +
+                        "(ID SERIAL PRIMARY KEY NOT NULL," +
+                        " CARD_NO VARCHAR(16) NOT NULL, " +
+                        " CVV VARCHAR(3) NOT NULL, " +
+                        " SORT_CODE VARCHAR(6) NOT NULL, " +
+                        " ACCOUNT_NO VARCHAR(8) NOT NULL, " +
+                        " CUSTOMER_ID INT NOT NULL)";
+                s.executeUpdate(sql);
+                s1.executeUpdate("INSERT INTO CARD_DETAILS (CARD_NO,CVV,SORTCODE,ACCOUNT_NO,CUSTOMER_ID) VALUES ('1111222233334444','435','401020','12345678',1);");
             }
             sProduct.close();
             sProduct1.close();
