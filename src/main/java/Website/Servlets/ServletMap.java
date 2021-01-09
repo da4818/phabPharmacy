@@ -53,6 +53,9 @@ public class ServletMap extends HttpServlet {
                 "       document.getElementById(\"category\").value = x\n" +
                 "       document.getElementById(\"findCategory\").submit();\n" +
                 "   }\n" +
+                "    function redirectBrowse(){\n" +
+                "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
+                "    }\n" +
                 "</script>\n" +
                 "</body>\n" +
                 "</html>");
@@ -287,7 +290,7 @@ public class ServletMap extends HttpServlet {
                 "    <div class=\"navbar\">\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/home\"><i class=\"fa fa-fw fa-home\"></i>Home</a> \n" +
                 "    <div class=\"dropdown\">\n" +
-                "        <button style=\"cursor: pointer;\" href=\"https://phabpharmacy.herokuapp.com/browse\" class=\"dropbtn\" onclick=\"redirectBrowse()\"><i class=\"fa fa-fw fa-search\"></i>Browse<i class=\"fa fa-caret-down\"></i></button>\n" +
+                "        <button style=\"cursor: pointer;\" class=\"dropbtn\" onclick=\"redirectBrowse()\"><i class=\"fa fa-fw fa-search\"></i>Browse<i class=\"fa fa-caret-down\"></i></button>\n" +
                 "        <div class=\"dropdown-content\">\n" +
                 "            <a href=\"https://phabpharmacy.herokuapp.com/browse#cold_and_flu\">Cold and Flu</a>\n" +
                 "            <a href=\"https://phabpharmacy.herokuapp.com/browse#skincare\">Skincare</a>\n" +
