@@ -18,6 +18,7 @@ public class ServletHome extends HttpServlet {
             resp.setContentType("text/html");
             String HTML = htmlOutput();
             resp.getWriter().write(HTML);
+            LoginDAO.resetTable("logged_in_customer");
         }
         // Creating/resetting database tables if necessary //
         //LoginDAO.createTable("customer");

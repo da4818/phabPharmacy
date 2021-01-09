@@ -69,7 +69,6 @@ public class ServletRegister extends HttpServlet {
             LoginDAO.addUser(fn,ln,em,pw,pc,ad,pn);
             User currentUser = LoginDAO.getUser(em,pw); //*rewrite to constructor with string values
             LoginDAO.setLoggedInUser(currentUser);
-            LoginDAO.resetTable("ordered_products");
             resp.getWriter().write("<h2>Successful registration. Welcome, " + currentUser.fname + "</h2>");
             Customer c = new Customer(currentUser.fname, currentUser.lname, currentUser.postcode, currentUser.email, currentUser.address, currentUser.phoneno);
             CreditCard cc = new CreditCard(cn,cvv,sc,an,c);
