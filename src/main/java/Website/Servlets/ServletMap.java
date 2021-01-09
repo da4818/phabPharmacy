@@ -102,9 +102,8 @@ public class ServletMap extends HttpServlet {
         resp.getWriter().write("</p>\n" +
                 "</div>\n" +
                 "    </section>\n" +
-                "  \n" +
-                imageURL +
                 "\n" +
+                imageURL +
                 " \n" +
                 "<script>\n" +
                 "   document.getElementById(\"cf\").onclick = function() {\n" +
@@ -137,6 +136,9 @@ public class ServletMap extends HttpServlet {
                 "       document.getElementById(\"category\").value = x\n" +
                 "       document.getElementById(\"findCategory\").submit();\n" +
                 "   }\n" +
+                "    function redirectBrowse(){\n" +
+                "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
+                "    }\n" +
                 "</script>\n" +
                 "</body>\n" +
                 "</html>");
@@ -310,12 +312,12 @@ public class ServletMap extends HttpServlet {
                 "          <button class=\"buttonStyle\" style=\"dropbtn; width: 222px;\">Categories</button>\n" +
                 "          <div class=\"dropdown-content\">\n" +
                 "            <form id=\"findCategory\" action=\"map\" method=\"post\">\n" +
-                "            <a id=\"cf\" href=\"#cold_and_flu\" >Cold and Flu</a>\n" +
-                "            <a id=\"s\" href=\"#skincare\">Skincare</a>\n" +
-                "            <a id=\"hpr\">Headaches and Pain Relief</a>\n" +
-                "            <a id=\"d\">Digestion</a>\n" +
-                "            <a id=\"a\">Allergy</a>\n" +
-                "            <a id=\"fa\">First Aid</a>\n" +
+                "            <a id=\"cf\" href=\"#cold_and_flu\"> Cold and Flu</a>\n" +
+                "            <a id=\"s\" href=\"#skincare\"> Skincare</a>\n" +
+                "            <a id=\"hpr\" href\"Headaches and Pain Relief\">Headaches and Pain Relief</a>\n" +
+                "            <a id=\"d\" href=\"Digestion\">Digestion</a>\n" +
+                "            <a id=\"a\" href=\"Allergy\">Allergy</a>\n" +
+                "            <a id=\"fa\" href=\"First Aid\">First Aid</a>\n" +
                 "            <input id=\"category\" name=\"category\" type=\"hidden\">\n" +
                 "            </form>  \n" +
                 "          </div>\n" +
