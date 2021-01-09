@@ -70,8 +70,8 @@ public class LoginDAO {
                 s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Benadryl Relief','24 caps',9.00,20,'Allergy',false);");
                 s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Dettol Antiseptic','500ml',3.20,20,'First Aid',false);");
             }
-            /*else if(tableName.equals("orders")){ //*this orders table may be redundant as the values are the same as the basket
-                String sql ="CREATE TABLE ORDERS " +
+            else if(tableName.equals("orders")){ //*this orders table may be redundant as the values are the same as the basket
+                String sql ="CREATE TABLE ORDER_PRODUCT " +
                         "(ID SERIAL PRIMARY KEY NOT NULL," +
                         " NAME VARCHAR(36) NOT NULL, " +
                         " DESCRIPTION VARCHAR(36) NOT NULL, " +
@@ -80,7 +80,7 @@ public class LoginDAO {
                         " LIMITED BOOLEAN NOT NULL, " +
                         " CUSTOMER_ID SMALLINT NOT NULL)";
                 s.executeUpdate(sql);
-            }*/
+            }
             else if(tableName.equals("logged")) { //this table is so that we can see which customer is currently logged in - there will only be at most 1 entry in this table, and will be updated when a new user logs in
                 String sql ="CREATE TABLE LOGGED " +
                         "(ID SERIAL PRIMARY KEY NOT NULL," +
@@ -111,25 +111,6 @@ public class LoginDAO {
     }
     // Functions to execute queries, or amend to the database content //
     // Checking if user is logging in with an existing account
-    public static void createOrder(){
-        try{
-            String dbUrl = System.getenv("JDBC_DATABASE_URL");
-            Class.forName("org.postgresql.Driver");
-            Connection c = DriverManager.getConnection(dbUrl);
-            Statement s = c.createStatement();
-            s.executeUpdate("CREATE TABLE ORDER_PRODUCT" +
-                    "(ID SERIAL PRIMARY KEY NOT NULL," +
-                    " NAME VARCHAR(36) NOT NULL," +
-                    " DESCRIPTION VARCHAR(36) NOT NULL," +
-                    " PRICE DECIMAL(10,2) NOT NULL," +
-                    " QUANTITY SMALLINT NOT NULL," +
-                    " LIMITED BOOLEAN NOT NULL," +
-                    " CUSTOMER_ID SMALLINT)");
-
-            s.close();
-            c.close();
-        }catch(Exception e){System.out.println(e);}
-    }
 
     public static boolean validateLogin(String email_in,String pass_in){
         boolean status=false;
