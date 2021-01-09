@@ -20,9 +20,36 @@ public class ServletMap extends HttpServlet {
         resp.setContentType("text/html");
         String HTML = htmlOutput();
         resp.getWriter().write(HTML); //Embed photo url for main store
-        resp.getWriter().write("  <img class=\"images\" src=\"https://bit.ly/main_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
-                " \n" +
-                "<script>\n" +
+        if(req.getServletPath().equals("/map")){
+            resp.getWriter().write("  <img class=\"images\" src=\"https://bit.ly/main_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
+                    " \n" +
+                    "<script>\n");
+        }
+
+        else if(req.getServletPath().equals("/map#cold_and_flu")){
+            resp.getWriter().write("<h3>Products in Cold and Flu</h3>\n" +
+                    "<img class=\"images\" src=\"https://bit.ly/cold_flu_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
+        }
+        else if(req.getServletPath().equals("/map#skincare")){
+            resp.getWriter().write("<h3>Products in Skincare</h3>\n" +
+                    "<img class=\"images\" src=\"https://bit.ly/skincare_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
+        }
+        else if(req.getServletPath().equals("/map#headaches_and_pain_relief")){
+            resp.getWriter().write("<h3>Products in Headaches and Pain Relief</h3>\n" +
+                    "<img class=\"images\" src=\"https://bit.ly/headache_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
+        }
+        else if(req.getServletPath().equals("/map#digestion")){
+            resp.getWriter().write("<h3>Products in Digestion</h3>\n" +
+                    "<img class=\"images\" src=\"https://bit.ly/digestion_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
+        }
+        else if(req.getServletPath().equals("/map#allergy")){
+            resp.getWriter().write("<h3>Products in Allergy</h3>\n" +
+                    "<img class=\"images\" src=\"https://bit.ly/allergy_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
+        }
+        else if(req.getServletPath().equals("/map#first_aid")){
+            resp.getWriter().write("<h3>Products in First Aid</h3>\n" +
+                    "<img class=\"images\" src=\"https://bit.ly/allergy_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
+        }
                 /*"   document.getElementById(\"cf\").onclick = function() {\n" +
                 "       var x = document.getElementById(\"cf\").innerHTML;\n" +
                 "       document.getElementById(\"category\").value = x\n" +
@@ -53,7 +80,7 @@ public class ServletMap extends HttpServlet {
                 "       document.getElementById(\"category\").value = x\n" +
                 "       document.getElementById(\"findCategory\").submit();\n" +
                 "   }\n" +*/
-                "    function redirectBrowse(){\n" +
+        resp.getWriter().write("    function redirectBrowse(){\n" +
                 "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
                 "    }\n" +
                 "</script>\n" +
@@ -67,14 +94,6 @@ public class ServletMap extends HttpServlet {
         String category = req.getParameter("category");
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
-        if(req.getServletPath().equals("/map#cold_and_flu")){
-            resp.getWriter().write("<h3>Cold and Flu</h3>\n" +
-                    "<img class=\"images\" src=\"https://bit.ly/cold_flu_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
-        }
-        else if(req.getServletPath().equals("/map#skincare")){
-            resp.getWriter().write("<h3>Skincare</h3>\n" +
-                    "<img class=\"images\" src=\"https://bit.ly/skincare_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
-        }
         /*resp.getWriter().write("    <section>\n" +
                 "      <div class=\"box\">\n" +
                 "        <h3>Products in " + category + ":</h3>\n" +
@@ -88,36 +107,9 @@ public class ServletMap extends HttpServlet {
             j++;
             p = LoginDAO.getProduct(j);
         }
-        String imageURL = "<img class=\"images\" src=\"https://bit.ly/main_map\" width=\"316\" height=\"400\">\n";
-        switch (category) {
-            case "Cold and Flu":
-                imageURL = "<img class=\"images\" src=\"https://bit.ly/cold_flu_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n";
-                break;
-            case "Skincare":
-                imageURL = "<img class=\"images\" src=\"https://bit.ly/skincare_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n";
-                break;
-            case "Headaches and Pain Relief":
-                imageURL = "<img class=\"images\" src=\"https://bit.ly/headache_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n";
-                break;
-            case "Digestion":
-                imageURL = "<img class=\"images\" src=\"https://bit.ly/digestion_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n";
-                break;
-            case "Allergy":
-                imageURL = "<img class=\"images\" src=\"https://bit.ly/allergy_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n";
-                break;
-            case "First Aid":
-                imageURL = "<img class=\"images\" src=\"https://bit.ly/first_aid_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n";
-                break;
-        }*/
 
-        resp.getWriter().write("</p>\n" +
-                "</div>\n" +
-                "    </section>\n" +
-                "\n" +
-                //imageURL +
-                " \n" +
                 "<script>\n" +
-                /*"   document.getElementById(\"cf\").onclick = function() {\n" +
+                "   document.getElementById(\"cf\").onclick = function() {\n" +
                 "       var x = document.getElementById(\"cf\").innerHTML;\n" +
                 "       document.getElementById(\"category\").value = x\n" +
                 "       document.getElementById(\"findCategory\").submit();\n" +
@@ -146,13 +138,13 @@ public class ServletMap extends HttpServlet {
                 "       var x = document.getElementById(\"fa\").innerHTML;\n" +
                 "       document.getElementById(\"category\").value = x\n" +
                 "       document.getElementById(\"findCategory\").submit();\n" +
-                "   }\n" +*/
+                "   }\n" +
                 "    function redirectBrowse(){\n" +
                 "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
                 "    }\n" +
                 "</script>\n" +
                 "</body>\n" +
-                "</html>");
+                "</html>");*/
 
     }
     public String htmlOutput(){
