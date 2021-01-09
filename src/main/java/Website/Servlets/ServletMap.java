@@ -67,7 +67,11 @@ public class ServletMap extends HttpServlet {
         String category = req.getParameter("category");
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
-        resp.getWriter().write("    <section>\n" +
+        if(req.getServletPath().equals("/map#cold_and_flu")){
+            resp.getWriter().write("<h3>Cold and Flu</h3>\n" +
+                    "<img class=\"images\" src=\"https://bit.ly/cold_flu_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
+        }
+        /*resp.getWriter().write("    <section>\n" +
                 "      <div class=\"box\">\n" +
                 "        <h3>Products in " + category + ":</h3>\n" +
                 "<p>");
@@ -100,13 +104,13 @@ public class ServletMap extends HttpServlet {
             case "First Aid":
                 imageURL = "<img class=\"images\" src=\"https://bit.ly/first_aid_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n";
                 break;
-        }
+        }*/
 
         resp.getWriter().write("</p>\n" +
                 "</div>\n" +
                 "    </section>\n" +
                 "\n" +
-                imageURL +
+                //imageURL +
                 " \n" +
                 "<script>\n" +
                 "   document.getElementById(\"cf\").onclick = function() {\n" +

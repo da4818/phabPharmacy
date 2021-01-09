@@ -243,17 +243,14 @@ public class LoginDAO {
     //Looks for user entry with the specific email and password, then returns this as a User class (similar variables to the table)
     public static User getUser(String email_in, String pass_in){
         User u = new User();
-        Connection c = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{
             Class.forName("org.postgresql.Driver");
-            c = DriverManager.getConnection(dbUrl);
-            ps = c.prepareStatement("select * from customer where email=? and pass_word=?");
+            Connection c = DriverManager.getConnection(dbUrl);
+            PreparedStatement ps = c.prepareStatement("select * from customer where email=? and pass_word=?");
             ps.setString(1,email_in);
             ps.setString(2,pass_in);
-            rs = ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 u.customer_id = rs.getInt("id");
                 u.fname = rs.getString("first_name");
