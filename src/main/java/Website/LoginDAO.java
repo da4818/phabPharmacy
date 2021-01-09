@@ -64,13 +64,38 @@ public class LoginDAO {
                         "('Benylin 4 Flu','24 caps',6.00,20,'Cold and Flu',false);");
 
                 s1.executeUpdate("INSERT INTO SHOP_PRODUCT (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('E45 Psoriasis Cream','50ml',20.00,15,'Skincare',false)," +
-                        "('Eurax Skin Cream','100g',5.70,15,'Skincare',false);");
-                s1.executeUpdate("INSERT INTO SHOP_PRODUCT (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Nurofen Meltlets','16 caps',4.00,40,'Headaches and Pain Relief',false);");
-                s1.executeUpdate("INSERT INTO SHOP_PRODUCT (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Dioralyte Blackcurrant','12 sachets',8.00,20,'Digestion',false);");
-                s1.executeUpdate("INSERT INTO SHOP_PRODUCT (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Benadryl Relief','24 caps',9.00,20,'Allergy',false);");
-                s1.executeUpdate("INSERT INTO SHOP_PRODUCT (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Dettol Antiseptic','500ml',3.20,20,'First Aid',false);");
+                        "('Eurax Skin Cream','100g',5.70,15,'Skincare',false)," +
+                        "('Skincare','Eucerin','Skin relief cream','50ml',9,7,20,20,false)," +
+                        "('Skincare','Eucerin','Face scrub','100ml',7.5,6,20,20,false)," +
+                        "('Skincare','Dermalex','Psoriasis cream','150ml',30,25,10,10,false)," +
+                        "('Skincare','Dermalex','Repair and Restore','100g',12,10,10,10,false)," +
+                        "('Skincare','Dermalex','Eczema cream','100g',25,22.2,5,5,false)," +
+                        "('Skincare','Cetaphil','Moisturising cream','50ml',10,7.6,20,20,false)," +
+                        "('Skincare','Cetaphil','Exfoliating cleanser','180ml',12,10.1,20,20,false);");
+                s1.executeUpdate("INSERT INTO SHOP_PRODUCT (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Nurofen Meltlets','16 caps',4.00,40,'Headaches and Pain Relief',false)," +
+                        "('Headaches and Pain Relief','Nurofen','Express','16 caps',4,3.5,30,30,false)," +
+                        "('Headaches and Pain Relief','Nurofen','Max strength','32 caps',7,6.2,25,25,false)," +
+                        "('Headaches and Pain Relief','Nurofen','Standard','16 caps',4,3.2,30,30,false)," +
+                        "('Headaches and Pain Relief','Cuprofen ','Max strength','96 caps',11,9,20,20,true)," +
+                        "('Headaches and Pain Relief','Solpadeine','Headache','16 caps',2,1.6,20,20,true)," +
+                        "('Headaches and Pain Relief','Anadin','Extra','16 caps',2.3,2,30,30,true)," +
+                        "('Headaches and Pain Relief','Anadin','Triple action','12 caps',2,1.9,30,30,true)," +
+                        "('Headaches and Pain Relief','Anadin','Original','16 caps',1.8,1.5,30,30,true)," +
+                        "('Headaches and Pain Relief','Disprin','Soluble','32 tablets',3.6,2.8,20,20,true);");
+                s1.executeUpdate("INSERT INTO SHOP_PRODUCT (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Dioralyte Blackcurrant','12 sachets',8.00,20,'Digestion',false)," +
+                        "('Digestion','Dioralyte','Lemon','12 sachets',8,7.3,20,20,false)," +
+                        "('Digestion','Gaviscon','Chewable','24 tablets',4.2,3.5,25,25,false)," +
+                        "('Digestion','Senokot','Max','10 tablets',3,2.7,10,10,false)," +
+                        "('Digestion','Gaviscon','Advance','300ml',10,8.1,10,10,false);");
+                s1.executeUpdate("INSERT INTO SHOP_PRODUCT (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Benadryl Relief','24 caps',9.00,20,'Allergy',false)," +
+                        "('Allergy','Piriteze','tabs','7 tablets',3,2.3,20,20,false)," +
+                        "('Allergy','Beconase','Relief','100 sprays',6,4,20,20,false);");
+                s1.executeUpdate("INSERT INTO SHOP_PRODUCT (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Dettol Antiseptic','500ml',3.20,20,'First Aid',false)," +
+                        "('First Aid','Dettol','Hand sanitizer','500ml',7,6.3,50,50,false)," +
+                        "('First Aid','Elastoplast','plasters','20 plasters',3,2,30,30,false)," +
+                        "('First Aid','TCP','Liquid','200ml',4,3.2,20,20,false);");
             }
-            else if(tableName.equals("orders")){ //*this orders table may be redundant as the values are the same as the basket
+            /*else if(tableName.equals("orders")){ //*this orders table may be redundant as the values are the same as the basket
                 String sql ="CREATE TABLE ORDER_PRODUCT " +
                         "(ID SERIAL PRIMARY KEY NOT NULL," +
                         " NAME VARCHAR(36) NOT NULL, " +
@@ -80,7 +105,7 @@ public class LoginDAO {
                         " LIMITED BOOLEAN NOT NULL, " +
                         " CUSTOMER_ID SMALLINT NOT NULL)";
                 s.executeUpdate(sql);
-            }
+            }*/
             else if(tableName.equals("logged")) { //this table is so that we can see which customer is currently logged in - there will only be at most 1 entry in this table, and will be updated when a new user logs in
                 String sql ="CREATE TABLE LOGGED_IN_CUSTOMER " +
                         "(ID SERIAL PRIMARY KEY NOT NULL," +
@@ -92,6 +117,15 @@ public class LoginDAO {
                         " ADDRESS VARCHAR(128)," +
                         " PHONE_NO VARCHAR(12))";
                 s.executeUpdate(sql);
+                String sql1 ="CREATE TABLE ORDER_PRODUCT " +
+                        "(ID SERIAL PRIMARY KEY NOT NULL," +
+                        " NAME VARCHAR(36) NOT NULL, " +
+                        " DESCRIPTION VARCHAR(36) NOT NULL, " +
+                        " PRICE DECIMAL(10,2) PRECISION NOT NULL, " +
+                        " QUANTITY SMALLINT NOT NULL, " +
+                        " LIMITED BOOLEAN NOT NULL, " +
+                        " CUSTOMER_ID SMALLINT NOT NULL)";
+                s.executeUpdate(sql1);
             }
             else if(tableName.equals("card_details")) { //this table is so that we can see which customer is currently logged in - there will only be at most 1 entry in this table, and will be updated when a new user logs in
                 String sql ="CREATE TABLE CARD_DETAILS " +
