@@ -19,7 +19,6 @@ public class ServletBrowse extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        LoginDAO.createTable("basket");
         String HTML= htmlOutput();
         resp.getWriter().write(HTML);
                 ArrayList<String> headers = getHeaderinfo("headers"); //See line 110
@@ -68,7 +67,7 @@ public class ServletBrowse extends HttpServlet {
         String logOut = req.getParameter("logOut");
         if (logOut.equals("Log Out")){
             LoginDAO.resetTable("logged");
-            LoginDAO.resetTable("basket");
+            LoginDAO.resetTable("baskets");
         }
         if (!LoginDAO.checkLoggedIn()){ //If no one is logged in, it will prevent them from adding items to their basket
             resp.getWriter().write("<pre><script>window.onload(alert(\"Please ensure that you have created an account and logged in before adding items to your basket.\"));</script></pre>");

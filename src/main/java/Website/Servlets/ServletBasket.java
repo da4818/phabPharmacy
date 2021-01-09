@@ -22,7 +22,7 @@ public class ServletBasket extends HttpServlet {
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
         DecimalFormat df = new DecimalFormat("0.00");
-        int n = LoginDAO.tableSize("basket");
+        int n = LoginDAO.tableSize("baskets");
         if(n > 0){
             Double totalBasket = LoginDAO.getBasketTotal();
             String total = df.format(totalBasket);
@@ -73,7 +73,7 @@ public class ServletBasket extends HttpServlet {
         String logOut = req.getParameter("logOut");
         if (logOut.equals("Log Out")){
            LoginDAO.resetTable("logged");
-            LoginDAO.resetTable("basket");
+            LoginDAO.resetTable("baskets");
         }
         String updateBasket = req.getParameter("update");
         int q = Integer.parseInt(req.getParameter("basketItemQuantity"));
@@ -87,7 +87,7 @@ public class ServletBasket extends HttpServlet {
         }
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
-        int n = LoginDAO.tableSize("basket");
+        int n = LoginDAO.tableSize("baskets");
         DecimalFormat df = new DecimalFormat("0.00");
         if(n > 0){
             Double totalBasket = LoginDAO.getBasketTotal();

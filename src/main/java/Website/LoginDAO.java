@@ -70,8 +70,8 @@ public class LoginDAO {
                 s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Benadryl Relief','24 caps',9.00,20,'Allergy',false);");
                 s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Dettol Antiseptic','500ml',3.20,20,'First Aid',false);");
             }
-            else if(tableName.equals("basket")){
-                String sql ="CREATE TABLE BASKET " +
+            else if(tableName.equals("baskets")){
+                String sql ="CREATE TABLE BASKETS " +
                         "(ID SERIAL PRIMARY KEY NOT NULL," +
                         " NAME VARCHAR(36) NOT NULL, " +
                         " DESCRIPTION VARCHAR(36) NOT NULL, " +
@@ -297,17 +297,17 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            String sql = "select * from basket where name='" + p_in.name + "';"; //we check if the user has previous added the item to the basket before
+            String sql = "select * from baskets where name='" + p_in.name + "';"; //we check if the user has previous added the item to the basket before
             Statement s = c.createStatement();
             ResultSet rs = s.executeQuery(sql);
             if(rs.next()){ //if they have, we will update the quantity to the most recent value they have chosen (it won't add the amount e.g. if they click x1 and then x3 it updates to x3, not x4 - this is for simplicity)
                 Statement s1 = c.createStatement();
-                String sql1 = "update basket set quantity =" + quantity_in + "where name='" + p_in.name+ "'";
+                String sql1 = "update baskets set quantity =" + quantity_in + "where name='" + p_in.name+ "'";
                 s1.executeUpdate(sql1);
                 s1.close();
             }
             else { //if they haven't previously added the item to the basket, it will create a new entry in the table
-                PreparedStatement ps = c.prepareStatement("insert into basket (id,name,description,price,quantity,limited) values(?,?,?,?,?,?)");
+                PreparedStatement ps = c.prepareStatement("insert into baskets (id,name,description,price,quantity,limited) values(?,?,?,?,?,?)");
                 ps.setInt(1,p_in.id);
                 ps.setString(2, p_in.name);
                 ps.setString(3, p_in.description);
@@ -329,7 +329,7 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            PreparedStatement ps=c.prepareStatement("with temp as (select row_number() over (order by name asc) as rownum, * from basket) select * from temp where rownum=?");
+            PreparedStatement ps=c.prepareStatement("with temp as (select row_number() over (order by name asc) as rownum, * from baskets) select * from temp where rownum=?");
             ps.setInt(1,n); //If one item is removed, the IDs aren't automatically updated e.g. if i remove item ID=2, table's ID will read as 1,3,4,5... this poses problems when using a for loop to display the information
             ResultSet rs=ps.executeQuery(); //SQL has no easy way to select item based on row number rather than an existing column - this is one solution
             while(rs.next()){ // If int n = 2 (i.e. the second item in the basket), this will correspond to the 2nd entry in the basket table based on alphabetical order ('order by name asc' gives alphabetical order)
@@ -351,7 +351,7 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            PreparedStatement ps=c.prepareStatement(" select * from basket where id=?");
+            PreparedStatement ps=c.prepareStatement(" select * from baskets where id=?");
             ps.setInt(1,n); //If one item is removed, the IDs aren't automatically updated e.g. if i remove item ID=2, table's ID will read as 1,3,4,5... this poses problems when using a for loop to display the information
             ResultSet rs=ps.executeQuery(); //SQL has no easy way to select item based on row number rather than an existing column - this is one solution
             while(rs.next()){ // If int n = 2 (i.e. the second item in the basket), this will correspond to the 2nd entry in the basket table based on alphabetical order ('order by name asc' gives alphabetical order)
@@ -394,7 +394,7 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            String sql = "select sum(price*quantity) from basket"; //For some reason it won't return the existing value in the subtotal column
+            String sql = "select sum(price*quantity) from baskets"; //For some reason it won't return the existing value in the subtotal column
             Statement s = c.createStatement();
             ResultSet rs = s.executeQuery(sql);
             while(rs.next()){
@@ -412,7 +412,7 @@ public class LoginDAO {
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
             Statement s = c.createStatement();
-            String sql = "delete from basket where id=" + id_in; //removes the item entry from the table
+            String sql = "delete from baskets where id=" + id_in; //removes the item entry from the table
             s.executeUpdate(sql);
 
             s.close();
@@ -445,7 +445,7 @@ public class LoginDAO {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            String sql = "select sum(quantity) from basket";//although similar to 'tableSize()', this counts the number of items, not just the number of different products
+            String sql = "select sum(quantity) from baskets";//although similar to 'tableSize()', this counts the number of items, not just the number of different products
             Statement s = c.createStatement(); //i.e. x3 vicks and x2 dettol is 5 items comprised of 2 different products - the basket displays 5
             ResultSet rs = s.executeQuery(sql);
             while(rs.next()){
