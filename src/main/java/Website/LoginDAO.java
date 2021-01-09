@@ -327,13 +327,11 @@ public class LoginDAO {
     }
     //When a customer logs in/registers, it will update the table holding the info of the current user to their details
     public static void setLoggedInUser(User loggedInUser){
-        Connection c = null;
-        Statement s = null;
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{
             Class.forName("org.postgresql.Driver");
-            c = DriverManager.getConnection(dbUrl);
-            s = c.createStatement();
+            Connection c = DriverManager.getConnection(dbUrl);
+            Statement s  = c.createStatement();
             s.executeUpdate("truncate table logged_in_customer"); //instead of updating the table it will just empty it and add a new entry
             String sql = "insert into logged_in_customer (first_name,last_name,email,pass_word,postcode,customer_id) SELECT first_name,last_name,email,pass_word,postcode,id FROM customer WHERE id=" +loggedInUser.customer_id +";";
             s.executeUpdate(sql);
@@ -370,15 +368,12 @@ public class LoginDAO {
     // Gets product attributes to display on browse page
     public static Product getProduct(int n){
         Product p = new Product();
-        Connection c = null;
-        Statement s = null;
-        ResultSet rs = null;
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{
             Class.forName("org.postgresql.Driver");
-            c = DriverManager.getConnection(dbUrl);
-            s = c.createStatement();;
-            rs = s.executeQuery("select * from shop_product where branch_id = 1 and barcode=" + n);
+            Connection c = DriverManager.getConnection(dbUrl);
+            Statement s = c.createStatement();;
+            ResultSet rs = s.executeQuery("select * from shop_product where branch_id = 1 and barcode=" + n);
             while(rs.next()){
                 p.barcode = rs.getInt("barcode");
                 p.category = rs.getString("category");
