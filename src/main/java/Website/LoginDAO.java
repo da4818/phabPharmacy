@@ -28,7 +28,7 @@ public class LoginDAO {
             Statement s = c.createStatement();
             Statement s1 = c.createStatement();
             if(tableName.equals("users")) { //* rename to 'customers'
-                String sql ="CREATE TABLE USERS " +
+                String sql ="CREATE TABLE CUSTOMER " +
                         "(ID SERIAL PRIMARY KEY NOT NULL," +
                         " FIRST_NAME VARCHAR(36) NOT NULL, " +
                         " LAST_NAME VARCHAR(36) NOT NULL, " +
@@ -38,11 +38,11 @@ public class LoginDAO {
                         " ADDRESS VARCHAR(128)," +
                         " PHONE_NO VARCHAR(12))"; //*add phone_no VARCHAR(12), address VARCHAR(128) to table
                 s.executeUpdate(sql);
-                s1.executeUpdate("INSERT INTO USERS (FIRST_NAME,LAST_NAME,EMAIL,PASS_WORD,POSTCODE,ADDRESS) VALUES ('John','Doe','email1','pass1','SW72AZ','Exhibiton Road');");
-                s1.executeUpdate("INSERT INTO USERS (FIRST_NAME,LAST_NAME,EMAIL,PASS_WORD,POSTCODE) VALUES ('Mia','Stewart','email2','pass2','SW65TD');");
+                s1.executeUpdate("INSERT INTO CUSTOMER (FIRST_NAME,LAST_NAME,EMAIL,PASS_WORD,POSTCODE,ADDRESS) VALUES ('John','Doe','email1','pass1','SW72AZ','Exhibiton Road');");
+                s1.executeUpdate("INSERT INTO CUSTOMER (FIRST_NAME,LAST_NAME,EMAIL,PASS_WORD,POSTCODE) VALUES ('Mia','Stewart','email2','pass2','SW65TD');");
             }
             else if(tableName.equals("products")){ //*rename to 'shop_products'
-                String sql ="CREATE TABLE PRODUCTS " +
+                String sql ="CREATE TABLE SHOP_PRODUCT " +
                         "(ID SERIAL PRIMARY KEY NOT NULL," +
                         " NAME VARCHAR(36) NOT NULL, " + // *separate into 'brand' and 'name'
                         " DESCRIPTION VARCHAR(36) NOT NULL, " + //*rename to 'amount'
@@ -52,7 +52,7 @@ public class LoginDAO {
                         " LIMITED BOOLEAN NOT NULL)"; //*I think boolean may be easier to manage than SMALLINT
                 //*add other columns (buy_price,soft/hard min)
                 s.executeUpdate(sql);
-                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Vicks Vaporub','100g',4.50,15,'Cold and Flu',false)," +
+                s1.executeUpdate("INSERT INTO SHOP_PRODUCT (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Vicks Vaporub','100g',4.50,15,'Cold and Flu',false)," +
                         "('Vicks First Defence','15ml',6.80,20,'Cold and Flu',false)," +
                         "('Gsk Night Nurse','160ml',8.50,30,'Cold and Flu',false)," +
                         "('Gsk Night Nurse','160ml',9.00,30,'Cold and Flu',false)," +
@@ -63,12 +63,12 @@ public class LoginDAO {
                         "('Benylin Mucus Relief','16 caps',4.80,20,'Cold and Flu',false)," +
                         "('Benylin 4 Flu','24 caps',6.00,20,'Cold and Flu',false);");
 
-                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('E45 Psoriasis Cream','50ml',20.00,15,'Skincare',false)," +
+                s1.executeUpdate("INSERT INTO SHOP_PRODUCT (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('E45 Psoriasis Cream','50ml',20.00,15,'Skincare',false)," +
                         "('Eurax Skin Cream','100g',5.70,15,'Skincare',false);");
-                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Nurofen Meltlets','16 caps',4.00,40,'Headaches and Pain Relief',false);");
-                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Dioralyte Blackcurrant','12 sachets',8.00,20,'Digestion',false);");
-                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Benadryl Relief','24 caps',9.00,20,'Allergy',false);");
-                s1.executeUpdate("INSERT INTO PRODUCTS (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Dettol Antiseptic','500ml',3.20,20,'First Aid',false);");
+                s1.executeUpdate("INSERT INTO SHOP_PRODUCT (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Nurofen Meltlets','16 caps',4.00,40,'Headaches and Pain Relief',false);");
+                s1.executeUpdate("INSERT INTO SHOP_PRODUCT (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Dioralyte Blackcurrant','12 sachets',8.00,20,'Digestion',false);");
+                s1.executeUpdate("INSERT INTO SHOP_PRODUCT (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Benadryl Relief','24 caps',9.00,20,'Allergy',false);");
+                s1.executeUpdate("INSERT INTO SHOP_PRODUCT (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Dettol Antiseptic','500ml',3.20,20,'First Aid',false);");
             }
             else if(tableName.equals("orders")){ //*this orders table may be redundant as the values are the same as the basket
                 String sql ="CREATE TABLE ORDER_PRODUCT " +
@@ -82,7 +82,7 @@ public class LoginDAO {
                 s.executeUpdate(sql);
             }
             else if(tableName.equals("logged")) { //this table is so that we can see which customer is currently logged in - there will only be at most 1 entry in this table, and will be updated when a new user logs in
-                String sql ="CREATE TABLE LOGGED " +
+                String sql ="CREATE TABLE LOGGED_IN_CUSTOMER " +
                         "(ID SERIAL PRIMARY KEY NOT NULL," +
                         " FIRST_NAME VARCHAR(36) NOT NULL, " +
                         " LAST_NAME VARCHAR(36) NOT NULL, " +
