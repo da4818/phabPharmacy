@@ -72,6 +72,7 @@ public class LoginDAO {
                         "('Skincare','Dermalex','Eczema cream','100g',25,22.2,5,5,false)," +
                         "('Skincare','Cetaphil','Moisturising cream','50ml',10,7.6,20,20,false)," +
                         "('Skincare','Cetaphil','Exfoliating cleanser','180ml',12,10.1,20,20,false);");
+
                 s1.executeUpdate("INSERT INTO SHOP_PRODUCT (NAME,DESCRIPTION,PRICE,QUANTITY,CATEGORY,LIMITED) VALUES ('Nurofen Meltlets','16 caps',4.00,40,'Headaches and Pain Relief',false)," +
                         "('Headaches and Pain Relief','Nurofen','Express','16 caps',4,3.5,30,30,false)," +
                         "('Headaches and Pain Relief','Nurofen','Max strength','32 caps',7,6.2,25,25,false)," +
