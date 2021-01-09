@@ -599,13 +599,32 @@ public class LoginDAO {
         try{
             Class.forName("org.postgresql.Driver");
             c = DriverManager.getConnection(dbUrl);
-            String sql = "select count(*) from " + tableName + ";"; //'select count(*)' gets the number of entries
-            s = c.createStatement();
-            rs = s.executeQuery(sql);
-            while(rs.next()){
-                String p = rs.getString(1); //'select count' returns a string value, not a number
-                n = Integer.parseInt(p); //so we convert that string to an integer
+            if (tableName.equals("ordered_product")){
+                String sql = "select customer_id from logged_in_customer;";
+                rs = s.executeQuery(sql);
+                int cust_id = 0;
+                while(rs.next()){
+                    cust_id = rs.getInt("customer_id");
+                }
+                String sql1 = "select count(*) from ordered_product where customer_id=" + cust_id + ";"; //'select count(*)' gets the number of entries
+                s = c.createStatement();
+                rs = s.executeQuery(sql1);
+                while(rs.next()){
+                    String p = rs.getString(1); //'select count' returns a string value, not a number
+                    n = Integer.parseInt(p); //so we convert that string to an integer
+                }
             }
+            else{
+                String sql = "select count(*) from " + tableName + ";"; //'select count(*)' gets the number of entries
+                s = c.createStatement();
+                rs = s.executeQuery(sql);
+                while(rs.next()){
+                    String p = rs.getString(1); //'select count' returns a string value, not a number
+                    n = Integer.parseInt(p); //so we convert that string to an integer
+                }
+            }
+
+
 
             rs.close();
             s.close();

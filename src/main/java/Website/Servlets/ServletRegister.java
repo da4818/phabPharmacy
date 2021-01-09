@@ -36,7 +36,7 @@ public class ServletRegister extends HttpServlet {
         String logOut = req.getParameter("logOut");
         if (logOut.equals("Log Out")){
             LoginDAO.resetTable("logged_in_customer");
-            LoginDAO.resetTable("ordered_products");
+            //LoginDAO.resetTable("ordered_products");
         }
         String HTML = htmlOutput();
         String fn = req.getParameter("fname");
