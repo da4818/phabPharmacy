@@ -202,7 +202,7 @@ public class LoginDAO {
         try{
             Class.forName("org.postgresql.Driver");
             c = DriverManager.getConnection(dbUrl);
-            ps = c.prepareStatement("select * from customer where email=? and pass_word=?");
+            ps = c.prepareStatement("select * from customer where email=? and pass_word=?;");
             ps.setString(1,email_in);
             ps.setString(2,pass_in);
             rs = ps.executeQuery();
@@ -227,7 +227,7 @@ public class LoginDAO {
         try{
             Class.forName("org.postgresql.Driver");
             c = DriverManager.getConnection(dbUrl);
-            ps = c.prepareStatement("select * from customer where email=?");
+            ps = c.prepareStatement("select * from customer where email=?;");
             ps.setString(1,email_in);
             rs = ps.executeQuery();
             status = rs.next(); //similar to line 121
@@ -247,7 +247,7 @@ public class LoginDAO {
         try{
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            PreparedStatement ps = c.prepareStatement("select * from customer where email=? and pass_word=?");
+            PreparedStatement ps = c.prepareStatement("select * from customer where email=? and pass_word=?;");
             ps.setString(1,email_in);
             ps.setString(2,pass_in);
             ResultSet rs = ps.executeQuery();
@@ -277,7 +277,7 @@ public class LoginDAO {
         try{
             Class.forName("org.postgresql.Driver");
             c = DriverManager.getConnection(dbUrl);
-            ps = c.prepareStatement("insert into customer(first_name,last_name,email,pass_word,postcode,address,phone_no) values(?,?,?,?,?,?,?)");
+            ps = c.prepareStatement("insert into customer(first_name,last_name,email,pass_word,postcode,address,phone_no) values(?,?,?,?,?,?,?);");
             ps.setString(1,fname_in);
             ps.setString(2,lname_in);
             ps.setString(3,email_in);
@@ -328,9 +328,9 @@ public class LoginDAO {
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
             Statement s  = c.createStatement();
-            s.executeUpdate("truncate table logged_in_customer"); //instead of updating the table it will just empty it and add a new entry
+            s.executeUpdate("truncate table logged_in_customer;"); //instead of updating the table it will just empty it and add a new entry
             //String sql = "insert into logged_in_customer(first_name,last_name,email,pass_word,postcode,customer_id) SELECT first_name,last_name,email,pass_word,postcode,id FROM customer WHERE id=" +loggedInUser.customer_id +";";
-            PreparedStatement ps = c.prepareStatement("insert into logged_in_customer(first_name,last_name,email,postcode,customer_id) VALUES (?,?,?,?,?)");
+            PreparedStatement ps = c.prepareStatement("insert into logged_in_customer(first_name,last_name,email,postcode,customer_id) VALUES (?,?,?,?,?);");
             ps.setString(1,loggedInUser.fname);
             ps.setString(2,loggedInUser.lname);
             ps.setString(3,loggedInUser.email);
@@ -355,7 +355,7 @@ public class LoginDAO {
             Class.forName("org.postgresql.Driver");
             c = DriverManager.getConnection(dbUrl);
             s = c.createStatement();
-            rs = s.executeQuery("select * from logged_in_customer");
+            rs = s.executeQuery("select * from logged_in_customer;");
             status = rs.next(); //Status is now true if an entry with the email and password exists (i.e. the only entry in the table)
 
             rs.close();
@@ -375,7 +375,7 @@ public class LoginDAO {
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
             Statement s = c.createStatement();;
-            ResultSet rs = s.executeQuery("select * from shop_product where branch_id = 1 and barcode=" + n);
+            ResultSet rs = s.executeQuery("select * from shop_product where branch_id = 1 and barcode=" + n +";");
             while(rs.next()){
                 p.barcode = rs.getInt("barcode");
                 p.category = rs.getString("category");
@@ -397,16 +397,13 @@ public class LoginDAO {
 
     // Adds product to a basket table
     public static void addToBasket(Product p_in, int quantity_in){
-        ResultSet rs = null;
-        ResultSet rs1 = null;
-        PreparedStatement ps = null;
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{ //if the customer adds Vicks vaporub x1 and then adds the same product but x2 again, we want it to display 'x2' rather than 'x1' and 'x2' appearing separately
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
             Statement s = c.createStatement();
             String sql = "select customer_id from logged_in_customer;";
-            rs = s.executeQuery(sql);
+            ResultSet rs = s.executeQuery(sql);
             int cust_id = 0;
             while(rs.next()){
                 cust_id = rs.getInt("customer_id");
@@ -414,14 +411,14 @@ public class LoginDAO {
 
             String sql1 = "select * from ordered_product where name='" + p_in.name + "' and customer_id=;" + cust_id + ";"; //We check if the user has previously added the item to the basket before
             Statement s1 = c.createStatement();
-            rs1 = s1.executeQuery(sql1);
+            ResultSet rs1 = s1.executeQuery(sql1);
             if(rs1.next()){ //If they have, we will update the quantity to the most recent value they have chosen (it won't add the amount on e.g. if they click x1 and then x3 it updates to x3, not x4 - this is for simplicity)
                 Statement s2 = c.createStatement();
-                String sql2 = "update ordered_product set quantity =" + quantity_in + "where name='" + p_in.name + "' and customer_id=" + cust_id + ";";
+                String sql2 = "update ordered_product set quantity =" + quantity_in + " where name='" + p_in.name + "' and customer_id=" + cust_id + ";";
                 s2.executeUpdate(sql2);
             }
             else { //If they haven't previously added the item to the basket, it will create a new entry in the table
-                ps = c.prepareStatement("insert into ordered_product (barcode,category,brand,name,amount,sell_price,quantity,limit_of_1,customer_id) values(?,?,?,?,?,?,?,?,?);");
+                PreparedStatement ps = c.prepareStatement("insert into ordered_product (barcode,category,brand,name,amount,sell_price,quantity,limit_of_1,customer_id) values(?,?,?,?,?,?,?,?,?);");
                 ps.setInt(1,p_in.barcode);
                 ps.setString(2, p_in.category);
                 ps.setString(3, p_in.brand);
@@ -432,10 +429,10 @@ public class LoginDAO {
                 ps.setBoolean(8, p_in.limited);
                 ps.setInt(9,cust_id);
                 ps.executeUpdate();
+                ps.close();
             }
             rs.close();
             rs1.close();
-            ps.close();
             s.close();
             s1.close();
             c.close();
@@ -463,7 +460,7 @@ public class LoginDAO {
             while(rs.next()){
                 cust_id = rs.getInt("customer_id");
             }
-            ps = c.prepareStatement("with temp as (select row_number() over (order by name asc) as rownum, * from ordered_product where customer_id=" + cust_id + ") select * from temp where rownum=?");
+            ps = c.prepareStatement("with temp as (select row_number() over (order by name asc) as rownum, * from ordered_product where customer_id=" + cust_id + ") select * from temp where rownum=?;");
             ps.setInt(1,n); //If one item is removed, the IDs aren't automatically updated e.g. if i remove item ID=2, table's ID will read as 1,3,4,5... this poses problems when using a for loop to display the information
             rs1 = ps.executeQuery(); //SQL has no easy way to select item based on row number rather than an existing column - this is one solution
             while(rs1.next()){ // If int n = 2 (i.e. the second item in the basket), this will correspond to the 2nd entry in the basket table based on alphabetical order ('order by name asc' gives alphabetical order)
@@ -502,7 +499,7 @@ public class LoginDAO {
             while(rs.next()){
                 cust_id = rs.getInt("customer_id");
             }
-            String sql1 = "select sum(sell_price*quantity) from ordered_product where customer_id=" +cust_id; //For some reason it won't return the existing value in the subtotal column
+            String sql1 = "select sum(sell_price*quantity) from ordered_product where customer_id=" + cust_id + ";"; //For some reason it won't return the existing value in the subtotal column
             s1 = c.createStatement();
             rs1 = s.executeQuery(sql1);
             while(rs1.next()){
@@ -537,7 +534,7 @@ public class LoginDAO {
                 cust_id = rs.getInt("customer_id");
             }
             s1 = c.createStatement();
-            String sql1 = "delete from ordered_product where customer_id=" + cust_id + "and barcode=" + id_in; //removes the item entry from the table
+            String sql1 = "delete from ordered_product where customer_id=" + cust_id + " and barcode=" + id_in + ";"; //removes the item entry from the table
             s1.executeUpdate(sql1);
 
             rs.close();
@@ -647,7 +644,7 @@ public class LoginDAO {
             while(rs.next()){
                 cust_id = rs.getInt("customer_id");
             }
-            String sql1 = "select sum(quantity) from ordered_product where customer_id=" + cust_id;//although similar to 'tableSize()', this counts the number of items, not just the number of different products
+            String sql1 = "select sum(quantity) from ordered_product where customer_id=" + cust_id + ";";//although similar to 'tableSize()', this counts the number of items, not just the number of different products
             s = c.createStatement(); //i.e. x3 vicks and x2 dettol is 5 items comprised of 2 different products - the basket displays 5
             rs = s.executeQuery(sql1);
             while(rs.next()){

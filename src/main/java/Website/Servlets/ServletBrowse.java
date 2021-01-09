@@ -74,7 +74,6 @@ public class ServletBrowse extends HttpServlet {
             int pos = Integer.parseInt(req.getParameter("buttonNumber"));
             int q = Integer.parseInt(req.getParameter("basketQuantity"));
             Product pBasket = LoginDAO.getProduct(pos);
-            resp.getWriter().write("<p>" + pBasket.name +": " + q +"</p>");
             LoginDAO.addToBasket(pBasket,q);
         }
         resp.getWriter().write(HTML);
