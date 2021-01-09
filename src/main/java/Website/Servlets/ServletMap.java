@@ -319,12 +319,12 @@ public class ServletMap extends HttpServlet {
                 "          <button class=\"buttonStyle\" style=\"dropbtn; width: 222px;\">Categories</button>\n" +
                 "          <div class=\"dropdown-content\">\n" +
                 "            <form id=\"findCategory\" action=\"map\" method=\"post\">\n" +
-                "            <a id=\"cf\" href=\"#cold_and_flu\"> Cold and Flu</a>\n" +
-                "            <a id=\"s\" href=\"#skincare\"> Skincare</a>\n" +
-                "            <a id=\"hpr\" href=\"#Headaches and Pain Relief\">Headaches and Pain Relief</a>\n" +
-                "            <a id=\"d\" href=\"#Digestion\">Digestion</a>\n" +
-                "            <a id=\"a\" href=\"#Allergy\">Allergy</a>\n" +
-                "            <a id=\"fa\" href=\"#First Aid\">First Aid</a>\n" +
+                "            <a id=\"cf\" href=\"https://phabpharmacy.herokuapp.com/map#cold_and_flu\"> Cold and Flu</a>\n" +
+                "            <a id=\"s\" href=\"https://phabpharmacy.herokuapp.com/map#skincare\"> Skincare</a>\n" +
+                "            <a id=\"hpr\" href=\"https://phabpharmacy.herokuapp.com/map#Headaches and Pain Relief\">Headaches and Pain Relief</a>\n" +
+                "            <a id=\"d\" href=\"https://phabpharmacy.herokuapp.com/map#Digestion\">Digestion</a>\n" +
+                "            <a id=\"a\" href=\"https://phabpharmacy.herokuapp.com/map#Allergy\">Allergy</a>\n" +
+                "            <a id=\"fa\" href=\"https://phabpharmacy.herokuapp.com/map#First Aid\">First Aid</a>\n" +
                 "            <input id=\"category\" name=\"category\" type=\"hidden\">\n" +
                 "            </form>  \n" +
                 "          </div>\n" +

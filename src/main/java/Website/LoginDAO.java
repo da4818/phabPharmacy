@@ -331,7 +331,7 @@ public class LoginDAO {
             Statement s  = c.createStatement();
             s.executeUpdate("truncate table logged_in_customer"); //instead of updating the table it will just empty it and add a new entry
             //String sql = "insert into logged_in_customer(first_name,last_name,email,pass_word,postcode,customer_id) SELECT first_name,last_name,email,pass_word,postcode,id FROM customer WHERE id=" +loggedInUser.customer_id +";";
-            PreparedStatement ps =c.prepareStatement("insert into logged_in_customer(first_name,last_name,email,pass_word,postcode,customer_id) VALUES (?,?,?,?,?,?)");
+            PreparedStatement ps = c.prepareStatement("insert into logged_in_customer(first_name,last_name,email,pass_word,postcode,customer_id) VALUES (?,?,?,?,?,?)");
             ps.setString(1,loggedInUser.fname);
             ps.setString(2,loggedInUser.lname);
             ps.setString(3,loggedInUser.email);
