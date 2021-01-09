@@ -73,7 +73,8 @@ public class ServletBrowse extends HttpServlet {
             int pos = Integer.parseInt(req.getParameter("buttonNumber"));
             int q = Integer.parseInt(req.getParameter("basketQuantity"));
             Product pBasket = LoginDAO.getProduct(pos);
-            LoginDAO.addToBasket(pBasket,q);
+            resp.getWriter().write("<p>" + pBasket.name +": " + q +"</p>");
+            //LoginDAO.addToBasket(pBasket,q);
         }
         resp.getWriter().write(HTML);
         //ArrayList<String> headers = getHeaderinfo("headers");
@@ -142,7 +143,7 @@ public class ServletBrowse extends HttpServlet {
             displayCurrentUser = "     <form name=\"logOut\" action=\"home\" method=\"post\">\n" +
                     "       <div style=\"float: right;\" class=\"currentUser\">" + cUser.fname +"<i class=\"fa fa-fw fa-user\"></i>\n" +
                     "        <div class=\"logOut\">\n" +
-                    "          <input class=\"logOutButton\" type=\"submit\" value=\"Log Out\">\n" +
+                    "          <input type=\"submit\" name=\"logOut\" class=\"logOutButton\" value=\"Log Out\">\n" +
                     "        </div>\n" +
                     "      </div>\n" +
                     "    </form>\n";

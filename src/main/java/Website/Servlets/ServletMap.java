@@ -21,14 +21,14 @@ public class ServletMap extends HttpServlet {
         String HTML = htmlOutput();
         resp.getWriter().write(HTML); //Embed photo url for main store
         if(req.getServletPath().equals("/map")){
-            resp.getWriter().write("  <img class=\"images\" src=\"https://bit.ly/main_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
+            resp.getWriter().write("<img class=\"images\" src=\"https://bit.ly/main_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
                     " \n" +
                     "<script>\n");
         }
 
         else if(req.getServletPath().equals("/map/cold_and_flu")){
-            resp.getWriter().write("<br><h3>Products in Cold and Flu</h3>\n" +
-                    "<img class=\"images\" src=\"https://bit.ly/cold_flu_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
+            resp.getWriter().write("<img class=\"images\" src=\"https://bit.ly/cold_flu_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
+                    "<h3>Products in Cold and Flu</h3>\n");
         }
         else if(req.getServletPath().equals("/map/skincare")){
             resp.getWriter().write("<h3>Products in Skincare</h3>\n" +
@@ -50,36 +50,6 @@ public class ServletMap extends HttpServlet {
             resp.getWriter().write("<h3>Products in First Aid</h3>\n" +
                     "<img class=\"images\" src=\"https://bit.ly/allergy_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
         }
-                /*"   document.getElementById(\"cf\").onclick = function() {\n" +
-                "       var x = document.getElementById(\"cf\").innerHTML;\n" +
-                "       document.getElementById(\"category\").value = x\n" +
-                "       document.getElementById(\"findCategory\").submit();\n" +
-                "   }\n" +
-                "   document.getElementById(\"s\").onclick = function() {\n" +
-                "       var x = document.getElementById(\"s\").innerHTML;\n" +
-                "       document.getElementById(\"category\").value = x\n" +
-                "   document.getElementById(\"findCategory\").submit();\n" +
-                "   }\n" +
-                "   document.getElementById(\"hpr\").onclick = function() {\n" +
-                "       var x = document.getElementById(\"hpr\").innerHTML;\n" +
-                "       document.getElementById(\"category\").value = x\n" +
-                "       document.getElementById(\"findCategory\").submit();\n" +
-                "   }\n" +
-                "   document.getElementById(\"d\").onclick = function() {\n" +
-                "       var x = document.getElementById(\"d\").innerHTML;\n" +
-                "       document.getElementById(\"category\").value = x\n" +
-                "       document.getElementById(\"findCategory\").submit();\n" +
-                "   }\n" +
-                "   document.getElementById(\"a\").onclick = function() {\n" +
-                "       var x = document.getElementById(\"a\").innerHTML;\n" +
-                "       document.getElementById(\"category\").value = x\n" +
-                "       document.getElementById(\"findCategory\").submit();\n" +
-                "   }\n" +
-                "   document.getElementById(\"fa\").onclick = function() {\n" +
-                "       var x = document.getElementById(\"fa\").innerHTML;\n" +
-                "       document.getElementById(\"category\").value = x\n" +
-                "       document.getElementById(\"findCategory\").submit();\n" +
-                "   }\n" +*/
         resp.getWriter().write("<script>\n" +
                 "function redirectBrowse(){\n" +
                 "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
@@ -92,61 +62,6 @@ public class ServletMap extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        String category = req.getParameter("category");
-        String HTML = htmlOutput();
-        resp.getWriter().write(HTML);
-        /*resp.getWriter().write("    <section>\n" +
-                "      <div class=\"box\">\n" +
-                "        <h3>Products in " + category + ":</h3>\n" +
-                "<p>");
-        int j = 1;
-        Product p = LoginDAO.getProduct(j);
-        while (j < 42){ //Number of items in Paddington branch store
-            if (p.category.equals(category)) {
-                resp.getWriter().write(p.brand + " " + p.name + " - " + p.amount + "<br>");
-            }
-            j++;
-            p = LoginDAO.getProduct(j);
-        }
-
-                "<script>\n" +
-                "   document.getElementById(\"cf\").onclick = function() {\n" +
-                "       var x = document.getElementById(\"cf\").innerHTML;\n" +
-                "       document.getElementById(\"category\").value = x\n" +
-                "       document.getElementById(\"findCategory\").submit();\n" +
-                "   }\n" +
-                "   document.getElementById(\"s\").onclick = function() {\n" +
-                "       var x = document.getElementById(\"s\").innerHTML;\n" +
-                "       document.getElementById(\"category\").value = x\n" +
-                "   document.getElementById(\"findCategory\").submit();\n" +
-                "   }\n" +
-                "   document.getElementById(\"hpr\").onclick = function() {\n" +
-                "       var x = document.getElementById(\"hpr\").innerHTML;\n" +
-                "       document.getElementById(\"category\").value = x\n" +
-                "       document.getElementById(\"findCategory\").submit();\n" +
-                "   }\n" +
-                "   document.getElementById(\"d\").onclick = function() {\n" +
-                "       var x = document.getElementById(\"d\").innerHTML;\n" +
-                "       document.getElementById(\"category\").value = x\n" +
-                "       document.getElementById(\"findCategory\").submit();\n" +
-                "   }\n" +
-                "   document.getElementById(\"a\").onclick = function() {\n" +
-                "       var x = document.getElementById(\"a\").innerHTML;\n" +
-                "       document.getElementById(\"category\").value = x\n" +
-                "       document.getElementById(\"findCategory\").submit();\n" +
-                "   }\n" +
-                "   document.getElementById(\"fa\").onclick = function() {\n" +
-                "       var x = document.getElementById(\"fa\").innerHTML;\n" +
-                "       document.getElementById(\"category\").value = x\n" +
-                "       document.getElementById(\"findCategory\").submit();\n" +
-                "   }\n" +
-                "    function redirectBrowse(){\n" +
-                "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
-                "    }\n" +
-                "</script>\n" +
-                "</body>\n" +
-                "</html>");*/
-
     }
     public String htmlOutput(){
         boolean userLoggedIn = LoginDAO.checkLoggedIn();
@@ -157,7 +72,7 @@ public class ServletMap extends HttpServlet {
             displayCurrentUser = "     <form name=\"logOut\" action=\"home\" method=\"post\">\n" +
                     "       <div style=\"float: right;\" class=\"currentUser\">" + cUser.fname +"<i class=\"fa fa-fw fa-user\"></i>\n" +
                     "        <div class=\"logOut\">\n" +
-                    "          <input class=\"logOutButton\" type=\"submit\" value=\"Log Out\">\n" +
+                    "          <input type=\"submit\" name=\"logOut\" class=\"logOutButton\" value=\"Log Out\">\n" +
                     "        </div>\n" +
                     "      </div>\n" +
                     "    </form>\n";
@@ -315,15 +230,12 @@ public class ServletMap extends HttpServlet {
                 "        <div class=\"dropdown\">\n" +
                 "          <button class=\"buttonStyle\" style=\"dropbtn; width: 222px;\">Categories</button>\n" +
                 "          <div class=\"dropdown-content\">\n" +
-                "            <form id=\"findCategory\" action=\"map\" method=\"post\">\n" +
                 "            <a id=\"cf\" href=\"https://phabpharmacy.herokuapp.com/map/cold_and_flu\"> Cold and Flu</a>\n" +
                 "            <a id=\"s\" href=\"https://phabpharmacy.herokuapp.com/map/skincare\"> Skincare</a>\n" +
-                "            <a id=\"hpr\" href=\"https://phabpharmacy.herokuapp.com/map#headaches_and_pain_relief\">Headaches and Pain Relief</a>\n" +
-                "            <a id=\"d\" href=\"https://phabpharmacy.herokuapp.com/map#digestion\">Digestion</a>\n" +
-                "            <a id=\"a\" href=\"https://phabpharmacy.herokuapp.com/map#allergy\">Allergy</a>\n" +
-                "            <a id=\"fa\" href=\"https://phabpharmacy.herokuapp.com/map#first_aid\">First Aid</a>\n" +
-                "            <input id=\"category\" name=\"category\" type=\"hidden\">\n" +
-                "            </form>  \n" +
+                "            <a id=\"hpr\" href=\"https://phabpharmacy.herokuapp.com/map/headaches_and_pain_relief\">Headaches and Pain Relief</a>\n" +
+                "            <a id=\"d\" href=\"https://phabpharmacy.herokuapp.com/map/digestion\">Digestion</a>\n" +
+                "            <a id=\"a\" href=\"https://phabpharmacy.herokuapp.com/map/allergy\">Allergy</a>\n" +
+                "            <a id=\"fa\" href=\"https://phabpharmacy.herokuapp.com/map/first_aid\">First Aid</a>\n" +
                 "          </div>\n" +
                 "        </div>\n" +
                 "    </div>\n" +
