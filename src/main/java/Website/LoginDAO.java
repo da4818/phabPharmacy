@@ -444,25 +444,20 @@ public class LoginDAO {
     // Gets info from products added to basket to display on basket page, based on the position it appears on the page (line 301)
     public static Product getBasketInfo(int n){
         Product p = new Product();
-        Connection c = null;
-        PreparedStatement ps = null;
-        Statement s = null;
-        ResultSet rs = null;
-        ResultSet rs1 = null;
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{
             Class.forName("org.postgresql.Driver");
-            c = DriverManager.getConnection(dbUrl);
-            s = c.createStatement();
+            Connection c = DriverManager.getConnection(dbUrl);
+            Statement s = c.createStatement();
             String sql = "select customer_id from logged_in_customer;";
-            rs = s.executeQuery(sql);
+            ResultSet rs = s.executeQuery(sql);
             int cust_id = 0;
             while(rs.next()){
                 cust_id = rs.getInt("customer_id");
             }
-            ps = c.prepareStatement("with temp as (select row_number() over (order by name asc) as rownum, * from ordered_product where customer_id=" + cust_id + ") select * from temp where rownum=?;");
+            PreparedStatement ps = c.prepareStatement("with temp as (select row_number() over (order by name asc) as rownum, * from ordered_product where customer_id=" + cust_id + ") select * from temp where rownum=?;");
             ps.setInt(1,n); //If one item is removed, the IDs aren't automatically updated e.g. if i remove item ID=2, table's ID will read as 1,3,4,5... this poses problems when using a for loop to display the information
-            rs1 = ps.executeQuery(); //SQL has no easy way to select item based on row number rather than an existing column - this is one solution
+            ResultSet rs1 = ps.executeQuery(); //SQL has no easy way to select item based on row number rather than an existing column - this is one solution
             while(rs1.next()){ // If int n = 2 (i.e. the second item in the basket), this will correspond to the 2nd entry in the basket table based on alphabetical order ('order by name asc' gives alphabetical order)
                 p.barcode = rs1.getInt("barcode");
                 p.brand = rs1.getString("brand");
@@ -483,25 +478,20 @@ public class LoginDAO {
     }
     public static Double getBasketTotal(){
         double total = 0;
-        Connection c = null;
-        Statement s = null;
-        Statement s1 = null;
-        ResultSet rs = null;
-        ResultSet rs1 = null;
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{
             Class.forName("org.postgresql.Driver");
-            c = DriverManager.getConnection(dbUrl);
-            s = c.createStatement();
+            Connection c = DriverManager.getConnection(dbUrl);
+            Statement s = c.createStatement();
             String sql = "select customer_id from logged_in_customer;";
-            rs = s.executeQuery(sql);
+            ResultSet rs = s.executeQuery(sql);
             int cust_id = 0;
             while(rs.next()){
                 cust_id = rs.getInt("customer_id");
             }
             String sql1 = "select sum(sell_price*quantity) from ordered_product where customer_id=" + cust_id + ";"; //For some reason it won't return the existing value in the subtotal column
-            s1 = c.createStatement();
-            rs1 = s.executeQuery(sql1);
+            Statement s1 = c.createStatement();
+            ResultSet rs1 = s.executeQuery(sql1);
             while(rs1.next()){
                 total = rs1.getDouble(1);
             }
@@ -518,22 +508,18 @@ public class LoginDAO {
     }
     //Removes item from the basket database when trash icon is pressed
     public static void removeFromBasket(int id_in){
-        Connection c = null;
-        Statement s = null;
-        Statement s1 = null;
-        ResultSet rs = null;
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{
             Class.forName("org.postgresql.Driver");
-            c = DriverManager.getConnection(dbUrl);
-            s = c.createStatement();
+            Connection c = DriverManager.getConnection(dbUrl);
+            Statement s = c.createStatement();
             String sql = "select customer_id from logged_in_customer;";
-            rs = s.executeQuery(sql);
+            ResultSet rs = s.executeQuery(sql);
             int cust_id = 0;
             while(rs.next()){
                 cust_id = rs.getInt("customer_id");
             }
-            s1 = c.createStatement();
+            Statement s1 = c.createStatement();
             String sql1 = "delete from ordered_product where customer_id=" + cust_id + " and barcode=" + id_in + ";"; //removes the item entry from the table
             s1.executeUpdate(sql1);
 
@@ -547,24 +533,19 @@ public class LoginDAO {
     }
     public static CreditCard getCurrentCard(){
         CreditCard cc = new CreditCard();
-        Connection c = null;
-        PreparedStatement ps = null;
-        Statement s = null;
-        ResultSet rs = null;
-        ResultSet rs1 = null;
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{
             Class.forName("org.postgresql.Driver");
-            c = DriverManager.getConnection(dbUrl);
-            s = c.createStatement();
+            Connection c = DriverManager.getConnection(dbUrl);
+            Statement s = c.createStatement();
             String sql = "select customer_id from logged_in_customer;";
-            rs = s.executeQuery(sql);
+            ResultSet rs = s.executeQuery(sql);
             int cust_id = 0;
             while(rs.next()){
                 cust_id = rs.getInt("customer_id");
             }
-            ps = c.prepareStatement("select * from card_details where customer_id=" + cust_id + ";");
-            rs1 = ps.executeQuery();
+            PreparedStatement ps = c.prepareStatement("select * from card_details where customer_id=" + cust_id + ";");
+            ResultSet rs1 = ps.executeQuery();
             while(rs1.next()){ // If int n = 2 (i.e. the second item in the basket), this will correspond to the 2nd entry in the basket table based on alphabetical order ('order by name asc' gives alphabetical order)
                 cc.cardNumber = rs1.getString("card_no");
                 cc.cvv = rs1.getString("cvv");
@@ -583,17 +564,18 @@ public class LoginDAO {
 
     }
     // Display size of table - i.e. number of entries - used as a for loop in displaying all the products in the browse page
-    //Also useful when determining whether tables are empty
+    // Also useful when determining whether tables are empty
+
     public static int tableSize(String tableName){
         int n = 0; //Base case: n = 0 tells us the table is empty or something has gone wrong
-        Connection c = null;
         Statement s = null;
         ResultSet rs = null;
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{
             Class.forName("org.postgresql.Driver");
-            c = DriverManager.getConnection(dbUrl);
+            Connection c = DriverManager.getConnection(dbUrl);
             if (tableName.equals("ordered_product")){
+                s = c.createStatement();
                 String sql = "select customer_id from logged_in_customer;";
                 rs = s.executeQuery(sql);
                 int cust_id = 0;
@@ -628,15 +610,13 @@ public class LoginDAO {
     // To return the number of items in the basket - to be displayed on the navigation bar header
     public static int getBasketSize(){
         int n = 0;
-        Connection c = null;
-        Statement s = null;
-        ResultSet rs = null;
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{
             Class.forName("org.postgresql.Driver");
-            c = DriverManager.getConnection(dbUrl);
+            Connection c = DriverManager.getConnection(dbUrl);
+            Statement s = c.createStatement();
             String sql = "select customer_id from logged_in_customer;";
-            rs = s.executeQuery(sql);
+            ResultSet rs = s.executeQuery(sql);
             int cust_id = 0;
             while(rs.next()){
                 cust_id = rs.getInt("customer_id");
@@ -646,7 +626,7 @@ public class LoginDAO {
             rs = s.executeQuery(sql1);
             while(rs.next()){
                 String p = rs.getString(1);
-                n=Integer.parseInt(p);
+                n = Integer.parseInt(p);
             }
             rs.close();
             s.close();
