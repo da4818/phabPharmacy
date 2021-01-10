@@ -21,7 +21,7 @@ public class ServletMap extends HttpServlet {
         String HTML = htmlOutput();
         resp.getWriter().write(HTML); //Embed photo url for main store
         if(req.getServletPath().equals("/map")){
-            resp.getWriter().write("<br>" +
+            resp.getWriter().write("<h3></h3>" +
                     "<img class=\"images\" src=\"https://bit.ly/main_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
                     " \n" +
                     "<script>\n");
