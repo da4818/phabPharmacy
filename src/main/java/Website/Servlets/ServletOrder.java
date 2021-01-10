@@ -81,6 +81,19 @@ public class ServletOrder extends HttpServlet {
                 "</script>\n" +
                 "</body>\n" +
                 "</html>");
+        /*User u = LoginDAO.getCurrentUser();
+                String place_order = req.getParameter("orderResponse");
+                if (place_order.equals("orderResponse")){
+                    String dbUrl = System.getenv("JDBC_DATABASE_URL");
+                    try {
+                        Class.forName("org.postgresql.Driver");
+                        Connection db = DriverManager.getConnection(dbUrl);
+                        Statement stmt = db.createStatement();
+                        //stmt.execute("INSERT INTO ordered_product (name,quantity,sell_price,orders_id) VALUES(b.name,b.quantity,b.price,u.id)");
+                        UpdateQuantity update = new UpdateQuantity(b.name, b.brand, -b.quantity);
+                    } catch (ClassNotFoundException | SQLException e) {
+                        e.printStackTrace();
+                    }*/
 
     }
     public String htmlOutput(){
