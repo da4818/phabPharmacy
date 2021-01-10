@@ -42,7 +42,8 @@ public class ServletOrder extends HttpServlet {
                 "  </form>\n" +
                 "  </div>\n" +
                 "</div>\n");
-        int n = LoginDAO.tableSize("ordered_products");
+
+        int n = LoginDAO.tableSize("ordered_product");
         if(n>0) {
             resp.getWriter().write("<div class=\"basketContainer\">\n" +
                     " <p style=\"display: inline-block; margin-bottom: 0px;\"><b>Order Summary</b></p>\n" +
@@ -53,7 +54,7 @@ public class ServletOrder extends HttpServlet {
             resp.getWriter().write(b.brand + " " + b.name + " " + b.amount + " - x" + b.quantity + " - £" + subtotal + "<br>");
             }
             resp.getWriter().write("</p>\n" +
-                    "    <button onclick=\"window.location.href='https://phabpharmacy.herokuapp.com/basket';\" class=\"buttonStyle\">Edit Basket</button>\n" +
+                    "    <button onclick=\"window.location.href='https://phabpharmacy.herokuapp.com/basket'\" class=\"buttonStyle\">Edit Basket</button>\n" +
                     "</div>\n");
             resp.getWriter().write("<script>\n" +
                     "function redirectBrowse(){\n" +
@@ -105,7 +106,7 @@ public class ServletOrder extends HttpServlet {
             displayCurrentUser = "<div class=\"currentUser\">" + cUser.fname + "<i class=\"fa fa-fw fa-user\"></i></div>\n";
         }
         int basketSize = LoginDAO.getBasketSize();
-        String basketSizeOut="";
+        String basketSizeOut = "";
         if (basketSize != 0){ basketSizeOut = String.valueOf(basketSize);}
         return "<!DOCTYPE html>\n" + //HTML comments are on the respective .jsp files (need updating)
                 "<html>\n" +

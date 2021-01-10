@@ -1,21 +1,13 @@
 package Website.Servlets;
-
-import Website.Entities.Customer;
 import Website.Entities.Product;
 import Website.Entities.User;
-import Website.Functions.UpdateQuantity;
 import Website.LoginDAO;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.DecimalFormat;
 
 import static java.lang.String.valueOf;
@@ -29,7 +21,6 @@ public class ServletBasket extends HttpServlet {
         resp.getWriter().write(HTML);
         DecimalFormat df = new DecimalFormat("0.00");
         int n = LoginDAO.tableSize("ordered_product");
-        resp.getWriter().write("<p>"+n+"</p>");
         if(n > 0){
             Double totalBasket = LoginDAO.getBasketTotal();
             String total = df.format(totalBasket);
@@ -38,7 +29,7 @@ public class ServletBasket extends HttpServlet {
                     "</div>\n");
             for(int i=1;i<n+1;i++) {
                 Product b = LoginDAO.getBasketInfo(i);
-                String price = valueOf(df.format(b.price));
+                String price = df.format(b.price);
                 String subtotal = valueOf(df.format(b.price*b.quantity));
                 int max = b.limited ? 1 : 5;
                 resp.getWriter().write("<section>" +
@@ -104,7 +95,7 @@ public class ServletBasket extends HttpServlet {
                     "</div>\n");
             for(int i=1;i<n+1;i++) {
                 Product b = LoginDAO.getBasketInfo(i);
-                String price = valueOf(df.format(b.price));
+                String price = df.format(b.price);
                 String subtotal = valueOf(df.format(b.price*b.quantity));
                 int max = b.limited ? 1 : 5;
                 resp.getWriter().write("<section>" +
@@ -144,10 +135,9 @@ public class ServletBasket extends HttpServlet {
 
     public String htmlOutput(){
         boolean userLoggedIn = LoginDAO.checkLoggedIn();
-        String displayCurrentUser = "";
-        User cUser = null;
+        String displayCurrentUser = "<div class=\"currentUser\"><i class=\"fa fa-fw fa-user\"></i></div>\n";
         if (userLoggedIn) {
-            cUser = LoginDAO.getCurrentUser();
+            User cUser = LoginDAO.getCurrentUser();
             displayCurrentUser = "     <form name=\"logOut\" action=\"home\" method=\"post\">\n" +
                     "       <div style=\"float: right;\" class=\"currentUser\">" + cUser.fname +"<i class=\"fa fa-fw fa-user\"></i>\n" +
                     "        <div class=\"logOut\">\n" +
@@ -156,11 +146,8 @@ public class ServletBasket extends HttpServlet {
                     "      </div>\n" +
                     "    </form>\n";
         }
-        else if (!userLoggedIn){
-            displayCurrentUser = "<div class=\"currentUser\"><i class=\"fa fa-fw fa-user\"></i></div>\n";
-        }
         int basketSize = LoginDAO.getBasketSize();
-        String basketSizeOut="";
+        String basketSizeOut = "";
         if (basketSize != 0){ basketSizeOut = String.valueOf(basketSize);}
         return "<!DOCTYPE html>\n" + //HTML comments are on the respective .jsp files (need updating)
                 "<html>\n" +

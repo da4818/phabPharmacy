@@ -185,7 +185,7 @@ public class ServletBrowse extends HttpServlet {
     public String htmlOutput(){
         boolean userLoggedIn = LoginDAO.checkLoggedIn();
         String displayCurrentUser = "<div class=\"currentUser\"><i class=\"fa fa-fw fa-user\"></i></div>\n";
-        if (userLoggedIn) { //If a user is logged in, userMessage will be displayed on the header (see line 144)
+        if (userLoggedIn) {
             User cUser = LoginDAO.getCurrentUser();
             displayCurrentUser = "     <form name=\"logOut\" action=\"home\" method=\"post\">\n" +
                     "       <div style=\"float: right;\" class=\"currentUser\">" + cUser.fname +"<i class=\"fa fa-fw fa-user\"></i>\n" +
@@ -196,7 +196,7 @@ public class ServletBrowse extends HttpServlet {
                     "    </form>\n";
         }
         int basketSize = LoginDAO.getBasketSize();
-        String basketSizeOut="";
+        String basketSizeOut = "";
         if (basketSize != 0){ basketSizeOut = String.valueOf(basketSize);}
         return "<!DOCTYPE html>\n" + //HTML comments are on the respective .jsp files (need updating)
                 "<html>\n" +

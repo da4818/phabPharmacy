@@ -67,10 +67,9 @@ public class ServletLogin extends HttpServlet {
 
     public String htmlOutput(){
         boolean userLoggedIn = LoginDAO.checkLoggedIn();
-        String displayCurrentUser = "";
-        User cUser = null;
-        if (userLoggedIn == true) { //If a user is logged in, userMessage will be displayed on the header (see line 144)
-            cUser = LoginDAO.getCurrentUser();
+        String displayCurrentUser = "<div class=\"currentUser\"><i class=\"fa fa-fw fa-user\"></i></div>\n";
+        if (userLoggedIn) {
+            User cUser = LoginDAO.getCurrentUser();
             displayCurrentUser = "     <form name=\"logOut\" action=\"home\" method=\"post\">\n" +
                     "       <div style=\"float: right;\" class=\"currentUser\">" + cUser.fname +"<i class=\"fa fa-fw fa-user\"></i>\n" +
                     "        <div class=\"logOut\">\n" +
@@ -79,11 +78,8 @@ public class ServletLogin extends HttpServlet {
                     "      </div>\n" +
                     "    </form>\n";
         }
-        else if (userLoggedIn == false){
-            displayCurrentUser = "<div class=\"currentUser\"><i class=\"fa fa-fw fa-user\"></i></div>\n";
-        }
         int basketSize = LoginDAO.getBasketSize();
-        String basketSizeOut="";
+        String basketSizeOut = "";
         if (basketSize != 0){ basketSizeOut = String.valueOf(basketSize);}
         return "<!DOCTYPE html>\n" + //HTML comments are on the respective .jsp files (need updating)
                 "<html>\n" +

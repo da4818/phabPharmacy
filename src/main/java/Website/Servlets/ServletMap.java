@@ -75,7 +75,6 @@ public class ServletMap extends HttpServlet {
     public String htmlOutput(){
         boolean userLoggedIn = LoginDAO.checkLoggedIn();
         String displayCurrentUser = "<div class=\"currentUser\"><i class=\"fa fa-fw fa-user\"></i></div>\n";
-
         if (userLoggedIn) {
             User cUser = LoginDAO.getCurrentUser();
             displayCurrentUser = "     <form name=\"logOut\" action=\"home\" method=\"post\">\n" +
@@ -87,7 +86,7 @@ public class ServletMap extends HttpServlet {
                     "    </form>\n";
         }
         int basketSize = LoginDAO.getBasketSize();
-        String basketSizeOut="";
+        String basketSizeOut = "";
         if (basketSize != 0){ basketSizeOut = String.valueOf(basketSize);}
         return "<!DOCTYPE html>\n" +
                 "<html>\n" +
