@@ -29,6 +29,7 @@ public class ServletBasket extends HttpServlet {
         resp.getWriter().write(HTML);
         DecimalFormat df = new DecimalFormat("0.00");
         int n = LoginDAO.tableSize("ordered_product");
+        resp.getWriter().write(n);
         if(n > 0){
             Double totalBasket = LoginDAO.getBasketTotal();
             String total = df.format(totalBasket);
@@ -91,6 +92,7 @@ public class ServletBasket extends HttpServlet {
         else {
             LoginDAO.removeFromBasket(modifiedItem.barcode);
         }
+
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
         int n = LoginDAO.tableSize("ordered_product");
@@ -136,7 +138,7 @@ public class ServletBasket extends HttpServlet {
                         Class.forName("org.postgresql.Driver");
                         Connection db = DriverManager.getConnection(dbUrl);
                         Statement stmt = db.createStatement();
-                        stmt.execute("INSERT INTO ordered_product (name,quantity,sell_price,orders_id) VALUES(b.name,b.quantity,b.price,u.id)");
+                        //stmt.execute("INSERT INTO ordered_product (name,quantity,sell_price,orders_id) VALUES(b.name,b.quantity,b.price,u.id)");
                         UpdateQuantity update = new UpdateQuantity(b.name, b.brand, -b.quantity);
                     } catch (ClassNotFoundException | SQLException e) {
                         e.printStackTrace();
@@ -159,7 +161,7 @@ public class ServletBasket extends HttpServlet {
         boolean userLoggedIn = LoginDAO.checkLoggedIn();
         String displayCurrentUser = "";
         User cUser = null;
-        if (userLoggedIn == true) {
+        if (userLoggedIn) {
             cUser = LoginDAO.getCurrentUser();
             displayCurrentUser = "     <form name=\"logOut\" action=\"home\" method=\"post\">\n" +
                     "       <div style=\"float: right;\" class=\"currentUser\">" + cUser.fname +"<i class=\"fa fa-fw fa-user\"></i>\n" +
@@ -169,7 +171,7 @@ public class ServletBasket extends HttpServlet {
                     "      </div>\n" +
                     "    </form>\n";
         }
-        else if (userLoggedIn == false){
+        else if (!userLoggedIn){
             displayCurrentUser = "<div class=\"currentUser\"><i class=\"fa fa-fw fa-user\"></i></div>\n";
         }
         int basketSize = LoginDAO.getBasketSize();
