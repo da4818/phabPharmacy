@@ -78,17 +78,7 @@ public class ServletBrowse extends HttpServlet {
         resp.getWriter().write(HTML);
         int j=1;
         Product p = LoginDAO.getProduct(j);
-        int i=0;
-        while(j<42){
-            resp.getWriter().write("<h2>" + headers.get(i)+"</h2>");
-            while(p.category.equals(headers.get(i))) {
-                resp.getWriter().write("<p>" + p.name + "</p>");
-                j++;
-                p = LoginDAO.getProduct(j);
-            }
-            i++;
-        }
-        /*for (int i=0;i<6;i++) {
+        for (int i=0;i<6;i++) {
             resp.getWriter().write("<section>\n" + "<h2 id=\""+headerURLs.get(i)+"\">" + headers.get(i) + "</h2>\n");
             while (p.category.equals(headers.get(i))) {
                 String price = df.format(p.price);
@@ -116,7 +106,7 @@ public class ServletBrowse extends HttpServlet {
             }
             resp.getWriter().write("</section>");
         }
-        resp.getWriter().write("</body>\n" + "</html>");*/
+        resp.getWriter().write("</body>\n" + "</html>");
     }
 
     public ArrayList <String> getHeaderinfo(String info_in){

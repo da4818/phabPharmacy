@@ -170,7 +170,7 @@ public class ServletRegister extends HttpServlet {
                 "       .dropdown:hover .dropdown-content {\n" +
                 "           display: block;\n" +
                 "       }\n" +
-                "       .currentUser {\n" +
+                "       .currentUser{\n" +
                 "           position: relative;\n" +
                 "           float: right;\n" +
                 "           font-size: 16px;\n" +
@@ -179,7 +179,7 @@ public class ServletRegister extends HttpServlet {
                 "           padding: 14px 14px 4px 16px;\n" +
                 "           text-decoration: none;\n" +
                 "       }\n" +
-                "       .logOut {\n" +
+                "       .logOut{\n" +
                 "           height: 10px;\n" +
                 "           bottom: 0px;\n" +
                 "           margin: 0px;\n" +
@@ -189,7 +189,7 @@ public class ServletRegister extends HttpServlet {
                 "           font-size: 8px;\n" +
                 "           color: white;\n" +
                 "       }\n" +
-                "       .logOutButton {\n" +
+                "       .logOutButton{\n" +
                 "           background-color: transparent;\n" +
                 "           font-size: 8px;\n" +
                 "           width: 10;\n" +

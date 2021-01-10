@@ -409,7 +409,7 @@ public class LoginDAO {
                 cust_id = rs.getInt("customer_id");
             }
 
-            String sql1 = "select * from ordered_product where name='" + p_in.name + "' and customer_id=;" + cust_id + ";"; //We check if the user has previously added the item to the basket before
+            String sql1 = "select * from ordered_product where name='" + p_in.name + "' and customer_id=" + cust_id + ";"; //We check if the user has previously added the item to the basket before
             Statement s1 = c.createStatement();
             ResultSet rs1 = s1.executeQuery(sql1);
             if(rs1.next()){ //If they have, we will update the quantity to the most recent value they have chosen (it won't add the amount on e.g. if they click x1 and then x3 it updates to x3, not x4 - this is for simplicity)
