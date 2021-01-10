@@ -462,6 +462,7 @@ public class LoginDAO {
                 p.barcode = rs1.getInt("barcode");
                 p.brand = rs1.getString("brand");
                 p.name = rs1.getString("name");
+                p.amount = rs1.getString("amount");
                 p.price = rs1.getDouble("sell_price");
                 p.quantity = rs1.getInt("quantity");
                 p.limited = rs1.getBoolean("limit_of_1");
