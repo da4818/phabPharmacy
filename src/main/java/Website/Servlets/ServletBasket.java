@@ -29,7 +29,7 @@ public class ServletBasket extends HttpServlet {
         resp.getWriter().write(HTML);
         DecimalFormat df = new DecimalFormat("0.00");
         int n = LoginDAO.tableSize("ordered_product");
-        resp.getWriter().write(n);
+        resp.getWriter().write("<p>"+n+"</p>");
         if(n > 0){
             Double totalBasket = LoginDAO.getBasketTotal();
             String total = df.format(totalBasket);
@@ -80,7 +80,6 @@ public class ServletBasket extends HttpServlet {
         String logOut = req.getParameter("logOut");
         if (logOut.equals("Log Out")){
            LoginDAO.resetTable("logged_in_customer");
-           //LoginDAO.resetTable("customer_basket");
         }
         String updateBasket = req.getParameter("update");
         int q = Integer.parseInt(req.getParameter("basketItemQuantity"));
@@ -109,12 +108,12 @@ public class ServletBasket extends HttpServlet {
                 String subtotal = valueOf(df.format(b.price*b.quantity));
                 int max = b.limited ? 1 : 5;
                 resp.getWriter().write("<section>" +
-                        "<div class=\"basketContainer\">\n");
+                        "<div class=\"basketContainer\" id=\"cont1\">\n");
                 if(b.limited){
                     resp.getWriter().write("  <p class=\"tooltip\" style=\"display: inline-block;\"><b>" + b.brand + " " + b.name + "</b><br>" + b.amount + "<br>£<output type=\"number\">" + price + "</output><span class=\"tooltiptext\"><i>Limited to one per customer</i></span></p>\n");
                 }
                 else{
-                    resp.getWriter().write("  <p style=\"display: inline-block;\"><b>" + b.brand + " " + b.name + "</b><br>" + b.amount + "<br>£<output type=\"number\">" + price + "</output></p>\n");
+                    resp.getWriter().write("  <p style=\"display: inline-block;\"><b>" + b.brand + " " + b.name +"</b><br>" + b.amount + "<br>£<output type=\"number\">" + price + "</output></p>\n");
                 }
                 resp.getWriter().write("  <div class=\"quant\">\n" +
                         "    <form id=\"updateBasket\" action=\"basket\" method=\"post\"> \n" +
@@ -123,16 +122,15 @@ public class ServletBasket extends HttpServlet {
                         "    <input name=\"basketButtonNumber\" type=\"hidden\"value=\"" + i + "\">\n" +
                         "    <input name=\"basketItemId\" type=\"hidden\"value=\"" + b.barcode + "\">\n" +
                         "    <input name=\"update\" style=\"margin-left: 0px;\" type=\"submit\" class=\"buttonStyle\" value=\"Update\">\n" +
+                        "    <input type=\"hidden\" name=\"logOut\" value=\"false\">\n" +
                         "    <button name=\"update\" type=\"submit\" class=\"buttonStyle\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button>\n" +
                         "    </form>\n" +
                         "  </div>\n" +
                         "  <div class=\"price\"><p>£<output></output>" + subtotal + "</p></div>\n" +
                         "</div>\n" +
                         "</section>");
-
-
-                }
             }
+        }
         else{
             resp.getWriter().write("<p>Empty Basket</p>");
             resp.getWriter().write("<div class=\"totalContainer\">\n" +

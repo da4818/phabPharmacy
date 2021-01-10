@@ -10,13 +10,11 @@ public class LoginDAO {
 
     //Empties tables - useful for when an order has been made and the basket needs to be emptied
     public static void resetTable(String tableName){
-        Connection c = null;
-        Statement s = null;
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{
             Class.forName("org.postgresql.Driver");
-            c = DriverManager.getConnection(dbUrl);
-            s = c.createStatement();
+            Connection c = DriverManager.getConnection(dbUrl);
+            Statement s = c.createStatement();
             String sql = "truncate table " + tableName + ";";
             s.executeUpdate(sql);
             s.close();
@@ -26,7 +24,6 @@ public class LoginDAO {
         }
     }
     public static void createTable(String tableName){
-        Connection c = null;
         Statement sCustomer = null;
         Statement sCustomer1 = null;
         Statement sProduct = null;
@@ -38,7 +35,7 @@ public class LoginDAO {
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{
             Class.forName("org.postgresql.Driver");
-            c = DriverManager.getConnection(dbUrl);
+            Connection c = DriverManager.getConnection(dbUrl);
 
             if(tableName.equals("customer")) {
                 sCustomer = c.createStatement();
@@ -571,34 +568,29 @@ public class LoginDAO {
         int n = 0; //Base case: n = 0 tells us the table is empty or something has gone wrong
         Statement s = null;
         ResultSet rs = null;
+        String sql1 = null;
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            if (tableName.equals("ordered_product")){
+            if (tableName.equals("ordered_product")) {
                 s = c.createStatement();
                 String sql = "select customer_id from logged_in_customer;";
                 rs = s.executeQuery(sql);
                 int cust_id = 0;
-                while(rs.next()){
+                while (rs.next()) {
                     cust_id = rs.getInt("customer_id");
                 }
-                String sql1 = "select count(*) from ordered_product where customer_id=" + cust_id + ";"; //'select count(*)' gets the number of entries
-                s = c.createStatement();
-                rs = s.executeQuery(sql1);
-                while(rs.next()){
-                    String p = rs.getString(1); //'select count' returns a string value, not a number
-                    n = Integer.parseInt(p); //so we convert that string to an integer
-                }
+                sql1 = "select count(*) from ordered_product where customer_id=" + cust_id + ";"; //'select count(*)' gets the number of entries
             }
-            else{
-                String sql = "select count(*) from " + tableName + ";"; //'select count(*)' gets the number of entries
-                s = c.createStatement();
-                rs = s.executeQuery(sql);
-                while(rs.next()){
-                    String p = rs.getString(1); //'select count' returns a string value, not a number
-                    n = Integer.parseInt(p); //so we convert that string to an integer
-                }
+            else if (tableName.equals("shop_product")){
+                sql1 = "select count(*) from shop_product where branch_id=1;";
+            }
+            s = c.createStatement();
+            rs = s.executeQuery(sql1);
+            while(rs.next()){
+                String p = rs.getString(1); //'select count' returns a string value, not a number
+                n = Integer.parseInt(p); //so we convert that string to an integer
             }
             rs.close();
             s.close();

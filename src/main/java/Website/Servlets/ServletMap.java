@@ -27,8 +27,17 @@ public class ServletMap extends HttpServlet {
                     "<script>\n");
         }
         else if(req.getServletPath().equals("/map/cold_and_flu")){
-            resp.getWriter().write("<h3>Products in Cold and Flu</h3>\n" +
-                    "<img class=\"images\" src=\"https://bit.ly/cold_flu_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
+            resp.getWriter().write("<h3>Products in Cold and Flu</h3>\n");
+            int j = 1;
+            Product p = LoginDAO.getProduct(j);
+            while (j <= LoginDAO.tableSize("shop_product")){
+                if (p.category.equals("Cold and Flu")) {
+                    resp.getWriter().write(p.brand + " " + p.name + " " + p.amount + "<br>");
+                }
+                j++;
+                p = LoginDAO.getProduct(j);
+            }
+            resp.getWriter().write("<img class=\"images\" src=\"https://bit.ly/cold_flu_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
         }
         else if(req.getServletPath().equals("/map/skincare")){
             resp.getWriter().write("<h3>Products in Skincare</h3>\n" +
