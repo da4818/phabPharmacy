@@ -25,7 +25,33 @@ public class ServletBrowse extends HttpServlet {
         resp.setContentType("text/html");
         String HTML= htmlOutput();
         resp.getWriter().write(HTML);
-        int j=1;
+
+        resp.getWriter().write("<section>\n" + "<h2 id=\""+headerURLs.get(0)+"\">" + headers.get(0) + "</h2>\n");
+        for (int j=1;j<11;j++) {
+            Product p = LoginDAO.getProduct(j);
+            String price = df.format(p.price);
+            int max = p.limited ? 1 : 5;
+            resp.getWriter().write("<div class=\"relative\">\n");
+            if (p.limited){
+                resp.getWriter().write("<label class=\"tooltip\"><center>" + p.brand + " " + p.name + "<br>" + p.amount + "</center>\n" +
+                        "<span class=\"tooltiptext\"><i>Limited to one per customer</i></span></label><br>\n");
+            }
+            else{
+                resp.getWriter().write("<label><center>" + p.brand + " " + p.name + "<br>" + p.amount + "</center></label><br>\n");
+            }
+            resp.getWriter().write("<label><center>£" + price + "</label></center><br>\n" +
+                    "<div class=\"absolute\">\n" +
+                    "<form action=\"browse\" method=\"post\">\n" +
+                    "<input name=\"basketQuantity\" type=\"number\" size=\"5\" min=\"0\" max=\"" + max + "\">\n" +
+                    "<input name=\"buttonNumber\" type=\"hidden\"value=\"" + j + "\">\n" +
+                    "<input type=\"hidden\" name=\"logOut\" value=\"false\">\n" +
+                    "<input type=\"submit\"class=\"buttonStyle\" value=\"Add to Basket\">\n" +
+                    "</form>\n" +
+                    "</div>\n" +
+                    "</div>");
+        }
+        resp.getWriter().write("</section>");
+        /*int j=1;
         Product p = LoginDAO.getProduct(j);
         for (int i=0;i<6;i++) {
             resp.getWriter().write("<section>\n" + "<h2 id=\""+headerURLs.get(i)+"\">" + headers.get(i) + "</h2>\n");
@@ -54,7 +80,7 @@ public class ServletBrowse extends HttpServlet {
                 p = LoginDAO.getProduct(j);
             }
             resp.getWriter().write("</section>");
-        }
+        }*/
         resp.getWriter().write("</body>\n" + "</html>");
     }
 
@@ -76,7 +102,33 @@ public class ServletBrowse extends HttpServlet {
             LoginDAO.addToBasket(pBasket,q);
         }
         resp.getWriter().write(HTML);
-        int j=1;
+        resp.getWriter().write("<section>\n" + "<h2 id=\""+headerURLs.get(0)+"\">" + headers.get(0) + "</h2>\n");
+        for (int j=1;j<11;j++) {
+            Product p = LoginDAO.getProduct(j);
+                String price = df.format(p.price);
+                int max = p.limited ? 1 : 5;
+                resp.getWriter().write("<div class=\"relative\">\n");
+                if (p.limited){
+                    resp.getWriter().write("<label class=\"tooltip\"><center>" + p.brand + " " + p.name + "<br>" + p.amount + "</center>\n" +
+                            "<span class=\"tooltiptext\"><i>Limited to one per customer</i></span></label><br>\n");
+                }
+                else{
+                    resp.getWriter().write("<label><center>" + p.brand + " " + p.name + "<br>" + p.amount + "</center></label><br>\n");
+                }
+                resp.getWriter().write("<label><center>£" + price + "</label></center><br>\n" +
+                        "<div class=\"absolute\">\n" +
+                        "<form action=\"browse\" method=\"post\">\n" +
+                        "<input name=\"basketQuantity\" type=\"number\" size=\"5\" min=\"0\" max=\"" + max + "\">\n" +
+                        "<input name=\"buttonNumber\" type=\"hidden\"value=\"" + j + "\">\n" +
+                        "<input type=\"hidden\" name=\"logOut\" value=\"false\">\n" +
+                        "<input type=\"submit\"class=\"buttonStyle\" value=\"Add to Basket\">\n" +
+                        "</form>\n" +
+                        "</div>\n" +
+                        "</div>");
+            }
+            resp.getWriter().write("</section>");
+        }
+        /*int j=1;
         Product p = LoginDAO.getProduct(j);
         for (int i=0;i<6;i++) {
             resp.getWriter().write("<section>\n" + "<h2 id=\""+headerURLs.get(i)+"\">" + headers.get(i) + "</h2>\n");
@@ -106,7 +158,7 @@ public class ServletBrowse extends HttpServlet {
             }
             resp.getWriter().write("</section>");
         }
-        resp.getWriter().write("</body>\n" + "</html>");
+        resp.getWriter().write("</body>\n" + "</html>");*/
     }
 
     public ArrayList <String> getHeaderinfo(String info_in){
