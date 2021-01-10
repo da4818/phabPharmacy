@@ -65,7 +65,7 @@ public class ServletBasket extends HttpServlet {
             }
         }
         else{
-            resp.getWriter().write("<p>Empty Basket</p>");
+            resp.getWriter().write("<p>Empty Basket"+n+"</p>");
             resp.getWriter().write("<div class=\"totalContainer\">\n" +
                     "  <p>Total: £0.00</p>\n" +
                     "</div>\n");

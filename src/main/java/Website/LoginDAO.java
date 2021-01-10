@@ -617,9 +617,6 @@ public class LoginDAO {
                     n = Integer.parseInt(p); //so we convert that string to an integer
                 }
             }
-
-
-
             rs.close();
             s.close();
             c.close();

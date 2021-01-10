@@ -196,8 +196,10 @@ public class ServletBrowse extends HttpServlet {
                     "    </form>\n";
         }
         int basketSize = LoginDAO.getBasketSize();
-        String basketSizeOut="";
-        if (basketSize != 0){ basketSizeOut = String.valueOf(basketSize);}
+        String basketSizeOut= "    <a href=\"https://phabpharmacy.herokuapp.com/basket\"><i style=\"width: 35px;\" class=\"fa fa-fw fa-shopping-basket\"><p style=\"display: inline; font-family: Arial; font-weight: bold\" id=\"basket\"> </p></i></a>\n";
+        if (basketSize != 0){
+            basketSizeOut = "    <a href=\"https://phabpharmacy.herokuapp.com/basket\"><i style=\"width: 35px;\" class=\"fa fa-fw fa-shopping-basket\"><p style=\"display: inline; font-family: Arial; font-weight: bold\" id=\"basket\"> " + basketSizeOut + "</p></i></a>\n";
+        }
         return "<!DOCTYPE html>\n" + //HTML comments are on the respective .jsp files (need updating)
                 "<html>\n" +
                 "<head>\n" +
@@ -381,7 +383,7 @@ public class ServletBrowse extends HttpServlet {
                 "    <a href=\"https://phabpharmacy.herokuapp.com/login\"><i class=\"fa fa-fw fa-user\"></i>Login</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/map\"><i class=\"fa fa-compass\" aria-hidden=\"true\"></i> In-Store</a>\n" +
-                "    <a href=\"https://phabpharmacy.herokuapp.com/basket\"><i style=\"width: 35px;\" class=\"fa fa-fw fa-shopping-basket\"><p style=\"display: inline; font-family: Arial; font-weight: bold\" id=\"basket\"> " + basketSizeOut + "</p></i></a>\n" +
+                basketSizeOut +
                 displayCurrentUser +
                 "</div>\n";
     }
