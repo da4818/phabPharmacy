@@ -50,7 +50,7 @@ public class ServletBrowse extends HttpServlet {
                     "</div>\n" +
                     "</div>");
         }
-        resp.getWriter().write("</section>");
+        resp.getWriter().write("</section>\n");
         /*int j=1;
         Product p = LoginDAO.getProduct(j);
         for (int i=0;i<6;i++) {
@@ -79,7 +79,7 @@ public class ServletBrowse extends HttpServlet {
                 j++;
                 p = LoginDAO.getProduct(j);
             }
-            resp.getWriter().write("</section>");
+            resp.getWriter().write("</section>\n");
         }*/
         resp.getWriter().write("</body>\n" + "</html>");
     }
@@ -126,7 +126,7 @@ public class ServletBrowse extends HttpServlet {
                         "</div>\n" +
                         "</div>");
             }
-            resp.getWriter().write("</section>");
+            resp.getWriter().write("</section>\n");
         }
         /*int j=1;
         Product p = LoginDAO.getProduct(j);
@@ -156,10 +156,10 @@ public class ServletBrowse extends HttpServlet {
                 j++;
                 p = LoginDAO.getProduct(j);
             }
-            resp.getWriter().write("</section>");
+            resp.getWriter().write("</section>\n");
         }
-        resp.getWriter().write("</body>\n" + "</html>");*/
-    }
+        resp.getWriter().write("</body>\n" + "</html>");
+    }*/
 
     public ArrayList <String> getHeaderinfo(String info_in){
         ArrayList <String> output = new ArrayList<>();
