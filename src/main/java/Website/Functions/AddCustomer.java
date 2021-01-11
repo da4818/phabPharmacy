@@ -25,7 +25,7 @@ public class AddCustomer {
             pStmt.setString(5,cust.address);
             pStmt.setString(6,cust.phone_number);
             pStmt.executeUpdate();
-            String sqlStr = "SELECT * FROM customer WHERE first_name = " + cust.first_name + " AND email = " + cust.email + ";";
+            String sqlStr = "SELECT * FROM customer WHERE first_name = '" + cust.first_name + "' AND email = '" + cust.email + "';";
             ResultSet rs = stmt1.executeQuery(sqlStr);
             int id = Integer.parseInt(null);
             if (rs.next()) {

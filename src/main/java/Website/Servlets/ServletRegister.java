@@ -56,6 +56,9 @@ public class ServletRegister extends HttpServlet {
         if(emailCheck.validEmail()) {
             resp.getWriter().write("valid email");
         }
+        else{
+            resp.getWriter().write("invalid email");
+        }
 
         /*if(LoginDAO.validateRegister(em)){ //Checks database to see if email exists in use database
             resp.getWriter().write("<h2>There is an existing account with the email entered, please log in.</h2>");
@@ -80,11 +83,13 @@ public class ServletRegister extends HttpServlet {
             //LoginDAO.addUser(fn,ln,em,pw,pc,ad,pn);
             User currentUser = LoginDAO.getUser(em,pw); //*rewrite to constructor with string values
             LoginDAO.setLoggedInUser(currentUser);
-            resp.getWriter().write("<h2>Successful registration. Welcome, " + currentUser.fname + "</h2>");
+
             Customer c = new Customer(currentUser.fname, currentUser.lname, currentUser.postcode, currentUser.email, currentUser.address, currentUser.phoneno);
             //CreditCard cc = new CreditCard(cn,cvv,sc,an);
             new AddCustomer(c,cc);
+            resp.getWriter().write("<h2>Successful registration. Welcome, " + currentUser.fname + "</h2>");
         }*/
+
 
         resp.getWriter().write("response");
         resp.getWriter().write("<script>\n" +
