@@ -76,27 +76,25 @@ public class ServletAmendDetails extends HttpServlet {
         return "<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "<head>\n" +
-                "    <meta charset=\"utf-8\">\n" +
-                "    <meta name=\"viewport\" content=\"width=device-width\">\n" +
-                "    <title>Amend Details</title>\n" +
-                "    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">\n" +
-                "    <style>\n" +
-                "        body {font-family: Arial, Helvetica, sans-serif;}\n" +
-                "        .navbar {\n" +
-                "            width: 100%;\n" +
-                "            background-color: #555;\n" +
-                "            overflow: auto;\n" +
-                "        }\n" +
-                "        .navbar a {\n" +
-                "            float: left;\n" +
-                "            padding: 12px;\n" +
-                "            color: white;\n" +
-                "            text-decoration: none;\n" +
-                "            font-size: 17px;\n" +
-                "        }\n" +
-                "        .active {\n" +
-                "            background-color: #51B5C2;\n" +
-                "        }\n" +
+                "   <meta charset=\"utf-8\">\n" +
+                "   <meta name=\"viewport\" content=\"width=device-width\">\n" +
+                "   <title>Amend Details</title>\n" +
+                "   <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">\n" +
+                "   <style>\n" +
+                "       body {font-family: Arial, Helvetica, sans-serif;}\n" +
+                "       .navbar {\n" +
+                "           width: 100%;\n" +
+                "           background-color: #555;\n" +
+                "           overflow: auto;\n" +
+                "       }\n" +
+                "       .navbar a {\n" +
+                "           float: left;\n" +
+                "           font-size: 16px;\n" +
+                "           color: white;\n" +
+                "           text-align: center;\n" +
+                "           padding: 14px 16px;\n" +
+                "           text-decoration: none;\n" +
+                "       }\n" +
                 "        @media screen and (max-width: 500px) {\n" +
                 "            .navbar a {\n" +
                 "                float: none;\n" +
@@ -198,14 +196,15 @@ public class ServletAmendDetails extends HttpServlet {
                 "        .tooltip:hover .tooltiptext {\n" +
                 "          visibility: visible;\n" +
                 "        }\n" +
-                "        div.currentUser{\n" +
-                "          float: right;\n" +
-                "          font-size: 16px;\n" +
-                "          color: white;\n" +
-                "          text-align: center;\n" +
-                "          padding: 14px 16px;\n" +
-                "          text-decoration: none;\n" +
-                "        }\n" +
+                "       .currentUser {\n" +
+                "           position: relative;\n" +
+                "           float: right;\n" +
+                "           font-size: 16px;\n" +
+                "           color: white;\n" +
+                "           text-align: center;\n" +
+                "           padding: 14px 14px 4px 16px;\n" +
+                "           text-decoration: none;\n" +
+                "       }\n" +
                 "        input, textarea{\n" +
                 "          font-family: Arial, Helvetica, sans-serif;\n" +
                 "          font-size: 16px;\n" +
