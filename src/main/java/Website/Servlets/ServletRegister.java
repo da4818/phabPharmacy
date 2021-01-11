@@ -36,6 +36,8 @@ public class ServletRegister extends HttpServlet {
             //LoginDAO.resetTable("ordered_products");
         }
         String HTML = htmlOutput();
+        resp.getWriter().write(HTML);
+
         String fn = req.getParameter("fname");
         String ln = req.getParameter("lname");
         String em = req.getParameter("email");
@@ -48,17 +50,12 @@ public class ServletRegister extends HttpServlet {
         String pc = req.getParameter("postcode");
         String ad = req.getParameter("address");
         String pn = req.getParameter("phone_no");
-        resp.getWriter().write(HTML);
+
         EmailValidation emailCheck = new EmailValidation(em,pw,vpw);
         CreditCard cc = new CreditCard(cn,cvv,sc,an);
         Address a = new Address("test",pc);
+
         resp.getWriter().write("<p>Output</p>");
-        if(emailCheck.validEmail()) {
-            resp.getWriter().write("valid email");
-        }
-        else{
-            resp.getWriter().write("invalid email");
-        }
 
         /*if(LoginDAO.validateRegister(em)){ //Checks database to see if email exists in use database
             resp.getWriter().write("<h2>There is an existing account with the email entered, please log in.</h2>");
@@ -91,7 +88,7 @@ public class ServletRegister extends HttpServlet {
         }*/
 
 
-        resp.getWriter().write("response");
+
         resp.getWriter().write("<script>\n" +
                 "    function redirectBrowse(){\n" +
                 "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
@@ -276,7 +273,7 @@ public class ServletRegister extends HttpServlet {
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"phone_no\" value=\"\" placeholder=\"Phone Number\"><br>\n" +
                 "  \n" +
                 "  <input type=\"hidden\" name=\"logOut\" value=\"false\">\n" +
-                "  <input type=\"submit\" class=\"buttonStyle\" value=\"Submit\">\n" +
+                "  <input type=\"submit\" style=\"width: 35ch;\" class=\"buttonStyle\" value=\"Submit\">\n" +
                 "</form>\n";
     }
 }
