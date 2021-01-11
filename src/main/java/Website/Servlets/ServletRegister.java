@@ -214,22 +214,25 @@ public class ServletRegister extends HttpServlet {
                 "           width: 26em; \n" +
                 "           width: 40ch; \n" +
                 "       }\n" +*/
+                "       textarea {\n" +
+                "           height: auto;\n" +
+                "       }\n" +
                 "       textarea::placeholder {\n" +
                 "           font-family: Arial, Helvetica, sans-serif;\n" +
                 "           width: 40ch; \n" +
                 "       }\n" +
-                "        .buttonStyle {\n" +
-                "            background-color: #00B8C5;\n" +
-                "            border: none;\n" +
-                "            color: white;\n" +
-                "            padding: 5px 25px;\n" +
-                "            text-align: center;\n" +
-                "            text-decoration: none;\n" +
-                "            display: inline-block;\n" +
-                "            font-size: 16px;\n" +
-                "            margin: 4px 2px;\n" +
-                "            cursor: pointer;\n" +
-                "        }\n" +
+                "       .buttonStyle {\n" +
+                "           background-color: #00B8C5;\n" +
+                "           border: none;\n" +
+                "           color: white;\n" +
+                "           padding: 5px 25px;\n" +
+                "           text-align: center;\n" +
+                "           text-decoration: none;\n" +
+                "           display: inline-block;\n" +
+                "           font-size: 16px;\n" +
+                "           margin: 4px 2px;\n" +
+                "           cursor: pointer;\n" +
+                "       }\n" +
                 "   </style>\n" +
                 "\n" +
                 "</head>\n" +
@@ -275,7 +278,7 @@ public class ServletRegister extends HttpServlet {
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"phone_no\" value=\"\" placeholder=\"Phone Number\"><br>\n" +
                 "  \n" +
                 "  <input type=\"hidden\" name=\"logOut\" value=\"false\">\n" +
-                "  <input type=\"submit\" style=\"width: 36ch;\" class=\"buttonStyle\" value=\"Submit\">\n" +
+                "  <input type=\"submit\" style=\"width: 25ch;\" class=\"buttonStyle\" value=\"Submit\">\n" +
                 "</form>\n";
     }
 }
