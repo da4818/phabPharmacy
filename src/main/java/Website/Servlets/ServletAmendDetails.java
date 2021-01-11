@@ -41,9 +41,9 @@ public class ServletAmendDetails extends HttpServlet {
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"postcode\" placeholder=\"Postcode*\"><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" value=\"\" name=\"phone_no\" placeholder=\"Phone Number\"><br>\n" +
                 "  \n" +
-                "  <input type=\"submit\" class=\"buttonStyle\" value=\"Update Details\">\n" +
-                "  <button class=\"buttonStyle\" href=\"https://phabpharmacy.herokuapp.com/order\">Cancel</button>\n" +
+                "  <input type=\"submit\" style=\"width: 30px;\" class=\"buttonStyle\" value=\"Update Details\">\n" +
                 "</form>\n" +
+                "  <button class=\"buttonStyle\" href=\"https://phabpharmacy.herokuapp.com/order\">Cancel</button>\n" +
                 "</body>\n" +
                 "</html>");
     }
@@ -64,7 +64,7 @@ public class ServletAmendDetails extends HttpServlet {
         if (!cc.validCardNumber() || !cc.validAccountNumber() || !cc.validSortCode() || !cc.validCvv()){
             resp.getWriter().write("<h2>Invalid card details, please try again.</h2>");
         }
-        else if(!a.validPostcode()){
+        if(!a.validPostcode()){
             resp.getWriter().write("<h2>Invalid postcode, please try again.</h2>");
         }
         resp.getWriter().write("<h2>Information updated.</h2>");

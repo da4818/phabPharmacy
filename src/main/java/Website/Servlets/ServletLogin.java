@@ -84,7 +84,9 @@ public class ServletLogin extends HttpServlet {
         return "<!DOCTYPE html>\n" + //HTML comments are on the respective .jsp files (need updating)
                 "<html>\n" +
                 "<head>\n" +
-                "   <title>Login</title>\n" +
+                "   <meta charset=\"utf-8\">\n" +
+                "   <meta name=\"viewport\" content=\"width=device-width\">\n" +
+                "   <title>Home</title>\n" +
                 "   <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">\n" +
                 "   <style>\n" +
                 "       body {font-family: Arial, Helvetica, sans-serif;}\n" +
@@ -146,7 +148,7 @@ public class ServletLogin extends HttpServlet {
                 "       .dropdown:hover .dropdown-content {\n" +
                 "           display: block;\n" +
                 "       }\n" +
-                "       .currentUser {\n" +
+                "       .currentUser{\n" +
                 "           position: relative;\n" +
                 "           float: right;\n" +
                 "           font-size: 16px;\n" +
@@ -155,7 +157,7 @@ public class ServletLogin extends HttpServlet {
                 "           padding: 14px 14px 4px 16px;\n" +
                 "           text-decoration: none;\n" +
                 "       }\n" +
-                "       .logOut {\n" +
+                "       .logOut{\n" +
                 "           height: 10px;\n" +
                 "           bottom: 0px;\n" +
                 "           margin: 0px;\n" +
@@ -165,7 +167,7 @@ public class ServletLogin extends HttpServlet {
                 "           font-size: 8px;\n" +
                 "           color: white;\n" +
                 "       }\n" +
-                "       .logOutButton {\n" +
+                "       .logOutButton{\n" +
                 "           background-color: transparent;\n" +
                 "           font-size: 8px;\n" +
                 "           width: 10;\n" +
@@ -173,25 +175,8 @@ public class ServletLogin extends HttpServlet {
                 "           margin: 0px;\n" +
                 "           border: none;\n" +
                 "       }\n" +
-                "       .buttonStyle{\n" +
-                "           background-color: #00B8C5;\n" +
-                "           border: none;\n" +
-                "           color: white;\n" +
-                "           padding: 5px 25px;\n" +
-                "           text-align: center;\n" +
-                "           text-decoration: none;\n" +
-                "           display: inline-block;\n" +
-                "           font-size: 16px;\n" +
-                "           margin: 4px 2px;\n" +
-                "           cursor: pointer;\n" +
-                "       }\n" +
-                "       input{\n" +
-                "           font-family: Arial, Helvetica, sans-serif;\n" +
-                "           font-size: 14px;\n" +
-                "           width: 26em; \n" +
-                "           width: 40ch; \n" +
-                "       }\n" +
                 "   </style>\n" +
+                "\n" +
                 "</head>\n" +
                 "<body>\n" +
                 "<div class=\"navbar\">\n" +
@@ -213,7 +198,6 @@ public class ServletLogin extends HttpServlet {
                 "    <a href=\"https://phabpharmacy.herokuapp.com/basket\"><i style=\"width: 35px;\" class=\"fa fa-fw fa-shopping-basket\"><p style=\"display: inline; font-family: Arial; font-weight: bold\" id=\"basket\"> " + basketSizeOut + "</p></i></a>\n" +
                 displayCurrentUser +
                 "</div>\n" +
-                "\n" +
                 "<h1>Login</h1>\n" +
                 "<p> Login below. If you haven't got an account, <a href=\"https://phabpharmacy.herokuapp.com/register\"> register here.</a></p>\n" +
                 "\n" +
@@ -225,3 +209,12 @@ public class ServletLogin extends HttpServlet {
                 "</form>\n";
     }
 }
+
+/*
+"       input{\n" +
+                "           font-family: Arial, Helvetica, sans-serif;\n" +
+                "           font-size: 14px;\n" +
+                "           width: 26em; \n" +
+                "           width: 40ch; \n" +
+                "       }\n" +
+ */
