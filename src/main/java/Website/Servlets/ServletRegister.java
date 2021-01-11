@@ -52,6 +52,7 @@ public class ServletRegister extends HttpServlet {
         EmailValidation emailCheck = new EmailValidation(em,pw,vpw);
         CreditCard cc = new CreditCard(cn,cvv,sc,an);
         Address a = new Address(ad,pc);
+
         if(LoginDAO.validateRegister(em)){ //Checks database to see if email exists in use database
             resp.getWriter().write("<h2>There is an existing account with the email entered, please log in.</h2>");
         }
@@ -80,6 +81,7 @@ public class ServletRegister extends HttpServlet {
             //CreditCard cc = new CreditCard(cn,cvv,sc,an);
             new AddCustomer(c,cc);
         }
+        resp.getWriter().write("response");
         resp.getWriter().write("<script>\n" +
                 "    function redirectBrowse(){\n" +
                 "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +

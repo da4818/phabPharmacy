@@ -19,11 +19,11 @@ public class ServletMap extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         String HTML = htmlOutput();
-        resp.getWriter().write(HTML); //Embed photo url for main store
+        resp.getWriter().write(HTML);
         if(req.getServletPath().equals("/map")){
-            resp.getWriter().write("<h3></h3>" + "<div class=\"box\">\n" + "</div>\n" +
+            resp.getWriter().write("<h3> </h3>" + "<div class=\"box\">\n" + "</div>\n" +
                     "<img class=\"images\" src=\"https://bit.ly/main_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
-        }
+        } // Embedded photo url for main store
 
         else if(req.getServletPath().equals("/map/cold_and_flu")){
             resp.getWriter().write("<h3>Products in Cold and Flu</h3>\n" +
