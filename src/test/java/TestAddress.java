@@ -1,7 +1,7 @@
 import Website.Entities.Address;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test; //Note that import org.junit.Test; will not work
-public class testAddress {
+public class TestAddress {
     @Test
     public void testPostcode(){
         Address ad = new Address("Exhibition Road\nKensington\nLondon", "SW7 2az");
