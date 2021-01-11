@@ -97,11 +97,11 @@ public class ServletRegister extends HttpServlet {
                 "</body>\n" +
                 "</html>");
     }
-
+    //If a user is logged in, the current user and a 'log out' button will be displayed on the header (see line 144)
     public String htmlOutput(){
         boolean userLoggedIn = LoginDAO.checkLoggedIn();
         String displayCurrentUser = "<div class=\"currentUser\"><i class=\"fa fa-fw fa-user\"></i></div>\n";
-        if (userLoggedIn) { //If a user is logged in, the current user and a 'log out' button will be displayed on the header (see line 144)
+        if (userLoggedIn) {
             User cUser = LoginDAO.getCurrentUser();
             displayCurrentUser = "     <form name=\"logOut\" action=\"home\" method=\"post\">\n" +
                     "       <div style=\"float: right;\" class=\"currentUser\">" + cUser.fname +"<i class=\"fa fa-fw fa-user\"></i>\n" +
@@ -119,7 +119,7 @@ public class ServletRegister extends HttpServlet {
                 "<head>\n" +
                 "   <meta charset=\"utf-8\">\n" +
                 "   <meta name=\"viewport\" content=\"width=device-width\">\n" +
-                "   <title>Register</title>\n" +
+                "   <title>Home</title>\n" +
                 "   <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">\n" +
                 "   <style>\n" +
                 "       body {font-family: Arial, Helvetica, sans-serif;}\n" +
@@ -208,18 +208,6 @@ public class ServletRegister extends HttpServlet {
                 "           margin: 0px;\n" +
                 "           border: none;\n" +
                 "       }\n" +
-                "       .buttonStyle{\n" +
-                "           background-color: #00B8C5;\n" +
-                "           border: none;\n" +
-                "           color: white;\n" +
-                "           padding: 5px 25px;\n" +
-                "           text-align: center;\n" +
-                "           text-decoration: none;\n" +
-                "           display: inline-block;\n" +
-                "           font-size: 16px;\n" +
-                "           margin: 4px 2px;\n" +
-                "           cursor: pointer;\n" +
-                "       }\n" +
                 "       input, textarea{\n" +
                 "           font-family: Arial, Helvetica, sans-serif;\n" +
                 "           font-size: 14px;\n" +
@@ -229,7 +217,20 @@ public class ServletRegister extends HttpServlet {
                 "       textarea::placeholder {\n" +
                 "           font-family: Arial, Helvetica, sans-serif;\n" +
                 "       }\n" +
+                "        .buttonStyle {\n" +
+                "            background-color: #00B8C5;\n" +
+                "            border: none;\n" +
+                "            color: white;\n" +
+                "            padding: 5px 25px;\n" +
+                "            text-align: center;\n" +
+                "            text-decoration: none;\n" +
+                "            display: inline-block;\n" +
+                "            font-size: 16px;\n" +
+                "            margin: 4px 2px;\n" +
+                "            cursor: pointer;\n" +
+                "        }\n" +
                 "   </style>\n" +
+                "\n" +
                 "</head>\n" +
                 "<body>\n" +
                 "<div class=\"navbar\">\n" +
@@ -277,3 +278,6 @@ public class ServletRegister extends HttpServlet {
                 "</form>\n";
     }
 }
+/*
+
+ */

@@ -175,6 +175,24 @@ public class ServletLogin extends HttpServlet {
                 "           margin: 0px;\n" +
                 "           border: none;\n" +
                 "       }\n" +
+                "       input{\n" +
+                "           font-family: Arial, Helvetica, sans-serif;\n" +
+                "           font-size: 14px;\n" +
+                "           width: 26em; \n" +
+                "           width: 40ch; \n" +
+                "       }\n" +
+                "        .buttonStyle {\n" +
+                "            background-color: #00B8C5;\n" +
+                "            border: none;\n" +
+                "            color: white;\n" +
+                "            padding: 5px 25px;\n" +
+                "            text-align: center;\n" +
+                "            text-decoration: none;\n" +
+                "            display: inline-block;\n" +
+                "            font-size: 16px;\n" +
+                "            margin: 4px 2px;\n" +
+                "            cursor: pointer;\n" +
+                "        }\n" +
                 "   </style>\n" +
                 "\n" +
                 "</head>\n" +
@@ -211,10 +229,5 @@ public class ServletLogin extends HttpServlet {
 }
 
 /*
-"       input{\n" +
-                "           font-family: Arial, Helvetica, sans-serif;\n" +
-                "           font-size: 14px;\n" +
-                "           width: 26em; \n" +
-                "           width: 40ch; \n" +
-                "       }\n" +
+
  */
