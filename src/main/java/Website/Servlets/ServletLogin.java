@@ -175,12 +175,12 @@ public class ServletLogin extends HttpServlet {
                 "           margin: 0px;\n" +
                 "           border: none;\n" +
                 "       }\n" +
-                "       input{\n" +
+                /*"       input{\n" +
                 "           font-family: Arial, Helvetica, sans-serif;\n" +
                 "           font-size: 14px;\n" +
                 "           width: 26em; \n" +
                 "           width: 40ch; \n" +
-                "       }\n" +
+                "       }\n" +*/
                 "        .buttonStyle {\n" +
                 "            background-color: #00B8C5;\n" +
                 "            border: none;\n" +
@@ -223,7 +223,7 @@ public class ServletLogin extends HttpServlet {
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"email\" placeholder=\"Email Address*\"><br>\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"pass\" placeholder=\"Password*\"><br>\n" +
                 "        <input type=\"hidden\" name=\"logOut\" value=\"false\">\n" + // a hidden input tag is added to prevent nullPointer errors (line 25)
-                "        <input type=\"submit\" style=\"width: 36ch;\" class=\"buttonStyle\" value=\"Submit\">\n" +
+                "        <input type=\"submit\" style=\"width: 20ch;\" class=\"buttonStyle\" value=\"Submit\">\n" +
                 "</form>\n";
     }
 }

@@ -213,10 +213,11 @@ public class ServletRegister extends HttpServlet {
                 "           font-size: 14px;\n" +
                 "           width: 26em; \n" +
                 "           width: 40ch; \n" +
-                "       }\n" +
+                "       }\n" +*/
                 "       textarea::placeholder {\n" +
                 "           font-family: Arial, Helvetica, sans-serif;\n" +
-                "       }\n" +*/
+                "           width: 40ch; \n" +
+                "       }\n" +
                 "        .buttonStyle {\n" +
                 "            background-color: #00B8C5;\n" +
                 "            border: none;\n" +
