@@ -26,7 +26,7 @@ public class ServletBrowse extends HttpServlet {
         String HTML= htmlOutput();
         resp.getWriter().write(HTML);
 
-        resp.getWriter().write("<section>\n" + "<h2 id=\""+headerURLs.get(0)+"\">" + headers.get(0) + "</h2>\n");
+        /*resp.getWriter().write("<section>\n" + "<h2 id=\""+headerURLs.get(0)+"\">" + headers.get(0) + "</h2>\n");
         for (int j=1;j<11;j++) {
             Product p = LoginDAO.getProduct(j);
             String price = df.format(p.price);
@@ -50,7 +50,25 @@ public class ServletBrowse extends HttpServlet {
                     "</div>\n" +
                     "</div>");
         }
-        resp.getWriter().write("</section>\n");
+        resp.getWriter().write("</section>\n");*/
+        int i=0;
+        boolean displayHeader = true;
+        resp.getWriter().write("<h2>" +headers.get(i)+"</h2>\n");
+        for (int j=1;j<42;j++){
+            Product p = LoginDAO.getProduct(j);
+            if(p.category.equals(headers.get(i))){
+                displayHeader = false;
+
+            }
+            else{
+                displayHeader = true;
+                i++;
+            }
+            if (displayHeader){
+                resp.getWriter().write("<h2>" +headers.get(i)+"</h2>\n");
+            }
+            resp.getWriter().write("<p>" +p.name+"</p>\n");
+        }
         /*int j=1;
         Product p = LoginDAO.getProduct(j);
         for (int i=0;i<6;i++) {

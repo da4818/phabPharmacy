@@ -2,7 +2,11 @@ package Website;
 import Website.Entities.CreditCard;
 import Website.Entities.Product;
 import Website.Entities.User;
+import Website.Functions.UpdateQuantity;
+
 import java.sql.*;
+
+import static java.lang.String.valueOf;
 
 // DAO = data access object //
 // all comments with a * at the beginning are referring to any changes that need to be made in terms of the databases Choi Wan has made
@@ -628,5 +632,22 @@ public class LoginDAO {
             System.err.println(e.getClass().getName()+": " + e.getMessage());
         }
         return n;
+    }
+
+    public void placeOrder(){
+        String dbUrl = System.getenv("JDBC_DATABASE_URL");
+        try {
+            Class.forName("org.postgresql.Driver");
+            Connection c = DriverManager.getConnection(dbUrl);
+            Statement stmt = c.createStatement();
+            //stmt.execute("INSERT INTO ordered_product (name,quantity,sell_price,orders_id) VALUES(b.name,b.quantity,b.price,u.id)");
+            int n = LoginDAO.tableSize("ordered_product");
+            for(int i=1;i<n+1;i++) {
+                Product b = LoginDAO.getBasketInfo(i);
+                UpdateQuantity update = new UpdateQuantity(b.name, b.brand, -b.quantity);
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

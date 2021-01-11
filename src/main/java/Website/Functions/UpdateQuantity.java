@@ -11,7 +11,7 @@ public class UpdateQuantity {
     private float sellPrice;
     private float buyPrice;
 
-    public UpdateQuantity(String name1, String brand1, int change) {
+    public UpdateQuantity(String name1, String brand1, int quantityChange) {
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try {
             Class.forName("org.postgresql.Driver");
@@ -27,7 +27,7 @@ public class UpdateQuantity {
                 fullStock = rs.getInt("full_stock");
                 System.out.println(quant);
             }
-            if (change < 0) {
+            if (quantityChange < 0) {
                 float oldProfit = 0;
                 float newProfit = 0;
                 rs = stmt.executeQuery("SELECT * FROM daily_profit WHERE date = CURRENT_DATE ;");
@@ -38,11 +38,11 @@ public class UpdateQuantity {
                     oldProfit = 0;
                     stmt.execute("INSERT INTO daily_profit(date, profit) VALUES(CURRENT_DATE,0);");
                 }
-                float saleProfit = -change * (sellPrice - buyPrice);
+                float saleProfit = -quantityChange * (sellPrice - buyPrice);
                 newProfit = oldProfit + saleProfit;
                 stmt.execute("UPDATE daily_profit SET profit = " + newProfit + " WHERE date = CURRENT_DATE;");
             }
-            int update = quant + change;
+            int update = quant + quantityChange;
             stmt.execute("UPDATE shop_product SET quantity = " + update + " WHERE name = " + name1 + " AND brand = " + brand1 + ";");
             int hardmin = (int) (fullStock*0.1);
             if(update<hardmin){

@@ -1,9 +1,6 @@
 package Website.Servlets;
 
-import Website.Entities.CreditCard;
-import Website.Entities.Customer;
-import Website.Entities.EmailValidation;
-import Website.Entities.User;
+import Website.Entities.*;
 import Website.Functions.AddCustomer;
 import Website.LoginDAO;
 
@@ -53,25 +50,34 @@ public class ServletRegister extends HttpServlet {
         String pn = req.getParameter("phone_no");
         resp.getWriter().write(HTML);
         EmailValidation emailCheck = new EmailValidation(em,pw,vpw);
+        CreditCard cc = new CreditCard(cn,cvv,sc,an);
+        Address a = new Address(ad,pc);
         if(LoginDAO.validateRegister(em)){ //Checks database to see if email exists in use database
-            resp.getWriter().write("<h2> There is an existing account with the email entered. Please log in.</h2>");
+            resp.getWriter().write("<h2>There is an existing account with the email entered, please log in.</h2>");
         }
         else if (fn.isEmpty() || ln.isEmpty() || em.isEmpty() || pw.isEmpty() || vpw.isEmpty() || cn.isEmpty() || cvv.isEmpty()|| sc.isEmpty() || an.isEmpty() || pc.isEmpty()){ //Checks if any of the required fields are empty
             resp.getWriter().write("<h2>Incomplete fields, please enter all the information.</h2>");
         }
-        else if (!pw.equals(vpw)){
-            resp.getWriter().write("<h2> Passwords don't match, please try again.</h2>");
+        if (!pw.equals(vpw)){
+            resp.getWriter().write("<h2>Passwords don't match, please try again.</h2>");
         }
         else if(!emailCheck.validEmail()){
             resp.getWriter().write(emailCheck.getErrorMessage());
         }
+        else if (!cc.validCardNumber() || !cc.validAccountNumber() || !cc.validSortCode() || !cc.validCvv()){
+            resp.getWriter().write("<h2>Invalid card details, please try again.</h2>");
+        }
+        else if(!a.validPostcode()){
+            resp.getWriter().write("<h2>Invalid postcode, please try again.</h2>");
+        }
+
         else{
-            LoginDAO.addUser(fn,ln,em,pw,pc,ad,pn);
+            //LoginDAO.addUser(fn,ln,em,pw,pc,ad,pn);
             User currentUser = LoginDAO.getUser(em,pw); //*rewrite to constructor with string values
             LoginDAO.setLoggedInUser(currentUser);
             resp.getWriter().write("<h2>Successful registration. Welcome, " + currentUser.fname + "</h2>");
             Customer c = new Customer(currentUser.fname, currentUser.lname, currentUser.postcode, currentUser.email, currentUser.address, currentUser.phoneno);
-            CreditCard cc = new CreditCard(cn,cvv,sc,an,c);
+            //CreditCard cc = new CreditCard(cn,cvv,sc,an);
             new AddCustomer(c,cc);
         }
         resp.getWriter().write("<script>\n" +

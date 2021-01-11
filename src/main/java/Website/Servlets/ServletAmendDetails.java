@@ -1,5 +1,6 @@
 package Website.Servlets;
 
+import Website.Entities.Address;
 import Website.Entities.CreditCard;
 import Website.Entities.User;
 import Website.LoginDAO;
@@ -55,9 +56,17 @@ public class ServletAmendDetails extends HttpServlet {
         String an = req.getParameter("account_no");
         String cvv = req.getParameter("cvv");
         String pc = req.getParameter("postcode");
-        String ads = req.getParameter("address");
+        String ad = req.getParameter("address");
         String pn = req.getParameter("phone_no");
         //Perform checks to make sure user inputs are valid - card number
+        CreditCard cc = new CreditCard(cn,cvv,sc,an);
+        Address a = new Address(ad,pc);
+        if (!cc.validCardNumber() || !cc.validAccountNumber() || !cc.validSortCode() || !cc.validCvv()){
+            resp.getWriter().write("<h2>Invalid card details, please try again.</h2>");
+        }
+        else if(!a.validPostcode()){
+            resp.getWriter().write("<h2>Invalid postcode, please try again.</h2>");
+        }
         resp.getWriter().write("<h2>Information updated.</h2>");
     }
 

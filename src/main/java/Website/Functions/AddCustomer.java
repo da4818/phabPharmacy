@@ -13,11 +13,11 @@ public class AddCustomer {
         try {
 
             Class.forName("org.postgresql.Driver");
-            Connection db = DriverManager.getConnection(dbUrl);
-            //Statement stmt = db.createStatement();
-            Statement stmt1 = db.createStatement();
-            //Statement stmt2 = db.createStatement();
-            PreparedStatement pStmt = db.prepareStatement("INSERT INTO customer (first_name,last_name,email,postcode,address,phone_no) VALUES (?,?,?,?,?,?);");
+            Connection c = DriverManager.getConnection(dbUrl);
+            //Statement stmt = c.createStatement();
+            Statement stmt1 = c.createStatement();
+            //Statement stmt2 = c.createStatement();
+            PreparedStatement pStmt = c.prepareStatement("INSERT INTO customer (first_name,last_name,email,postcode,address,phone_no) VALUES (?,?,?,?,?,?);");
             pStmt.setString(1,cust.first_name);
             pStmt.setString(2,cust.last_name);
             pStmt.setString(3,cust.email);
@@ -32,7 +32,7 @@ public class AddCustomer {
                 id = rs.getInt("id");
             }
 
-            PreparedStatement pStmt2 = db.prepareStatement("INSERT INTO card_details (card_no,cvv,sort_code,account_no,customer_id) VALUES(?,?,?,?,?);");
+            PreparedStatement pStmt2 = c.prepareStatement("INSERT INTO card_details (card_no,cvv,sort_code,account_no,customer_id) VALUES(?,?,?,?,?);");
             pStmt2.setString(1,cc.cardNumber);
             pStmt2.setString(2,cc.cvv);
             pStmt2.setString(3,cc.sortCode);
@@ -40,11 +40,11 @@ public class AddCustomer {
             pStmt2.setInt(5,id);
             pStmt2.executeUpdate();
 
+            rs.close();
             pStmt.close();
             pStmt2.close();
             stmt1.close();
-            rs.close();
-            db.close();
+            c.close();
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
