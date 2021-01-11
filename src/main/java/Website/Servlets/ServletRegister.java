@@ -51,7 +51,7 @@ public class ServletRegister extends HttpServlet {
         resp.getWriter().write(HTML);
         EmailValidation emailCheck = new EmailValidation(em,pw,vpw);
         CreditCard cc = new CreditCard(cn,cvv,sc,an);
-        Address a = new Address(ad,pc);
+        Address a = new Address("test",pc);
         resp.getWriter().write("<p>Output</p>");
         if(emailCheck.validEmail()) {
             resp.getWriter().write("valid email");

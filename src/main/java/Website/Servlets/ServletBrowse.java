@@ -53,7 +53,7 @@ public class ServletBrowse extends HttpServlet {
         resp.getWriter().write("</section>\n");*/
         int i=0;
         boolean displayHeader = true;
-        resp.getWriter().write("<section>\n" + "<h2 id=\""+headerURLs.get(0)+"\">" + headers.get(0) + "</h2>\n");
+        resp.getWriter().write("<section>\n" + "<h2 id=\""+headerURLs.get(i)+"\">" + headers.get(i) + "</h2>\n");
         for (int j=1;j<42;j++){
             Product p = LoginDAO.getProduct(j);
             String price = df.format(p.price);
@@ -66,7 +66,8 @@ public class ServletBrowse extends HttpServlet {
                 i++;
             }
             if (displayHeader){
-                resp.getWriter().write("<section>\n" + "<h2 id=\""+headerURLs.get(0)+"\">" + headers.get(0) + "</h2>\n");
+                resp.getWriter().write("</section>\n"); //Ends previous section
+                resp.getWriter().write("<section>\n" + "<h2 id=\""+headerURLs.get(i)+"\">" + headers.get(i) + "</h2>\n");
             }
             resp.getWriter().write("<div class=\"relative\">\n");
             if (p.limited){
