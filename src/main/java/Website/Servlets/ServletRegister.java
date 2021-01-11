@@ -208,7 +208,7 @@ public class ServletRegister extends HttpServlet {
                 "           margin: 0px;\n" +
                 "           border: none;\n" +
                 "       }\n" +
-                "       input, textarea{\n" +
+                /*"       input, textarea{\n" +
                 "           font-family: Arial, Helvetica, sans-serif;\n" +
                 "           font-size: 14px;\n" +
                 "           width: 26em; \n" +
@@ -216,7 +216,7 @@ public class ServletRegister extends HttpServlet {
                 "       }\n" +
                 "       textarea::placeholder {\n" +
                 "           font-family: Arial, Helvetica, sans-serif;\n" +
-                "       }\n" +
+                "       }\n" +*/
                 "        .buttonStyle {\n" +
                 "            background-color: #00B8C5;\n" +
                 "            border: none;\n" +
@@ -278,6 +278,3 @@ public class ServletRegister extends HttpServlet {
                 "</form>\n";
     }
 }
-/*
-
- */
