@@ -1,5 +1,6 @@
 package Website.Servlets;
 
+import Website.Entities.CreditCard;
 import Website.Entities.User;
 import Website.LoginDAO;
 
@@ -17,17 +18,27 @@ public class ServletAmendDetails extends HttpServlet {
         resp.setContentType("text/html");
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
+        CreditCard cc = LoginDAO.getCurrentCard();
+        User u = LoginDAO.getCurrentUser();
+        String address_out = "Address";
+        String phone_no_out = "Phone Number";
+        if(!u.address.equals(null)){
+            address_out = u.address;
+        }
+        if(!u.phoneno.equals(null)){
+            phone_no_out = u.phoneno;
+        }
         resp.getWriter().write("<form name=\"amendDetailsForm\" action=\"amend_details\" method=\"post\">\n" +
                 "  <h3>Order Information<br><b style=\"font-size: 15px;\">Payment Information</b></h3>\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"card_no\" placeholder=\"Card Number*\"><br>\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"sort_code\" placeholder=\"Sort Code*\"><br>\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"account_no\" placeholder=\"Account Number*\"><br>\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"cvv\" placeholder=\"CVV*\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"card_no\" placeholder=\"" + cc.cardNumber + "\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"sort_code\" placeholder=\"" + cc.sortCode + "\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"account_no\" placeholder=\"" + cc.accountNumber + "\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"cvv\" placeholder=\"" + cc.cvv +"\"><br>\n" +
                 "\n" +
                 "  <h3 style=\"font-size: 15px;\">Shipping Information</h3>\n" +
-                "  <textarea name=\"address\" cols=\"30\" rows=\"4\" value=\"\" placeholder=\"Address\"></textarea><br>\n" +
+                "  <textarea name=\"address\" cols=\"30\" rows=\"4\" value=\"\" placeholder=\"" + address_out +"\"></textarea><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"postcode\" placeholder=\"Postcode*\"><br>\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" value=\"\" name=\"phone_no\" placeholder=\"Phone Number\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" value=\"\" name=\"phone_no\" placeholder=\"" + phone_no_out +"\"><br>\n" +
                 "  \n" +
                 "  <input type=\"submit\" class=\"buttonStyle\" value=\"Update Details\">\n" +
                 "</form>\n" +
