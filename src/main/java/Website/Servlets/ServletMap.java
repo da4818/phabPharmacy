@@ -27,7 +27,7 @@ public class ServletMap extends HttpServlet {
                     "<script>\n");
         }
         else if(req.getServletPath().equals("/map/cold_and_flu")){
-            resp.getWriter().write("<h3>Products in Cold and Flu</h3>\n");
+            resp.getWriter().write("<h3>Products in Cold and Flu</h3>\n" + "<img class=\"images\" src=\"https://bit.ly/cold_flu_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
             int j = 1;
             Product p = LoginDAO.getProduct(j);
             while (j <= LoginDAO.tableSize("shop_product")){
@@ -37,27 +37,71 @@ public class ServletMap extends HttpServlet {
                 j++;
                 p = LoginDAO.getProduct(j);
             }
-            resp.getWriter().write("<img class=\"images\" src=\"https://bit.ly/cold_flu_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
         }
         else if(req.getServletPath().equals("/map/skincare")){
             resp.getWriter().write("<h3>Products in Skincare</h3>\n" +
                     "<img class=\"images\" src=\"https://bit.ly/skincare_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
+            int j = 1;
+            Product p = LoginDAO.getProduct(j);
+            while (j <= LoginDAO.tableSize("shop_product")){
+                if (p.category.equals("Skincare")) {
+                    resp.getWriter().write(p.brand + " " + p.name + " " + p.amount + "<br>");
+                }
+                j++;
+                p = LoginDAO.getProduct(j);
+            }
         }
         else if(req.getServletPath().equals("/map/headaches_and_pain_relief")){
             resp.getWriter().write("<h3>Products in Headaches and Pain Relief</h3>\n" +
                     "<img class=\"images\" src=\"https://bit.ly/headache_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
+            int j = 1;
+            Product p = LoginDAO.getProduct(j);
+            while (j <= LoginDAO.tableSize("shop_product")){
+                if (p.category.equals("Headaches and Pain Relief")) {
+                    resp.getWriter().write(p.brand + " " + p.name + " " + p.amount + "<br>");
+                }
+                j++;
+                p = LoginDAO.getProduct(j);
+            }
         }
         else if(req.getServletPath().equals("/map/digestion")){
             resp.getWriter().write("<h3>Products in Digestion</h3>\n" +
                     "<img class=\"images\" src=\"https://bit.ly/digestion_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
+            int j = 1;
+            Product p = LoginDAO.getProduct(j);
+            while (j <= LoginDAO.tableSize("shop_product")){
+                if (p.category.equals("Digestion")) {
+                    resp.getWriter().write(p.brand + " " + p.name + " " + p.amount + "<br>");
+                }
+                j++;
+                p = LoginDAO.getProduct(j);
+            }
         }
         else if(req.getServletPath().equals("/map/allergy")){
             resp.getWriter().write("<h3>Products in Allergy</h3>\n" +
                     "<img class=\"images\" src=\"https://bit.ly/allergy_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
+            int j = 1;
+            Product p = LoginDAO.getProduct(j);
+            while (j <= LoginDAO.tableSize("shop_product")){
+                if (p.category.equals("Allergy")) {
+                    resp.getWriter().write(p.brand + " " + p.name + " " + p.amount + "<br>");
+                }
+                j++;
+                p = LoginDAO.getProduct(j);
+            }
         }
         else if(req.getServletPath().equals("/map/first_aid")){
             resp.getWriter().write("<h3>Products in First Aid</h3>\n" +
                     "<img class=\"images\" src=\"https://bit.ly/first_aid_map_\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
+            int j = 1;
+            Product p = LoginDAO.getProduct(j);
+            while (j <= LoginDAO.tableSize("shop_product")){
+                if (p.category.equals("First Aid")) {
+                    resp.getWriter().write(p.brand + " " + p.name + " " + p.amount + "<br>");
+                }
+                j++;
+                p = LoginDAO.getProduct(j);
+            }
         }
         resp.getWriter().write("<script>\n" +
                 "function redirectBrowse(){\n" +

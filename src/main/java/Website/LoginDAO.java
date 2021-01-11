@@ -453,8 +453,8 @@ public class LoginDAO {
                 cust_id = rs.getInt("customer_id");
             }
             PreparedStatement ps = c.prepareStatement("with temp as (select row_number() over (order by name asc) as rownum, * from ordered_product where customer_id=" + cust_id + ") select * from temp where rownum=?;");
-            ps.setInt(1,n); //If one item is removed, the IDs aren't automatically updated e.g. if i remove item ID=2, table's ID will read as 1,3,4,5... this poses problems when using a for loop to display the information
-            ResultSet rs1 = ps.executeQuery(); //SQL has no easy way to select item based on row number rather than an existing column - this is one solution
+            ps.setInt(1,n); // If one item is removed, the IDs aren't automatically updated e.g. if i remove item ID=2, table's ID will read as 1,3,4,5... this poses problems when using a for loop to display the information
+            ResultSet rs1 = ps.executeQuery(); // SQL has no easy way to select item based on row number rather than an existing column - this is one solution
             while(rs1.next()){ // If int n = 2 (i.e. the second item in the basket), this will correspond to the 2nd entry in the basket table based on alphabetical order ('order by name asc' gives alphabetical order)
                 p.barcode = rs1.getInt("barcode");
                 p.brand = rs1.getString("brand");
