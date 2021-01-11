@@ -111,9 +111,9 @@ public class ServletRegister extends HttpServlet {
                     "      </div>\n" +
                     "    </form>\n";
         }
-        //int basketSize = LoginDAO.getBasketSize();
+        int basketSize = LoginDAO.getBasketSize();
         String basketSizeOut = "";
-        //if (basketSize != 0){ basketSizeOut = String.valueOf(basketSize);}
+        if (basketSize != 0){ basketSizeOut = String.valueOf(basketSize);}
         return "<!DOCTYPE html>\n" + //HTML comments are on the respective .jsp files (need updating)
                 "<html>\n" +
                 "<head>\n" +

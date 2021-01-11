@@ -32,7 +32,7 @@ public class ServletOrder extends HttpServlet {
                 "  <p style=\"display: inline-block; margin-bottom: 0px;\"><b>Shipping Address</b></p>\n" +
                 "  <p>" + u.fname + " " + u.lname + "<br>" + u.postcode + "</p>\n" +
                 "  <p><b>Payment Details</b></p>\n" +
-                "  <p>" + cc.getCensoredCardNumber() + "<br>" +cc.sortCode+ "<br>" + cc.accountNumber +"</p>\n" +
+                "  <p>" + cc.getCensoredCardNumber() + "<br>" + cc.getSortCode() + "<br>" + cc.accountNumber +"</p>\n" +
                 "  <button onclick=\"window.location.href='https://phabpharmacy.herokuapp.com/amend_details';\"class=\"buttonStyle\">Edit Details</button>\n" +
                 "  <div class=\"confirmContainer\">\n" +
                 "  <p>Total Cost: <b>£" + total +"</b></p>\n" +
