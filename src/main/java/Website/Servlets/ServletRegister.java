@@ -54,7 +54,12 @@ public class ServletRegister extends HttpServlet {
         EmailValidation emailCheck = new EmailValidation(em,pw,vpw);
         CreditCard cc = new CreditCard(cn,cvv,sc,an);
         Address a = new Address("test",pc);
-
+        if (a.address.equals("")){
+            resp.getWriter().write("<p>Address is optional</p>");
+        }
+        if (a.validPostcode()){
+            resp.getWriter().write("<p>Valid postcode:"+a.postcode+"</p>");
+        }
         resp.getWriter().write("<p>Output</p>\n");
 
         /*if(LoginDAO.validateRegister(em)){ //Checks database to see if email exists in use database
@@ -208,15 +213,6 @@ public class ServletRegister extends HttpServlet {
                 "           margin: 0px;\n" +
                 "           border: none;\n" +
                 "       }\n" +
-                /*"       input, textarea{\n" +
-                "           font-family: Arial, Helvetica, sans-serif;\n" +
-                "           font-size: 14px;\n" +
-                "           width: 26em; \n" +
-                "           width: 40ch; \n" +
-                "       }\n" +*/
-                "       textarea {\n" +
-                "           height: auto;\n" +
-                "       }\n" +
                 "       textarea::placeholder {\n" +
                 "           font-family: Arial, Helvetica, sans-serif;\n" +
                 "           width: 40ch; \n" +
@@ -273,12 +269,12 @@ public class ServletRegister extends HttpServlet {
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"cvv\" placeholder=\"CVV*\"><br>\n" +
                 "\n" +
                 "  <h3 style=\"font-size: 15px;\">Shipping Information</h3>\n" +
-                "  <textarea name=\"address\" cols=\"30\" rows=\"4\" value=\"\" placeholder=\"Address\"></textarea><br>\n" +
+                "  <textarea name=\"address\" style=\"width: 28ch;\"  value=\"\" placeholder=\"Address\"></textarea><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"postcode\" placeholder=\"Postcode*\"><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"phone_no\" value=\"\" placeholder=\"Phone Number\"><br>\n" +
                 "  \n" +
                 "  <input type=\"hidden\" name=\"logOut\" value=\"false\">\n" +
-                "  <input type=\"submit\" style=\"width: 25ch;\" class=\"buttonStyle\" value=\"Submit\">\n" +
+                "  <input type=\"submit\" style=\"width: 220px;\" class=\"buttonStyle\" value=\"Submit\">\n" +
                 "</form>\n";
     }
 }
