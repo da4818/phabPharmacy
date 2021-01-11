@@ -187,7 +187,7 @@ public class ServletLogin extends HttpServlet {
                 "       }\n" +
                 "       input{\n" +
                 "           font-family: Arial, Helvetica, sans-serif;\n" +
-                "           font-size: 16px;\n" +
+                "           font-size: 14px;\n" +
                 "           width: 26em; \n" +
                 "           width: 40ch; \n" +
                 "       }\n" +

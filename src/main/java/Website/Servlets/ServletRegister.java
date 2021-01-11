@@ -52,8 +52,12 @@ public class ServletRegister extends HttpServlet {
         EmailValidation emailCheck = new EmailValidation(em,pw,vpw);
         CreditCard cc = new CreditCard(cn,cvv,sc,an);
         Address a = new Address(ad,pc);
+        resp.getWriter().write("<p>Output</p>");
+        if(emailCheck.validEmail()) {
+            resp.getWriter().write("valid email");
+        }
 
-        if(LoginDAO.validateRegister(em)){ //Checks database to see if email exists in use database
+        /*if(LoginDAO.validateRegister(em)){ //Checks database to see if email exists in use database
             resp.getWriter().write("<h2>There is an existing account with the email entered, please log in.</h2>");
         }
         if (fn.isEmpty() || ln.isEmpty() || em.isEmpty() || pw.isEmpty() || vpw.isEmpty() || cn.isEmpty() || cvv.isEmpty()|| sc.isEmpty() || an.isEmpty() || pc.isEmpty()){ //Checks if any of the required fields are empty
@@ -72,7 +76,7 @@ public class ServletRegister extends HttpServlet {
             resp.getWriter().write("<h2>Invalid postcode, please try again.</h2>");
         }
 
-        /*else{
+        else{
             //LoginDAO.addUser(fn,ln,em,pw,pc,ad,pn);
             User currentUser = LoginDAO.getUser(em,pw); //*rewrite to constructor with string values
             LoginDAO.setLoggedInUser(currentUser);
@@ -216,7 +220,7 @@ public class ServletRegister extends HttpServlet {
                 "       }\n" +
                 "       input, textarea{\n" +
                 "           font-family: Arial, Helvetica, sans-serif;\n" +
-                "           font-size: 16px;\n" +
+                "           font-size: 14px;\n" +
                 "           width: 26em; \n" +
                 "           width: 40ch; \n" +
                 "       }\n" +

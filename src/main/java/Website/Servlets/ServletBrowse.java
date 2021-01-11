@@ -53,21 +53,39 @@ public class ServletBrowse extends HttpServlet {
         resp.getWriter().write("</section>\n");*/
         int i=0;
         boolean displayHeader = true;
-        resp.getWriter().write("<h2>" +headers.get(i)+"</h2>\n");
+        resp.getWriter().write("<section>\n" + "<h2 id=\""+headerURLs.get(0)+"\">" + headers.get(0) + "</h2>\n");
         for (int j=1;j<42;j++){
             Product p = LoginDAO.getProduct(j);
+            String price = df.format(p.price);
+            int max = p.limited ? 1 : 5;
             if(p.category.equals(headers.get(i))){
                 displayHeader = false;
-
             }
             else{
                 displayHeader = true;
                 i++;
             }
             if (displayHeader){
-                resp.getWriter().write("<h2>" +headers.get(i)+"</h2>\n");
+                resp.getWriter().write("<section>\n" + "<h2 id=\""+headerURLs.get(0)+"\">" + headers.get(0) + "</h2>\n");
             }
-            resp.getWriter().write("<p>" +p.name+"</p>\n");
+            resp.getWriter().write("<div class=\"relative\">\n");
+            if (p.limited){
+                resp.getWriter().write("<label class=\"tooltip\"><center>" + p.brand + " " + p.name + "<br>" + p.amount + "</center>\n" +
+                        "<span class=\"tooltiptext\"><i>Limited to one per customer</i></span></label><br>\n");
+            }
+            else{
+                resp.getWriter().write("<label><center>" + p.brand + " " + p.name + "<br>" + p.amount + "</center></label><br>\n");
+            }
+            resp.getWriter().write("<label><center>£" + price + "</label></center><br>\n" +
+                    "<div class=\"absolute\">\n" +
+                    "<form action=\"browse\" method=\"post\">\n" +
+                    "<input name=\"basketQuantity\" type=\"number\" size=\"5\" min=\"0\" max=\"" + max + "\">\n" +
+                    "<input name=\"buttonNumber\" type=\"hidden\"value=\"" + j + "\">\n" +
+                    "<input type=\"hidden\" name=\"logOut\" value=\"false\">\n" +
+                    "<input type=\"submit\"class=\"buttonStyle\" value=\"Add to Basket\">\n" +
+                    "</form>\n" +
+                    "</div>\n" +
+                    "</div>");
         }
         /*int j=1;
         Product p = LoginDAO.getProduct(j);
