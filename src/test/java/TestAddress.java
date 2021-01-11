@@ -8,5 +8,7 @@ public class TestAddress {
         System.out.println(ad.address);
         Assert.assertEquals(ad.postcode,"SW7 2AZ");
         Assert.assertEquals(ad.validPostcode(),true);
+        Address ad1 = new Address("Test","");
+        System.out.println(ad1.postcode.length());
     }
 }

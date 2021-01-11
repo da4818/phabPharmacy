@@ -55,7 +55,7 @@ public class ServletRegister extends HttpServlet {
         CreditCard cc = new CreditCard(cn,cvv,sc,an);
         Address a = new Address("test",pc);
 
-        resp.getWriter().write("<p>Output</p>");
+        resp.getWriter().write("<p>Output</p>\n");
 
         /*if(LoginDAO.validateRegister(em)){ //Checks database to see if email exists in use database
             resp.getWriter().write("<h2>There is an existing account with the email entered, please log in.</h2>");
@@ -111,9 +111,9 @@ public class ServletRegister extends HttpServlet {
                     "      </div>\n" +
                     "    </form>\n";
         }
-        int basketSize = LoginDAO.getBasketSize();
+        //int basketSize = LoginDAO.getBasketSize();
         String basketSizeOut = "";
-        if (basketSize != 0){ basketSizeOut = String.valueOf(basketSize);}
+        //if (basketSize != 0){ basketSizeOut = String.valueOf(basketSize);}
         return "<!DOCTYPE html>\n" + //HTML comments are on the respective .jsp files (need updating)
                 "<html>\n" +
                 "<head>\n" +
@@ -273,7 +273,7 @@ public class ServletRegister extends HttpServlet {
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"phone_no\" value=\"\" placeholder=\"Phone Number\"><br>\n" +
                 "  \n" +
                 "  <input type=\"hidden\" name=\"logOut\" value=\"false\">\n" +
-                "  <input type=\"submit\" style=\"width: 35ch;\" class=\"buttonStyle\" value=\"Submit\">\n" +
+                "  <input type=\"submit\" style=\"width: 36ch;\" class=\"buttonStyle\" value=\"Submit\">\n" +
                 "</form>\n";
     }
 }
