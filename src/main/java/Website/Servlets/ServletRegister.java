@@ -54,13 +54,13 @@ public class ServletRegister extends HttpServlet {
         EmailValidation emailCheck = new EmailValidation(em,pw,vpw);
         CreditCard cc = new CreditCard(cn,cvv,sc,an);
         Address a = new Address(ad,pc);
-        if (a.address.isEmpty()){
+        /*if (a.address.isEmpty()){
             resp.getWriter().write("<p>Address is optional</p>");
         }
         if (a.validPostcode()){
             resp.getWriter().write("<p>Valid postcode:"+a.postcode+"</p>");
         }
-        resp.getWriter().write("<p>Output</p>\n");
+        resp.getWriter().write("<p>Output</p>\n");*/
 
         /*if(LoginDAO.validateRegister(em)){ //Checks database to see if email exists in use database
             resp.getWriter().write("<h2>There is an existing account with the email entered, please log in.</h2>");
@@ -68,13 +68,13 @@ public class ServletRegister extends HttpServlet {
         if (fn.isEmpty() || ln.isEmpty() || em.isEmpty() || pw.isEmpty() || vpw.isEmpty() || cn.isEmpty() || cvv.isEmpty()|| sc.isEmpty() || an.isEmpty() || pc.isEmpty()){ //Checks if any of the required fields are empty
             resp.getWriter().write("<h2>Incomplete fields, please enter all the information.</h2>");
         }
-        if (!pw.equals(vpw)){
+        else if (!pw.equals(vpw)){
             resp.getWriter().write("<h2>Passwords don't match, please try again.</h2>");
-        }
+        }*/
         if(!emailCheck.validEmail()){
             resp.getWriter().write(emailCheck.getErrorMessage());
         }
-        if (!cc.validCardNumber() || !cc.validAccountNumber() || !cc.validSortCode() || !cc.validCvv()){
+        /*if (!cc.validCardNumber() || !cc.validAccountNumber() || !cc.validSortCode() || !cc.validCvv()){
             resp.getWriter().write("<h2>Invalid card details, please try again.</h2>");
         }
         if(!a.validPostcode()){
@@ -269,7 +269,7 @@ public class ServletRegister extends HttpServlet {
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"cvv\" placeholder=\"CVV*\"><br>\n" +
                 "\n" +
                 "  <h3 style=\"font-size: 15px;\">Shipping Information</h3>\n" +
-                "  <textarea name=\"address\" style=\"width: 219px;\"  value=\"\" placeholder=\"Address\"></textarea><br>\n" +
+                "  <textarea name=\"address\" style=\"width: 218px;\"  value=\"\" placeholder=\"Address\"></textarea><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"postcode\" placeholder=\"Postcode*\"><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"phone_no\" value=\"\" placeholder=\"Phone Number\"><br>\n" +
                 "  \n" +
