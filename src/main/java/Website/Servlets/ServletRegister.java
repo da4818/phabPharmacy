@@ -33,7 +33,6 @@ public class ServletRegister extends HttpServlet {
         String logOut = req.getParameter("logOut");
         if (logOut.equals("Log Out")){
             LoginDAO.resetTable("logged_in_customer");
-            //LoginDAO.resetTable("ordered_products");
         }
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
@@ -55,12 +54,14 @@ public class ServletRegister extends HttpServlet {
         CreditCard cc = new CreditCard(cn,cvv,sc,an);
         Address a = new Address(ad,pc);
 
-        boolean allowReg = true;
+        resp.getWriter().write("<p>List:<br>"+fn+"<br>"+ln+"<br>"+em+"<br>"+pw+"<br>"+vpw+"<br>"+cn+"<br>"+cvv+"<br>"+sc+"<br>"+an+"<br>"+pc+"<br>"+ad+"<br>"+pn+"<br>");
+        /*boolean allowReg = true;
         if (fn.isEmpty() || ln.isEmpty() || em.isEmpty() || pw.isEmpty() || vpw.isEmpty() || pc.isEmpty() || cn.isEmpty() || cvv.isEmpty()|| sc.isEmpty() || an.isEmpty()){ //Checks if any of the required fields are empty
             resp.getWriter().write("<h2>Incomplete fields, please enter all the information.</h2>");
             allowReg = false;
         }
         else{
+            resp.getWriter().write("<p>all required entries have been filled</p>");
             if(LoginDAO.validateRegister(em)){ //Checks database to see if email exists in use database
                 resp.getWriter().write("<h2>There is an existing account with the email entered, please log in.</h2>");
                 allowReg = false;
@@ -92,7 +93,7 @@ public class ServletRegister extends HttpServlet {
                 new AddCustomer(c,cc);
                 resp.getWriter().write("<h2>Successful registration. Welcome, " + currentUser.fname + "</h2>");
             }
-        }
+        }*/
 
         resp.getWriter().write("<script>\n" +
                 "    function redirectBrowse(){\n" +
