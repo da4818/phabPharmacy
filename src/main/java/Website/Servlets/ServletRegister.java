@@ -54,54 +54,50 @@ public class ServletRegister extends HttpServlet {
         EmailValidation emailCheck = new EmailValidation(em,pw,vpw);
         CreditCard cc = new CreditCard(cn,cvv,sc,an);
         Address a = new Address(ad,pc);
-        /*if (a.address.isEmpty()){
-            resp.getWriter().write("<p>Address is optional</p>");
-        }
-        if (a.validPostcode()){
-            resp.getWriter().write("<p>Valid postcode:"+a.postcode+"</p>");
-        }
-        resp.getWriter().write("<p>Output</p>\n");*/
-        boolean allowReg = true;
-        if(LoginDAO.validateRegister(em)){ //Checks database to see if email exists in use database
-            resp.getWriter().write("<h2>There is an existing account with the email entered, please log in.</h2>");
-            allowReg = false;
-        }
-        else if (fn.isEmpty() || ln.isEmpty() || em.isEmpty() || pw.isEmpty() || vpw.isEmpty() || pc.isEmpty()){ //Checks if any of the required fields are empty
+
+        resp.getWriter().write("<p>list:"+a.postcode+"<br>"+fn+"<br>"+ln+"<br>"+em+"<br>"+pw+"<br>"+vpw+"<br>"+cn+"<br>"+cvv+"<br>"+sc+"<br>"+an+"<br>"+pc+"<br>"+ad+"<br>"+pn+"</p>");
+
+
+        /*boolean allowReg = true;
+        if (fn.isEmpty()){ //Checks if any of the required fields are empty
             resp.getWriter().write("<h2>Incomplete fields, please enter all the information.</h2>");
             allowReg = false;
         }
-        // cn.isEmpty() || cvv.isEmpty()|| sc.isEmpty() || an.isEmpty() ||
-        else if (!pw.equals(vpw)){
-            resp.getWriter().write("<h2>Passwords don't match, please try again.</h2>");
-            allowReg = false;
-        }
-        else if(!emailCheck.validEmail()){
-            resp.getWriter().write(emailCheck.getErrorMessage());
-            allowReg = false;
-        }
-        else if (!cc.validCardNumber() || !cc.validAccountNumber() || !cc.validSortCode() || !cc.validCvv()){
-            resp.getWriter().write("<h2>Invalid card details, please try again.</h2>");
-            allowReg = false;
-        }
-        else if(!a.validPostcode()){
-            resp.getWriter().write("<h2>Invalid postcode, please try again.</h2>");
-            allowReg = false;
-        }
-        if (allowReg){
-            //LoginDAO.addUser(fn,ln,em,pw,pc,ad,pn);
-            User currentUser = LoginDAO.getUser(em,pw); //*rewrite to constructor with string values
-            LoginDAO.setLoggedInUser(currentUser);
-
-            Customer c = new Customer(currentUser.fname, currentUser.lname, currentUser.postcode, currentUser.email, currentUser.address, currentUser.phoneno);
-            //CreditCard cc = new CreditCard(cn,cvv,sc,an);
-            new AddCustomer(c,cc);
-            resp.getWriter().write("<h2>Successful registration. Welcome, " + currentUser.fname + "</h2>");
-        }
         else{
-            resp.getWriter().write("<p>error</p>");
-        }
+            if(LoginDAO.validateRegister(em)){ //Checks database to see if email exists in use database
+                resp.getWriter().write("<h2>There is an existing account with the email entered, please log in.</h2>");
+                allowReg = false;
+            }
+            else if(!emailCheck.validEmail()){
+                resp.getWriter().write(emailCheck.getErrorMessage());
+                allowReg = false;
+            }
+            // || ln.isEmpty() || em.isEmpty() || pw.isEmpty() || vpw.isEmpty() || pc.isEmpty() || cn.isEmpty() || cvv.isEmpty()|| sc.isEmpty() || an.isEmpty() ||
+            if (!pw.equals(vpw)){
+                resp.getWriter().write("<h2>Passwords don't match, please try again.</h2>");
+                allowReg = false;
+            }
 
+            if (!cc.validCardNumber() || !cc.validAccountNumber() || !cc.validSortCode() || !cc.validCvv()){
+                resp.getWriter().write("<h2>Invalid card details, please try again.</h2>");
+                allowReg = false;
+            }
+            if(!a.validPostcode()){
+                resp.getWriter().write("<h2>Invalid postcode, please try again.</h2>");
+                allowReg = false;
+            }
+            if (allowReg){
+                //LoginDAO.addUser(fn,ln,em,pw,pc,ad,pn);
+                User currentUser = LoginDAO.getUser(em,pw); //*rewrite to constructor with string values
+                LoginDAO.setLoggedInUser(currentUser);
 
+                Customer c = new Customer(currentUser.fname, currentUser.lname, currentUser.postcode, currentUser.email, currentUser.address, currentUser.phoneno);
+                //CreditCard cc = new CreditCard(cn,cvv,sc,an);
+                new AddCustomer(c,cc);
+                resp.getWriter().write("<h2>Successful registration. Welcome, " + currentUser.fname + "</h2>");
+            }
+            resp.getWriter().write("<p>response</p>");
+        }*/
 
         resp.getWriter().write("<script>\n" +
                 "    function redirectBrowse(){\n" +

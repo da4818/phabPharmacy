@@ -618,6 +618,9 @@ public class LoginDAO {
             while(rs.next()){
                 cust_id = rs.getInt("customer_id");
             }
+            if(!rs.next()){
+                return 0;
+            }
             String sql1 = "select sum(quantity) from ordered_product where customer_id=" + cust_id + ";";//although similar to 'tableSize()', this counts the number of items, not just the number of different products
             s = c.createStatement(); //i.e. x3 vicks and x2 dettol is 5 items comprised of 2 different products - the basket displays 5
             rs = s.executeQuery(sql1);
