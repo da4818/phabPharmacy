@@ -618,7 +618,7 @@ public class LoginDAO {
             if(!rs.next()){
                 return 0;
             }
-            while(rs.next()){
+            else{
                 cust_id = rs.getInt("customer_id");
             }
 
