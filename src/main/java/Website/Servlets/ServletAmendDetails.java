@@ -23,12 +23,12 @@ public class ServletAmendDetails extends HttpServlet {
         User u = LoginDAO.getCurrentUser();
         String address_out = "Address";
         String phone_no_out = "Phone Number";
-        /*if(!u.address.isEmpty()){
+        if(!u.address.isEmpty()){
             address_out = u.address;
         }
         if(!u.phoneno.equals(null)){
             phone_no_out = u.phoneno;
-        }*/
+        }
         resp.getWriter().write("<form name=\"amendDetailsForm\" action=\"amend_details\" method=\"post\">\n" +
                 "  <h3>Order Information<br><b style=\"font-size: 15px;\">Payment Information</b></h3>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"card_no\" placeholder=\"Card Number*\"><br>\n" +
@@ -41,8 +41,8 @@ public class ServletAmendDetails extends HttpServlet {
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"postcode\" placeholder=\"Postcode*\"><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" value=\"\" name=\"phone_no\" placeholder=\"Phone Number\"><br>\n" +
                 "  \n" +
-                "  <input type=\"submit\" style=\"width: 150px;\" class=\"buttonStyle\" value=\"Update Details\">\n" +
-                "  <a class=\"buttonStyle\" href=\"https://phabpharmacy.herokuapp.com/order\">Cancel</a>\n" +
+                "  <input type=\"submit\" style=\"width: 200px;\" class=\"buttonStyle\" value=\"Update Details\">\n" +
+                "  <a class=\"buttonStyle\" style=\"width: 200px;\" href=\"https://phabpharmacy.herokuapp.com/order\">Cancel</a>\n" +
                 "</form>\n" +
 
                 "</body>\n" +
@@ -59,16 +59,22 @@ public class ServletAmendDetails extends HttpServlet {
         String pc = req.getParameter("postcode");
         String ad = req.getParameter("address");
         String pn = req.getParameter("phone_no");
-        //Perform checks to make sure user inputs are valid - card number
+        // Perform checks to make sure user inputs are valid - card number
         CreditCard cc = new CreditCard(cn,cvv,sc,an);
         Address a = new Address(ad,pc);
+        boolean valid = true;
         if (!cc.validCardNumber() || !cc.validAccountNumber() || !cc.validSortCode() || !cc.validCvv()){
             resp.getWriter().write("<h2>Invalid card details, please try again.</h2>");
+            valid = false;
         }
         if(!a.validPostcode()){
             resp.getWriter().write("<h2>Invalid postcode, please try again.</h2>");
+            valid = false;
         }
-        resp.getWriter().write("<h2>Information updated.</h2>");
+        if (valid) {
+            LoginDAO.updateCustomer(cc,a.postcode,a.address,pn);
+            resp.getWriter().write("<h2>Information updated.</h2>");
+        }
     }
 
 
@@ -76,9 +82,8 @@ public class ServletAmendDetails extends HttpServlet {
     String htmlOutput(){
         boolean userLoggedIn = LoginDAO.checkLoggedIn(); //For certain pages (confirming order and amending user details) we do not want them to log out --> this code differs from the other servlets
         String displayCurrentUser = "<div class=\"currentUser\"><i class=\"fa fa-fw fa-user\"></i></div>"; //The use should always be logged in, so this should never account (placed in case of any unexpected outcomes)
-        User cUser = null;
         if (userLoggedIn == true) {
-            cUser = LoginDAO.getCurrentUser();
+            User cUser = LoginDAO.getCurrentUser();
             displayCurrentUser = "<div class=\"currentUser\">" + cUser.fname + "<i class=\"fa fa-fw fa-user\"></i></div>\n";
         }
         int basketSize = LoginDAO.getBasketSize();

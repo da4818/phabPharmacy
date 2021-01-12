@@ -88,48 +88,17 @@ public class ServletBrowse extends HttpServlet {
                     "</div>\n" +
                     "</div>");
         }
-        /*int j=1;
-        Product p = LoginDAO.getProduct(j);
-        for (int i=0;i<6;i++) {
-            resp.getWriter().write("<section>\n" + "<h2 id=\""+headerURLs.get(i)+"\">" + headers.get(i) + "</h2>\n");
-            while (p.category.equals(headers.get(i))) {
-                String price = df.format(p.price);
-                int max = p.limited ? 1 : 5;
-                resp.getWriter().write("<div class=\"relative\">\n");
-                if (p.limited){
-                    resp.getWriter().write("<label class=\"tooltip\"><center>" + p.brand + " " + p.name + "<br>" + p.amount + "</center>\n" +
-                            "<span class=\"tooltiptext\"><i>Limited to one per customer</i></span></label><br>\n");
-                }
-                else{
-                        resp.getWriter().write("<label><center>" + p.brand + " " + p.name + "<br>" + p.amount + "</center></label><br>\n");
-                }
-                resp.getWriter().write("<label><center>£" + price + "</label></center><br>\n" +
-                        "<div class=\"absolute\">\n" +
-                        "<form action=\"browse\" method=\"post\">\n" +
-                        "<input name=\"basketQuantity\" type=\"number\" size=\"5\" min=\"0\" max=\"" + max + "\">\n" +
-                        "<input name=\"buttonNumber\" type=\"hidden\"value=\"" + j + "\">\n" +
-                        "<input type=\"hidden\" name=\"logOut\" value=\"false\">\n" +
-                        "<input type=\"submit\"class=\"buttonStyle\" value=\"Add to Basket\">\n" +
-                        "</form>\n" +
-                        "</div>\n" +
-                        "</div>");
-                j++;
-                p = LoginDAO.getProduct(j);
-            }
-            resp.getWriter().write("</section>\n");
-        }*/
         resp.getWriter().write("</body>\n" + "</html>");
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        String HTML= htmlOutput();
         String logOut = req.getParameter("logOut");
         if (logOut.equals("Log Out")){
             LoginDAO.resetTable("logged_in_customer");
         }
-        if (!LoginDAO.checkLoggedIn()){ //If no one is logged in, it will prevent them from adding items to their basket
+        if (!LoginDAO.checkLoggedIn()){ // If no one is logged in, it will prevent them from adding items to their basket
             resp.getWriter().write("<pre><script>window.onload(alert(\"Please ensure that you have created an account and logged in before adding items to your basket.\"));</script></pre>");
         }
         if(LoginDAO.checkLoggedIn()){
@@ -138,33 +107,48 @@ public class ServletBrowse extends HttpServlet {
             Product pBasket = LoginDAO.getProduct(pos);
             LoginDAO.addToBasket(pBasket,q);
         }
+        String HTML= htmlOutput(); //
         resp.getWriter().write(HTML);
-        resp.getWriter().write("<section>\n" + "<h2 id=\""+headerURLs.get(0)+"\">" + headers.get(0) + "</h2>\n");
-        for (int j=1;j<11;j++) {
+        int i=0;
+        boolean displayHeader = true;
+        resp.getWriter().write("<section>\n" + "<h2 id=\""+headerURLs.get(i)+"\">" + headers.get(i) + "</h2>\n");
+        for (int j=1;j<42;j++){
             Product p = LoginDAO.getProduct(j);
-                String price = df.format(p.price);
-                int max = p.limited ? 1 : 5;
-                resp.getWriter().write("<div class=\"relative\">\n");
-                if (p.limited){
-                    resp.getWriter().write("<label class=\"tooltip\"><center>" + p.brand + " " + p.name + "<br>" + p.amount + "</center>\n" +
-                            "<span class=\"tooltiptext\"><i>Limited to one per customer</i></span></label><br>\n");
-                }
-                else{
-                    resp.getWriter().write("<label><center>" + p.brand + " " + p.name + "<br>" + p.amount + "</center></label><br>\n");
-                }
-                resp.getWriter().write("<label><center>£" + price + "</label></center><br>\n" +
-                        "<div class=\"absolute\">\n" +
-                        "<form action=\"browse\" method=\"post\">\n" +
-                        "<input name=\"basketQuantity\" type=\"number\" size=\"5\" min=\"0\" max=\"" + max + "\">\n" +
-                        "<input name=\"buttonNumber\" type=\"hidden\"value=\"" + j + "\">\n" +
-                        "<input type=\"hidden\" name=\"logOut\" value=\"false\">\n" +
-                        "<input type=\"submit\"class=\"buttonStyle\" value=\"Add to Basket\">\n" +
-                        "</form>\n" +
-                        "</div>\n" +
-                        "</div>");
+            String price = df.format(p.price);
+            int max = p.limited ? 1 : 5;
+            if(p.category.equals(headers.get(i))){
+                displayHeader = false;
             }
-            resp.getWriter().write("</section>\n");
+            else{
+                displayHeader = true;
+                i++;
+            }
+            if (displayHeader){
+                resp.getWriter().write("</section>\n"); //Ends previous section
+                resp.getWriter().write("<section>\n" + "<h2 id=\""+headerURLs.get(i)+"\">" + headers.get(i) + "</h2>\n");
+            }
+            resp.getWriter().write("<div class=\"relative\">\n");
+            if (p.limited){
+                resp.getWriter().write("<label class=\"tooltip\"><center>" + p.brand + " " + p.name + "<br>" + p.amount + "</center>\n" +
+                        "<span class=\"tooltiptext\"><i>Limited to one per customer</i></span></label><br>\n");
+            }
+            else{
+                resp.getWriter().write("<label><center>" + p.brand + " " + p.name + "<br>" + p.amount + "</center></label><br>\n");
+            }
+            resp.getWriter().write("<label><center>£" + price + "</label></center><br>\n" +
+                    "<div class=\"absolute\">\n" +
+                    "<form action=\"browse\" method=\"post\">\n" +
+                    "<input name=\"basketQuantity\" type=\"number\" size=\"5\" min=\"0\" max=\"" + max + "\">\n" +
+                    "<input name=\"buttonNumber\" type=\"hidden\"value=\"" + j + "\">\n" +
+                    "<input type=\"hidden\" name=\"logOut\" value=\"false\">\n" +
+                    "<input type=\"submit\"class=\"buttonStyle\" value=\"Add to Basket\">\n" +
+                    "</form>\n" +
+                    "</div>\n" +
+                    "</div>");
         }
+        resp.getWriter().write("</body>\n" + "</html>");
+    }
+
         /*int j=1;
         Product p = LoginDAO.getProduct(j);
         for (int i=0;i<6;i++) {

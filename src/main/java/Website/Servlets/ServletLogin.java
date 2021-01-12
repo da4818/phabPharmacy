@@ -32,25 +32,25 @@ public class ServletLogin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        String logOut = req.getParameter("logOut"); //If this input button doesn't exist, it will result in a nullPointerException error - line 225
+        String logOut = req.getParameter("logOut"); // For each form submission - there is a hidden button named "logOut" - this is for pages where no log out button is present (when no one is logged in) - if the hidden button didn't exist for these pages, it will result in a nullPointerException error - line 225
         if (logOut.equals("Log Out")){
             LoginDAO.resetTable("logged_in_customer");
-            //LoginDAO.resetTable("customer_basket");
+            // LoginDAO.resetTable("customer_basket");
         }
-        String HTML = htmlOutput();
-        //Retrieves info that user has entered - in HTML code, the input tags are named "email" and "pass" (lines 160-161)
+        // Retrieves info that user has entered - in HTML code, the input tags are named "email" and "pass" (lines 160-161)
         String em = req.getParameter("email");
         String pw = req.getParameter("pass");
+        String HTML = htmlOutput();
         resp.getWriter().write(HTML);
-        if(LoginDAO.validateLogin(em,pw)){ //Checks that the input variables match existing entries in the customer ('user') database
-            User currentUser = LoginDAO.getUser(em,pw); //If the login entries pass the validation checks
-            LoginDAO.setLoggedInUser(currentUser); //This will update the current user database (I've called it 'logged') so they know which customer is currently logged in
+        if(LoginDAO.validateLogin(em,pw)){ // Checks that the input variables match existing entries in the customer ('user') database
+            User currentUser = LoginDAO.getUser(em,pw); // If the login entries pass the validation checks
+            LoginDAO.setLoggedInUser(currentUser); // This will update the current user database (I've called it 'logged') so they know which customer is currently logged in
             resp.getWriter().write("<h2>Welcome back, " + currentUser.fname + "!</h2>\n");
         }
         else if (em.isEmpty() || pw.isEmpty()){
             resp.getWriter().write("<h2>Incomplete fields, please enter all the information.</h2>\n");
         }
-        else{ //If the input variables don't match any existing entries in the customer ('user') database
+        else{ // If the input variables don't match any existing entries in the customer ('user') database
             resp.getWriter().write("<h2>Wrong email or password, please try again.</h2>\n");
         }
         resp.getWriter().write("<script>\n" +
@@ -81,7 +81,7 @@ public class ServletLogin extends HttpServlet {
         int basketSize = LoginDAO.getBasketSize();
         String basketSizeOut = "";
         if (basketSize != 0){ basketSizeOut = String.valueOf(basketSize);}
-        return "<!DOCTYPE html>\n" + //HTML comments are on the respective .jsp files (need updating)
+        return "<!DOCTYPE html>\n" + // HTML comments are on the respective .jsp files (need updating)
                 "<html>\n" +
                 "<head>\n" +
                 "   <meta charset=\"utf-8\">\n" +
