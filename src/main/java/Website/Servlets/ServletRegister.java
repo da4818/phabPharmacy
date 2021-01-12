@@ -124,7 +124,7 @@ public class ServletRegister extends HttpServlet {
                 "<head>\n" +
                 "   <meta charset=\"utf-8\">\n" +
                 "   <meta name=\"viewport\" content=\"width=device-width\">\n" +
-                "   <title>Home</title>\n" +
+                "   <title>Register</title>\n" +
                 "   <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">\n" +
                 "   <style>\n" +
                 "       body {font-family: Arial, Helvetica, sans-serif;}\n" +
