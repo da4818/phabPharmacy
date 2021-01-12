@@ -62,7 +62,7 @@ public class ServletRegister extends HttpServlet {
         }
         resp.getWriter().write("<p>Output</p>\n");*/
 
-        /*if(LoginDAO.validateRegister(em)){ //Checks database to see if email exists in use database
+        if(LoginDAO.validateRegister(em)){ //Checks database to see if email exists in use database
             resp.getWriter().write("<h2>There is an existing account with the email entered, please log in.</h2>");
         }
         if (fn.isEmpty() || ln.isEmpty() || em.isEmpty() || pw.isEmpty() || vpw.isEmpty() || cn.isEmpty() || cvv.isEmpty()|| sc.isEmpty() || an.isEmpty() || pc.isEmpty()){ //Checks if any of the required fields are empty
@@ -70,11 +70,11 @@ public class ServletRegister extends HttpServlet {
         }
         else if (!pw.equals(vpw)){
             resp.getWriter().write("<h2>Passwords don't match, please try again.</h2>");
-        }*/
+        }
         if(!emailCheck.validEmail()){
             resp.getWriter().write(emailCheck.getErrorMessage());
         }
-        /*if (!cc.validCardNumber() || !cc.validAccountNumber() || !cc.validSortCode() || !cc.validCvv()){
+        if (!cc.validCardNumber() || !cc.validAccountNumber() || !cc.validSortCode() || !cc.validCvv()){
             resp.getWriter().write("<h2>Invalid card details, please try again.</h2>");
         }
         if(!a.validPostcode()){
@@ -90,7 +90,7 @@ public class ServletRegister extends HttpServlet {
             //CreditCard cc = new CreditCard(cn,cvv,sc,an);
             new AddCustomer(c,cc);
             resp.getWriter().write("<h2>Successful registration. Welcome, " + currentUser.fname + "</h2>");
-        }*/
+        }
 
 
 
