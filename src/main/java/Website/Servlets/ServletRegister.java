@@ -61,26 +61,32 @@ public class ServletRegister extends HttpServlet {
             resp.getWriter().write("<p>Valid postcode:"+a.postcode+"</p>");
         }
         resp.getWriter().write("<p>Output</p>\n");*/
-
+        boolean allowReg = true;
         if(LoginDAO.validateRegister(em)){ //Checks database to see if email exists in use database
             resp.getWriter().write("<h2>There is an existing account with the email entered, please log in.</h2>");
+            allowReg = false;
         }
         else if (fn.isEmpty() || ln.isEmpty() || em.isEmpty() || pw.isEmpty() || vpw.isEmpty() || cn.isEmpty() || cvv.isEmpty()|| sc.isEmpty() || an.isEmpty() || pc.isEmpty()){ //Checks if any of the required fields are empty
             resp.getWriter().write("<h2>Incomplete fields, please enter all the information.</h2>");
+            allowReg = false;
         }
-        /*else if (!pw.equals(vpw)){
+        else if (!pw.equals(vpw)){
             resp.getWriter().write("<h2>Passwords don't match, please try again.</h2>");
+            allowReg = false;
         }
         else if(!emailCheck.validEmail()){
             resp.getWriter().write(emailCheck.getErrorMessage());
+            allowReg = false;
         }
         else if (!cc.validCardNumber() || !cc.validAccountNumber() || !cc.validSortCode() || !cc.validCvv()){
             resp.getWriter().write("<h2>Invalid card details, please try again.</h2>");
+            allowReg = false;
         }
         else if(!a.validPostcode()){
             resp.getWriter().write("<h2>Invalid postcode, please try again.</h2>");
+            allowReg = false;
         }
-        else{
+        else if (allowReg){
             //LoginDAO.addUser(fn,ln,em,pw,pc,ad,pn);
             User currentUser = LoginDAO.getUser(em,pw); //*rewrite to constructor with string values
             LoginDAO.setLoggedInUser(currentUser);
@@ -89,7 +95,7 @@ public class ServletRegister extends HttpServlet {
             //CreditCard cc = new CreditCard(cn,cvv,sc,an);
             new AddCustomer(c,cc);
             resp.getWriter().write("<h2>Successful registration. Welcome, " + currentUser.fname + "</h2>");
-        }*/
+        }
 
 
 
