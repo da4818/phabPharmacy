@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Address {
     public String address;
+    public String[] addressLines;
     public String postcode;
 
     public Address(String address, String postcode){
@@ -15,12 +16,19 @@ public class Address {
         else{
             this.postcode = postcode.toUpperCase();
         }
+        addressLines = address.split("\\n");
 
     }
 
-    /*public String getAddress(){
-        String lines[] = address.split("\\r?\\n");
-    }*/
+
+    public String getAddress(){
+        String out="";
+        for (String s: addressLines){
+            out += s + "<br>";
+        }
+        return out;
+    }
+
 
     // This checks for the correct postcode format - e.g. SW 72AZ is invalid but SW72AZ and SW7 2AZ is valid
     // The space can be either the 3rd, 4th or 5th position of the postcode (e.g. 3rd in L1 1JJ, 4th in SW7 2AZ and 5th in SW1A 1AA)

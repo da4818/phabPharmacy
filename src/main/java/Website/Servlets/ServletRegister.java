@@ -55,13 +55,7 @@ public class ServletRegister extends HttpServlet {
         CreditCard cc = new CreditCard(cn,cvv,sc,an);
         Address a = new Address(ad,pc);
 
-        String[] parts = a.address.split("\\n");
-        for (int i=0;i< parts.length;i++){
-            resp.getWriter().write("<p>:"+parts[i]+ "</p>");
-        }
-
-
-        /*boolean allowReg = true;
+        boolean allowReg = true;
         if (fn.isEmpty()){ //Checks if any of the required fields are empty
             resp.getWriter().write("<h2>Incomplete fields, please enter all the information.</h2>");
             allowReg = false;
@@ -100,7 +94,7 @@ public class ServletRegister extends HttpServlet {
                 resp.getWriter().write("<h2>Successful registration. Welcome, " + currentUser.fname + "</h2>");
             }
             resp.getWriter().write("<p>response</p>");
-        }*/
+        }
 
         resp.getWriter().write("<script>\n" +
                 "    function redirectBrowse(){\n" +
@@ -277,7 +271,7 @@ public class ServletRegister extends HttpServlet {
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"cvv\" value=\"\" placeholder=\"CVV*\"><br>\n" +
                 "\n" +
                 "  <h3 style=\"font-size: 15px;\">Shipping Information</h3>\n" +
-                "  <textarea style=\"width: 217px;\" name=\"address\" value=\"\" placeholder=\"Address\"></textarea><br>\n" +
+                "  <textarea style=\"width: 217px; font-family: Arial, Helvetica, sans-serif;\" name=\"address\" value=\"\" placeholder=\"Address\"></textarea><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"postcode\" value=\"\" placeholder=\"Postcode*\"><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"phone_no\" value=\"\" placeholder=\"Phone Number\"><br>\n" +
                 "  \n" +
