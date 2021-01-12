@@ -54,7 +54,7 @@ public class ServletRegister extends HttpServlet {
         EmailValidation emailCheck = new EmailValidation(em,pw,vpw);
         CreditCard cc = new CreditCard(cn,cvv,sc,an);
         Address a = new Address("test",pc);
-        if (a.address.equals(null)){
+        if (a.address.isEmpty()){
             resp.getWriter().write("<p>Address is optional</p>");
         }
         if (a.validPostcode()){

@@ -39,9 +39,7 @@ public class ServletMap extends HttpServlet {
                 p = LoginDAO.getProduct(j);
             }
             resp.getWriter().write("</div>\n" + "</section>\n" +
-                    "<section style=\"float: right; margin-right: 15%;\">\n" +
-                    "<img src=\"https://bit.ly/cold_flu_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
-                    "</section>\n");
+                    "<img src=\"https://bit.ly/cold_flu_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
         }
 
         else if(req.getServletPath().equals("/map/skincare")){
@@ -58,9 +56,7 @@ public class ServletMap extends HttpServlet {
                 p = LoginDAO.getProduct(j);
             }
             resp.getWriter().write("</div>\n" + "</section>\n" +
-                    "<section style=\"float: right; margin-right: 15%;\">\n" +
-                    "<img class=\"images\" src=\"https://bit.ly/skincare_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
-                    "</section>\n");
+                    "<img class=\"images\" src=\"https://bit.ly/skincare_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
         }
         else if(req.getServletPath().equals("/map/headaches_and_pain_relief")){
             resp.getWriter().write("<section>" +
@@ -76,9 +72,7 @@ public class ServletMap extends HttpServlet {
                 p = LoginDAO.getProduct(j);
             }
             resp.getWriter().write("</div>\n" + "</section>\n" +
-                    "<section style=\"float: right; margin-right: 15%;\">\n" +
-                    "<img class=\"images\" src=\"https://bit.ly/headache_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
-                    "</section>\n");
+                    "<img class=\"images\" src=\"https://bit.ly/headache_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
         }
         else if(req.getServletPath().equals("/map/digestion")){
             resp.getWriter().write("<section>" +
@@ -94,9 +88,7 @@ public class ServletMap extends HttpServlet {
                 p = LoginDAO.getProduct(j);
             }
             resp.getWriter().write("</div>\n" + "</section>\n" +
-                    "<section style=\"float: right; margin-right: 15%;\">\n" +
-                    "<img class=\"images\" src=\"https://bit.ly/digestion_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
-                    "</section>\n");
+                    "<img class=\"images\" src=\"https://bit.ly/digestion_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
         }
         else if(req.getServletPath().equals("/map/allergy")){
             resp.getWriter().write("<section>" +
@@ -112,9 +104,7 @@ public class ServletMap extends HttpServlet {
                 p = LoginDAO.getProduct(j);
             }
             resp.getWriter().write("</div>\n" + "</section>\n" +
-                    "<section style=\"float: right; margin-right: 15%;\">\n" +
-                    "<img class=\"images\" src=\"https://bit.ly/allergy_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
-                    "</section>\n");
+                    "<img class=\"images\" src=\"https://bit.ly/allergy_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
         }
         else if(req.getServletPath().equals("/map/first_aid")){
             resp.getWriter().write("<section>" +
@@ -268,7 +258,7 @@ public class ServletMap extends HttpServlet {
                 "      div.box{\n" +
                 "        position: absolute;\n" +
                 "        top: 157px;\n" +
-                "        margin-left: 280px;\n" +
+                "        left: 280px;\n" +
                 "      }\n" +
                 "      .buttonStyle{\n" +
                 "            background-color: #00B8C5;\n" +
