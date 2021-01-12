@@ -268,7 +268,7 @@ public class ServletMap extends HttpServlet {
                 "      div.box{\n" +
                 "        position: absolute;\n" +
                 "        top: 157px;\n" +
-                "        margin-left: 20px;\n" +
+                "        margin-left: 100px;\n" +
                 "      }\n" +
                 "      .buttonStyle{\n" +
                 "            background-color: #00B8C5;\n" +
