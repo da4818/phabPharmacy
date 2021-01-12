@@ -39,8 +39,8 @@ public class ServletMap extends HttpServlet {
                 p = LoginDAO.getProduct(j);
             }
             resp.getWriter().write("</div>\n" + "</section>\n" +
-                    "<section style=\"float: right; margin-right: 15%;>\n" +
-                    "<img class=\"images\" src=\"https://bit.ly/cold_flu_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
+                    "<section style=\"float: right; margin-right: 15%;\">\n" +
+                    "<img src=\"https://bit.ly/cold_flu_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
                     "</section>\n");
         }
 
@@ -58,7 +58,7 @@ public class ServletMap extends HttpServlet {
                 p = LoginDAO.getProduct(j);
             }
             resp.getWriter().write("</div>\n" + "</section>\n" +
-                    "<section style=\"float: right; margin-right: 15%;>\n" +
+                    "<section style=\"float: right; margin-right: 15%;\">\n" +
                     "<img class=\"images\" src=\"https://bit.ly/skincare_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
                     "</section>\n");
         }
@@ -76,7 +76,7 @@ public class ServletMap extends HttpServlet {
                 p = LoginDAO.getProduct(j);
             }
             resp.getWriter().write("</div>\n" + "</section>\n" +
-                    "<section style=\"float: right; margin-right: 15%;>\n" +
+                    "<section style=\"float: right; margin-right: 15%;\">\n" +
                     "<img class=\"images\" src=\"https://bit.ly/headache_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
                     "</section>\n");
         }
@@ -94,7 +94,7 @@ public class ServletMap extends HttpServlet {
                 p = LoginDAO.getProduct(j);
             }
             resp.getWriter().write("</div>\n" + "</section>\n" +
-                    "<section style=\"float: right; margin-right: 15%;>\n" +
+                    "<section style=\"float: right; margin-right: 15%;\">\n" +
                     "<img class=\"images\" src=\"https://bit.ly/digestion_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
                     "</section>\n");
         }
@@ -112,7 +112,7 @@ public class ServletMap extends HttpServlet {
                 p = LoginDAO.getProduct(j);
             }
             resp.getWriter().write("</div>\n" + "</section>\n" +
-                    "<section style=\"float: right; margin-right: 15%;>\n" +
+                    "<section style=\"float: right; margin-right: 15%;\">\n" +
                     "<img class=\"images\" src=\"https://bit.ly/allergy_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
                     "</section>\n");
         }
@@ -130,7 +130,7 @@ public class ServletMap extends HttpServlet {
                 p = LoginDAO.getProduct(j);
             }
             resp.getWriter().write("</div>\n" + "</section>\n" +
-                    "<section style=\"float: right; margin-right: 15%;>\n" +
+                    "<section style=\"float: right; margin-right: 15%;\">\n" +
                     "<img class=\"images\" src=\"https://bit.ly/first_aid_map_\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
                     "</section>\n");
         }
@@ -268,7 +268,7 @@ public class ServletMap extends HttpServlet {
                 "      div.box{\n" +
                 "        position: absolute;\n" +
                 "        top: 157px;\n" +
-                "        margin-left: 100px;\n" +
+                "        margin-left: 280px;\n" +
                 "      }\n" +
                 "      .buttonStyle{\n" +
                 "            background-color: #00B8C5;\n" +
