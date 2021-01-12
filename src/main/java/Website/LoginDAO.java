@@ -508,7 +508,7 @@ public class LoginDAO {
         }
         return total;
     }
-    //Removes item from the basket database when trash icon is pressed
+    // Removes item from the basket database when trash icon is pressed
     public static void removeFromBasket(int id_in){
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{
@@ -569,7 +569,7 @@ public class LoginDAO {
     // Also useful when determining whether tables are empty
 
     public static int tableSize(String tableName){
-        int n = 0; //Base case: n = 0 tells us the table is empty or something has gone wrong
+        int n = 0; // Base case: n = 0 tells us the table is empty or something has gone wrong
         Statement s = null;
         ResultSet rs = null;
         String sql1 = null;
@@ -585,7 +585,7 @@ public class LoginDAO {
                 while (rs.next()) {
                     cust_id = rs.getInt("customer_id");
                 }
-                sql1 = "select count(*) from ordered_product where customer_id=" + cust_id + ";"; //'select count(*)' gets the number of entries
+                sql1 = "select count(*) from ordered_product where customer_id=" + cust_id + ";"; // The SQL command 'select count(*)' gets the number of entries (i.e. the number of rows)
             }
             else if (tableName.equals("shop_product")){
                 sql1 = "select count(*) from shop_product where branch_id=1;";
@@ -593,8 +593,8 @@ public class LoginDAO {
             s = c.createStatement();
             rs = s.executeQuery(sql1);
             while(rs.next()){
-                String p = rs.getString(1); //'select count' returns a string value, not a number
-                n = Integer.parseInt(p); //so we convert that string to an integer
+                String p = rs.getString(1); // The SQL command 'select count' returns a string value, not a number
+                n = Integer.parseInt(p); // So we convert that string to an integer
             }
             rs.close();
             s.close();
@@ -615,14 +615,15 @@ public class LoginDAO {
             String sql = "select customer_id from logged_in_customer;";
             ResultSet rs = s.executeQuery(sql);
             int cust_id = 0;
-            while(rs.next()){
-                cust_id = rs.getInt("customer_id");
-            }
             if(!rs.next()){
                 return 0;
             }
-            String sql1 = "select sum(quantity) from ordered_product where customer_id=" + cust_id + ";";//although similar to 'tableSize()', this counts the number of items, not just the number of different products
-            s = c.createStatement(); //i.e. x3 vicks and x2 dettol is 5 items comprised of 2 different products - the basket displays 5
+            while(rs.next()){
+                cust_id = rs.getInt("customer_id");
+            }
+
+            String sql1 = "select sum(quantity) from ordered_product where customer_id=" + cust_id + ";";// Although similar to 'tableSize()', this counts the number of items, not just the number of different products
+            s = c.createStatement(); // i.e. x3 vicks and x2 dettol is 5 items comprised of 2 different products - the basket displays 5
             rs = s.executeQuery(sql1);
             while(rs.next()){
                 String p = rs.getString(1);
