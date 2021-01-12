@@ -56,7 +56,7 @@ public class ServletRegister extends HttpServlet {
         Address a = new Address(ad,pc);
 
         boolean allowReg = true;
-        if (fn.isEmpty()){ //Checks if any of the required fields are empty
+        if (fn.isEmpty() || ln.isEmpty() || em.isEmpty() || pw.isEmpty() || vpw.isEmpty() || pc.isEmpty() || cn.isEmpty() || cvv.isEmpty()|| sc.isEmpty() || an.isEmpty()){ //Checks if any of the required fields are empty
             resp.getWriter().write("<h2>Incomplete fields, please enter all the information.</h2>");
             allowReg = false;
         }
@@ -69,7 +69,6 @@ public class ServletRegister extends HttpServlet {
                 resp.getWriter().write(emailCheck.getErrorMessage());
                 allowReg = false;
             }
-            // || ln.isEmpty() || em.isEmpty() || pw.isEmpty() || vpw.isEmpty() || pc.isEmpty() || cn.isEmpty() || cvv.isEmpty()|| sc.isEmpty() || an.isEmpty() ||
             if (!pw.equals(vpw)){
                 resp.getWriter().write("<h2>Passwords don't match, please try again.</h2>");
                 allowReg = false;
@@ -93,7 +92,6 @@ public class ServletRegister extends HttpServlet {
                 new AddCustomer(c,cc);
                 resp.getWriter().write("<h2>Successful registration. Welcome, " + currentUser.fname + "</h2>");
             }
-            resp.getWriter().write("<p>response</p>");
         }
 
         resp.getWriter().write("<script>\n" +
@@ -258,21 +256,21 @@ public class ServletRegister extends HttpServlet {
                 "<h1>Register</h1>\n" +
                 "<p> Register below. If you already have an account, <a href=\"https://phabpharmacy.herokuapp.com/login\"> login here.</a>\n" +
                 "    <form name=\"registerForm\" action=\"register\" method=\"post\">\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"fname\" value=\"\" placeholder=\"First Name*\"><br>\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"lname\" value=\"\" placeholder=\"Last Name*\"><br>\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"email\" value=\"\" placeholder=\"Email Address*\"><br>\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"pass\" value=\"\" placeholder=\"Password*\"><br>\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"verify_pass\" value=\"\" placeholder=\"Verify Password*\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"fname\" placeholder=\"First Name*\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"lname\" placeholder=\"Last Name*\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"email\" placeholder=\"Email Address*\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"pass\" placeholder=\"Password*\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"verify_pass\" placeholder=\"Verify Password*\"><br>\n" +
                 "  <h3>Order Information<br><b style=\"font-size: 15px;\">Payment Information</b></h3>\n" +
                 "\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"card_no\" value=\"\" placeholder=\"Card Number*\"><br>\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"sort_code\" value=\"\" placeholder=\"Sort Code*\"><br>\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"account_no\" value=\"\" placeholder=\"Account Number*\"><br>\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"cvv\" value=\"\" placeholder=\"CVV*\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"card_no\" placeholder=\"Card Number*\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"sort_code\" placeholder=\"Sort Code*\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"account_no\" placeholder=\"Account Number*\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"cvv\" placeholder=\"CVV*\"><br>\n" +
                 "\n" +
                 "  <h3 style=\"font-size: 15px;\">Shipping Information</h3>\n" +
                 "  <textarea style=\"width: 217px; font-family: Arial, Helvetica, sans-serif;\" name=\"address\" value=\"\" placeholder=\"Address\"></textarea><br>\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"postcode\" value=\"\" placeholder=\"Postcode*\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"postcode\" placeholder=\"Postcode*\"><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"phone_no\" value=\"\" placeholder=\"Phone Number\"><br>\n" +
                 "  \n" +
                 "  <input type=\"hidden\" name=\"logOut\" value=\"false\">\n" +
