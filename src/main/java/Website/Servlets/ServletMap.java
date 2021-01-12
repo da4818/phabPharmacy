@@ -26,8 +26,9 @@ public class ServletMap extends HttpServlet {
         } // Embedded photo url for main store
 
         else if(req.getServletPath().equals("/map/cold_and_flu")){
-            resp.getWriter().write("<h3>Products in Cold and Flu</h3>\n" +
-                    "<div class=\"box\">\n");
+            resp.getWriter().write("<section>" +
+                    "<div class=\"box\">\n" +
+                    "<h3>Products in Cold and Flu</h3>\n");
             int j = 1;
             Product p = LoginDAO.getProduct(j);
             while (j <= LoginDAO.tableSize("shop_product")){
@@ -37,12 +38,16 @@ public class ServletMap extends HttpServlet {
                 j++;
                 p = LoginDAO.getProduct(j);
             }
-            resp.getWriter().write("</div>\n" + "<img class=\"images\" src=\"https://bit.ly/cold_flu_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
+            resp.getWriter().write("</div>\n" + "</section>\n" +
+                    "<section style=\"float: right; margin-right: 15%;>\n" +
+                    "<img class=\"images\" src=\"https://bit.ly/cold_flu_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
+                    "</section>\n");
         }
 
         else if(req.getServletPath().equals("/map/skincare")){
-            resp.getWriter().write("<h3>Products in Skincare</h3>\n" +
-                            "<div class=\"box\">\n");
+            resp.getWriter().write("<section>" +
+                    "<div class=\"box\">\n" +
+                    "<h3>Products in Skincare</h3>\n");
             int j = 1;
             Product p = LoginDAO.getProduct(j);
             while (j <= LoginDAO.tableSize("shop_product")){
@@ -52,11 +57,15 @@ public class ServletMap extends HttpServlet {
                 j++;
                 p = LoginDAO.getProduct(j);
             }
-            resp.getWriter().write("</div>\n" + "<img class=\"images\" src=\"https://bit.ly/skincare_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
+            resp.getWriter().write("</div>\n" + "</section>\n" +
+                    "<section style=\"float: right; margin-right: 15%;>\n" +
+                    "<img class=\"images\" src=\"https://bit.ly/skincare_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
+                    "</section>\n");
         }
         else if(req.getServletPath().equals("/map/headaches_and_pain_relief")){
-            resp.getWriter().write("<h3>Products in Headaches and Pain Relief</h3>\n" +
-                    "<div class=\"box\">\n");
+            resp.getWriter().write("<section>" +
+                    "<div class=\"box\">\n" +
+                    "<h3>Products in Headaches and Pain Relief</h3>\n");
             int j = 1;
             Product p = LoginDAO.getProduct(j);
             while (j <= LoginDAO.tableSize("shop_product")){
@@ -66,11 +75,15 @@ public class ServletMap extends HttpServlet {
                 j++;
                 p = LoginDAO.getProduct(j);
             }
-            resp.getWriter().write("</div>\n" + "<img class=\"images\" src=\"https://bit.ly/headache_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
+            resp.getWriter().write("</div>\n" + "</section>\n" +
+                    "<section style=\"float: right; margin-right: 15%;>\n" +
+                    "<img class=\"images\" src=\"https://bit.ly/headache_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
+                    "</section>\n");
         }
         else if(req.getServletPath().equals("/map/digestion")){
-            resp.getWriter().write("<h3>Products in Digestion</h3>\n" +
-                    "<div class=\"box\">\n");
+            resp.getWriter().write("<section>" +
+                    "<div class=\"box\">\n" +
+                    "<h3>Products in Digestion</h3>\n");
             int j = 1;
             Product p = LoginDAO.getProduct(j);
             while (j <= LoginDAO.tableSize("shop_product")){
@@ -80,11 +93,15 @@ public class ServletMap extends HttpServlet {
                 j++;
                 p = LoginDAO.getProduct(j);
             }
-            resp.getWriter().write("</div>\n" + "<img class=\"images\" src=\"https://bit.ly/digestion_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
+            resp.getWriter().write("</div>\n" + "</section>\n" +
+                    "<section style=\"float: right; margin-right: 15%;>\n" +
+                    "<img class=\"images\" src=\"https://bit.ly/digestion_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
+                    "</section>\n");
         }
         else if(req.getServletPath().equals("/map/allergy")){
-            resp.getWriter().write("<h3>Products in Allergy</h3>\n" +
-                    "<div class=\"box\">\n");
+            resp.getWriter().write("<section>" +
+                    "<div class=\"box\">\n" +
+                    "<h3>Products in Allergy</h3>\n");
             int j = 1;
             Product p = LoginDAO.getProduct(j);
             while (j <= LoginDAO.tableSize("shop_product")){
@@ -94,11 +111,15 @@ public class ServletMap extends HttpServlet {
                 j++;
                 p = LoginDAO.getProduct(j);
             }
-            resp.getWriter().write("</div>\n" + "<img class=\"images\" src=\"https://bit.ly/allergy_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
+            resp.getWriter().write("</div>\n" + "</section>\n" +
+                    "<section style=\"float: right; margin-right: 15%;>\n" +
+                    "<img class=\"images\" src=\"https://bit.ly/allergy_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
+                    "</section>\n");
         }
         else if(req.getServletPath().equals("/map/first_aid")){
-            resp.getWriter().write("<h3>Products in First Aid</h3>\n" +
-                    "<div class=\"box\">\n");
+            resp.getWriter().write("<section>" +
+                    "<div class=\"box\">\n" +
+                    "<h3>Products in First Aid</h3>\n");
             int j = 1;
             Product p = LoginDAO.getProduct(j);
             while (j <= LoginDAO.tableSize("shop_product")){
@@ -108,7 +129,10 @@ public class ServletMap extends HttpServlet {
                 j++;
                 p = LoginDAO.getProduct(j);
             }
-            resp.getWriter().write("</div>\n" + "<img class=\"images\" src=\"https://bit.ly/first_aid_map_\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
+            resp.getWriter().write("</div>\n" + "</section>\n" +
+                    "<section style=\"float: right; margin-right: 15%;>\n" +
+                    "<img class=\"images\" src=\"https://bit.ly/first_aid_map_\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
+                    "</section>\n");
         }
         resp.getWriter().write("<script>\n" +
                 "function redirectBrowse(){\n" +
@@ -234,18 +258,17 @@ public class ServletMap extends HttpServlet {
                 "           border: none;\n" +
                 "       }\n" +
                 "      .section{\n" +
-                "        display: table-row;\n" +
+                "        display: table-cell;\n" +
                 "      }\n" +
                 "      .images{\n" +
                 "        display: table-row;\n" +
                 "        float: right;           \n" +
                 "        margin-right: 15%;\n" +
                 "      }\n" +
-                "      .box {\n" +
-                "        float: left;\n" +
-                "        padding: 2px 5px;\n" +
-                "        margin-left: 10px;\n" +
-                "        margin-top: 10px;\n" +
+                "      div.box{\n" +
+                "        position: absolute;\n" +
+                "        top: 157px;\n" +
+                "        margin-left: 20px;\n" +
                 "      }\n" +
                 "      .buttonStyle{\n" +
                 "            background-color: #00B8C5;\n" +
@@ -282,22 +305,20 @@ public class ServletMap extends HttpServlet {
                 "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" style=\"width: 35px;\"><i style=\"width: 35px;\" class=\"fa fa-fw fa-shopping-basket\"><p style=\"display: inline; font-family: Arial; font-weight: bold\" id=\"basket\"> " + basketSizeOut + "</p></i></a>\n" +
                 displayCurrentUser +
                 "</div>\n" +
-                "    <h1>Find Items in Store</h1>\n" +
-                "    <p>Choose a category to see all of items in the section and their in-store (Paddington branch) location.</p>\n" +
-                "    <section>\n" +
-                "      <div class=\"box\" style=\"padding-top: 12px;\">\n" +
-                "        <div class=\"dropdown\">\n" +
-                "          <button class=\"buttonStyle\" style=\"dropbtn; width: 222px;\">Categories</button>\n" +
-                "          <div class=\"dropdown-content\">\n" +
-                "            <a id=\"cf\" href=\"https://phabpharmacy.herokuapp.com/map/cold_and_flu\"> Cold and Flu</a>\n" +
-                "            <a id=\"s\" href=\"https://phabpharmacy.herokuapp.com/map/skincare\"> Skincare</a>\n" +
-                "            <a id=\"hpr\" href=\"https://phabpharmacy.herokuapp.com/map/headaches_and_pain_relief\">Headaches and Pain Relief</a>\n" +
-                "            <a id=\"d\" href=\"https://phabpharmacy.herokuapp.com/map/digestion\">Digestion</a>\n" +
-                "            <a id=\"a\" href=\"https://phabpharmacy.herokuapp.com/map/allergy\">Allergy</a>\n" +
-                "            <a id=\"fa\" href=\"https://phabpharmacy.herokuapp.com/map/first_aid\">First Aid</a>\n" +
-                "          </div>\n" +
-                "        </div>\n" +
-                "    </div>\n" +
-                "    </section>\n";
+                "   <h1>Find Items in Store</h1>\n" +
+                "   <p>Choose a category to see all of items in the section and their in-store (Paddington branch) location.</p>\n" +
+                "   <section>\n" +
+                "       <div class=\"dropdown\">\n" +
+                "           <button class=\"buttonStyle\" style=\"dropbtn; width: 222px;\">Categories</button>\n" +
+                "           <div class=\"dropdown-content\">\n" +
+                "               <a id=\"cf\" href=\"https://phabpharmacy.herokuapp.com/map/cold_and_flu\"> Cold and Flu</a>\n" +
+                "               <a id=\"s\" href=\"https://phabpharmacy.herokuapp.com/map/skincare\"> Skincare</a>\n" +
+                "               <a id=\"hpr\" href=\"https://phabpharmacy.herokuapp.com/map/headaches_and_pain_relief\">Headaches and Pain Relief</a>\n" +
+                "               <a id=\"d\" href=\"https://phabpharmacy.herokuapp.com/map/digestion\">Digestion</a>\n" +
+                "               <a id=\"a\" href=\"https://phabpharmacy.herokuapp.com/map/allergy\">Allergy</a>\n" +
+                "               <a id=\"fa\" href=\"https://phabpharmacy.herokuapp.com/map/first_aid\">First Aid</a>\n" +
+                "           </div>\n" +
+                "       </div>\n" +
+                "   </section>\n";
     }
 }
