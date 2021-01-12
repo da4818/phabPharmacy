@@ -20,121 +20,127 @@ public class ServletMap extends HttpServlet {
         resp.setContentType("text/html");
         String HTML = htmlOutput();
         resp.getWriter().write(HTML);
-        if(req.getServletPath().equals("/map")){
-            resp.getWriter().write("<h3> </h3>" + "<div class=\"box\">\n" + "</div>\n" +
-                    "<section style=\"float: right; margin-right: 15%;\">\n" +
-                    "<img class=\"images\" src=\"https://bit.ly/main_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
-                    "</section>\n");
-        } // Embedded photo url for main store
-
-        else if(req.getServletPath().equals("/map/cold_and_flu")){
-            resp.getWriter().write("<section>" +
-                    "<div class=\"box\">\n" +
-                    "<h3>Products in Cold and Flu</h3>\n");
-            int j = 1;
-            Product p = LoginDAO.getProduct(j);
-            while (j <= LoginDAO.tableSize("shop_product")){
-                if (p.category.equals("Cold and Flu")) {
-                    resp.getWriter().write(p.brand + " " + p.name + " " + p.amount + "<br>");
+        switch (req.getServletPath()) {
+            case "/map":
+                resp.getWriter().write("<h3> </h3>" + "<div class=\"box\">\n" + "</div>\n" +
+                        "<section style=\"float: right; margin-right: 15%;\">\n" +
+                        "<img class=\"images\" src=\"https://bit.ly/main_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
+                        "</section>\n");
+                break;
+            case "/map/cold_and_flu": {
+                resp.getWriter().write("<section>" +
+                        "<div class=\"box\">\n" +
+                        "<h3>Products in Cold and Flu</h3>\n");
+                int j = 1;
+                Product p = LoginDAO.getProduct(j);
+                while (j <= LoginDAO.tableSize("shop_product")) {
+                    if (p.category.equals("Cold and Flu")) {
+                        resp.getWriter().write(p.brand + " " + p.name + " " + p.amount + "<br>");
+                    }
+                    j++;
+                    p = LoginDAO.getProduct(j);
                 }
-                j++;
-                p = LoginDAO.getProduct(j);
+                resp.getWriter().write("</div>\n" + "</section>\n" +
+                        "<section style=\"float: right; margin-right: 15%;\">\n" +
+                        "<img class=\"images\" src=\"https://bit.ly/cold_flu_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
+                        "</section>\n");
+                break;
             }
-            resp.getWriter().write("</div>\n" + "</section>\n" +
-                    "<section style=\"float: right; margin-right: 15%;\">\n" +
-                    "<img class=\"images\" src=\"https://bit.ly/cold_flu_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
-                    "</section>\n");
-        }
-
-        else if(req.getServletPath().equals("/map/skincare")){
-            resp.getWriter().write("<section>" +
-                    "<div class=\"box\">\n" +
-                    "<h3>Products in Skincare</h3>\n");
-            int j = 1;
-            Product p = LoginDAO.getProduct(j);
-            while (j <= LoginDAO.tableSize("shop_product")){
-                if (p.category.equals("Skincare")) {
-                    resp.getWriter().write(p.brand + " " + p.name + " " + p.amount + "<br>");
+            case "/map/skincare": {
+                resp.getWriter().write("<section>" +
+                        "<div class=\"box\">\n" +
+                        "<h3>Products in Skincare</h3>\n");
+                int j = 1;
+                Product p = LoginDAO.getProduct(j);
+                while (j <= LoginDAO.tableSize("shop_product")) {
+                    if (p.category.equals("Skincare")) {
+                        resp.getWriter().write(p.brand + " " + p.name + " " + p.amount + "<br>");
+                    }
+                    j++;
+                    p = LoginDAO.getProduct(j);
                 }
-                j++;
-                p = LoginDAO.getProduct(j);
+                resp.getWriter().write("</div>\n" + "</section>\n" +
+                        "<section style=\"float: right; margin-right: 15%;\">\n" +
+                        "<img class=\"images\" src=\"https://bit.ly/skincare_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
+                        "</section>\n");
+                break;
             }
-            resp.getWriter().write("</div>\n" + "</section>\n" +
-                    "<section style=\"float: right; margin-right: 15%;\">\n" +
-                    "<img class=\"images\" src=\"https://bit.ly/skincare_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
-                    "</section>\n");
-        }
-        else if(req.getServletPath().equals("/map/headaches_and_pain_relief")){
-            resp.getWriter().write("<section>" +
-                    "<div class=\"box\">\n" +
-                    "<h3>Products in Headaches and Pain Relief</h3>\n");
-            int j = 1;
-            Product p = LoginDAO.getProduct(j);
-            while (j <= LoginDAO.tableSize("shop_product")){
-                if (p.category.equals("Headaches and Pain Relief")) {
-                    resp.getWriter().write(p.brand + " " + p.name + " " + p.amount + "<br>");
+            case "/map/headaches_and_pain_relief": {
+                resp.getWriter().write("<section>" +
+                        "<div class=\"box\">\n" +
+                        "<h3>Products in Headaches and Pain Relief</h3>\n");
+                int j = 1;
+                Product p = LoginDAO.getProduct(j);
+                while (j <= LoginDAO.tableSize("shop_product")) {
+                    if (p.category.equals("Headaches and Pain Relief")) {
+                        resp.getWriter().write(p.brand + " " + p.name + " " + p.amount + "<br>");
+                    }
+                    j++;
+                    p = LoginDAO.getProduct(j);
                 }
-                j++;
-                p = LoginDAO.getProduct(j);
+                resp.getWriter().write("</div>\n" + "</section>\n" +
+                        "<section style=\"float: right; margin-right: 15%;\">\n" +
+                        "<img class=\"images\" src=\"https://bit.ly/headache_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
+                        "</section>\n");
+                break;
             }
-            resp.getWriter().write("</div>\n" + "</section>\n" +
-                    "<section style=\"float: right; margin-right: 15%;\">\n" +
-                    "<img class=\"images\" src=\"https://bit.ly/headache_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
-                    "</section>\n");
-        }
-        else if(req.getServletPath().equals("/map/digestion")){
-            resp.getWriter().write("<section>" +
-                    "<div class=\"box\">\n" +
-                    "<h3>Products in Digestion</h3>\n");
-            int j = 1;
-            Product p = LoginDAO.getProduct(j);
-            while (j <= LoginDAO.tableSize("shop_product")){
-                if (p.category.equals("Digestion")) {
-                    resp.getWriter().write(p.brand + " " + p.name + " " + p.amount + "<br>");
+            case "/map/digestion": {
+                resp.getWriter().write("<section>" +
+                        "<div class=\"box\">\n" +
+                        "<h3>Products in Digestion</h3>\n");
+                int j = 1;
+                Product p = LoginDAO.getProduct(j);
+                while (j <= LoginDAO.tableSize("shop_product")) {
+                    if (p.category.equals("Digestion")) {
+                        resp.getWriter().write(p.brand + " " + p.name + " " + p.amount + "<br>");
+                    }
+                    j++;
+                    p = LoginDAO.getProduct(j);
                 }
-                j++;
-                p = LoginDAO.getProduct(j);
+                resp.getWriter().write("</div>\n" + "</section>\n" +
+                        "<section style=\"float: right; margin-right: 15%;\">\n" +
+                        "<img class=\"images\" src=\"https://bit.ly/digestion_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
+                        "</section>\n");
+                break;
             }
-            resp.getWriter().write("</div>\n" + "</section>\n" +
-                    "<section style=\"float: right; margin-right: 15%;\">\n" +
-                    "<img class=\"images\" src=\"https://bit.ly/digestion_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
-                    "</section>\n");
-        }
-        else if(req.getServletPath().equals("/map/allergy")){
-            resp.getWriter().write("<section>" +
-                    "<div class=\"box\">\n" +
-                    "<h3>Products in Allergy</h3>\n");
-            int j = 1;
-            Product p = LoginDAO.getProduct(j);
-            while (j <= LoginDAO.tableSize("shop_product")){
-                if (p.category.equals("Allergy")) {
-                    resp.getWriter().write(p.brand + " " + p.name + " " + p.amount + "<br>");
+            case "/map/allergy": {
+                resp.getWriter().write("<section>" +
+                        "<div class=\"box\">\n" +
+                        "<h3>Products in Allergy</h3>\n");
+                int j = 1;
+                Product p = LoginDAO.getProduct(j);
+                while (j <= LoginDAO.tableSize("shop_product")) {
+                    if (p.category.equals("Allergy")) {
+                        resp.getWriter().write(p.brand + " " + p.name + " " + p.amount + "<br>");
+                    }
+                    j++;
+                    p = LoginDAO.getProduct(j);
                 }
-                j++;
-                p = LoginDAO.getProduct(j);
+                resp.getWriter().write("</div>\n" + "</section>\n" +
+                        "<section style=\"float: right; margin-right: 15%;\">\n" +
+                        "<img class=\"images\" src=\"https://bit.ly/allergy_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
+                        "</section>\n");
+                break;
             }
-            resp.getWriter().write("</div>\n" + "</section>\n" +
-                    "<section style=\"float: right; margin-right: 15%;\">\n" +
-                    "<img class=\"images\" src=\"https://bit.ly/allergy_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
-                    "</section>\n");
-        }
-        else if(req.getServletPath().equals("/map/first_aid")){
-            resp.getWriter().write("<section>" +
-                    "<div class=\"box\">\n" +
-                    "<h3>Products in First Aid</h3>\n");
-            int j = 1;
-            Product p = LoginDAO.getProduct(j);
-            while (j <= LoginDAO.tableSize("shop_product")){
-                if (p.category.equals("First Aid")) {
-                    resp.getWriter().write(p.brand + " " + p.name + " " + p.amount + "<br>");
+            case "/map/first_aid": {
+                resp.getWriter().write("<section>" +
+                        "<div class=\"box\">\n" +
+                        "<h3>Products in First Aid</h3>\n");
+                int j = 1;
+                Product p = LoginDAO.getProduct(j);
+                while (j <= LoginDAO.tableSize("shop_product")) {
+                    if (p.category.equals("First Aid")) {
+                        resp.getWriter().write(p.brand + " " + p.name + " " + p.amount + "<br>");
+                    }
+                    j++;
+                    p = LoginDAO.getProduct(j);
                 }
-                j++;
-                p = LoginDAO.getProduct(j);
+                resp.getWriter().write("</div>\n" + "</section>\n" +
+                        "<section style=\"float: right; margin-right: 15%;\">\n" +
+                        "<img class=\"images\" src=\"https://bit.ly/first_aid_map_\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
+                        "</section>\n");
+                break;
             }
-            resp.getWriter().write("</div>\n" + "</section>\n" +
-                    "<section style=\"float: right; margin-right: 15%;\">\n" +
-                    "<img class=\"images\" src=\"https://bit.ly/first_aid_map_\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
-                    "</section>\n");
         }
         resp.getWriter().write("<script>\n" +
                 "function redirectBrowse(){\n" +

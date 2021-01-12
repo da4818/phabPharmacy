@@ -65,22 +65,21 @@ public class ServletRegister extends HttpServlet {
         if(LoginDAO.validateRegister(em)){ //Checks database to see if email exists in use database
             resp.getWriter().write("<h2>There is an existing account with the email entered, please log in.</h2>");
         }
-        if (fn.isEmpty() || ln.isEmpty() || em.isEmpty() || pw.isEmpty() || vpw.isEmpty() || cn.isEmpty() || cvv.isEmpty()|| sc.isEmpty() || an.isEmpty() || pc.isEmpty()){ //Checks if any of the required fields are empty
+        else if (fn.isEmpty() || ln.isEmpty() || em.isEmpty() || pw.isEmpty() || vpw.isEmpty() || cn.isEmpty() || cvv.isEmpty()|| sc.isEmpty() || an.isEmpty() || pc.isEmpty()){ //Checks if any of the required fields are empty
             resp.getWriter().write("<h2>Incomplete fields, please enter all the information.</h2>");
         }
-        else if (!pw.equals(vpw)){
+        /*else if (!pw.equals(vpw)){
             resp.getWriter().write("<h2>Passwords don't match, please try again.</h2>");
         }
-        if(!emailCheck.validEmail()){
+        else if(!emailCheck.validEmail()){
             resp.getWriter().write(emailCheck.getErrorMessage());
         }
-        if (!cc.validCardNumber() || !cc.validAccountNumber() || !cc.validSortCode() || !cc.validCvv()){
+        else if (!cc.validCardNumber() || !cc.validAccountNumber() || !cc.validSortCode() || !cc.validCvv()){
             resp.getWriter().write("<h2>Invalid card details, please try again.</h2>");
         }
-        if(!a.validPostcode()){
+        else if(!a.validPostcode()){
             resp.getWriter().write("<h2>Invalid postcode, please try again.</h2>");
         }
-
         else{
             //LoginDAO.addUser(fn,ln,em,pw,pc,ad,pn);
             User currentUser = LoginDAO.getUser(em,pw); //*rewrite to constructor with string values
@@ -90,7 +89,7 @@ public class ServletRegister extends HttpServlet {
             //CreditCard cc = new CreditCard(cn,cvv,sc,an);
             new AddCustomer(c,cc);
             resp.getWriter().write("<h2>Successful registration. Welcome, " + currentUser.fname + "</h2>");
-        }
+        }*/
 
 
 
@@ -269,7 +268,7 @@ public class ServletRegister extends HttpServlet {
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"cvv\" placeholder=\"CVV*\"><br>\n" +
                 "\n" +
                 "  <h3 style=\"font-size: 15px;\">Shipping Information</h3>\n" +
-                "  <textarea name=\"address\" style=\"width: 218px;\"  value=\"\" placeholder=\"Address\"></textarea><br>\n" +
+                "  <textarea style=\"width: 217px;\" value=\"\" name=\"address\" placeholder=\"Address\"></textarea><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"postcode\" placeholder=\"Postcode*\"><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"phone_no\" value=\"\" placeholder=\"Phone Number\"><br>\n" +
                 "  \n" +
