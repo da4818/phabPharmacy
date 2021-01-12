@@ -269,7 +269,7 @@ public class ServletRegister extends HttpServlet {
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"cvv\" placeholder=\"CVV*\"><br>\n" +
                 "\n" +
                 "  <h3 style=\"font-size: 15px;\">Shipping Information</h3>\n" +
-                "  <textarea name=\"address\" style=\"width: 221px;\"  value=\"\" placeholder=\"Address\"></textarea><br>\n" +
+                "  <textarea name=\"address\" style=\"width: 219px;\"  value=\"\" placeholder=\"Address\"></textarea><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"postcode\" placeholder=\"Postcode*\"><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"phone_no\" value=\"\" placeholder=\"Phone Number\"><br>\n" +
                 "  \n" +
