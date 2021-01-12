@@ -58,14 +58,14 @@ public class ServletRegister extends HttpServlet {
             resp.getWriter().write("<h2>Incomplete fields, please enter all the information.</h2>");
             allowReg = false;
         }
-        resp.getWriter().write("<p>List:<br>"+fn+"<br>"+ln+"<br>"+em+"<br>"+pw+"<br>"+vpw+"<br>"+cn+"<br>"+cvv+"<br>"+sc+"<br>"+an+"<br>"+pc+"<br>"+ad+"<br>"+pn+"<br>");
-       /*else{
+       // resp.getWriter().write("<p>List:<br>"+fn+"<br>"+ln+"<br>"+em+"<br>"+pw+"<br>"+vpw+"<br>"+cn+"<br>"+cvv+"<br>"+sc+"<br>"+an+"<br>"+pc+"<br>"+ad+"<br>"+pn+"<br>");
+       else{
             resp.getWriter().write("<p>all required entries have been filled</p>");
             if(LoginDAO.validateRegister(em)){ //Checks database to see if email exists in use database
                 resp.getWriter().write("<h2>There is an existing account with the email entered, please log in.</h2>");
                 allowReg = false;
             }
-            else if(!emailCheck.validEmail()){
+            if(!emailCheck.validEmail()){
                 resp.getWriter().write(emailCheck.getErrorMessage());
                 allowReg = false;
             }
@@ -86,21 +86,20 @@ public class ServletRegister extends HttpServlet {
                 //LoginDAO.addUser(fn,ln,em,pw,pc,ad,pn);
                 User currentUser = LoginDAO.getUser(em,pw); //*rewrite to constructor with string values
                 LoginDAO.setLoggedInUser(currentUser);
-
                 Customer c = new Customer(currentUser.fname, currentUser.lname, currentUser.postcode, currentUser.email, currentUser.address, currentUser.phoneno);
                 //CreditCard cc = new CreditCard(cn,cvv,sc,an);
                 new AddCustomer(c,cc);
                 resp.getWriter().write("<h2>Successful registration. Welcome, " + currentUser.fname + "</h2>");
             }
-        }*/
+        }
 
-        resp.getWriter().write("<script>\n" +
-                "    function redirectBrowse(){\n" +
-                "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
-                "    }\n" +
-                "</script>\n" +
-                "</body>\n" +
-                "</html>");
+       resp.getWriter().write("<script>\n" +
+               "    function redirectBrowse(){\n" +
+               "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
+               "    }\n" +
+               "</script>\n" +
+               "</body>\n" +
+               "</html>");
     }
     //If a user is logged in, the current user and a 'log out' button will be displayed on the header (see line 144)
     public String htmlOutput(){

@@ -42,7 +42,7 @@ public class ServletBrowse extends HttpServlet {
             resp.getWriter().write("<label><center>£" + price + "</label></center><br>\n" +
                     "<div class=\"absolute\">\n" +
                     "<form action=\"browse\" method=\"post\">\n" +
-                    "<input name=\"basketQuantity\" type=\"number\" size=\"5\" min=\"0\" max=\"" + max + "\">\n" +
+                    "<input name=\"basketQuantity\" type=\"number\" size=\"5\" min=\"1\" max=\"" + max + "\">\n" +
                     "<input name=\"buttonNumber\" type=\"hidden\"value=\"" + j + "\">\n" +
                     "<input type=\"hidden\" name=\"logOut\" value=\"false\">\n" +
                     "<input type=\"submit\"class=\"buttonStyle\" value=\"Add to Basket\">\n" +
@@ -80,7 +80,7 @@ public class ServletBrowse extends HttpServlet {
             resp.getWriter().write("<label><center>£" + price + "</label></center><br>\n" +
                     "<div class=\"absolute\">\n" +
                     "<form action=\"browse\" method=\"post\">\n" +
-                    "<input name=\"basketQuantity\" type=\"number\" size=\"5\" min=\"0\" max=\"" + max + "\">\n" +
+                    "<input name=\"basketQuantity\" type=\"number\" size=\"5\" min=\"1\" max=\"" + max + "\">\n" +
                     "<input name=\"buttonNumber\" type=\"hidden\"value=\"" + j + "\">\n" +
                     "<input type=\"hidden\" name=\"logOut\" value=\"false\">\n" +
                     "<input type=\"submit\"class=\"buttonStyle\" value=\"Add to Basket\">\n" +
@@ -138,7 +138,7 @@ public class ServletBrowse extends HttpServlet {
             resp.getWriter().write("<label><center>£" + price + "</label></center><br>\n" +
                     "<div class=\"absolute\">\n" +
                     "<form action=\"browse\" method=\"post\">\n" +
-                    "<input name=\"basketQuantity\" type=\"number\" size=\"5\" min=\"0\" max=\"" + max + "\">\n" +
+                    "<input name=\"basketQuantity\" type=\"number\" size=\"5\" min=\"1\" max=\"" + max + "\">\n" +
                     "<input name=\"buttonNumber\" type=\"hidden\"value=\"" + j + "\">\n" +
                     "<input type=\"hidden\" name=\"logOut\" value=\"false\">\n" +
                     "<input type=\"submit\"class=\"buttonStyle\" value=\"Add to Basket\">\n" +
@@ -167,7 +167,7 @@ public class ServletBrowse extends HttpServlet {
                 resp.getWriter().write("<label><center>£" + price + "</label></center><br>\n" +
                         "<div class=\"absolute\">\n" +
                         "<form action=\"browse\" method=\"post\">\n" +
-                        "<input name=\"basketQuantity\" type=\"number\" size=\"5\" min=\"0\" max=\"" + max + "\">\n" +
+                        "<input name=\"basketQuantity\" type=\"number\" size=\"5\" min=\"1\" max=\"" + max + "\">\n" +
                         "<input name=\"buttonNumber\" type=\"hidden\"value=\"" + j + "\">\n" +
                         "<input type=\"hidden\" name=\"logOut\" value=\"false\">\n" +
                         "<input type=\"submit\"class=\"buttonStyle\" value=\"Add to Basket\">\n" +
