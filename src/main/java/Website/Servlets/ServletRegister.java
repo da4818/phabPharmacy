@@ -53,14 +53,14 @@ public class ServletRegister extends HttpServlet {
 
         EmailValidation emailCheck = new EmailValidation(em,pw,vpw);
         CreditCard cc = new CreditCard(cn,cvv,sc,an);
-        Address a = new Address("test",pc);
+        Address a = new Address(ad,pc);
         if (a.address.isEmpty()){
             resp.getWriter().write("<p>Address is optional</p>");
         }
         if (a.validPostcode()){
             resp.getWriter().write("<p>Valid postcode:"+a.postcode+"</p>");
         }
-        resp.getWriter().write("<p>Output:"+a.address+"test</p>\n");
+        resp.getWriter().write("<p>Output</p>\n");
 
         /*if(LoginDAO.validateRegister(em)){ //Checks database to see if email exists in use database
             resp.getWriter().write("<h2>There is an existing account with the email entered, please log in.</h2>");

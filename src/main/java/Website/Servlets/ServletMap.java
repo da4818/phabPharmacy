@@ -22,7 +22,9 @@ public class ServletMap extends HttpServlet {
         resp.getWriter().write(HTML);
         if(req.getServletPath().equals("/map")){
             resp.getWriter().write("<h3> </h3>" + "<div class=\"box\">\n" + "</div>\n" +
-                    "<img class=\"images\" src=\"https://bit.ly/main_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
+                    "<section style=\"float: right; margin-right: 15%;\">\n" +
+                    "<img class=\"images\" src=\"https://bit.ly/main_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
+                    "</section>\n");
         } // Embedded photo url for main store
 
         else if(req.getServletPath().equals("/map/cold_and_flu")){
@@ -39,7 +41,9 @@ public class ServletMap extends HttpServlet {
                 p = LoginDAO.getProduct(j);
             }
             resp.getWriter().write("</div>\n" + "</section>\n" +
-                    "<img src=\"https://bit.ly/cold_flu_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
+                    "<section style=\"float: right; margin-right: 15%;\">\n" +
+                    "<img class=\"images\" src=\"https://bit.ly/cold_flu_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
+                    "</section>\n");
         }
 
         else if(req.getServletPath().equals("/map/skincare")){
@@ -56,7 +60,9 @@ public class ServletMap extends HttpServlet {
                 p = LoginDAO.getProduct(j);
             }
             resp.getWriter().write("</div>\n" + "</section>\n" +
-                    "<img class=\"images\" src=\"https://bit.ly/skincare_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
+                    "<section style=\"float: right; margin-right: 15%;\">\n" +
+                    "<img class=\"images\" src=\"https://bit.ly/skincare_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
+                    "</section>\n");
         }
         else if(req.getServletPath().equals("/map/headaches_and_pain_relief")){
             resp.getWriter().write("<section>" +
@@ -72,7 +78,9 @@ public class ServletMap extends HttpServlet {
                 p = LoginDAO.getProduct(j);
             }
             resp.getWriter().write("</div>\n" + "</section>\n" +
-                    "<img class=\"images\" src=\"https://bit.ly/headache_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
+                    "<section style=\"float: right; margin-right: 15%;\">\n" +
+                    "<img class=\"images\" src=\"https://bit.ly/headache_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
+                    "</section>\n");
         }
         else if(req.getServletPath().equals("/map/digestion")){
             resp.getWriter().write("<section>" +
@@ -88,7 +96,9 @@ public class ServletMap extends HttpServlet {
                 p = LoginDAO.getProduct(j);
             }
             resp.getWriter().write("</div>\n" + "</section>\n" +
-                    "<img class=\"images\" src=\"https://bit.ly/digestion_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
+                    "<section style=\"float: right; margin-right: 15%;\">\n" +
+                    "<img class=\"images\" src=\"https://bit.ly/digestion_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
+                    "</section>\n");
         }
         else if(req.getServletPath().equals("/map/allergy")){
             resp.getWriter().write("<section>" +
@@ -104,7 +114,9 @@ public class ServletMap extends HttpServlet {
                 p = LoginDAO.getProduct(j);
             }
             resp.getWriter().write("</div>\n" + "</section>\n" +
-                    "<img class=\"images\" src=\"https://bit.ly/allergy_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n");
+                    "<section style=\"float: right; margin-right: 15%;\">\n" +
+                    "<img class=\"images\" src=\"https://bit.ly/allergy_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
+                    "</section>\n");
         }
         else if(req.getServletPath().equals("/map/first_aid")){
             resp.getWriter().write("<section>" +
