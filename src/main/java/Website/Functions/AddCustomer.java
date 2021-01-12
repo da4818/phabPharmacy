@@ -10,20 +10,45 @@ public class AddCustomer {
 
     public AddCustomer(Customer cust, CreditCard cc) {
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
+        PreparedStatement pStmt = null;
         try {
 
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
-            //Statement stmt = c.createStatement();
             Statement stmt1 = c.createStatement();
-            //Statement stmt2 = c.createStatement();
-            PreparedStatement pStmt = c.prepareStatement("INSERT INTO customer (first_name,last_name,email,postcode,address,phone_no) VALUES (?,?,?,?,?,?);");
-            pStmt.setString(1,cust.first_name);
-            pStmt.setString(2,cust.last_name);
-            pStmt.setString(3,cust.email);
-            pStmt.setString(4,cust.postcode);
-            pStmt.setString(5,cust.address);
-            pStmt.setString(6,cust.phone_number);
+            if (cust.address.isEmpty() && !cust.phone_number.isEmpty()){
+                pStmt = c.prepareStatement("INSERT INTO customer (first_name,last_name,email,postcode,phone_no) VALUES (?,?,?,?,?);");
+                pStmt.setString(1,cust.first_name);
+                pStmt.setString(2,cust.last_name);
+                pStmt.setString(3,cust.email);
+                pStmt.setString(4,cust.postcode);
+                pStmt.setString(5,cust.phone_number);
+            }
+            else if (!cust.address.isEmpty() && cust.phone_number.isEmpty()){
+                pStmt = c.prepareStatement("INSERT INTO customer (first_name,last_name,email,postcode,address) VALUES (?,?,?,?,?);");
+                pStmt.setString(1,cust.first_name);
+                pStmt.setString(2,cust.last_name);
+                pStmt.setString(3,cust.email);
+                pStmt.setString(4,cust.postcode);
+                pStmt.setString(5,cust.address);
+            }
+            else if (cust.address.isEmpty() && cust.phone_number.isEmpty()){
+                pStmt = c.prepareStatement("INSERT INTO customer (first_name,last_name,email,postcode) VALUES (?,?,?,?);");
+                pStmt.setString(1,cust.first_name);
+                pStmt.setString(2,cust.last_name);
+                pStmt.setString(3,cust.email);
+                pStmt.setString(4,cust.postcode);
+            }
+            else{
+                pStmt = c.prepareStatement("INSERT INTO customer (first_name,last_name,email,postcode,address,phone_no) VALUES (?,?,?,?,?,?);");
+                pStmt.setString(1,cust.first_name);
+                pStmt.setString(2,cust.last_name);
+                pStmt.setString(3,cust.email);
+                pStmt.setString(4,cust.postcode);
+                pStmt.setString(5,cust.address);
+                pStmt.setString(6,cust.phone_number);
+            }
+
             pStmt.executeUpdate();
             String sqlStr = "SELECT * FROM customer WHERE first_name = '" + cust.first_name + "' AND email = '" + cust.email + "';";
             ResultSet rs = stmt1.executeQuery(sqlStr);

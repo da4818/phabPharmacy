@@ -55,7 +55,10 @@ public class ServletRegister extends HttpServlet {
         CreditCard cc = new CreditCard(cn,cvv,sc,an);
         Address a = new Address(ad,pc);
 
-        resp.getWriter().write("<p>list:"+a.postcode+"<br>"+fn+"<br>"+ln+"<br>"+em+"<br>"+pw+"<br>"+vpw+"<br>"+cn+"<br>"+cvv+"<br>"+sc+"<br>"+an+"<br>"+pc+"<br>"+ad+"<br>"+pn+"</p>");
+        String[] parts = a.address.split("\\n");
+        for (int i=0;i< parts.length;i++){
+            resp.getWriter().write("<p>:"+parts[i]+ "</p>");
+        }
 
 
         /*boolean allowReg = true;
@@ -265,7 +268,7 @@ public class ServletRegister extends HttpServlet {
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"lname\" value=\"\" placeholder=\"Last Name*\"><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"email\" value=\"\" placeholder=\"Email Address*\"><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"pass\" value=\"\" placeholder=\"Password*\"><br>\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"verifyPass\" value=\"\" placeholder=\"Verify Password*\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"verify_pass\" value=\"\" placeholder=\"Verify Password*\"><br>\n" +
                 "  <h3>Order Information<br><b style=\"font-size: 15px;\">Payment Information</b></h3>\n" +
                 "\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"card_no\" value=\"\" placeholder=\"Card Number*\"><br>\n" +
