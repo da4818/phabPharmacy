@@ -66,10 +66,11 @@ public class ServletRegister extends HttpServlet {
             resp.getWriter().write("<h2>There is an existing account with the email entered, please log in.</h2>");
             allowReg = false;
         }
-        else if (fn.isEmpty() || ln.isEmpty() || em.isEmpty() || pw.isEmpty() || vpw.isEmpty() || cn.isEmpty() || cvv.isEmpty()|| sc.isEmpty() || an.isEmpty() || pc.isEmpty()){ //Checks if any of the required fields are empty
+        else if (fn.isEmpty() || ln.isEmpty() || em.isEmpty() || pw.isEmpty() || vpw.isEmpty() || pc.isEmpty()){ //Checks if any of the required fields are empty
             resp.getWriter().write("<h2>Incomplete fields, please enter all the information.</h2>");
             allowReg = false;
         }
+        // cn.isEmpty() || cvv.isEmpty()|| sc.isEmpty() || an.isEmpty() ||
         else if (!pw.equals(vpw)){
             resp.getWriter().write("<h2>Passwords don't match, please try again.</h2>");
             allowReg = false;
@@ -86,7 +87,7 @@ public class ServletRegister extends HttpServlet {
             resp.getWriter().write("<h2>Invalid postcode, please try again.</h2>");
             allowReg = false;
         }
-        else if (allowReg){
+        if (allowReg){
             //LoginDAO.addUser(fn,ln,em,pw,pc,ad,pn);
             User currentUser = LoginDAO.getUser(em,pw); //*rewrite to constructor with string values
             LoginDAO.setLoggedInUser(currentUser);
@@ -95,6 +96,9 @@ public class ServletRegister extends HttpServlet {
             //CreditCard cc = new CreditCard(cn,cvv,sc,an);
             new AddCustomer(c,cc);
             resp.getWriter().write("<h2>Successful registration. Welcome, " + currentUser.fname + "</h2>");
+        }
+        else{
+            resp.getWriter().write("<p>error</p>");
         }
 
 
@@ -261,21 +265,21 @@ public class ServletRegister extends HttpServlet {
                 "<h1>Register</h1>\n" +
                 "<p> Register below. If you already have an account, <a href=\"https://phabpharmacy.herokuapp.com/login\"> login here.</a>\n" +
                 "    <form name=\"registerForm\" action=\"register\" method=\"post\">\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"fname\" placeholder=\"First Name*\"><br>\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"lname\" placeholder=\"Last Name*\"><br>\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"email\" placeholder=\"Email Address*\"><br>\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"pass\" placeholder=\"Password*\"><br>\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"verifyPass\" placeholder=\"Verify Password*\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"fname\" value=\"\" placeholder=\"First Name*\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"lname\" value=\"\" placeholder=\"Last Name*\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"email\" value=\"\" placeholder=\"Email Address*\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"pass\" value=\"\" placeholder=\"Password*\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"verifyPass\" value=\"\" placeholder=\"Verify Password*\"><br>\n" +
                 "  <h3>Order Information<br><b style=\"font-size: 15px;\">Payment Information</b></h3>\n" +
                 "\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"card_no\" placeholder=\"Card Number*\"><br>\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"sort_code\" placeholder=\"Sort Code*\"><br>\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"account_no\" placeholder=\"Account Number*\"><br>\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"cvv\" placeholder=\"CVV*\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"card_no\" value=\"\" placeholder=\"Card Number*\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"sort_code\" value=\"\" placeholder=\"Sort Code*\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"account_no\" value=\"\" placeholder=\"Account Number*\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"cvv\" value=\"\" placeholder=\"CVV*\"><br>\n" +
                 "\n" +
                 "  <h3 style=\"font-size: 15px;\">Shipping Information</h3>\n" +
-                "  <textarea style=\"width: 217px;\" value=\"\" name=\"address\" placeholder=\"Address\"></textarea><br>\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"postcode\" placeholder=\"Postcode*\"><br>\n" +
+                "  <textarea style=\"width: 217px;\" name=\"address\" value=\"\" placeholder=\"Address\"></textarea><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"postcode\" value=\"\" placeholder=\"Postcode*\"><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"phone_no\" value=\"\" placeholder=\"Phone Number\"><br>\n" +
                 "  \n" +
                 "  <input type=\"hidden\" name=\"logOut\" value=\"false\">\n" +
