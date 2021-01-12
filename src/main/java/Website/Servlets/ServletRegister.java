@@ -60,7 +60,7 @@ public class ServletRegister extends HttpServlet {
         if (a.validPostcode()){
             resp.getWriter().write("<p>Valid postcode:"+a.postcode+"</p>");
         }
-        resp.getWriter().write("<p>Output</p>\n");
+        resp.getWriter().write("<p>Output:"+a.address+"test</p>\n");
 
         /*if(LoginDAO.validateRegister(em)){ //Checks database to see if email exists in use database
             resp.getWriter().write("<h2>There is an existing account with the email entered, please log in.</h2>");

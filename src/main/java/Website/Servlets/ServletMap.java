@@ -253,7 +253,7 @@ public class ServletMap extends HttpServlet {
                 "      .images{\n" +
                 "        display: table-row;\n" +
                 "        float: right;           \n" +
-                "        margin-right: 15%;\n" +
+                "        right: 15%;\n" +
                 "      }\n" +
                 "      div.box{\n" +
                 "        position: absolute;\n" +
