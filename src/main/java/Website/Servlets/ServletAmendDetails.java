@@ -37,11 +37,11 @@ public class ServletAmendDetails extends HttpServlet {
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"cvv\" placeholder=\"CVV*\"><br>\n" +
                 "\n" +
                 "  <h3 style=\"font-size: 15px;\">Shipping Information</h3>\n" +
-                "  <textarea name=\"address\" style=\"width: 217px;\" rows=\"4\" value=\"\" placeholder=\"Address\"></textarea><br>\n" +
+                "  <textarea name=\"address\" style=\"width: 217px; font-family: Arial, Helvetica, sans-serif;\" rows=\"4\" value=\"\" placeholder=\"Address\"></textarea><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"postcode\" placeholder=\"Postcode\"><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" value=\"\" name=\"phone_no\" placeholder=\"Phone Number\"><br>\n" +
                 "  \n" +
-                "  <input type=\"submit\" style=\"width: 150px;\" class=\"buttonStyle\" value=\"Update Details\">\n" +
+                "  <input type=\"submit\" style=\"width: 145px;\" class=\"buttonStyle\" value=\"Update Details\">\n" +
                 "  <a class=\"buttonStyle\" style=\"width: 75px;\" href=\"https://phabpharmacy.herokuapp.com/order\">Cancel</a>\n" +
                 "</form>\n" +
 
@@ -221,15 +221,10 @@ public class ServletAmendDetails extends HttpServlet {
                 "           padding: 14px 14px 4px 16px;\n" +
                 "           text-decoration: none;\n" +
                 "       }\n" +
-                "        input, textarea{\n" +
-                "          font-family: Arial, Helvetica, sans-serif;\n" +
-                "          font-size: 16px;\n" +
-                "          width: 26em;\n" +
-                "          width: 40ch;\n" +
-                "        }\n" +
-                "        textarea::placeholder {\n" +
-                "          font-family: Arial, Helvetica, sans-serif;\n" +
-                "        }\n" +
+                "       textarea::placeholder {\n" +
+                "           font-family: Arial, Helvetica, sans-serif;\n" +
+                "           width: 40ch; \n" +
+                "       }\n" +
                 "    </style>\n" +
                 "</head>\n" +
                 "<body>\n" +
