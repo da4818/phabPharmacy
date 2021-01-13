@@ -32,19 +32,19 @@ public class ServletOrder extends HttpServlet {
         String phoneNoOut = "";
         String addressOut = "";
         switch(u.nonNullEntries()){ // Due to nullPointExceptions, we need to check if 'phone_no' and/or 'address' is null within the database
-            case 'b':
+            case 'b': // If both 'address' and 'phone_no' are non-null values
                 Address ad = new Address(u.address,u.postcode);
                 addressOut = ad.displayAddress(1);
                 phoneNoOut = "<br>" + u.phoneno;
                 break;
-            case 'a':
+            case 'a': // If only 'address' is a non-null value
                 Address ad1 = new Address(u.address,u.postcode);
                 addressOut = ad1.displayAddress(1);
                break;
-            case 'p':
+            case 'p': // If only 'address' is a non-null value
                 phoneNoOut = "<br>" + u.phoneno;
                 break;
-            default:
+            default: // Base case: neither 'address' nor 'phone_no' are non-null values
                 break;
         }
 
