@@ -33,7 +33,7 @@ public class ServletOrder extends HttpServlet {
 
         resp.getWriter().write("<div class=\"addressContainer\">\n" +
                 "  <p style=\"display: inline-block; margin-bottom: 0px;\"><b>Shipping Address</b></p>\n" +
-                "  <p>" + u.fname + " " + u.lname + "<br>" + ad.getAddress() + "<br>" + u.postcode +"<br>" + u.phoneno + "</p>\n" +
+                "  <p>" + u.fname + " " + u.lname + "<br>" + u.postcode +"<br>" + u.phoneno + "</p>\n" +
                 "  <p><b>Payment Details</b></p>\n" +
                 "  <p>" + cc.getCensoredCardNumber() + "<br>" + cc.getSortCode() + "<br>" + cc.accountNumber +"</p>\n" +
                 "  <button onclick=\"window.location.href='https://phabpharmacy.herokuapp.com/amend_details';\"class=\"buttonStyle\">Edit Details</button>\n" +
@@ -77,8 +77,6 @@ public class ServletOrder extends HttpServlet {
         resp.getWriter().write(HTML); //There is no information request in the ServletOrder doPost - the only possible way to redirect to this doPost in particular is through clicking 'Confirm Order' button
         //LoginDAO.resetTable("ordered_products");
         User u = LoginDAO.getCurrentUser();
-
-
 
         resp.getWriter().write("<h2>Order confirmed!</h2>");
         resp.getWriter().write("<script>\n" + //This is to finish of the HTML code initiated in htmlOutput()
@@ -243,7 +241,7 @@ public class ServletOrder extends HttpServlet {
                 "<div class=\"navbar\">\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/home\"><i class=\"fa fa-fw fa-home\"></i>Home</a>\n" +
                 "    <div class=\"dropdown\">\n" +
-                "        <a href=\"https://phabpharmacy.herokuapp.com/browse\" style=\"cursor: pointer;\" class=\"dropbtn\" onclick=\"redirectBrowse()\"><i class=\"fa fa-fw fa-search\"></i>Browse<i class=\"fa fa-caret-down\"></i></a>\n" +
+                "        <button style=\"cursor: pointer;\" class=\"dropbtn\" onclick=\"redirectBrowse()\"><i class=\"fa fa-fw fa-search\"></i>Browse<i class=\"fa fa-caret-down\"></i></button>\n" +
                 "        <div class=\"dropdown-content\">\n" +
                 "            <a href=\"#cold_and_flu\">Cold and Flu</a>\n" +
                 "            <a href=\"#skincare\">Skincare</a>\n" +
