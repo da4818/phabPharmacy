@@ -123,7 +123,7 @@ public class ServletAmendDetails extends HttpServlet {
                 LoginDAO.updateCustomer("card_details", "account_no", an);
             }
             if(!sc.isEmpty()) {
-                LoginDAO.updateCustomer("card_details", "sortcode", sc);
+                LoginDAO.updateCustomer("card_details", "sort_code", sc);
             }
             resp.getWriter().write("<h2>Information updated.</h2>\n" +
                     "</body>\n" +
