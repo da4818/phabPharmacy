@@ -21,23 +21,51 @@ public class ServletAmendDetails extends HttpServlet {
         resp.getWriter().write(HTML);
         CreditCard cc = LoginDAO.getCurrentCard();
         User u = LoginDAO.getCurrentUser();
-        String address_out = "Address";
-        String phone_no_out = "Phone Number";
+
+        String cardNoOut = "Card Number";
+        String cvvOut = "CVV";
+        String sortcodeOut = "Sort Code";
+        String accountNoOut = "Account Number";
+        String postcodeOut = "Postcode";
+        String addressOut = "Address";
+        String phoneNoOut = "Phone Number";
+        // Fill placeholder text with the current information - to remind the user of the currently stored details
+        switch(u.nonNullEntries()){ // Due to nullPointExceptions, we need to check if 'phone_no' and/or 'address' is null within the database
+            case 'b':
+                Address ad = new Address(u.address,u.postcode);
+                addressOut = ad.displayAddress();
+                phoneNoOut = "<br>" + u.phoneno;
+                break;
+            case 'a':
+                Address ad1 = new Address(u.address,u.postcode);
+                addressOut = ad1.displayAddress();
+                break;
+            case 'p':
+                phoneNoOut = "<br>" + u.phoneno;
+                break;
+            default:
+                break;
+        }
+        cardNoOut = cc.cardNumber;
+        cvvOut = cc.cvv;
+        accountNoOut = cc.accountNumber;
+        sortcodeOut = cc.sortCode;
+        postcodeOut = u.postcode;
 
         resp.getWriter().write("<form name=\"amendDetailsForm\" action=\"amend_details\" method=\"post\">\n" +
                 "  <h3>Order Information<br><b style=\"font-size: 15px;\">Payment Information</b></h3>\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"card_no\" placeholder=\""+address_out +"\"><br>\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"sort_code\" placeholder=\"Sortcode\"><br>\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"account_no\" placeholder=\"Account Number\"><br>\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"cvv\" placeholder=\"CVV*\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"card_no\" placeholder=\"" + cardNoOut + "\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"sort_code\" placeholder=\"" + sortcodeOut + "\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"account_no\" placeholder=\"" + accountNoOut + "\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"cvv\" placeholder=\"" + cvvOut + "\"><br>\n" +
                 "\n" +
                 "  <h3 style=\"font-size: 15px;\">Shipping Information</h3>\n" +
-                "  <textarea name=\"address\" style=\"width: 217px; font-family: Arial, Helvetica, sans-serif;\" rows=\"4\" value=\"\" placeholder=\"Address\"></textarea><br>\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"postcode\" placeholder=\"Postcode\"><br>\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" value=\"\" name=\"phone_no\" placeholder=\"Phone Number\"><br>\n" +
+                "  <textarea name=\"address\" style=\"width: 217px; font-family: Arial, Helvetica, sans-serif;\" rows=\"4\" value=\"\" placeholder=\"" + addressOut + "\"></textarea><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"postcode\" placeholder=\"" + postcodeOut + "\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" value=\"\" name=\"phone_no\" placeholder=\"" + phoneNoOut +"\"><br>\n" +
                 "  \n" +
                 "  <input type=\"submit\" style=\"width: 135px; margin-left: 0px;\" class=\"buttonStyle\" value=\"Update Details\">\n" +
-                "  <a class=\"buttonStyle\" style=\"width: 70px; margin-left: 2px;\" href=\"https://phabpharmacy.herokuapp.com/order\">Cancel</a>\n" +
+                "  <a class=\"buttonStyle\" style=\"width: 65px; margin-left: 2px;\" href=\"https://phabpharmacy.herokuapp.com/order\">Cancel</a>\n" +
                 "</form>\n" +
 
                 "</body>\n" +
