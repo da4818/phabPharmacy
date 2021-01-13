@@ -14,13 +14,13 @@ public class User {
 
     public char nonNullEntries(){
         char out = 'n'; // None are non-null
-        if (!LoginDAO.emptyField("address") && !LoginDAO.emptyField("phone_no")){
+        if (LoginDAO.nonNullField("address") && LoginDAO.nonNullField("phone_no")){
             out = 'b'; // Both are non-null
         }
-        else if (LoginDAO.emptyField("address") && !LoginDAO.emptyField("phone_no")){
+        else if (!LoginDAO.nonNullField("address") && LoginDAO.nonNullField("phone_no")){
             out = 'p'; // Phone number is non-null
         }
-        else if (!LoginDAO.emptyField("address") && LoginDAO.emptyField("phone_no")){
+        else if (LoginDAO.nonNullField("address") && !LoginDAO.nonNullField("phone_no")){
             out = 'a'; // Address is non-null
         }
         return out;

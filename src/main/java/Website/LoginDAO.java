@@ -270,7 +270,7 @@ public class LoginDAO {
         return u;
     }
 
-    public static boolean emptyField(String columnName){
+    public static boolean nonNullField(String columnName){
         boolean status = false;
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{
