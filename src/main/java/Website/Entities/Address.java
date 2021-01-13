@@ -23,14 +23,21 @@ public class Address {
     }
 
 
-    public String displayAddress(){
+    public String displayAddress(int n){
         String out="";
         String[] addressLines = address.split("\\n");
         if(address.isEmpty()){
             return out;
         }
-        for (String s: addressLines){
-            out += s + "<br>";
+        if (n == 1) {
+            for (String s : addressLines) {
+                out += s + "<br>";
+            }
+        }
+        else {
+            for (String s : addressLines) {
+                out += s + "\n";
+            }
         }
         return out;
     }

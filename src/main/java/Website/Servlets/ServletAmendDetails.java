@@ -33,15 +33,15 @@ public class ServletAmendDetails extends HttpServlet {
         switch(u.nonNullEntries()){ // Due to nullPointExceptions, we need to check if 'phone_no' and/or 'address' is null within the database
             case 'b':
                 Address ad = new Address(u.address,u.postcode);
-                addressOut = ad.displayAddress();
+                addressOut = ad.displayAddress(2);
                 phoneNoOut = "<br>" + u.phoneno;
                 break;
             case 'a':
                 Address ad1 = new Address(u.address,u.postcode);
-                addressOut = ad1.displayAddress();
+                addressOut = ad1.displayAddress(2);
                 break;
             case 'p':
-                phoneNoOut = "<br>" + u.phoneno;
+                phoneNoOut = u.phoneno;
                 break;
             default:
                 break;
