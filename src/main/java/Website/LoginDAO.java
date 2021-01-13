@@ -258,8 +258,18 @@ public class LoginDAO {
                 u.email = rs.getString("email");
                 u.password = rs.getString("password");
                 u.postcode = rs.getString("postcode");
-                u.address = rs.getString("address");
-                u.phoneno = rs.getString("phone_no");
+                if(!rs.getString("address").isEmpty()){
+                    u.address = rs.getString("address");
+                }
+                else{
+                    u.address = "";
+                }
+                if(!rs.getString("phone_no").isEmpty()){
+                    u.phoneno = rs.getString("phone_no");
+                }
+                else{
+                    u.phoneno = "";
+                }
             }
             rs.close();
             ps.close();
