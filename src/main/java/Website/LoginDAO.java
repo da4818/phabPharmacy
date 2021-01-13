@@ -316,6 +316,7 @@ public class LoginDAO {
     public static void updateCustomer(String tableName, String category, String value){
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         PreparedStatement ps = null;
+        PreparedStatement ps1 = null;
         try{
             Class.forName("org.postgresql.Driver");
             Connection c  = DriverManager.getConnection(dbUrl);
@@ -331,16 +332,20 @@ public class LoginDAO {
                 ps.setString(1, value);
                 ps.setInt(2, cust_id);
                 ps.executeUpdate();
-                Statement s1 = c.createStatement();
-                s.executeUpdate("update logged_in_customer set " + category + "=" + value+ " where id=" + cust_id + ";");
+                ps1 = c.prepareStatement("update logged_in_customer set " + category + "=?  where id=?;");
+                ps1.setString(1, value);
+                ps1.setInt(2, cust_id);
+                ps1.executeUpdate();
             }
             else if (tableName.equals("card_details")) {
                 ps = c.prepareStatement("update card_details set " + category + "=?  where id=?;");
                 ps.setString(1, value);
                 ps.setInt(2, cust_id);
                 ps.executeUpdate();
+
             }
             ps.close();
+            ps1.close();
             c.close();
         }catch(Exception e){
             System.err.println(e.getClass().getName()+": " + e.getMessage());
