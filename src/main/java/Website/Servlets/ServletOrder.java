@@ -30,17 +30,12 @@ public class ServletOrder extends HttpServlet {
         String total = df.format(totalBasket);
         User u = LoginDAO.getCurrentUser();
 
-
-        String phoneNumber="";
-        if (!u.phoneno.isEmpty()){
-            phoneNumber = u.phoneno;
-        }
         resp.getWriter().write("<div class=\"addressContainer\">\n" +
                 "  <p style=\"display: inline-block; margin-bottom: 0px;\"><b>Shipping Address</b></p>\n" +
-                "  <p>" + u.fname + " " + u.lname + "<br>" + u.postcode + "<br>" + phoneNumber + "</p>\n");
+                "  <p>" + u.fname + " " + u.lname + "<br>" + u.postcode + "</p>\n");
         if (!u.address.isEmpty()){
             Address ad = new Address(u.address,u.postcode);
-            resp.getWriter().write("  <p>" + u.fname + " " + u.lname + "<br>" + ad.getAddress() + u.postcode + "<br>" + phoneNumber + "</p>\n");
+            resp.getWriter().write("  <p>" + u.fname + " " + u.lname + "<br>" + ad.getAddress() + u.postcode + "</p>\n");
         }
         resp.getWriter().write("  <p><b>Payment Details</b></p>\n" +
                 "  <p>" + cc.getCensoredCardNumber() + "<br>" + cc.getSortCode() + "<br>" + cc.accountNumber +"</p>\n" +
