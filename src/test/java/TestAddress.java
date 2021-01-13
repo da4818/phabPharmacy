@@ -26,8 +26,7 @@ public class TestAddress {
 
 
         Address adr = new Address("Exhibition Road\nKensington\nLondon", "SW7 2az");
-        Assert.assertEquals(adr.displayAddress(),"Exhibition Road<br>Kensington<br>London<br>");
-
+        Assert.assertEquals(adr.displayAddress(1),"Exhibition Road<br>Kensington<br>London<br>");
         // VALID ENTRIES
         // Non case-sensitive: outputs to capitalised format
         Address ad4 = new Address("", "sw7 2az");
