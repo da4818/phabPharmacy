@@ -16,7 +16,9 @@ public class Address {
         else{
             this.postcode = postcode.toUpperCase();
         }
-        addressLines = address.split("\\n");
+        if(!address.isEmpty()) {
+            addressLines = address.split("\\n");
+        }
 
     }
 
