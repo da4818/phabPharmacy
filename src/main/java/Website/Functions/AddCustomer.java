@@ -17,7 +17,7 @@ public class AddCustomer {
             Connection c = DriverManager.getConnection(dbUrl);
             Statement stmt1 = c.createStatement();
             if (cust.address.isEmpty() && !cust.phone_number.isEmpty()){
-                pStmt = c.prepareStatement("INSERT INTO customer (first_name,last_name,email,password,postcode,phone_no) VALUES (?,?,?,?,?,?);");
+                pStmt = c.prepareStatement("insert into customer(first_name,last_name,email,password,postcode,phone_no) values(?,?,?,?,?,?);");
                 pStmt.setString(1,cust.first_name);
                 pStmt.setString(2,cust.last_name);
                 pStmt.setString(3,cust.email);
@@ -26,7 +26,7 @@ public class AddCustomer {
                 pStmt.setString(6,cust.phone_number);
             }
             else if (!cust.address.isEmpty() && cust.phone_number.isEmpty()){
-                pStmt = c.prepareStatement("INSERT INTO customer (first_name,last_name,email,password,postcode,address) VALUES (?,?,?,?,?,?);");
+                pStmt = c.prepareStatement("insert into customer(first_name,last_name,email,password,postcode,address) values(?,?,?,?,?,?);");
                 pStmt.setString(1,cust.first_name);
                 pStmt.setString(2,cust.last_name);
                 pStmt.setString(3,cust.email);
