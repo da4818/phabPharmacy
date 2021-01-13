@@ -23,11 +23,15 @@ public class Address {
 
     public String getAddress(){
         String out="";
+        if(address.isEmpty()){
+            return out;
+        }
         for (String s: addressLines){
             out += s + "<br>";
         }
         return out;
     }
+
 
 
     // This checks for the correct postcode format - e.g. SW 72AZ is invalid but SW72AZ and SW7 2AZ is valid
