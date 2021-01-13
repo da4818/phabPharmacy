@@ -60,7 +60,6 @@ public class ServletRegister extends HttpServlet {
         }
        // resp.getWriter().write("<p>List:<br>"+fn+"<br>"+ln+"<br>"+em+"<br>"+pw+"<br>"+vpw+"<br>"+cn+"<br>"+cvv+"<br>"+sc+"<br>"+an+"<br>"+pc+"<br>"+ad+"<br>"+pn+"<br>");
        else{
-            resp.getWriter().write("<p>all required entries have been filled</p>");
             if(LoginDAO.validateRegister(em)){ //Checks database to see if email exists in use database
                 resp.getWriter().write("<h2>There is an existing account with the email entered, please log in.</h2>");
                 allowReg = false;

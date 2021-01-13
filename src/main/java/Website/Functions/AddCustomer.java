@@ -55,9 +55,9 @@ public class AddCustomer {
             pStmt.executeUpdate();
             String sqlStr = "SELECT * FROM customer WHERE first_name = '" + cust.first_name + "' AND email = '" + cust.email + "';";
             ResultSet rs = stmt1.executeQuery(sqlStr);
-            int id = Integer.parseInt(null);
-            if (rs.next()) {
-                id = rs.getInt("id");
+            int cust_id = 0;
+            if(rs.next()){
+                cust_id = rs.getInt("id");
             }
 
             PreparedStatement pStmt2 = c.prepareStatement("INSERT INTO card_details (card_no,cvv,sort_code,account_no,customer_id) VALUES(?,?,?,?,?);");
@@ -65,7 +65,7 @@ public class AddCustomer {
             pStmt2.setString(2,cc.cvv);
             pStmt2.setString(3,cc.sortCode);
             pStmt2.setString(4,cc.accountNumber);
-            pStmt2.setInt(5,id);
+            pStmt2.setInt(5,cust_id);
             pStmt2.executeUpdate();
 
             rs.close();

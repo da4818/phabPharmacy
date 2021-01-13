@@ -196,13 +196,12 @@ public class LoginDAO {
     // Checking if user is logging in with an existing account
     public static boolean validateLogin(String email_in,String pass_in){
         boolean status = false;
-        Connection c = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{
             Class.forName("org.postgresql.Driver");
-            c = DriverManager.getConnection(dbUrl);
+            Connection c = DriverManager.getConnection(dbUrl);
             ps = c.prepareStatement("select * from customer where email=? and password=?;");
             ps.setString(1,email_in);
             ps.setString(2,pass_in);
