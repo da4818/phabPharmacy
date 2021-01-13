@@ -327,12 +327,12 @@ public class LoginDAO {
                 cust_id = rs.getInt("customer_id");
             }
             if (tableName.equals("customer")) {
-                ps = c.prepareStatement("update customer set " + category + "=? where id=?; update logged_in_customer set " + category + "=? where id=?;");
+                ps = c.prepareStatement("update customer set " + category + "=? where id=?;");
                 ps.setString(1, value);
                 ps.setInt(2, cust_id);
-                ps.setString(3, value);
-                ps.setInt(4, cust_id);
                 ps.executeUpdate();
+                Statement s1 = c.createStatement();
+                s.executeUpdate("update logged_in_customer set " + category + "=" + value+ " where id=" + cust_id + ";");
             }
             else if (tableName.equals("card_details")) {
                 ps = c.prepareStatement("update card_details set " + category + "=?  where id=?;");
