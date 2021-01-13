@@ -332,9 +332,8 @@ public class LoginDAO {
                 ps.setString(1, value);
                 ps.setInt(2, cust_id);
                 ps.executeUpdate();
-                ps1 = c.prepareStatement("update logged_in_customer set " + category + "=?  where id=?;");
+                ps1 = c.prepareStatement("update logged_in_customer set " + category + "=?");
                 ps1.setString(1, value);
-                ps1.setInt(2, cust_id);
                 ps1.executeUpdate();
             }
             else if (tableName.equals("card_details")) {
