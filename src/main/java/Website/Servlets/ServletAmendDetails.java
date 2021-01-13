@@ -41,8 +41,8 @@ public class ServletAmendDetails extends HttpServlet {
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"postcode\" placeholder=\"Postcode\"><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" value=\"\" name=\"phone_no\" placeholder=\"Phone Number\"><br>\n" +
                 "  \n" +
-                "  <input type=\"submit\" style=\"width: 145px;\" class=\"buttonStyle\" value=\"Update Details\">\n" +
-                "  <a class=\"buttonStyle\" style=\"width: 75px;\" href=\"https://phabpharmacy.herokuapp.com/order\">Cancel</a>\n" +
+                "  <input type=\"submit\" style=\"width: 125px;\" class=\"buttonStyle\" value=\"Update Details\">\n" +
+                "  <a class=\"buttonStyle\" style=\"width: 65px;\" href=\"https://phabpharmacy.herokuapp.com/order\">Cancel</a>\n" +
                 "</form>\n" +
 
                 "</body>\n" +
@@ -247,7 +247,7 @@ public class ServletAmendDetails extends HttpServlet {
                 "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" style=\"background-color: #00B8C5; width: 35px;\"><i style=\"width: 35px;\" class=\"fa fa-fw fa-shopping-basket\"><p style=\"display: inline; font-family: Arial; font-weight: bold\" id=\"basket\"> " + basketSizeOut + "</p></i></a>\n" +
                 displayCurrentUser +
                 "</div>\n" +
-                "<h1>Amend Details</h1>\n+" +
-                "\"<p>Change any details as required (empty fields will not be updated). If everything is up to date, press 'Cancel'.</p>";
+                "<h1>Amend Details</h1>\n" +
+                "<p>Change any details as required (empty fields will not be updated). If everything is already up to date, press 'Cancel' to go back.</p>";
     }
 }

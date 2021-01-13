@@ -20,6 +20,10 @@ public class Address {
             this.address = address;
             addressLines = address.split("\\n");
         }
+        else if (address.isEmpty()){
+            this.address = "";
+            addressLines[0] = "";
+        }
 
     }
 
