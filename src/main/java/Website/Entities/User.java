@@ -1,5 +1,7 @@
 package Website.Entities;
 
+import Website.LoginDAO;
+
 public class User {
     public int customer_id;
     public String fname;
@@ -12,13 +14,13 @@ public class User {
 
     public char nonNullEntries(){
         char out = 'n'; // None are non-null
-        if (!address.equals(null) && phoneno.equals(null)){
+        if (!LoginDAO.emptyField("address") && !LoginDAO.emptyField("phone_no")){
             out = 'b'; // Both are non-null
         }
-        else if (!address.isEmpty() && phoneno.isEmpty()){
+        else if (LoginDAO.emptyField("address") && !LoginDAO.emptyField("phone_no")){
             out = 'p'; // Phone number is non-null
         }
-        else if (address.isEmpty() && !phoneno.isEmpty()){
+        else if (!LoginDAO.emptyField("address") && LoginDAO.emptyField("phone_no")){
             out = 'a'; // Address is non-null
         }
         return out;

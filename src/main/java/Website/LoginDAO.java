@@ -258,18 +258,8 @@ public class LoginDAO {
                 u.email = rs.getString("email");
                 u.password = rs.getString("password");
                 u.postcode = rs.getString("postcode");
-                if(!rs.getString("address").isEmpty()){
-                    u.address = rs.getString("address");
-                }
-                else{
-                    u.address = "";
-                }
-                if(!rs.getString("phone_no").isEmpty()){
-                    u.phoneno = rs.getString("phone_no");
-                }
-                else{
-                    u.phoneno = "";
-                }
+                u.address = rs.getString("address");
+                u.phoneno = rs.getString("phone_no");
             }
             rs.close();
             ps.close();
@@ -279,6 +269,26 @@ public class LoginDAO {
         }
         return u;
     }
+
+    public static boolean emptyField(String columnName){
+        boolean status = false;
+        String dbUrl = System.getenv("JDBC_DATABASE_URL");
+        try{
+            Class.forName("org.postgresql.Driver");
+            Connection c = DriverManager.getConnection(dbUrl);
+            Statement s = c.createStatement();
+            ResultSet rs = s.executeQuery("select " + columnName + " from logged_in_customer;");
+            status = rs.next(); //Status is now true if an entry with the email and password exists (i.e. the only entry in the table)
+
+            rs.close();
+            s.close();
+            c.close();
+        }catch(Exception e){
+            System.err.println(e.getClass().getName()+": " + e.getMessage());
+        }
+        return status;
+    }
+
     //If registration is valid, the customer's information will be added to the database
     public static void addUser(String fname_in,String lname_in, String email_in,String pass_in, String postcode_in, String address_in, String phoneno_in){
         Connection c = null;
