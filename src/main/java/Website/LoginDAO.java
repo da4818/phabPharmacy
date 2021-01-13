@@ -279,6 +279,9 @@ public class LoginDAO {
             Statement s = c.createStatement();
             ResultSet rs = s.executeQuery("select " + columnName + " from logged_in_customer;");
             status = rs.next(); //Status is now true if an entry with the email and password exists (i.e. the only entry in the table)
+            /*if (rs.getString(1).equals("null")){
+                status = false;
+            }*/
             rs.close();
             s.close();
             c.close();
@@ -297,6 +300,9 @@ public class LoginDAO {
             ResultSet rs = s.executeQuery("select " + columnName + " from logged_in_customer;");
             while(rs.next()){
                 status = rs.getString(1);
+                if (rs.getString(1).equals("null")){
+                    status = "fail";
+                }
             } //Status is now true if an entry with the email and password exists (i.e. the only entry in the table)
             rs.close();
             s.close();
