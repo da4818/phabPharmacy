@@ -314,8 +314,9 @@ public class LoginDAO {
         }
     }
 
-    public static void updateCustomer(CreditCard cc, String postcode_in, String address_in, String phoneno_in){
+    public static void updateCustomer(String tableName, String category, String value){
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
+        PreparedStatement ps = null;
         try{
             Class.forName("org.postgresql.Driver");
             Connection c  = DriverManager.getConnection(dbUrl);
@@ -326,23 +327,19 @@ public class LoginDAO {
             while(rs.next()){
                 cust_id = rs.getInt("customer_id");
             }
-            PreparedStatement ps = c.prepareStatement("update customer set postcode=?, address=?, phone_no=? where id=?;");
-            ps.setString(1,postcode_in);
-            ps.setString(2,address_in);
-            ps.setString(3,phoneno_in);
-            ps.setInt(4,cust_id);
-            ps.executeUpdate();
-
-            PreparedStatement ps1 = c.prepareStatement("update card_details set card_no=?, cvv=?, sort_code=?, account_no=? where id=?;");
-            ps1.setString(1,cc.cardNumber);
-            ps1.setString(2,cc.cvv);
-            ps1.setString(3,cc.sortCode);
-            ps1.setString(4,cc.accountNumber);
-            ps1.setInt(5,cust_id);
-            ps1.executeUpdate();
-            ps1.close();
-
-            ps1.close();
+            if (tableName.equals("customer")) {
+                ps = c.prepareStatement("update customer set " + category + "=? where id=?;");
+                ps.setString(1, value);
+                ps.setInt(2, cust_id);
+                ps.executeUpdate();
+            }
+            else if (tableName.equals("card_details")) {
+                ps = c.prepareStatement("update card_details set " + category + "=?  where id=?;");
+                ps.setString(1, value);
+                ps.setInt(2, cust_id);
+                ps.executeUpdate();
+            }
+            ps.close();
             c.close();
         }catch(Exception e){
             System.err.println(e.getClass().getName()+": " + e.getMessage());

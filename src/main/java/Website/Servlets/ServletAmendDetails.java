@@ -42,7 +42,7 @@ public class ServletAmendDetails extends HttpServlet {
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" value=\"\" name=\"phone_no\" placeholder=\"Phone Number\"><br>\n" +
                 "  \n" +
                 "  <input type=\"submit\" style=\"width: 135px; margin-left: 0px;\" class=\"buttonStyle\" value=\"Update Details\">\n" +
-                "  <a class=\"buttonStyle\" style=\"width: 75px;\" href=\"https://phabpharmacy.herokuapp.com/order\">Cancel</a>\n" +
+                "  <a class=\"buttonStyle\" style=\"width: 60px; margin-left: 2px;\" href=\"https://phabpharmacy.herokuapp.com/order\">Cancel</a>\n" +
                 "</form>\n" +
 
                 "</body>\n" +
@@ -72,7 +72,18 @@ public class ServletAmendDetails extends HttpServlet {
             valid = false;
         }
         if (valid) {
-            LoginDAO.updateCustomer(cc,a.postcode,a.address,pn);
+            if(!pc.isEmpty()) {
+                LoginDAO.updateCustomer("customer", "postcode", pc);
+            }
+            if(!ad.isEmpty()) {
+                LoginDAO.updateCustomer("customer", "address", ad);
+            }
+            if(!pn.isEmpty()) {
+                LoginDAO.updateCustomer("customer", "phone_no", pn);
+            }
+            if(!cn.isEmpty()) {
+                LoginDAO.updateCustomer("card_details", "card_no", cn);
+            }
             resp.getWriter().write("<h2>Information updated.</h2>");
         }
     }
