@@ -39,7 +39,8 @@ public class AddCustomer {
                 pStmt.setString(1,cust.first_name);
                 pStmt.setString(2,cust.last_name);
                 pStmt.setString(3,cust.email);
-                pStmt.setString(4,cust.postcode);
+                pStmt.setString(4,cust.password);
+                pStmt.setString(5,cust.postcode);
             }
             else{
                 pStmt = c.prepareStatement("INSERT INTO customer (first_name,last_name,email,password,postcode,address,phone_no) VALUES (?,?,?,?,?,?,?);");
