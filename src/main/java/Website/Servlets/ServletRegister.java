@@ -84,11 +84,12 @@ public class ServletRegister extends HttpServlet {
             if (allowReg){
                 //LoginDAO.addUser(fn,ln,em,pw,pc,ad,pn);
                 Customer c = new Customer(fn,ln,pc,em,pw,ad,pn);
+                resp.getWriter().write("<p>" +c.first_name+"</p>");
                 //CreditCard cc = new CreditCard(cn,cvv,sc,an);
-                new AddCustomer(c,cc);
+                /*new AddCustomer(c,cc);
                 User currentUser = LoginDAO.getUser(em,pw); //*rewrite to constructor with string values
                 LoginDAO.setLoggedInUser(currentUser);
-                resp.getWriter().write("<h2>Successful registration. Welcome, " + currentUser.fname + "</h2>");
+                resp.getWriter().write("<h2>Successful registration. Welcome, " + currentUser.fname + "</h2>");*/
             }
         }
 
