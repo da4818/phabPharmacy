@@ -31,7 +31,6 @@ public class ServletOrder extends HttpServlet {
         User u = LoginDAO.getCurrentUser();
         String phoneNoOut = "";
         String addressOut = "";
-        resp.getWriter().write("<p>" +u.nonNullEntries()+":"+u.address+ "-"+LoginDAO.test("phone_no")+"</p>");
         switch(u.nonNullEntries()){ // Due to nullPointExceptions, we need to check if 'phone_no' and/or 'address' is null within the database
             case 'b':
                 Address ad = new Address(u.address,u.postcode);
