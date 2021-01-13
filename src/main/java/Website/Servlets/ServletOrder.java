@@ -29,11 +29,11 @@ public class ServletOrder extends HttpServlet {
         CreditCard cc = LoginDAO.getCurrentCard();
         String total = df.format(totalBasket);
         User u = LoginDAO.getCurrentUser();
-        Address ad = new Address(u.address,u.postcode);
+        /*Address ad = new Address(u.address,u.postcode);
         String phoneNumber="";
         if (!u.phoneno.isEmpty()){
             phoneNumber = u.phoneno;
-        }
+        }*/
         resp.getWriter().write("<div class=\"addressContainer\">\n" +
                 "  <p style=\"display: inline-block; margin-bottom: 0px;\"><b>Shipping Address</b></p>\n" +
                 "  <p>" + u.fname + " " + u.lname + "<br>" + u.postcode +"</p>\n" +
