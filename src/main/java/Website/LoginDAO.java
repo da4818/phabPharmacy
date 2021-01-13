@@ -297,12 +297,9 @@ public class LoginDAO {
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
             Statement s = c.createStatement();
-            ResultSet rs = s.executeQuery("select " + columnName + " from logged_in_customer;");
+            ResultSet rs = s.executeQuery("select " + columnName + " from logged_in_customer where " + columnName + " is not null;");
             while(rs.next()){
                 status = rs.getString(1);
-                if (status.equals(null)){
-                    status = "fail";
-                }
             } //Status is now true if an entry with the email and password exists (i.e. the only entry in the table)
             rs.close();
             s.close();
