@@ -25,7 +25,7 @@ public class Address {
     }
 
 
-    public String getAddress(){
+    public String displayAddress(){
         String out="";
         String[] addressLines = address.split("\\n");
         if(address.isEmpty()){

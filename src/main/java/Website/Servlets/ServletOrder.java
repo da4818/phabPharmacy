@@ -29,14 +29,28 @@ public class ServletOrder extends HttpServlet {
         CreditCard cc = LoginDAO.getCurrentCard();
         String total = df.format(totalBasket);
         User u = LoginDAO.getCurrentUser();
-
+        String phoneNoOut = "";
+        String addressOut = "";
+        switch(u.nonNullEntries()){ // Due to nullPointExceptions, we need to check if 'phone_no' and/or 'address' is null within the database
+            case 'b':
+                Address ad = new Address(u.address,u.postcode);
+                addressOut = ad.displayAddress();
+                phoneNoOut = "<br>" + u.phoneno;
+                break;
+            case 'a':
+                Address ad1 = new Address(u.address,u.postcode);
+                addressOut = ad1.displayAddress();
+               break;
+            case 'p':
+                phoneNoOut = "<br>" + u.phoneno;
+                break;
+            default:
+                break;
+        }
         resp.getWriter().write("<div class=\"addressContainer\">\n" +
                 "  <p style=\"display: inline-block; margin-bottom: 0px;\"><b>Shipping Address</b></p>\n" +
-                "  <p>" + u.fname + " " + u.lname + "<br>" + u.postcode + "</p>\n");
-        if (!u.address.isEmpty()){
-            Address ad = new Address(u.address,u.postcode);
-            resp.getWriter().write("  <p>" + u.fname + " " + u.lname + "<br>" + ad.getAddress() + u.postcode + "</p>\n");
-        }
+                "  <p>" + u.fname + " " + u.lname + "<br>" + addressOut + u.postcode + phoneNoOut + "</p>\n");
+
         resp.getWriter().write("  <p><b>Payment Details</b></p>\n" +
                 "  <p>" + cc.getCensoredCardNumber() + "<br>" + cc.getSortCode() + "<br>" + cc.accountNumber +"</p>\n" +
                 "  <button onclick=\"window.location.href='https://phabpharmacy.herokuapp.com/amend_details';\"class=\"buttonStyle\">Edit Details</button>\n" +
