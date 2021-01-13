@@ -22,7 +22,6 @@ public class Address {
         }
         else if (address.isEmpty()){
             this.address = "";
-            addressLines[0] = "";
         }
 
     }
