@@ -34,7 +34,7 @@ public class ServletAmendDetails extends HttpServlet {
             case 'b':
                 Address ad = new Address(u.address,u.postcode);
                 addressOut = ad.displayAddress(2);
-                phoneNoOut = "<br>" + u.phoneno;
+                phoneNoOut = u.phoneno;
                 break;
             case 'a':
                 Address ad1 = new Address(u.address,u.postcode);
@@ -54,14 +54,21 @@ public class ServletAmendDetails extends HttpServlet {
 
         resp.getWriter().write("<form name=\"amendDetailsForm\" action=\"amend_details\" method=\"post\">\n" +
                 "  <h3>Order Information<br><b style=\"font-size: 15px;\">Payment Information</b></h3>\n" +
+                "  <label>Card Number</label><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"card_no\" placeholder=\"" + cardNoOut + "\"><br>\n" +
+                "  <label>Sort Code</label><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"sort_code\" placeholder=\"" + sortcodeOut + "\"><br>\n" +
+                "  <label>Account Number</label><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"account_no\" placeholder=\"" + accountNoOut + "\"><br>\n" +
+                "  <label>CVV</label><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"cvv\" placeholder=\"" + cvvOut + "\"><br>\n" +
                 "\n" +
                 "  <h3 style=\"font-size: 15px;\">Shipping Information</h3>\n" +
+                "  <label>Address</label><br>\n" +
                 "  <textarea name=\"address\" style=\"width: 217px; font-family: Arial, Helvetica, sans-serif;\" rows=\"4\" value=\"\" placeholder=\"" + addressOut + "\"></textarea><br>\n" +
+                "  <label>Postcode</label><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"postcode\" placeholder=\"" + postcodeOut + "\"><br>\n" +
+                "  <label>Phone Number</label><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" value=\"\" name=\"phone_no\" placeholder=\"" + phoneNoOut +"\"><br>\n" +
                 "  \n" +
                 "  <input type=\"submit\" style=\"width: 135px; margin-left: 0px;\" class=\"buttonStyle\" value=\"Update Details\">\n" +

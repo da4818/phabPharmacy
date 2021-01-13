@@ -92,12 +92,12 @@ public class ServletOrder extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException { //No logout feature when confirming order
         resp.setContentType("text/html");
         String HTML = htmlOutput();
-        resp.getWriter().write(HTML); //There is no information request in the ServletOrder doPost - the only possible way to redirect to this doPost in particular is through clicking 'Confirm Order' button
-        //LoginDAO.resetTable("ordered_products");
+        resp.getWriter().write(HTML); // There is no information request in the ServletOrder doPost - the only possible way to redirect to this doPost in particular is through clicking 'Confirm Order' button
         User u = LoginDAO.getCurrentUser();
+        //LoginDAO.resetTable("ordered_products");
 
         resp.getWriter().write("<h2>Order confirmed!</h2>");
-        resp.getWriter().write("<script>\n" + //This is to finish of the HTML code initiated in htmlOutput()
+        resp.getWriter().write("<script>\n" + // This is to finish of the HTML code initiated in htmlOutput()
                 "    function redirectBrowse(){\n" +
                 "        window.location.href=\"https://phabpharmacy.herokuapp.com/browse\"\n" +
                 "    }\n" +
