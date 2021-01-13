@@ -2,12 +2,13 @@ import Website.Entities.Address;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test; //Note that import org.junit.Test; will not work
 public class TestAddress {
+    // INVALID ENTRIES
     @Test
-    public void testPostcode(){
-        // INVALID ENTRIES
+    public void testInvalidPostcodes(){
         // Non alpha-numeric characters
         Address ad = new Address("","$W72AZ");
         Assert.assertEquals(ad.validPostcode(),false);
+
         // Invalid spacing
         Address ad1 = new Address("","S W72AZ");
         Assert.assertEquals(ad1.validPostcode(),false);
@@ -17,6 +18,8 @@ public class TestAddress {
         Assert.assertEquals(ad1b.validPostcode(),false);
         Address ad1c = new Address("","SW72A Z");
         Assert.assertEquals(ad1c.validPostcode(),false);
+        Address ad1d = new Address("","SW 72A Z");
+        Assert.assertEquals(ad1d.validPostcode(),false);
 
         // Too long postcode
         Address ad2 = new Address("","SW723 2AZ");
@@ -24,19 +27,26 @@ public class TestAddress {
         // Too short postcode
         Address ad3 = new Address("","S 2AZ");
 
-
         Address adr = new Address("Exhibition Road\nKensington\nLondon", "SW7 2az");
         Assert.assertEquals(adr.displayAddress(1),"Exhibition Road<br>Kensington<br>London<br>");
-        // VALID ENTRIES
-        // Non case-sensitive: outputs to capitalised format
+
+    }
+    // VALID ENTRIES
+    @Test
+    public void testValidPostcodes(){
+        // Not case-sensitive: outputs to capitalised format
         Address ad4 = new Address("", "sw7 2az");
         Assert.assertEquals(ad4.postcode,"SW7 2AZ");
         Address ad4a = new Address("", "Sw7 2az");
         Assert.assertEquals(ad4a.postcode,"SW7 2AZ");
         Address ad4b = new Address("", "SW7 2az");
         Assert.assertEquals(ad4b.postcode,"SW7 2AZ");
+        Address ad4c = new Address("", "SW7 2Az");
+        Assert.assertEquals(ad4c.postcode,"SW7 2AZ");
+        Address ad4d = new Address("", "SW7 2AZ");
+        Assert.assertEquals(ad4d.postcode,"SW7 2AZ");
 
-        // Non space: outputs to xxx xxx format
+        // Doesn't require xxx xxx input: will output to xxx xxx format
         Address ad5 = new Address("","SW72AZ");
         Assert.assertEquals(ad5.postcode,"SW7 2AZ");
 

@@ -6,11 +6,16 @@ import org.junit.jupiter.api.Test; //Note that import org.junit.Test; will not w
 public class TestCreditCard {
     @Test
     public void testCreditCardInput(){
+        // Spacing: users can input with or without spacing, and will be modified to a non-space format
         CreditCard cc = new CreditCard("1234 5678 1234 5678","123","123456","12345678");
         Assert.assertEquals(cc.cardNumber,"1234567812345678");
+        // Spacing: if the user inputs a non-space fomat, nothing will change
+        CreditCard cc1 = new CreditCard("1234567812345678","123","123456","12345678");
+        Assert.assertEquals(cc1.cardNumber,"1234567812345678");
     }
     @Test
     public void testCreditCardOutput(){
+
         CreditCard cc = new CreditCard("1234567812345678","123","123456","12345678");
         Assert.assertEquals(cc.getCensoredCardNumber(),"123456781234xxxx");
     }

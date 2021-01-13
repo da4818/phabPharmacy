@@ -72,7 +72,7 @@ public class ServletAmendDetails extends HttpServlet {
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" value=\"\" name=\"phone_no\" placeholder=\"" + phoneNoOut +"\"><br>\n" +
                 "  \n" +
                 "  <input type=\"submit\" style=\"width: 135px; margin-left: 0px;\" class=\"buttonStyle\" value=\"Update Details\">\n" +
-                "  <a class=\"buttonStyle\" style=\"width: 65px; margin-left: 2px;\" href=\"https://phabpharmacy.herokuapp.com/order\">Cancel</a>\n" +
+                "  <a class=\"buttonStyle\" style=\"width: 67px; margin-left: 2px;\" href=\"https://phabpharmacy.herokuapp.com/order\">Cancel</a>\n" +
                 "</form>\n" +
 
                 "</body>\n" +
@@ -82,6 +82,8 @@ public class ServletAmendDetails extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
+        String HTML = htmlOutput();
+        resp.getWriter().write(HTML);
         String cn = req.getParameter("card_no");
         String sc = req.getParameter("sort_code");
         String an = req.getParameter("account_no");
@@ -114,7 +116,18 @@ public class ServletAmendDetails extends HttpServlet {
             if(!cn.isEmpty()) {
                 LoginDAO.updateCustomer("card_details", "card_no", cn);
             }
-            resp.getWriter().write("<h2>Information updated.</h2>");
+            if(!cvv.isEmpty()) {
+                LoginDAO.updateCustomer("card_details", "cvv", cvv);
+            }
+            if(!an.isEmpty()) {
+                LoginDAO.updateCustomer("card_details", "account_no", an);
+            }
+            if(!sc.isEmpty()) {
+                LoginDAO.updateCustomer("card_details", "sortcode", sc);
+            }
+            resp.getWriter().write("<h2>Information updated.</h2>\n" +
+                    "</body>\n" +
+                    "</html>");
         }
     }
 
