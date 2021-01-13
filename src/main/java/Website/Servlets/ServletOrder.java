@@ -30,10 +30,13 @@ public class ServletOrder extends HttpServlet {
         String total = df.format(totalBasket);
         User u = LoginDAO.getCurrentUser();
         Address ad = new Address(u.address,u.postcode);
-
+        String phoneNumber="";
+        if (!u.phoneno.isEmpty()){
+            phoneNumber = u.phoneno;
+        }
         resp.getWriter().write("<div class=\"addressContainer\">\n" +
                 "  <p style=\"display: inline-block; margin-bottom: 0px;\"><b>Shipping Address</b></p>\n" +
-                "  <p>" + u.fname + " " + u.lname + "<br>" + u.postcode +"<br>" + u.phoneno + "</p>\n" +
+                "  <p>" + u.fname + " " + u.lname + "<br>" + ad.getAddress() + u.postcode +"<br>" + phoneNumber + "</p>\n" +
                 "  <p><b>Payment Details</b></p>\n" +
                 "  <p>" + cc.getCensoredCardNumber() + "<br>" + cc.getSortCode() + "<br>" + cc.accountNumber +"</p>\n" +
                 "  <button onclick=\"window.location.href='https://phabpharmacy.herokuapp.com/amend_details';\"class=\"buttonStyle\">Edit Details</button>\n" +
