@@ -300,7 +300,7 @@ public class LoginDAO {
             ResultSet rs = s.executeQuery("select " + columnName + " from logged_in_customer;");
             while(rs.next()){
                 status = rs.getString(1);
-                if (rs.getString(1).equals("null")){
+                if (rs.getString(1).equals(null)){
                     status = "fail";
                 }
             } //Status is now true if an entry with the email and password exists (i.e. the only entry in the table)
