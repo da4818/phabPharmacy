@@ -91,6 +91,7 @@ public class ServletRegister extends HttpServlet {
                 new AddCustomer(c,cc);
                 resp.getWriter().write("<h2>Successful registration. Welcome, " + currentUser.fname + "</h2>");
             }
+            resp.getWriter().write("<p>" + allowReg + "</p>");
         }
 
        resp.getWriter().write("<script>\n" +

@@ -41,8 +41,8 @@ public class ServletAmendDetails extends HttpServlet {
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"postcode\" placeholder=\"Postcode*\"><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" value=\"\" name=\"phone_no\" placeholder=\"Phone Number\"><br>\n" +
                 "  \n" +
-                "  <input type=\"submit\" style=\"width: 105px;\" class=\"buttonStyle\" value=\"Update Details\">\n" +
-                "  <a class=\"buttonStyle\" style=\"width: 105px;\" href=\"https://phabpharmacy.herokuapp.com/order\">Cancel</a>\n" +
+                "  <input type=\"submit\" style=\"width: 75px;\" class=\"buttonStyle\" value=\"Update Details\">\n" +
+                "  <a class=\"buttonStyle\" style=\"width: 750px;\" href=\"https://phabpharmacy.herokuapp.com/order\">Cancel</a>\n" +
                 "</form>\n" +
 
                 "</body>\n" +
@@ -63,11 +63,11 @@ public class ServletAmendDetails extends HttpServlet {
         CreditCard cc = new CreditCard(cn,cvv,sc,an);
         Address a = new Address(ad,pc);
         boolean valid = true;
-        if (!cc.validCardNumber() || !cc.validAccountNumber() || !cc.validSortCode() || !cc.validCvv()){
+        if (!cc.cardNumber.isEmpty() && !cc.validCardNumber() || !cc.accountNumber.isEmpty() && !cc.validAccountNumber() || !cc.sortCode.isEmpty() && !cc.validSortCode() || !cc.cvv.isEmpty()&& !cc.validCvv()){
             resp.getWriter().write("<h2>Invalid card details, please try again.</h2>");
             valid = false;
         }
-        if(!a.validPostcode()){
+        if(!a.postcode.isEmpty() && !a.validPostcode()){
             resp.getWriter().write("<h2>Invalid postcode, please try again.</h2>");
             valid = false;
         }

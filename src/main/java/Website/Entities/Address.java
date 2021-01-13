@@ -37,6 +37,9 @@ public class Address {
         if(!isAlphaNumeric(postcode)){
             return false;
         }
+        if(postcode.length() < 6 || postcode.length() > 8){
+            return false;
+        }
         return postcode.indexOf(' ') == postcode.length() - 4;
     }
 
