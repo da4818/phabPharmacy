@@ -367,6 +367,8 @@ public class LoginDAO {
                 u.lname = rs.getString("last_name");
                 u.email = rs.getString("email");
                 u.postcode = rs.getString("postcode");
+                u.address = rs.getString("address");
+                u.phoneno = rs.getString("phone_no");
             }
 
             rs.close();
