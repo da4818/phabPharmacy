@@ -15,12 +15,10 @@ public class Address {
         else{
             this.postcode = postcode.toUpperCase();
         }
-        if(!address.isEmpty()) {
-            this.address = address;
-        }
-        else if (address.isEmpty()){
-            this.address = "";
-        }
+
+        this.address = address;
+
+
 
     }
 
