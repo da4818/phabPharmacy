@@ -224,7 +224,7 @@ public class ServletRegister extends HttpServlet {
                 "           text-decoration: none;\n" +
                 "           display: inline-block;\n" +
                 "           font-size: 16px;\n" +
-                "           margin: 4px 2px;\n" +
+                "           margin: 4px 0px;\n" +
                 "           cursor: pointer;\n" +
                 "       }\n" +
                 "   </style>\n" +

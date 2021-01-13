@@ -47,6 +47,7 @@ public class ServletOrder extends HttpServlet {
             default:
                 break;
         }
+        resp.getWriter().write("<p>:" +u.nonNullEntries()+"</p>");
         resp.getWriter().write("<div class=\"addressContainer\">\n" +
                 "  <p style=\"display: inline-block; margin-bottom: 0px;\"><b>Shipping Address</b></p>\n" +
                 "  <p>" + u.fname + " " + u.lname + "<br>" + addressOut + u.postcode + phoneNoOut + "</p>\n");
