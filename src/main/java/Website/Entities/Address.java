@@ -8,7 +8,7 @@ public class Address {
     public String postcode;
 
     public Address(String address, String postcode){
-        this.address = address;
+
         if (postcode.length() > 3 && postcode.indexOf(' ') == -1){
             String temp = postcode.substring(0,postcode.length()-3) + " " +postcode.substring(postcode.length()-3);
             this.postcode = temp.toUpperCase();
@@ -17,6 +17,7 @@ public class Address {
             this.postcode = postcode.toUpperCase();
         }
         if(!address.isEmpty()) {
+            this.address = address;
             addressLines = address.split("\\n");
         }
 
