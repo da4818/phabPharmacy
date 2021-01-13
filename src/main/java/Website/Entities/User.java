@@ -12,7 +12,7 @@ public class User {
 
     public char nonNullEntries(){
         char out = 'n'; // None are non-null
-        if (!address.isEmpty() && !phoneno.isEmpty()){
+        if (!address.equals(null) && phoneno.equals(null)){
             out = 'b'; // Both are non-null
         }
         else if (!address.isEmpty() && phoneno.isEmpty()){
