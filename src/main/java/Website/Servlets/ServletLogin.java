@@ -217,7 +217,7 @@ public class ServletLogin extends HttpServlet {
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"email\" placeholder=\"Email Address*\"><br>\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"pass\" placeholder=\"Password*\"><br>\n" +
                 "        <input type=\"hidden\" name=\"logOut\" value=\"false\">\n" + // a hidden input tag is added to prevent nullPointer errors (line 25)
-                "        <input type=\"submit\" style=\"width: 220px;\" class=\"buttonStyle\" value=\"Submit\">\n" +
+                "        <input type=\"submit\" style=\"width: 222px;\" class=\"buttonStyle\" value=\"Submit\">\n" +
                 "</form>\n";
     }
 }

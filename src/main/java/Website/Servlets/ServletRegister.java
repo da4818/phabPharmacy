@@ -272,7 +272,7 @@ public class ServletRegister extends HttpServlet {
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"phone_no\" value=\"\" placeholder=\"Phone Number\"><br>\n" +
                 "  \n" +
                 "  <input type=\"hidden\" name=\"logOut\" value=\"false\">\n" +
-                "  <input type=\"submit\" style=\"width: 220px;\" class=\"buttonStyle\" value=\"Submit\">\n" +
+                "  <input type=\"submit\" style=\"width: 222px;\" class=\"buttonStyle\" value=\"Submit\">\n" +
                 "</form>\n";
     }
 }

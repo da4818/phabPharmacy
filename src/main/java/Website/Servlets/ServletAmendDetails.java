@@ -23,15 +23,10 @@ public class ServletAmendDetails extends HttpServlet {
         User u = LoginDAO.getCurrentUser();
         String address_out = "Address";
         String phone_no_out = "Phone Number";
-        /*if(!u.address.isEmpty()){
-            address_out = u.address;
-        }
-        if(!u.phoneno.equals(null)){
-            phone_no_out = u.phoneno;
-        }*/
+
         resp.getWriter().write("<form name=\"amendDetailsForm\" action=\"amend_details\" method=\"post\">\n" +
                 "  <h3>Order Information<br><b style=\"font-size: 15px;\">Payment Information</b></h3>\n" +
-                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"card_no\" placeholder=\"Card Number\"><br>\n" +
+                "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"card_no\" placeholder=\""+address_out +"\"><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"sort_code\" placeholder=\"Sortcode\"><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"account_no\" placeholder=\"Account Number\"><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"cvv\" placeholder=\"CVV*\"><br>\n" +
@@ -42,7 +37,7 @@ public class ServletAmendDetails extends HttpServlet {
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" value=\"\" name=\"phone_no\" placeholder=\"Phone Number\"><br>\n" +
                 "  \n" +
                 "  <input type=\"submit\" style=\"width: 135px; margin-left: 0px;\" class=\"buttonStyle\" value=\"Update Details\">\n" +
-                "  <a class=\"buttonStyle\" style=\"width: 60px; margin-left: 2px;\" href=\"https://phabpharmacy.herokuapp.com/order\">Cancel</a>\n" +
+                "  <a class=\"buttonStyle\" style=\"width: 70px; margin-left: 2px;\" href=\"https://phabpharmacy.herokuapp.com/order\">Cancel</a>\n" +
                 "</form>\n" +
 
                 "</body>\n" +
