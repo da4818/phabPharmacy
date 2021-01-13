@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Address {
     public String address;
-    public String[] addressLines;
     public String postcode;
 
     public Address(String address, String postcode){
@@ -18,7 +17,6 @@ public class Address {
         }
         if(!address.isEmpty()) {
             this.address = address;
-            addressLines = address.split("\\n");
         }
         else if (address.isEmpty()){
             this.address = "";
@@ -29,6 +27,7 @@ public class Address {
 
     public String getAddress(){
         String out="";
+        String[] addressLines = address.split("\\n");
         if(address.isEmpty()){
             return out;
         }
