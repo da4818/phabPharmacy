@@ -5,14 +5,16 @@ public class Customer {
     public String last_name;
     public String postcode;
     public String email;
+    public String password;
     public String address;
     public String phone_number;
 
-    public Customer(String first_name, String last_name, String postcode, String email, String address, String phone_number){
+    public Customer(String first_name, String last_name, String postcode, String email, String password, String address, String phone_number){
         this.first_name = first_name;
         this.last_name = last_name;
         this.postcode = postcode;
         this.email = email;
+        this.password = password;
         this.address = address;
         this.phone_number = phone_number;
     }

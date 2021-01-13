@@ -17,36 +17,39 @@ public class AddCustomer {
             Connection c = DriverManager.getConnection(dbUrl);
             Statement stmt1 = c.createStatement();
             if (cust.address.isEmpty() && !cust.phone_number.isEmpty()){
-                pStmt = c.prepareStatement("INSERT INTO customer (first_name,last_name,email,postcode,phone_no) VALUES (?,?,?,?,?);");
+                pStmt = c.prepareStatement("INSERT INTO customer (first_name,last_name,email,password,postcode,phone_no) VALUES (?,?,?,?,?,?);");
                 pStmt.setString(1,cust.first_name);
                 pStmt.setString(2,cust.last_name);
                 pStmt.setString(3,cust.email);
-                pStmt.setString(4,cust.postcode);
-                pStmt.setString(5,cust.phone_number);
+                pStmt.setString(4,cust.password);
+                pStmt.setString(5,cust.postcode);
+                pStmt.setString(6,cust.phone_number);
             }
             else if (!cust.address.isEmpty() && cust.phone_number.isEmpty()){
-                pStmt = c.prepareStatement("INSERT INTO customer (first_name,last_name,email,postcode,address) VALUES (?,?,?,?,?);");
+                pStmt = c.prepareStatement("INSERT INTO customer (first_name,last_name,email,password,postcode,address) VALUES (?,?,?,?,?,?);");
                 pStmt.setString(1,cust.first_name);
                 pStmt.setString(2,cust.last_name);
                 pStmt.setString(3,cust.email);
-                pStmt.setString(4,cust.postcode);
-                pStmt.setString(5,cust.address);
+                pStmt.setString(4,cust.password);
+                pStmt.setString(5,cust.postcode);
+                pStmt.setString(6,cust.address);
             }
             else if (cust.address.isEmpty() && cust.phone_number.isEmpty()){
-                pStmt = c.prepareStatement("INSERT INTO customer (first_name,last_name,email,postcode) VALUES (?,?,?,?);");
+                pStmt = c.prepareStatement("INSERT INTO customer (first_name,last_name,email,password,postcode) VALUES (?,?,?,?,?);");
                 pStmt.setString(1,cust.first_name);
                 pStmt.setString(2,cust.last_name);
                 pStmt.setString(3,cust.email);
                 pStmt.setString(4,cust.postcode);
             }
             else{
-                pStmt = c.prepareStatement("INSERT INTO customer (first_name,last_name,email,postcode,address,phone_no) VALUES (?,?,?,?,?,?);");
+                pStmt = c.prepareStatement("INSERT INTO customer (first_name,last_name,email,password,postcode,address,phone_no) VALUES (?,?,?,?,?,?,?);");
                 pStmt.setString(1,cust.first_name);
                 pStmt.setString(2,cust.last_name);
                 pStmt.setString(3,cust.email);
-                pStmt.setString(4,cust.postcode);
-                pStmt.setString(5,cust.address);
-                pStmt.setString(6,cust.phone_number);
+                pStmt.setString(4,cust.password);
+                pStmt.setString(5,cust.postcode);
+                pStmt.setString(6,cust.address);
+                pStmt.setString(7,cust.phone_number);
             }
 
             pStmt.executeUpdate();
