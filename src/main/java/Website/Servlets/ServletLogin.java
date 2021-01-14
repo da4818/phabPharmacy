@@ -51,7 +51,7 @@ public class ServletLogin extends HttpServlet {
             resp.getWriter().write("<h2 name=\"loginResponse\">Incomplete fields, please enter all the information.</h2>\n");
         }
         else{ // If the input variables don't match any existing entries in the customer ('user') database
-            resp.getWriter().write("<h2vname=\"loginResponse\">Wrong email or password, please try again.</h2>\n");
+            resp.getWriter().write("<h2 name=\"loginResponse\">Wrong email or password, please try again.</h2>\n");
         }
         resp.getWriter().write("<script>\n" +
                 "    function refreshPage(){\n" +
@@ -194,7 +194,7 @@ public class ServletLogin extends HttpServlet {
                 "<div class=\"navbar\">\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/home\"><i class=\"fa fa-fw fa-home\"></i>Home</a>\n" +
                 "    <div class=\"dropdown\">\n" +
-                "        <button href=\"https://phabpharmacy.herokuapp.com/home\" id=\"Browse\" style=\"cursor: pointer;\" class=\"dropbtn\" onclick=\"redirectBrowse()\"><i class=\"fa fa-fw fa-search\"></i>Browse<i class=\"fa fa-caret-down\"></i></button>\n" +
+                "        <button name=\"Browse\" style=\"cursor: pointer;\" class=\"dropbtn\" onclick=\"redirectBrowse()\"><i class=\"fa fa-fw fa-search\"></i>Browse<i class=\"fa fa-caret-down\"></i></button>\n" +
                 "        <div class=\"dropdown-content\">\n" +
                 "            <a href=\"https://phabpharmacy.herokuapp.com/browse#cold_and_flu\">Cold and Flu</a>\n" +
                 "            <a href=\"https://phabpharmacy.herokuapp.com/browse#skincare\">Skincare</a>\n" +
