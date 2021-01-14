@@ -211,7 +211,7 @@ public class ServletLogin extends HttpServlet {
                 displayCurrentUser +
                 "</div>\n" +
                 "<h1>Login</h1>\n" +
-                "<p> Login below. If you haven't got an account, <a href=\"https://phabpharmacy.herokuapp.com/register\"> register here.</a></p>\n" +
+                "<p name=\"redirectToRegister\"> Login below. If you haven't got an account, <a href=\"https://phabpharmacy.herokuapp.com/register\"> register here.</a></p>\n" +
                 "\n" +
                 "<form name=\"loginForm\" action=\"login\" method=\"post\">\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"email\" placeholder=\"Email Address*\"><br>\n" +

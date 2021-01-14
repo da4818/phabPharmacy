@@ -252,7 +252,7 @@ public class ServletRegister extends HttpServlet {
                 "</div>\n" +
                 "\n" +
                 "<h1>Register</h1>\n" +
-                "<p> Register below. If you already have an account, <a href=\"https://phabpharmacy.herokuapp.com/login\"> login here.</a>\n" +
+                "<p name=\"redirectToLogin\"> Register below. If you already have an account, <a href=\"https://phabpharmacy.herokuapp.com/login\"> login here.</a>\n" +
                 "    <form name=\"registerForm\" action=\"register\" method=\"post\">\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"fname\" placeholder=\"First Name*\"><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"lname\" placeholder=\"Last Name*\"><br>\n" +
