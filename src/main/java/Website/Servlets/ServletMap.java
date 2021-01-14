@@ -309,8 +309,8 @@ public class ServletMap extends HttpServlet {
                 "    </div>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/login\"><i class=\"fa fa-fw fa-user\"></i>Login</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
-                "    <a style=\"background-color: #00B8C5\"><i class=\"fa fa-compass\" aria-hidden=\"true\"></i> In-Store</a>\n" +
-                "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" style=\"width: 35px;\"><i style=\"width: 35px;\" class=\"fa fa-fw fa-shopping-basket\"><p style=\"display: inline; font-family: Arial; font-weight: bold\" id=\"basket\"> " + basketSizeOut + "</p></i></a>\n" +
+                "    <a style=\"background-color: #00B8C5\"><i class=\"fa fa-compass\" aria-hidden=\"true\"></i>In-Store</a>\n" +
+                "    <a href=\"https://phabpharmacy.herokuapp.com/basket\" name=\"Basket\"><i style=\"width: 35px;\" class=\"fa fa-fw fa-shopping-basket\"><p style=\"display: inline; font-family: Arial; font-weight: bold\" id=\"basket\"> " + basketSizeOut + "</p></i></a>\n" +
                 displayCurrentUser +
                 "</div>\n" +
                 "   <h1>Find Items in Store</h1>\n" +
