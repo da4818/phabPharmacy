@@ -22,7 +22,7 @@ public class ServletMap extends HttpServlet {
         resp.getWriter().write(HTML);
         switch (req.getServletPath()) {
             case "/map":
-                resp.getWriter().write("<h3> </h3>" + "<div class=\"box\">\n" + "</div>\n" +
+                resp.getWriter().write("<h3 name=\"mapResponse\"></h3>" + "<div class=\"box\">\n" + "</div>\n" +
                         "<section style=\"float: right; margin-right: 15%;\">\n" +
                         "<img class=\"images\" src=\"https://bit.ly/main_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
                         "</section>\n");
