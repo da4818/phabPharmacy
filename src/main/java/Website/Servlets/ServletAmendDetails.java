@@ -96,11 +96,11 @@ public class ServletAmendDetails extends HttpServlet {
         Address a = new Address(ad,pc);
         boolean valid = true;
         if (!cc.cardNumber.isEmpty() && !cc.validCardNumber() || !cc.accountNumber.isEmpty() && !cc.validAccountNumber() || !cc.sortCode.isEmpty() && !cc.validSortCode() || !cc.cvv.isEmpty()&& !cc.validCvv()){
-            resp.getWriter().write("<h2>Invalid card details, please try again.</h2>");
+            resp.getWriter().write("<h2 name=\"amendDetailsResponse\">Invalid card details, please try again.</h2>");
             valid = false;
         }
         if(!a.postcode.isEmpty() && !a.validPostcode()){
-            resp.getWriter().write("<h2>Invalid postcode, please try again.</h2>");
+            resp.getWriter().write("<h2 name=\"amendDetailsResponse\">Invalid postcode, please try again.</h2>");
             valid = false;
         }
         if (valid) {
@@ -125,7 +125,7 @@ public class ServletAmendDetails extends HttpServlet {
             if(!sc.isEmpty()) {
                 LoginDAO.updateCustomer("card_details", "sort_code", sc);
             }
-            resp.getWriter().write("<h2>Information updated.</h2>\n" +
+            resp.getWriter().write("<h2 name=\"amendDetailsResponse\">Information updated.</h2>\n" +
                     "</body>\n" +
                     "</html>");
         }
@@ -285,7 +285,7 @@ public class ServletAmendDetails extends HttpServlet {
                 "<div class=\"navbar\">\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/home\"><i class=\"fa fa-fw fa-home\"></i>Home</a>\n" +
                 "    <div class=\"dropdown\">\n" +
-                "        <button style=\"cursor: pointer;\" class=\"dropbtn\" onclick=\"redirectBrowse()\"><i class=\"fa fa-fw fa-search\"></i>Browse<i class=\"fa fa-caret-down\"></i></button>\n" +
+                "        <button name=\"Browse\" style=\"cursor: pointer;\" class=\"dropbtn\" onclick=\"redirectBrowse()\"><i class=\"fa fa-fw fa-search\"></i>Browse<i class=\"fa fa-caret-down\"></i></button>\n" +
                 "        <div class=\"dropdown-content\">\n" +
                 "            <a href=\"#cold_and_flu\">Cold and Flu</a>\n" +
                 "            <a href=\"#skincare\">Skincare</a>\n" +
