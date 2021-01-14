@@ -29,6 +29,7 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
     compile group: 'com.google.code.gson', name:'gson', version: '2.7'
     runtimeOnly group: 'org.postgresql', name: 'postgresql', version: '42.2.18'
+    compile 'com.sendgrid:sendgrid-java:3.0.9'
 
 }
 /*test {
