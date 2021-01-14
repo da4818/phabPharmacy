@@ -55,7 +55,7 @@ public class ServletOrder extends HttpServlet {
 
         resp.getWriter().write("  <p><b>Payment Details</b></p>\n" +
                 "  <p>" + cc.getCensoredCardNumber() + "<br>" + cc.getSortCode() + "<br>" + cc.accountNumber +"</p>\n" +
-                "  <button onclick=\"window.location.href='https://phabpharmacy.herokuapp.com/amend_details';\"class=\"buttonStyle\">Edit Details</button>\n" +
+                "  <button name=\"editDetails\" onclick=\"window.location.href='https://phabpharmacy.herokuapp.com/amend_details';\"class=\"buttonStyle\">Edit Details</button>\n" +
                 "  <div class=\"confirmContainer\">\n" +
                 "  <p>Total Cost: <b>£" + total +"</b></p>\n" +
                 "  <form id=\"confirmOrder\"  action=\"order\" method=\"post\">\n" + //A form allows us to to retrieve information added by the user (e.g. entering information)

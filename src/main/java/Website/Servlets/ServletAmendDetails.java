@@ -74,7 +74,11 @@ public class ServletAmendDetails extends HttpServlet {
                 "  <input name=\"update\" type=\"submit\" style=\"width: 135px; margin-left: 0px;\" class=\"buttonStyle\" value=\"Update Details\">\n" +
                 "  <a class=\"buttonStyle\" style=\"width: 69px; margin-left: 1px;\" href=\"https://phabpharmacy.herokuapp.com/order\">Cancel</a>\n" +
                 "</form>\n" +
-
+                "<script>\n" +
+                "   function refreshPage(){\n" +
+                "       setTimeout(function(){location.reload();},2000)\n" +
+                "   }\n" +
+                "</script>\n" +
                 "</body>\n" +
                 "</html>");
     }
@@ -125,7 +129,13 @@ public class ServletAmendDetails extends HttpServlet {
             if(!sc.isEmpty()) {
                 LoginDAO.updateCustomer("card_details", "sort_code", sc);
             }
-            resp.getWriter().write("<h2 name=\"amendDetailsResponse\">Information updated.</h2>\n" +
+            resp.getWriter().write("<h2 name=\"amendDetailsResponse\" onload=\"refreshPage()\">Information updated.</h2>\n" +
+                    "<p onload=\"refreshPage()\">You will be redirected back to the order summary.</p>\n" +
+                    "<script>\n" +
+                    "   function refreshPage(){\n" +
+                    "       setTimeout(function(){location.reload();},3000)\n" +
+                    "   }\n" +
+                    "</script>\n" +
                     "</body>\n" +
                     "</html>");
         }
