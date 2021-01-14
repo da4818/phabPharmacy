@@ -4,6 +4,7 @@ import Website.Entities.Address;
 import Website.Entities.CreditCard;
 import Website.Entities.Product;
 import Website.Entities.User;
+import Website.Functions.UpdateQuantity;
 import Website.LoginDAO;
 
 import javax.servlet.ServletException;
@@ -94,6 +95,11 @@ public class ServletOrder extends HttpServlet {
         String HTML = htmlOutput();
         resp.getWriter().write(HTML); // There is no information request in the ServletOrder doPost - the only possible way to redirect to this doPost in particular is through clicking 'Confirm Order' button
         User u = LoginDAO.getCurrentUser();
+        int n = LoginDAO.tableSize("ordered_product");
+        for(int i=1;i<n+1;i++) {
+            Product b = LoginDAO.getBasketInfo(i);
+            new UpdateQuantity(b.name,b.brand,b.quantity);
+        }
         //LoginDAO.resetTable("ordered_products");
 
         resp.getWriter().write("<h2 name=\"orderResponse\">Order confirmed!</h2>");

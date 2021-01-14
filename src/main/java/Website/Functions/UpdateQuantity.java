@@ -12,11 +12,11 @@ public class UpdateQuantity {
     private float buyPrice;
 
     public UpdateQuantity(String name1, String brand1, int quantityChange) {
-        String dbUrl = System.getenv("JDBC_DATABASE_URL");
+        String cUrl = System.getenv("JDBC_DATABASE_URL");
         try {
             Class.forName("org.postgresql.Driver");
-            Connection db = DriverManager.getConnection(dbUrl);
-            Statement stmt = db.createStatement();
+            Connection c = DriverManager.getConnection(cUrl);
+            Statement stmt = c.createStatement();
             String sqlStr = "SELECT * FROM shop_product WHERE name = " + name1 + " AND brand = " + brand1;
             System.out.println(sqlStr);
             ResultSet rs = stmt.executeQuery(sqlStr);
@@ -44,8 +44,8 @@ public class UpdateQuantity {
             }
             int update = quant + quantityChange;
             stmt.execute("UPDATE shop_product SET quantity = " + update + " WHERE name = " + name1 + " AND brand = " + brand1 + ";");
-            int hardmin = (int) (fullStock*0.1);
-            if(update<hardmin){
+            int hardMin = (int) (fullStock*0.1);
+            if(update<hardMin){
                 List<Product> order = new ArrayList<>();
                 //order.add(new Product(name1, brand1, fullStock-quant));
                 //we want to check all other members below their softmins e.g fullstock*0.2 and make order
@@ -66,7 +66,7 @@ public class UpdateQuantity {
             }
             rs.close();
             stmt.close();
-            db.close();
+            c.close();
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
