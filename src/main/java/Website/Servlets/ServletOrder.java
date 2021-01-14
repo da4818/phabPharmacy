@@ -75,7 +75,7 @@ public class ServletOrder extends HttpServlet {
             resp.getWriter().write(b.brand + " " + b.name + " " + b.amount + " - x" + b.quantity + " - £" + subtotal + "<br>");
             }
             resp.getWriter().write("</p>\n" +
-                    "    <button onclick=\"window.location.href='https://phabpharmacy.herokuapp.com/basket'\" class=\"buttonStyle\">Edit Basket</button>\n" +
+                    "    <button name=\"editBasket\" onclick=\"window.location.href='https://phabpharmacy.herokuapp.com/basket'\" class=\"buttonStyle\">Edit Basket</button>\n" +
                     "</div>\n");
             resp.getWriter().write("<script>\n" +
                     "function redirectBrowse(){\n" +

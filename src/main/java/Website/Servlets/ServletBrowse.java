@@ -208,7 +208,7 @@ public class ServletBrowse extends HttpServlet {
         String displayCurrentUser = "<div class=\"currentUser\"><i class=\"fa fa-fw fa-user\"></i></div>\n";
         if (userLoggedIn) {
             User cUser = LoginDAO.getCurrentUser();
-            displayCurrentUser = "     <form name=\"logOut\" action=\"home\" method=\"post\">\n" +
+            displayCurrentUser = "     <form name=\"logOutForm\" action=\"home\" method=\"post\">\n" +
                     "       <div style=\"float: right;\" class=\"currentUser\">" + cUser.fname +"<i class=\"fa fa-fw fa-user\"></i>\n" +
                     "        <div class=\"logOut\">\n" +
                     "          <input type=\"submit\" name=\"logOut\" class=\"logOutButton\" value=\"Log Out\">\n" +
