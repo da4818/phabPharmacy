@@ -71,7 +71,7 @@ public class ServletAmendDetails extends HttpServlet {
                 "  <label>Phone Number</label><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" value=\"\" name=\"phone_no\" placeholder=\"" + phoneNoOut +"\"><br>\n" +
                 "  \n" +
-                "  <input type=\"submit\" style=\"width: 135px; margin-left: 0px;\" class=\"buttonStyle\" value=\"Update Details\">\n" +
+                "  <input name=\"update\" type=\"submit\" style=\"width: 135px; margin-left: 0px;\" class=\"buttonStyle\" value=\"Update Details\">\n" +
                 "  <a class=\"buttonStyle\" style=\"width: 69px; margin-left: 1px;\" href=\"https://phabpharmacy.herokuapp.com/order\">Cancel</a>\n" +
                 "</form>\n" +
 
