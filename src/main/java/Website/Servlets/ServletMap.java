@@ -30,7 +30,7 @@ public class ServletMap extends HttpServlet {
             case "/map/cold_and_flu": {
                 resp.getWriter().write("<section>" +
                         "<div class=\"box\">\n" +
-                        "<h3>Products in Cold and Flu</h3>\n");
+                        "<h3 name=\"mapResponse\">Products in Cold and Flu</h3><p name=\"mapListResponse\">\n");
                 int j = 1;
                 Product p = LoginDAO.getProduct(j);
                 while (j <= LoginDAO.tableSize("shop_product")) {
@@ -40,7 +40,7 @@ public class ServletMap extends HttpServlet {
                     j++;
                     p = LoginDAO.getProduct(j);
                 }
-                resp.getWriter().write("</div>\n" + "</section>\n" +
+                resp.getWriter().write("</p>\n</div>\n" + "</section>\n" +
                         "<section style=\"float: right; margin-right: 15%;\">\n" +
                         "<img class=\"images\" src=\"https://bit.ly/cold_flu_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
                         "</section>\n");
@@ -49,7 +49,7 @@ public class ServletMap extends HttpServlet {
             case "/map/skincare": {
                 resp.getWriter().write("<section>" +
                         "<div class=\"box\">\n" +
-                        "<h3>Products in Skincare</h3>\n");
+                        "<h3 name=\"mapResponse\">Products in Skincare</h3><p name=\"mapListResponse\">\n");
                 int j = 1;
                 Product p = LoginDAO.getProduct(j);
                 while (j <= LoginDAO.tableSize("shop_product")) {
@@ -59,7 +59,7 @@ public class ServletMap extends HttpServlet {
                     j++;
                     p = LoginDAO.getProduct(j);
                 }
-                resp.getWriter().write("</div>\n" + "</section>\n" +
+                resp.getWriter().write("</p>\n</div>\n" + "</section>\n" +
                         "<section style=\"float: right; margin-right: 15%;\">\n" +
                         "<img class=\"images\" src=\"https://bit.ly/skincare_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
                         "</section>\n");
@@ -68,7 +68,7 @@ public class ServletMap extends HttpServlet {
             case "/map/headaches_and_pain_relief": {
                 resp.getWriter().write("<section>" +
                         "<div class=\"box\">\n" +
-                        "<h3>Products in Headaches and Pain Relief</h3>\n");
+                        "<h3 name=\"mapResponse\">Products in Headaches and Pain Relief</h3><p name=\"mapListResponse\">\n");
                 int j = 1;
                 Product p = LoginDAO.getProduct(j);
                 while (j <= LoginDAO.tableSize("shop_product")) {
@@ -78,7 +78,7 @@ public class ServletMap extends HttpServlet {
                     j++;
                     p = LoginDAO.getProduct(j);
                 }
-                resp.getWriter().write("</div>\n" + "</section>\n" +
+                resp.getWriter().write("</p>\n</div>\n" + "</section>\n" +
                         "<section style=\"float: right; margin-right: 15%;\">\n" +
                         "<img class=\"images\" src=\"https://bit.ly/headache_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
                         "</section>\n");
@@ -87,7 +87,7 @@ public class ServletMap extends HttpServlet {
             case "/map/digestion": {
                 resp.getWriter().write("<section>" +
                         "<div class=\"box\">\n" +
-                        "<h3>Products in Digestion</h3>\n");
+                        "<h3 name=\"mapResponse\">Products in Digestion</h3><p name=\"mapListResponse\">\n");
                 int j = 1;
                 Product p = LoginDAO.getProduct(j);
                 while (j <= LoginDAO.tableSize("shop_product")) {
@@ -97,7 +97,7 @@ public class ServletMap extends HttpServlet {
                     j++;
                     p = LoginDAO.getProduct(j);
                 }
-                resp.getWriter().write("</div>\n" + "</section>\n" +
+                resp.getWriter().write("</p>\n</div>\n" + "</section>\n" +
                         "<section style=\"float: right; margin-right: 15%;\">\n" +
                         "<img class=\"images\" src=\"https://bit.ly/digestion_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
                         "</section>\n");
@@ -106,7 +106,7 @@ public class ServletMap extends HttpServlet {
             case "/map/allergy": {
                 resp.getWriter().write("<section>" +
                         "<div class=\"box\">\n" +
-                        "<h3>Products in Allergy</h3>\n");
+                        "<h3 name=\"mapResponse\">Products in Allergy</h3><p name=\"mapListResponse\">\n");
                 int j = 1;
                 Product p = LoginDAO.getProduct(j);
                 while (j <= LoginDAO.tableSize("shop_product")) {
@@ -116,7 +116,7 @@ public class ServletMap extends HttpServlet {
                     j++;
                     p = LoginDAO.getProduct(j);
                 }
-                resp.getWriter().write("</div>\n" + "</section>\n" +
+                resp.getWriter().write("</p>\n</div>\n" + "</section>\n" +
                         "<section style=\"float: right; margin-right: 15%;\">\n" +
                         "<img class=\"images\" src=\"https://bit.ly/allergy_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
                         "</section>\n");
@@ -125,7 +125,7 @@ public class ServletMap extends HttpServlet {
             case "/map/first_aid": {
                 resp.getWriter().write("<section>" +
                         "<div class=\"box\">\n" +
-                        "<h3>Products in First Aid</h3>\n");
+                        "<h3 name=\"mapResponse\">Products in First Aid</h3><p name=\"mapListResponse\">\n");
                 int j = 1;
                 Product p = LoginDAO.getProduct(j);
                 while (j <= LoginDAO.tableSize("shop_product")) {
@@ -135,7 +135,7 @@ public class ServletMap extends HttpServlet {
                     j++;
                     p = LoginDAO.getProduct(j);
                 }
-                resp.getWriter().write("</div>\n" + "</section>\n" +
+                resp.getWriter().write("</p>\n</div>\n" + "</section>\n" +
                         "<section style=\"float: right; margin-right: 15%;\">\n" +
                         "<img class=\"images\" src=\"https://bit.ly/first_aid_map_\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
                         "</section>\n");

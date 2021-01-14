@@ -55,13 +55,13 @@ public class ServletRegister extends HttpServlet {
         Address a = new Address(ad,pc);
         boolean allowReg = true;
         if (fn.isEmpty() || ln.isEmpty() || em.isEmpty() || pw.isEmpty() || vpw.isEmpty() || pc.isEmpty() || cn.isEmpty() || cvv.isEmpty()|| sc.isEmpty() || an.isEmpty()){ //Checks if any of the required fields are empty
-            resp.getWriter().write("<h2>Incomplete fields, please enter all the information.</h2>");
+            resp.getWriter().write("<h2 name=\"registerResponse\">Incomplete fields, please enter all the information.</h2>");
             allowReg = false;
         }
        // resp.getWriter().write("<p>List:<br>"+fn+"<br>"+ln+"<br>"+em+"<br>"+pw+"<br>"+vpw+"<br>"+cn+"<br>"+cvv+"<br>"+sc+"<br>"+an+"<br>"+pc+"<br>"+ad+"<br>"+pn+"<br>");
        else{
             if(LoginDAO.validateRegister(em)){ //Checks database to see if email exists in use database
-                resp.getWriter().write("<h2>There is an existing account with the email entered, please log in.</h2>");
+                resp.getWriter().write("<h2 name=\"registerResponse\">There is an existing account with the email entered, please log in.</h2>");
                 allowReg = false;
             }
             if(!emailCheck.validEmail()){
@@ -69,16 +69,16 @@ public class ServletRegister extends HttpServlet {
                 allowReg = false;
             }
             if (!pw.equals(vpw)){
-                resp.getWriter().write("<h2>Passwords don't match, please try again.</h2>");
+                resp.getWriter().write("<h2 name=\"registerResponse\">Passwords don't match, please try again.</h2>");
                 allowReg = false;
             }
 
             if (!cc.validCardNumber() || !cc.validAccountNumber() || !cc.validSortCode() || !cc.validCvv()){
-                resp.getWriter().write("<h2>Invalid card details, please try again.</h2>");
+                resp.getWriter().write("<h2 name=\"registerResponse\">Invalid card details, please try again.</h2>");
                 allowReg = false;
             }
             if(!a.validPostcode()){
-                resp.getWriter().write("<h2>Invalid postcode, please try again.</h2>");
+                resp.getWriter().write("<h2 name=\"registerResponse\">Invalid postcode, please try again.</h2>");
                 allowReg = false;
             }
             if (allowReg){
@@ -88,7 +88,7 @@ public class ServletRegister extends HttpServlet {
                 new AddCustomer(c,cc);
                 User currentUser = LoginDAO.getUser(em,pw); //*rewrite to constructor with string values
                 LoginDAO.setLoggedInUser(currentUser);
-                resp.getWriter().write("<h2>Successful registration. Welcome, " + currentUser.fname + "</h2>");
+                resp.getWriter().write("<h2 name=\"registerResponse\">Successful registration. Welcome, " + currentUser.fname + "</h2>");
             }
         }
 
