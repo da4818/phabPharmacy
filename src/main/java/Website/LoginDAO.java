@@ -163,6 +163,7 @@ public class LoginDAO {
                         "SELL_PRICE DECIMAL(10,2) NOT NULL," +
                         "QUANTITY SMALLINT NOT NULL," +
                         "LIMIT_OF_1 BOOLEAN NOT NULL," +
+                        "CONFIRMED_ORDER BOOLEAN NOT NULL," +
                         "CUSTOMER_ID INT REFERENCES CUSTOMER (ID))";
                 sBasket.executeUpdate(sql);
             }
@@ -483,16 +484,16 @@ public class LoginDAO {
                 cust_id = rs.getInt("customer_id");
             }
 
-            String sql1 = "SELECT * FROM ordered_product WHERE name='" + p_in.name + "' and customer_id=" + cust_id + ";"; //We check if the user has previously added the item to the basket before
+            String sql1 = "SELECT * FROM ordered_product WHERE name='" + p_in.name + "' AND confirmed_order=false AND customer_id=" + cust_id + ";"; //We check if the user has previously added the item to the basket before
             Statement s1 = c.createStatement();
             ResultSet rs1 = s1.executeQuery(sql1);
             if(rs1.next()){ //If they have, we will UPDATE the quantity to the most recent value they have chosen (it won't add the amount on e.g. if they click x1 and then x3 it UPDATEs to x3, not x4 - this is for simplicity)
                 Statement s2 = c.createStatement();
-                String sql2 = "UPDATE ordered_product set quantity =" + quantity_in + " WHERE name='" + p_in.name + "' and customer_id=" + cust_id + ";";
+                String sql2 = "UPDATE ordered_product SET quantity =" + quantity_in + " WHERE name='" + p_in.name + "' and customer_id=" + cust_id + ";";
                 s2.executeUpdate(sql2);
             }
             else { //If they haven't previously added the item to the basket, it will create a new entry in the table
-                PreparedStatement ps = c.prepareStatement("INSERT INTO ordered_product (barcode,category,brand,name,amount,sell_price,quantity,limit_of_1,customer_id) values(?,?,?,?,?,?,?,?,?);");
+                PreparedStatement ps = c.prepareStatement("INSERT INTO ordered_product (barcode,category,brand,name,amount,sell_price,quantity,limit_of_1,confirmed_order,customer_id) values(?,?,?,?,?,?,?,?,?,?);");
                 ps.setInt(1,p_in.barcode);
                 ps.setString(2, p_in.category);
                 ps.setString(3, p_in.brand);
@@ -501,7 +502,8 @@ public class LoginDAO {
                 ps.setDouble(6, p_in.price);
                 ps.setInt(7, quantity_in); //Quantity added to basket rather than full stock quantity
                 ps.setBoolean(8, p_in.limited);
-                ps.setInt(9,cust_id);
+                ps.setBoolean(9,false);
+                ps.setInt(10,cust_id);
                 ps.executeUpdate();
                 ps.close();
             }
@@ -529,7 +531,7 @@ public class LoginDAO {
             while(rs.next()){
                 cust_id = rs.getInt("customer_id");
             }
-            PreparedStatement ps = c.prepareStatement("WITH temp AS (SELECT row_number() over (order by name asc) AS rownum, * FROM ordered_product WHERE customer_id=" + cust_id + ") SELECT * FROM temp WHERE rownum=?;");
+            PreparedStatement ps = c.prepareStatement("WITH temp AS (SELECT row_number() over (order by name asc) AS rownum, * FROM ordered_product WHERE confirmed_order=false AND customer_id=" + cust_id + ") SELECT * FROM temp WHERE rownum=?;");
             ps.setInt(1,n); // If one item is removed, the IDs aren't automatically updated e.g. if i remove item ID=2, table's ID will read as 1,3,4,5... this poses problems when using a for loop to display the information
             ResultSet rs1 = ps.executeQuery(); // SQL has no easy way to select item based on row number rather than an existing column - this is one solution
             while(rs1.next()){ // If int n = 2 (i.e. the second item in the basket), this will correspond to the 2nd entry in the basket table based on alphabetical order ('order by name asc' gives alphabetical order)
@@ -564,7 +566,7 @@ public class LoginDAO {
             while(rs.next()){
                 cust_id = rs.getInt("customer_id");
             }
-            String sql1 = "SELECT sum(sell_price*quantity) FROM ordered_product WHERE customer_id=" + cust_id + ";"; //For some reason it won't return the existing value in the subtotal column
+            String sql1 = "SELECT sum(sell_price*quantity) FROM ordered_product WHERE confirmed_order=false AND customer_id=" + cust_id + ";"; //For some reason it won't return the existing value in the subtotal column
             Statement s1 = c.createStatement();
             ResultSet rs1 = s.executeQuery(sql1);
             while(rs1.next()){
@@ -595,7 +597,7 @@ public class LoginDAO {
                 cust_id = rs.getInt("customer_id");
             }
             Statement s1 = c.createStatement();
-            String sql1 = "DELETE FROM ordered_product WHERE customer_id=" + cust_id + " and barcode=" + id_in + ";"; //removes the item entry FROM the table
+            String sql1 = "DELETE FROM ordered_product WHERE confirmed_order=false AND customer_id=" + cust_id + " and barcode=" + id_in + ";"; //removes the item entry FROM the table
             s1.executeUpdate(sql1);
 
             rs.close();
@@ -658,7 +660,7 @@ public class LoginDAO {
                 while (rs.next()) {
                     cust_id = rs.getInt("customer_id");
                 }
-                sql1 = "SELECT count(*) FROM ordered_product WHERE customer_id=" + cust_id + ";"; // The SQL command 'SELECT count(*)' gets the number of entries (i.e. the number of rows)
+                sql1 = "SELECT count(*) FROM ordered_product WHERE confirmed_order=false AND customer_id=" + cust_id + ";"; // The SQL command 'SELECT count(*)' gets the number of entries (i.e. the number of rows)
             }
             else if (tableName.equals("shop_product")){
                 sql1 = "SELECT count(*) FROM shop_product WHERE branch_id=1;";
@@ -695,7 +697,7 @@ public class LoginDAO {
                 cust_id = rs.getInt("customer_id");
             }
 
-            String sql1 = "SELECT sum(quantity) FROM ordered_product WHERE customer_id=" + cust_id + ";";// Although similar to 'tableSize()', this counts the number of items, not just the number of different products
+            String sql1 = "SELECT sum(quantity) FROM ordered_product WHERE confirmed_order=false AND customer_id=" + cust_id + ";";// Although similar to 'tableSize()', this counts the number of items, not just the number of different products
             s = c.createStatement(); // i.e. x3 vicks and x2 dettol is 5 items comprised of 2 different products - the basket displays 5
             rs = s.executeQuery(sql1);
             while(rs.next()){
@@ -713,14 +715,28 @@ public class LoginDAO {
 
     public static void placeOrder(){
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
+        Statement s = null;
+        String sql1 = null;
         try {
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
+            String sql = "SELECT customer_id FROM logged_in_customer;";
+            ResultSet rs = s.executeQuery(sql);
+            int cust_id = 0;
+            while(rs.next()){
+                cust_id = rs.getInt("customer_id");
+            }
             int n = LoginDAO.tableSize("ordered_product");
             for(int i=1;i<n+1;i++) {
                 Product b = LoginDAO.getBasketInfo(i);
+                s = c.createStatement();
+                sql1 = "UPDATE ordered_product SET confirmed_order=true WHERE customer_id= " +cust_id + ";";
+                s.executeUpdate(sql1);
                 new UpdateQuantity(b.name, b.brand, -b.quantity);
             }
+            rs.close();
+            s.close();
+            c.close();
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
