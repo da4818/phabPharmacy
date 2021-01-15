@@ -147,9 +147,6 @@ public class ServletOrder extends HttpServlet {
                 "          padding: 14px 16px;\n" +
                 "          text-decoration: none;\n" +
                 "        }\n" +
-                "        .active {\n" +
-                "            background-color: #51B5C2;\n" +
-                "        }\n" +
                 "        @media screen and (max-width: 500px) {\n" +
                 "            .navbar a {\n" +
                 "                float: none;\n" +
@@ -201,7 +198,7 @@ public class ServletOrder extends HttpServlet {
                 "            font-size: 16px;\n" +
                 "            color: white;\n" +
                 "            text-align: center;\n" +
-                "            padding: 14px 16px 4px 16px;\n" +
+                "            padding: 14px 14px 4px 16px;\n" +
                 "            text-decoration: none;\n" +
                 "        }\n" +
                 "        .logOut{\n" +
