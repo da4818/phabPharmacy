@@ -1,6 +1,7 @@
 package Website.Functions;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 //This class uses a customers ID to identify any online orders they have made and stores them as as an Order
 public class OrderRequest {
@@ -14,10 +15,12 @@ public class OrderRequest {
             Statement stmt = db.createStatement();
             String sqlStr2 = "SELECT * FROM ordered_product WHERE customer_id = " + customerId;
             ResultSet rs2 = stmt.executeQuery(sqlStr2);
+            products = new ArrayList<Product>();
             while (rs2.next()) {
                 Product p = new Product(rs2.getInt("barcode"), rs2.getString("name"), rs2.getString("brand"), rs2.getInt("quantity"), rs2.getString("category"));
-                this.products.add(p);
                 System.out.println(rs2.getString("name"));
+                this.products.add(p);
+                System.out.println(rs2.getString("brand"));
             }
             this.order = new Order(products, customerId);
             rs2.close();
