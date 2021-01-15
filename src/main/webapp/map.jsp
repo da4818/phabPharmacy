@@ -1,16 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
   User: debbie
-  Date: 14/12/2020
-  Time: 18:27
+  Date: 15/01/2021
+  Time: 12:18
   To change this template use File | Settings | File Templates.
 --%>
-//UPDATED//
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
 <html>
 <head>
-    <title>Login</title>
+    <title>Find Items In-Store</title>
     <!-- Import Icon Library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Creates navigation bar -->
@@ -100,23 +98,37 @@
             margin: 0px;
             border: none;
         }
-        .buttonStyle{
-            background-color: #00B8C5;
-            border: none;
-            color: white;
-            padding: 5px 25px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 0px;
-            cursor: pointer;
+        .section{
+          display: table-cell;
         }
+        .images{
+          display: table-row;
+          float: right;           
+          right: 15%;
+        }
+        div.box{
+          position: absolute;
+          top: 157px;
+          left: 280px;
+        }
+        .buttonStyle{
+              background-color: #00B8C5;
+              border: none;
+              color: white;
+              padding: 5px 25px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 16px;
+              margin: 4px 2px;
+              cursor: pointer;
+          }
     </style>
+        
 </head>
 <body>
 <div class="navbar">
-    <a href="https://phabpharmacy.herokuapp.com/home"><i class="fa fa-fw fa-home"></i>Home</a>
+    <a><i class="fa fa-fw fa-home"></i>Home</a> 
     <div class="dropdown">
         <button name="Browse" style="cursor: pointer;" class= "dropbtn" onclick="redirectBrowse()"><i class="fa fa-fw fa-search"></i>Browse<i class="fa fa-caret-down"></i></button>
         <div class="dropdown-content">
@@ -128,9 +140,9 @@
             <a href="https://phabpharmacy.herokuapp.com/browse#first_aid">First Aid</a>
         </div>
     </div>
-    <a style="background-color: #00B8C5"><i class="fa fa-fw fa-user"></i>Login</a> <%-- Tab coloured in blue to indicate it's the active tab --%>
+    <a href="https://phabpharmacy.herokuapp.com/login"><i class="fa fa-fw fa-user"></i>Login</a>
     <a href="https://phabpharmacy.herokuapp.com/register"><i class="fa fa-fw fa-user-plus"></i>Register</a>
-    <a href="https://phabpharmacy.herokuapp.com/map"><i class="fa fa-compass" aria-hidden="true"></i>In-Store</a>
+    <a style="background-color: #00B8C5"><i class="fa fa-compass" aria-hidden="true"></i>In-Store</a> <%-- Tab coloured in blue to indicate it's the active tab --%>
     <a href="https://phabpharmacy.herokuapp.com/basket"name="Basket"><i style="width: 35px;" class="fa fa-fw fa-shopping-basket"><p style="display: inline; font-family: Arial; font-weight: bold;" id="basket"></p></i></a>
     <!-- If a user is logged in -->
     <form name="logOut" action="home" method="post"> <!-- A form is needed to process the log out button -->
@@ -147,33 +159,49 @@
     <!---------------------------->
 </div>
 
-<h1><center>Login</center></h1>
-<p> Login below. If you haven't got an account, <a href="https://phabpharmacy.herokuapp.com/register">register here.</a></p>
+<h1>Find Items in Store</h1>
+<p>Choose a category to see all of items in the section and their in-store (Paddington branch) location.</p>
+<section>
+    <div class="dropdown">
+        <button class="buttonStyle" style="dropbtn; width: 222px;">Categories</button>
+        <div class="dropdown-content">
+            <a id="cf" href="https://phabpharmacy.herokuapp.com/map/cold_and_flu"> Cold and Flu</a>
+            <a id="s" href="https://phabpharmacy.herokuapp.com/map/skincare"> Skincare</a>
+            <a id="hpr" href="https://phabpharmacy.herokuapp.com/map/headaches_and_pain_relief">Headaches and Pain Relief</a>
+            <a id="d" href="https://phabpharmacy.herokuapp.com/map/digestion">Digestion</a>
+            <a id="a" href="https://phabpharmacy.herokuapp.com/map/allergy">Allergy</a>
+            <a id="fa" href="https://phabpharmacy.herokuapp.com/map/first_aid">First Aid</a>
+        </div>
+    </div>
+</section>
 
-<form name="loginForm" action="login" method="post">
-        <input type="text" size="30" class="form-control" name="email" placeholder="Email Address*"><br>
-        <input type="text" size="30" class="form-control" name="pass" placeholder="Password*"><br>
-        <input type="hidden" name="logOut" value="false">  <!--a hidden input tag is added to prevent nullPointer errors (in ServletLogin) -->
-        <input type="submit" name="login" style="width: 222px;" class="buttonStyle" value="Submit">
-</form>
-<!-- doPost -->
-<!-- Passes all checks -->
-<h2 name="loginResponse">Welcome back, <!-- User's name -->!</h2>
-<!-- Incomplete fields: email and/or password -->
-<h2 name="loginResponse">Incomplete fields, please enter all the information.</h2>
-<!-- If email and password don't match with an entry on the database -->
-<h2 name="loginResponse">Wrong email or password, please try again.</h2>
-<!-- doPost includes lines 172-181 -->
-<script>
-    function redirectBrowse(){
-        window.location.href="https://phabpharmacy.herokuapp.com/browse"
-    }
-</script>
+<!-- Main -->
+<h3 name="mapResponse"></h3>
+<div class="box"></div>
+<section style="float: right; margin-right: 15%;">
+    <img class="images" src="https://bit.ly/main_map" alt="Paddington Store" width="316" height="400">
+</section>
+
+<!-- Cold and Flu -->
+<section>
+    <div class="box">
+        <h3 name="mapResponse">Products in Cold and Flu</h3><p name="mapListResponse">
+        </p><!-- Brand, name, amount --></div>
+</section>
+<section style="float: right; margin-right: 15%;">
+    <img class="images" src="https://bit.ly/cold_flu_map" alt="Paddington Store" width="316" height="400">
+</section>
+
+<!-- Skincare -->
+<section>
+    <div class="box">
+        <h3 name="mapResponse">Products in Skincare</h3><p name="mapListResponse">
+    </p><!-- Brand, name, amount --></div>
+</section>
+<section style="float: right; margin-right: 15%;">
+    <img class="images" src="https://bit.ly/skincare_map" alt="Paddington Store" width="316" height="400">
+</section>
+
+
 </body>
 </html>
-
-
-
-
-
-

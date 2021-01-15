@@ -96,7 +96,6 @@ public class ServletOrder extends HttpServlet {
         resp.getWriter().write(HTML); // There is no information request in the ServletOrder doPost - the only possible way to redirect to this doPost in particular is through clicking 'Confirm Order' button
         User u = LoginDAO.getCurrentUser();
         LoginDAO.placeOrder();
-        LoginDAO.resetTable("ordered_product");
 
         resp.getWriter().write("<h2 name=\"orderResponse\">Order confirmed!</h2>");
         resp.getWriter().write("<script>\n" + // This is to finish of the HTML code initiated in htmlOutput()

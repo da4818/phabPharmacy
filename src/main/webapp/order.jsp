@@ -156,6 +156,7 @@
     </div>
     <a href="https://phabpharmacy.herokuapp.com/login"><i class="fa fa-fw fa-user"></i>Login</a>
     <a href="https://phabpharmacy.herokuapp.com/register"><i class="fa fa-fw fa-user-plus"></i>Register</a>
+    <a href="https://phabpharmacy.herokuapp.com/map"><i class="fa fa-compass" aria-hidden="true"></i>In-Store</a>
     <a href="https://phabpharmacy.herokuapp.com/basket"name="Basket"><i style="width: 35px;" class="fa fa-fw fa-shopping-basket"><p style="display: inline; font-family: Arial; font-weight: bold;" id="basket"></p></i></a>
     <%-- Tab coloured in blue to indicate it's the active tab --%>
     <!-- If a user is logged in -->
