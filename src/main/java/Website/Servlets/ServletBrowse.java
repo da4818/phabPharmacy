@@ -56,8 +56,8 @@ public class ServletBrowse extends HttpServlet {
                     "<form action=\"browse\" method=\"post\">\n" +
                     "<input name=\"basketQuantity\" type=\"number\" size=\"5\" min=\"1\" max=\"" + max + "\">\n" +
                     "<input name=\"buttonNumber\" type=\"hidden\"value=\"" + j + "\">\n" +
-                    "<input type=\"hidden\" name=\"logOut\" value=\"false\">\n" +
-                    "<input type=\"submit\"class=\"buttonStyle\" value=\"Add to Basket\">\n" +
+                    "<input name=\"logOut\" type=\"hidden\" value=\"false\">\n" +
+                    "<input name=\"addToBasket\" type=\"submit\"class=\"buttonStyle\" value=\"Add to Basket\">\n" +
                     "</form>\n" +
                     "</div>\n" +
                     "</div>");
@@ -114,8 +114,8 @@ public class ServletBrowse extends HttpServlet {
                     "<form action=\"browse\" method=\"post\">\n" +
                     "<input name=\"basketQuantity\" type=\"number\" size=\"5\" min=\"1\" max=\"" + max + "\">\n" +
                     "<input name=\"buttonNumber\" type=\"hidden\"value=\"" + j + "\">\n" +
-                    "<input type=\"hidden\" name=\"logOut\" value=\"false\">\n" +
-                    "<input type=\"submit\"class=\"buttonStyle\" value=\"Add to Basket\">\n" +
+                    "<input name=\"logOut\" type=\"hidden\" value=\"false\">\n" +
+                    "<input name=\"addToBasket\" type=\"submit\"class=\"buttonStyle\" value=\"Add to Basket\">\n" +
                     "</form>\n" +
                     "</div>\n" +
                     "</div>");
