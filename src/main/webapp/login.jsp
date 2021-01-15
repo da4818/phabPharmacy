@@ -5,6 +5,7 @@
   Time: 18:27
   To change this template use File | Settings | File Templates.
 --%>
+//UPDATED//
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -83,7 +84,6 @@
             text-decoration: none;
         }
         .logOut{
-            position: absolute;
             height: 10px;
             bottom: 0px;
             margin: 0px;
@@ -109,14 +109,8 @@
             text-decoration: none;
             display: inline-block;
             font-size: 16px;
-            margin: 4px 2px;
+            margin: 4px 0px;
             cursor: pointer;
-        }
-        input{
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 16px;
-            width: 26em; 
-            width: 40ch; 
         }
     </style>
 </head>
@@ -124,7 +118,7 @@
 <div class="navbar">
     <a href="https://phabpharmacy.herokuapp.com/home"><i class="fa fa-fw fa-home"></i>Home</a>
     <div class="dropdown">
-        <button style="cursor: pointer;" class= "dropbtn" onclick="redirectBrowse()"><i class="fa fa-fw fa-search"></i>Browse<i class="fa fa-caret-down"></i></button>
+        <button name="Browse" style="cursor: pointer;" class= "dropbtn" onclick="redirectBrowse()"><i class="fa fa-fw fa-search"></i>Browse<i class="fa fa-caret-down"></i></button>
         <div class="dropdown-content">
             <a href="https://phabpharmacy.herokuapp.com/browse#cold_and_flu">Cold and Flu</a>
             <a href="https://phabpharmacy.herokuapp.com/browse#skincare">Skincare</a>
@@ -136,7 +130,7 @@
     </div>
     <a style="background-color: #00B8C5"><i class="fa fa-fw fa-user"></i>Login</a> <%-- Tab coloured in blue to indicate it's the active tab --%>
     <a href="https://phabpharmacy.herokuapp.com/register"><i class="fa fa-fw fa-user-plus"></i>Register</a>
-    <a href="https://phabpharmacy.herokuapp.com/basket" style="width: 35px;" class="fa fa-fw fa-shopping-basket"><b style="font-family: Arial;" id="basket">basketNumber</b></a>
+    <a href="https://phabpharmacy.herokuapp.com/basket"name="Basket"><i style="width: 35px;" class="fa fa-fw fa-shopping-basket"><p style="display: inline; font-family: Arial; font-weight: bold;" id="basket"></p></i></a>
     <!-- If a user is logged in -->
     <form name="logOut" action="home" method="post"> <!-- A form is needed to process the log out button -->
         <div style="float: right;" class="currentUser">" + cUser.fname + "<i class="fa fa-fw fa-user"></i>
@@ -159,20 +153,17 @@
         <input type="text" size="30" class="form-control" name="email" placeholder="Email Address*"><br>
         <input type="text" size="30" class="form-control" name="pass" placeholder="Password*"><br>
         <input type="hidden" name="logOut" value="false">  <!--a hidden input tag is added to prevent nullPointer errors (in ServletLogin) -->
-        <input type="submit" class="buttonStyle" value="Submit">
+        <input type="submit" name="login" style="width: 222px;" class="buttonStyle" value="Submit">
 </form>
 <!-- doPost -->
 <!-- Passes all checks -->
-<h2>Welcome back, <!-- User's name -->!</h2>
+<h2 name="loginResponse">Welcome back, <!-- User's name -->!</h2>
 <!-- Incomplete fields: email and/or password -->
-<h2>Incomplete fields, please enter all the information.</h2>
+<h2 name="loginResponse">Incomplete fields, please enter all the information.</h2>
 <!-- If email and password don't match with an entry on the database -->
-<h2>Wrong email or password, please try again.</h2>
+<h2 name="loginResponse">Wrong email or password, please try again.</h2>
 <!-- doPost includes lines 172-181 -->
 <script>
-    function refreshPage(){
-        location.reload()
-    }
     function redirectBrowse(){
         window.location.href="https://phabpharmacy.herokuapp.com/browse"
     }
