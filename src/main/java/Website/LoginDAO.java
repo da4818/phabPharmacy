@@ -96,7 +96,7 @@ public class LoginDAO {
                         "HARD_MIN DECIMAL(10,2)," +
                         "BRANCH_ID INT REFERENCES BRANCH (ID))";
 
-                sProduct.executeUpdate(sqlProduct); //"name" appears to be a keyword in SQL (highlighted in orange for the "INSERT INTO" command), so it won't allow me to create the table with it for some reason (works with branch table though)
+                sProduct.executeUpdate(sqlProduct); //"name" appears to be a keyword in SQL (highlighted in orange for the "insert into" command), so it won't allow me to create the table with it for some reason (works with branch table though)
                 sProduct1 = c.createStatement();
                 sProduct1.executeUpdate("INSERT INTO SHOP_PRODUCT(CATEGORY,BRAND,NAME,AMOUNT,SELL_PRICE,BUY_PRICE,QUANTITY,FULL_STOCK,LIMIT_OF_1) VALUES('Cold and Flu','Vicks','Vaporub','100g',4.5,3.7,15,15,false)," +
                         "('Cold and Flu','Vicks','First Defence','15ml',6.8,5,20,20,false)," +
@@ -167,7 +167,7 @@ public class LoginDAO {
                 sBasket.executeUpdate(sql);
             }
 
-            else if(tableName.equals("logged_in_customer")) { //this table is so that we can see which customer is currently logged in - there will only be at most 1 entry in this table, and will be UPDATEd when a new user logs in
+            else if(tableName.equals("logged_in_customer")) { //this table is so that we can see which customer is currently logged in - there will only be at most 1 entry in this table, and will be updated when a new user logs in
                 sLogged = c.createStatement();
                 String sql ="CREATE TABLE LOGGED_IN_CUSTOMER (" +
                         "ID SERIAL PRIMARY KEY NOT NULL," +
@@ -182,7 +182,7 @@ public class LoginDAO {
                 sLogged.executeUpdate(sql);
 
             }
-            else if(tableName.equals("card_details")) { //this table is so that we can see which customer is currently logged in - there will only be at most 1 entry in this table, and will be UPDATEd when a new user logs in
+            else if(tableName.equals("card_details")) { //this table is so that we can see which customer is currently logged in - there will only be at most 1 entry in this table, and will be updated when a new user logs in
                 String sql ="CREATE TABLE CARD_DETAILS " +
                         "(ID SERIAL PRIMARY KEY NOT NULL," +
                         " CARD_NO VARCHAR(16) NOT NULL, " +
@@ -290,7 +290,7 @@ public class LoginDAO {
             Connection c = DriverManager.getConnection(dbUrl);
             Statement s = c.createStatement();
             ResultSet rs = s.executeQuery("SELECT " + columnName + " FROM logged_in_customer WHERE " + columnName + " is not null;");
-            status = rs.next(); //Status is now true if an entry FROM the column is not null (i.e. 'phone_no' has not been left blank)
+            status = rs.next(); //Status is now true if an entry from the column is not null (i.e. 'phone_no' has not been left blank)
             rs.close();
             s.close();
             c.close();
@@ -325,7 +325,7 @@ public class LoginDAO {
         }
     }
 
-    public static void UPDATECustomer(String tableName, String category, String value){
+    public static void updateCustomer(String tableName, String category, String value){
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         PreparedStatement ps = null;
         PreparedStatement ps1 = null;
@@ -393,7 +393,7 @@ public class LoginDAO {
         }
         return u;
     }
-    //When a customer logs in/registers, it will UPDATE the table holding the info of the current user to their details
+    //When a customer logs in/registers, it will update the table holding the info of the current user to their details
     public static void setLoggedInUser(User loggedInUser){
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try{
@@ -401,7 +401,7 @@ public class LoginDAO {
             Connection c = DriverManager.getConnection(dbUrl);
             Statement s  = c.createStatement();
             s.executeUpdate("truncate table logged_in_customer;"); //instead of updating the table it will just empty it and add a new entry
-            //String sql = "INSERT INTO logged_in_customer(first_name,last_name,email,password,postcode,customer_id) SELECT first_name,last_name,email,password,postcode,id FROM customer WHERE id=" +loggedInUser.customer_id +";";
+            //String sql = "insert into logged_in_customer(first_name,last_name,email,password,postcode,customer_id) SELECT first_name,last_name,email,password,postcode,id FROM customer WHERE id=" +loggedInUser.customer_id +";";
             PreparedStatement ps = c.prepareStatement("INSERT INTO logged_in_customer(first_name,last_name,email,postcode,address,phone_no,customer_id) VALUES (?,?,?,?,?,?,?);");
             ps.setString(1,loggedInUser.fname);
             ps.setString(2,loggedInUser.lname);
