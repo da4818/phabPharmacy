@@ -12,16 +12,18 @@ public class AccessUsers {
             Connection db = DriverManager.getConnection(dbUrl);
             Statement stmt = db.createStatement();
             String sqlStr = "SELECT * FROM staff WHERE username = " + username;
+            password = password.replace(" ","");
             System.out.println(password);
             ResultSet rs = stmt.executeQuery(sqlStr);
             if (rs.next()) {
                 String password1 = rs.getString("password");
-                if ((" " + password1) == password){
+                if ((password) == password1){
                     this.output = "true";
                     System.out.println("password check passed");
                 }
                 else{
                     this.output = "false";
+                    System.out.println("password check failed");
                 }
             }
         } catch (ClassNotFoundException | SQLException e) {
