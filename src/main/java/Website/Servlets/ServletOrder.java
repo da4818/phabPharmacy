@@ -95,11 +95,6 @@ public class ServletOrder extends HttpServlet {
         String HTML = htmlOutput();
         resp.getWriter().write(HTML); // There is no information request in the ServletOrder doPost - the only possible way to redirect to this doPost in particular is through clicking 'Confirm Order' button
         User u = LoginDAO.getCurrentUser();
-        /*int n = LoginDAO.tableSize("ordered_product");
-        for(int i=1;i<n+1;i++) {
-            Product b = LoginDAO.getBasketInfo(i);
-            new UpdateQuantity(b.name,b.brand,b.quantity);
-        }*/
         LoginDAO.placeOrder();
         LoginDAO.resetTable("ordered_product");
 

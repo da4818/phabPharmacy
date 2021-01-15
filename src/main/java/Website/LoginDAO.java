@@ -15,23 +15,25 @@ public class LoginDAO {
     //Empties tables - useful for when an order has been made and the basket needs to be emptied
     public static void resetTable(String tableName){
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
+        ResultSet rs = null;
         try{
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
             Statement s = c.createStatement();
             if(tableName.equals("ordered_product")) {
                 String sql = "SELECT customer_id FROM logged_in_customer;";
-                ResultSet rs = s.executeQuery(sql);
+                 rs = s.executeQuery(sql);
                 int cust_id = 0;
                 while(rs.next()){
                     cust_id = rs.getInt("customer_id");
                 }
-                String sql1 = "DELETE FROM " + tableName + " WHERE customer_id=" +cust_id+ ";";
+                String sql1 = "DELETE FROM " + tableName + " WHERE confirmed_order=true AND customer_id=" +cust_id+ ";";
                 s.executeUpdate(sql1);
             }
 
             String sql2 = "TRUNCATE TABLE " + tableName + ";";
             s.executeUpdate(sql2);
+            rs.close();
             s.close();
             c.close();
         }catch(Exception e){
@@ -721,6 +723,7 @@ public class LoginDAO {
             Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection(dbUrl);
             String sql = "SELECT customer_id FROM logged_in_customer;";
+            s = c.createStatement();
             ResultSet rs = s.executeQuery(sql);
             int cust_id = 0;
             while(rs.next()){
