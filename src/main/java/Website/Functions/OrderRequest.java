@@ -13,7 +13,7 @@ public class OrderRequest {
             Class.forName("org.postgresql.Driver");
             Connection db = DriverManager.getConnection(dbUrl);
             Statement stmt = db.createStatement();
-            String sqlStr2 = "SELECT * FROM ordered_product WHERE customer_id = " + customerId;
+            String sqlStr2 = "SELECT * FROM ordered_product WHERE customer_id = " + customerId + " AND confirmed_order = false";
             ResultSet rs2 = stmt.executeQuery(sqlStr2);
             products = new ArrayList<Product>();
             while (rs2.next()) {

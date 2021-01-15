@@ -18,6 +18,10 @@ public class AccessUsers {
                 String password1 = rs.getString("password");
                 if (password1 == password){
                     this.output = "true";
+                    System.out.println("password check passed");
+                }
+                else{
+                    this.output = "false";
                 }
             }
         } catch (ClassNotFoundException | SQLException e) {
