@@ -116,7 +116,7 @@ public class Email {
         return false;
     }
     public String getErrorMessage(){
-        String out = "<p>Valid emails must: <br>- not contain consecutive special characters<br>- not begin with a special character '_', '.' or '-'<br>- not contain any of the following characters: " +getSpecialChars() +"</p>";
+        String out = "<p>Valid emails must: <br>- not contain consecutive special characters<br>- not begin with a special character '_', '.' or '-'<br>- not contain any of the following characters: " +getSpecialChars() +"</p></h2>";
             return out;
     }
 }
