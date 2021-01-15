@@ -23,7 +23,11 @@ public class CheckoffServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException,
             IOException {
         String reqBody=req.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
-        DeleteOrderedProduct dop = new DeleteOrderedProduct(reqBody);
+        String[] parts = reqBody.split(" ");
+        String productId = parts[0];
+        String customerId = parts[1];
+        System.out.println(productId);
+        DeleteOrderedProduct dop = new DeleteOrderedProduct(productId, customerId);
         resp.setContentType("text/html");
         resp.getWriter().write("Succeeded");
     }
