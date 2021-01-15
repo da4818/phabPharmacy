@@ -30,7 +30,8 @@ public class UserServlet extends HttpServlet {
         String password = parts[1];
         AccessUsers query = new AccessUsers(username, password);
         resp.setContentType("text/html");
-        String response = new String(query.getOutput());
+        String response;
+        response = query.getOutput();
         resp.getWriter().write(response);
 
 
