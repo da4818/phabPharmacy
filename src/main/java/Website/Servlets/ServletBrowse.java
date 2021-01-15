@@ -73,7 +73,10 @@ public class ServletBrowse extends HttpServlet {
             LoginDAO.resetTable("logged_in_customer");
         }
         if (!LoginDAO.checkLoggedIn()){ // If no one is logged in, it will prevent them from adding items to their basket
-            resp.getWriter().write("<pre><script>window.onload=\"alertMessage()\"</script></pre>\n");
+            resp.getWriter().write("<pre><script>window.onload=function(){\n" +
+                    " alertMessage()" +
+                    //"alert(\"Please ensure that you have created an account and logged in before adding items to your basket.\");\n" +
+                    "};</script></pre>\n");
         }
         if(LoginDAO.checkLoggedIn()){
             int pos = Integer.parseInt(req.getParameter("buttonNumber"));
