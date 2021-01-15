@@ -100,7 +100,7 @@ public class ServletRegister extends HttpServlet {
                "</body>\n" +
                "</html>");
     }
-    //If a user is logged in, the current user and a 'log out' button will be displayed on the header (see line 144)
+    //If a user is logged in, the current user and a 'log out' button will be displayed on the header (see line 109, 251)
     public String htmlOutput(){
         boolean userLoggedIn = LoginDAO.checkLoggedIn();
         String displayCurrentUser = "<div class=\"currentUser\"><i class=\"fa fa-fw fa-user\"></i></div>\n";

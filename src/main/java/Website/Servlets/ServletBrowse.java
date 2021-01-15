@@ -17,8 +17,8 @@ import static java.lang.System.err;
 
 @WebServlet(urlPatterns = {"/browse"},loadOnStartup = 0)
 public class ServletBrowse extends HttpServlet {
-    ArrayList<String> headers = getHeaderinfo("headers"); //See line 110
-    ArrayList<String> headerURLs = getHeaderinfo("headerURLs"); //See line 110
+    ArrayList<String> headers = getHeaderinfo("headers"); //See line 129
+    ArrayList<String> headerURLs = getHeaderinfo("headerURLs"); //See line 129
     DecimalFormat df = new DecimalFormat("0.00");
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -129,7 +129,7 @@ public class ServletBrowse extends HttpServlet {
     public ArrayList <String> getHeaderinfo(String info_in){
         ArrayList <String> output = new ArrayList<>();
         if (info_in.equals("headers")){ //This is the categories to be displayed
-            output.add("Cold and Flu"); //The headers will correspond to the anchor link URL (see line 120)
+            output.add("Cold and Flu"); //The headers will correspond to the anchor link URL (line 139)
             output.add("Skincare");
             output.add("Headaches and Pain Relief");
             output.add("Digestion");
@@ -137,8 +137,8 @@ public class ServletBrowse extends HttpServlet {
             output.add("First Aid");
         }
         else if (info_in.equals("headerURLs")){ // These are the names to hyperlink to a specific part of the page (termed an 'anchor link')
-            output.add("cold_and_flu"); // Each anchor link is named in the 'id' section of the header tag (line 30)
-            output.add("skincare"); // This anchor link corresponds to the hyperlink URL for each dropdown option in the navigation bar (lines 273-278)
+            output.add("cold_and_flu"); // Each anchor link is named in the 'id' section of the header tag (line 44)
+            output.add("skincare"); // This anchor link corresponds to the hyperlink URL for each dropdown option in the navigation bar (lines 343-348)
             output.add("headaches_and_pain_relief");
             output.add("digestion");
             output.add("allergy");
