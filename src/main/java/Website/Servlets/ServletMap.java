@@ -317,7 +317,7 @@ public class ServletMap extends HttpServlet {
                 "   <p>Choose a category to see all of items in the section and their in-store (Paddington branch) location.</p>\n" +
                 "   <section>\n" +
                 "       <div class=\"dropdown\">\n" +
-                "           <button class=\"buttonStyle\" style=\"dropbtn; width: 222px;\">Categories</button>\n" +
+                "           <button name=\"Category\" class=\"buttonStyle\" style=\"dropbtn; width: 222px;\">Categories</button>\n" +
                 "           <div class=\"dropdown-content\">\n" +
                 "               <a id=\"cf\" href=\"https://phabpharmacy.herokuapp.com/map/cold_and_flu\"> Cold and Flu</a>\n" +
                 "               <a id=\"s\" href=\"https://phabpharmacy.herokuapp.com/map/skincare\"> Skincare</a>\n" +
