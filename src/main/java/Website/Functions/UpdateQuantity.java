@@ -19,7 +19,7 @@ public class UpdateQuantity {
             Connection c = DriverManager.getConnection(dbUrl);
             Statement stmt = c.createStatement();
             // Get the details from the database about the specific product
-            String sqlStr = "SELECT * FROM shop_product WHERE name = " + name1 + " AND brand = " + brand1;
+            String sqlStr = "SELECT * FROM shop_product WHERE name = '" + name1 + "' AND brand = '" + brand1 + "';";
             System.out.println(sqlStr);
             ResultSet rs = stmt.executeQuery(sqlStr);
             if (rs.next()) {
@@ -49,7 +49,7 @@ public class UpdateQuantity {
             }
             int update = quant + quantityChange;
             // Update the quantity of the product
-            stmt.execute("UPDATE shop_product SET quantity = " + update + " WHERE name = " + name1 + " AND brand = " + brand1 + ";");
+            stmt.execute("UPDATE shop_product SET quantity = " + update + " WHERE name = '" + name1 + "' AND brand = '" + brand1 + "';");
             int hardMin = (int) (fullStock*0.1);
             if(update<hardMin){
                 List<Product> order = new ArrayList<>();
