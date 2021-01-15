@@ -11,6 +11,18 @@ Features to know:
 - The quantity maximum for unlimited products is 5, this was chosen arbitrarily.
 - Existing users can amend their card details and shipping address on the Amend Details page. Any entries left empty will not be updated.
 
-CLIENT APPLICATION -
+Some customer logins:
+Name: John Smith
+Email: js@hotmail.com
+Password: qwerty
 
-INTERACTIVE MAP -
+Name: Tim Peake
+Email: tpke@gmail.com
+Password: wasd&&
+
+Staff logins:
+Username: mh507
+Password: 12345678
+
+Username: 2aa402
+Password: turtles()
