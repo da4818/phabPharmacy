@@ -16,7 +16,7 @@ public class OrderRequest {
             ResultSet rs2 = stmt.executeQuery(sqlStr2);
             while (rs2.next()) {
                 Product p = new Product(rs2.getInt("barcode"), rs2.getString("name"), rs2.getString("brand"), rs2.getInt("quantity"), rs2.getString("category"));
-                products.add(p);
+                this.products.add(p);
                 System.out.println(rs2.getString("name"));
             }
             this.order = new Order(products, customerId);
