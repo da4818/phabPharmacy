@@ -65,7 +65,7 @@ public class ServletRegister extends HttpServlet {
                 allowReg = false;
             }
             if(!emailCheck.validEmail()){
-                resp.getWriter().write(emailCheck.getErrorMessage());
+                resp.getWriter().write("<h2 name=\"registerResponse\">Invalid email, please try again.</h2>" + emailCheck.getErrorMessage());
                 allowReg = false;
             }
             if (!pw.equals(vpw)){

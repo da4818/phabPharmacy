@@ -85,7 +85,7 @@ public class Email {
                         if (n == prefix.length()-1){
                             return false;
                         }
-                        // if a special char is present, but not the final char-if a letter or number doesn't follow the special char
+                        // If a special char is present, but not the final char-if a letter or number doesn't follow the special char
                         else if (!Character.isLetterOrDigit(prefix.charAt(n+1))){
                             return false;
                         }
@@ -116,7 +116,7 @@ public class Email {
         return false;
     }
     public String getErrorMessage(){
-        String out = "<h2>Invalid email, please try again.</h2><p>Valid emails must: <br>- not contain consecutive special characters<br>- not begin with a special character '_', '.' or '-'<br>- not contain any of the following characters: " +getSpecialChars() +"</p>";
+        String out = "<p>Valid emails must: <br>- not contain consecutive special characters<br>- not begin with a special character '_', '.' or '-'<br>- not contain any of the following characters: " +getSpecialChars() +"</p>";
             return out;
     }
 }
