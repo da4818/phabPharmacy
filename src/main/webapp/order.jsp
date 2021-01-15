@@ -79,7 +79,7 @@
           font-size: 16px;
           color: white;
           text-align: center;
-          padding: 14px 16px 4px 16px;
+          padding: 14px 14px 4px 16px;
           text-decoration: none;
       }
       .logOut{
@@ -101,10 +101,10 @@
           border: none;
       }
       div.basketContainer{
-          width: 350px;
-          margin: 0px;
-          padding: 0px 0px 20px 20px;
-          border: 1px solid black;
+        width: 350px;
+        margin: 0px;
+        padding: 0px 0px 20px 20px;
+        border: 1px solid black;
       }
       div.addressContainer {
         position: relative;
@@ -115,13 +115,13 @@
         border: 1px solid black;
       }
       div.confirmContainer{
-          position: absolute; <%-- A section with an 'absolute' position will be placed relatively, when inside a container with a 'relative' position--%>
-          width: 270px;
-          height: 70px;
-          right: -1px; <%-- The RHS will be place exactly on the addressContainer's RH border (the -1px is to account for the 1px thick border) --%>
-          bottom: -87px;<%-- Similar to line above, but relative to bottom of addressContainer (-87px gives aesthetic spacing) --%>
-          padding: 0px 0px 15px 20px;
-          border: 1px solid black;
+        position: absolute;
+        width: 270px;
+        height: 70px;
+        right: -1px;
+        bottom: -87px;
+        padding: 0px 0px 15px 20px;
+        border: 1px solid black;
       }
       .buttonStyle{
           background-color: #51B5C2; 
@@ -144,7 +144,7 @@
 <div class="navbar">
     <a href="https://phabpharmacy.herokuapp.com/home"><i class="fa fa-fw fa-home"></i>Home</a>
     <div class="dropdown">
-        <button class= "dropbtn"><i class="fa fa-fw fa-search"></i>Browse<i class="fa fa-caret-down"></i></button>
+        <button name="Browse" class="dropbtn"><i class="fa fa-fw fa-search"></i>Browse<i class="fa fa-caret-down"></i></button>
         <div class="dropdown-content">
             <a href="https://phabpharmacy.herokuapp.com/browse#cold_and_flu">Cold and Flu</a>
             <a href="https://phabpharmacy.herokuapp.com/browse#skincare">Skincare</a>
@@ -156,7 +156,7 @@
     </div>
     <a href="https://phabpharmacy.herokuapp.com/login"><i class="fa fa-fw fa-user"></i>Login</a>
     <a href="https://phabpharmacy.herokuapp.com/register"><i class="fa fa-fw fa-user-plus"></i>Register</a>
-    <a href="https://phabpharmacy.herokuapp.com/basket" style="background-color: #00B8C5; width: 35px;"><i style="width: 35px;" class="fa fa-fw fa-shopping-basket"><p style="display: inline; font-family: Arial; font-weight: bold" id="basket"><!--Basket Quantity--></p></i></a>
+    <a href="https://phabpharmacy.herokuapp.com/basket"name="Basket"><i style="width: 35px;" class="fa fa-fw fa-shopping-basket"><p style="display: inline; font-family: Arial; font-weight: bold;" id="basket"></p></i></a>
     <%-- Tab coloured in blue to indicate it's the active tab --%>
     <!-- If a user is logged in -->
     <form name="logOut" action="home" method="post"> <!-- A form is needed to process the log out button -->
@@ -175,14 +175,14 @@
 
 <h1>Confirm Order</h1>
 <!-- doPost -->
-<h2>Order Confirmed!</h2>
+<h2 name="orderResponse">Order Confirmed!</h2>
 <!-- doPost includes lines 199-205 -->
 
 <!-- doGet -->
 <div class="addressContainer">
     <p style="display: inline-block; margin-bottom: 0px;"><b>Shipping Address</b></p>
     <p>" + u.fname + " " + u.lname + "<br>" + u.postcode + "<br>Payment</p>
-    <button onclick="window.location.href='https://phabpharmacy.herokuapp.com/amend_details';"class="buttonStyle">Edit Details</button>
+    <button name="editDetails" onclick="window.location.href='https://phabpharmacy.herokuapp.com/amend_details';"class="buttonStyle">Edit Details</button>
     <div class="confirmContainer">
         <p>Total Cost: <b>£" + total +"</b></p>
         <form id="confirmOrder" action="order" method="post">
@@ -194,7 +194,7 @@
 <div class="basketContainer">
     <p style="display: inline-block; margin-bottom: 0px;"><b>Order Summary</b></p>
     <p><!-- Product name--> - <!-- Product description--> - x <!-- Product quantity--> - £ <!-- Product subtotal --><br></p>
-    <button onclick="window.location.href='https://phabpharmacy.herokuapp.com/basket';" class="buttonStyle">Edit Basket</button>
+    <button name="editBasket" onclick="window.location.href='https://phabpharmacy.herokuapp.com/basket';" class="buttonStyle">Edit Basket</button>
 </div>
 <script>
   function redirectBrowse(){
