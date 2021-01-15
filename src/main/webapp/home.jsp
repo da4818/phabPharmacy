@@ -86,7 +86,6 @@
             text-decoration: none;
         }
         .logOut{
-            position: absolute;
             height: 10px;
             bottom: 0px;
             margin: 0px;
