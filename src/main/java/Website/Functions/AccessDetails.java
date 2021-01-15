@@ -18,7 +18,7 @@ String amount;
             Connection db = DriverManager.getConnection(dbUrl);
             Statement stmt = db.createStatement();
             //Selecting the row from our shop_product table which contains the product information
-            String sqlStr = "SELECT * FROM shop_product WHERE id = " + intId;
+            String sqlStr = "SELECT * FROM shop_product WHERE barcode = " + intId;
             System.out.println(sqlStr);
             ResultSet rs = stmt.executeQuery(sqlStr);
             //extracting values from database
