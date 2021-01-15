@@ -5,6 +5,7 @@
   Time: 19:31
   To change this template use File | Settings | File Templates.
 --%>
+//UPDATED//
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -70,7 +71,7 @@
             text-align: left;
         }
         .dropdown-content a:hover {
-            background-color: #ddd;
+            background-color: #ddd; 
         }
         .dropdown:hover .dropdown-content {
             display: block;
@@ -102,7 +103,11 @@
             margin: 0px;
             border: none;
         }
-        .buttonStyle{
+        textarea::placeholder {
+            font-family: Arial, Helvetica, sans-serif;
+            width: 40ch; 
+        }
+        .buttonStyle {
             background-color: #00B8C5;
             border: none;
             color: white;
@@ -111,17 +116,8 @@
             text-decoration: none;
             display: inline-block;
             font-size: 16px;
-            margin: 4px 2px;
+            margin: 4px 0px;
             cursor: pointer;
-        }
-        input, textarea{
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 16px;
-            width: 26em; /* fallback for the next one, for browsers not recognizing ch */
-            width: 40ch; /* sets the width to 40 times the width of the digit “0” */
-        }
-        textarea::placeholder {
-            font-family: Arial, Helvetica, sans-serif;
         }
     </style>
 </head>
@@ -129,7 +125,7 @@
 <div class="navbar">
     <a href="https://phabpharmacywebsite.herokuapp.com/home"><i class="fa fa-fw fa-home"></i>Home</a>
     <div class="dropdown">
-        <button style="cursor: pointer;" class= "dropbtn" onclick="redirectBrowse()"><i class="fa fa-fw fa-search"></i>Browse<i class="fa fa-caret-down"></i></button>
+        <button name="Browse" style="cursor: pointer;" class= "dropbtn" onclick="redirectBrowse()"><i class="fa fa-fw fa-search"></i>Browse<i class="fa fa-caret-down"></i></button>
         <div class="dropdown-content">
             <a href="https://phabpharmacy.herokuapp.com/browse#cold_and_flu">Cold and Flu</a>
             <a href="https://phabpharmacy.herokuapp.com/browse#skincare">Skincare</a>
@@ -141,7 +137,7 @@
     </div>
     <a href="https://phabpharmacy.herokuapp.com/login"><i class="fa fa-fw fa-user"></i>Login</a>
     <a style="background-color: #00B8C5"><i class="fa fa-fw fa-user-plus"></i>Register</a> <%-- Tab coloured in blue to indicate it's the active tab --%>
-    <a href="https://phabpharmacy.herokuapp.com/basket" style="width: 35px;" class="fa fa-fw fa-shopping-basket"><b id="basket"></b></a>
+    <a href="https://phabpharmacy.herokuapp.com/basket"name="Basket"><i style="width: 35px;" class="fa fa-fw fa-shopping-basket"><p style="display: inline; font-family: Arial; font-weight: bold;" id="basket"></p></i></a>
     <!-- If a user is logged in -->
     <form name="logOut" action="home" method="post"> <!-- A form is needed to process the log out button -->
         <div style="float: right;" class="currentUser">" + cUser.fname + "<i class="fa fa-fw fa-user"></i>
@@ -181,13 +177,13 @@
 
 <!-- doPost response -->
 <!-- Passes all checks -->
-<h2>Successful registration. Welcome, <!--Newly registered user's name-->!</h2>
+<h2 name="registerResponse">Successful registration. Welcome, <!--Newly registered user's name-->!</h2>
 <!-- If the user logs in with an email that has an existing account -->
-<h2>There is an existing account with the email entered. Please log in.</h2>
+<h2 name="registerResponse">There is an existing account with the email entered. Please log in.</h2>
 <!-- Incomplete fields: names, email, password (and verification), card details, postcode (full address and phone number are optional) -->
-<h2>Incomplete fields, please enter all the information.</h2>
+<h2 name="registerResponse">Incomplete fields, please enter all the information.</h2>
 <!-- If the password and password verification don't match -->
-<h2>Passwords don't match, please try again.</h2>
+<h2 name="registerResponse">Passwords don't match, please try again.</h2>
 <!-- doPost includes lines 192-198 -->
 <script>
     function redirectBrowse(){

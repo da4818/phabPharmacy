@@ -1,7 +1,7 @@
 package Website.Functions;
 
 import com.sendgrid.*;
-
+import Website.Entities.Product;
 import java.io.IOException;
 import java.util.List;
 //This class is used to send an Email to the wholesaler containing a list of products which the pharmacy wishes to purchase
@@ -37,5 +37,6 @@ public class MailSender {
             }
         }
     }
+
 }
 
