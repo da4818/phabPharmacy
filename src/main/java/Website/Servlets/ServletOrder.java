@@ -95,12 +95,7 @@ public class ServletOrder extends HttpServlet {
         String HTML = htmlOutput();
         resp.getWriter().write(HTML); // There is no information request in the ServletOrder doPost - the only possible way to redirect to this doPost in particular is through clicking 'Confirm Order' button
         User u = LoginDAO.getCurrentUser();
-        int n = LoginDAO.tableSize("ordered_product");
-        for(int i=1;i<n+1;i++) {
-            Product b = LoginDAO.getBasketInfo(i);
-            new UpdateQuantity(b.name,b.brand,b.quantity);
-        }
-        //LoginDAO.resetTable("ordered_products");
+        LoginDAO.placeOrder();
 
         resp.getWriter().write("<h2 name=\"orderResponse\">Order confirmed!</h2>");
         resp.getWriter().write("<script>\n" + // This is to finish of the HTML code initiated in htmlOutput()
@@ -145,9 +140,6 @@ public class ServletOrder extends HttpServlet {
                 "          text-align: center;\n" +
                 "          padding: 14px 16px;\n" +
                 "          text-decoration: none;\n" +
-                "        }\n" +
-                "        .active {\n" +
-                "            background-color: #51B5C2;\n" +
                 "        }\n" +
                 "        @media screen and (max-width: 500px) {\n" +
                 "            .navbar a {\n" +
@@ -200,7 +192,7 @@ public class ServletOrder extends HttpServlet {
                 "            font-size: 16px;\n" +
                 "            color: white;\n" +
                 "            text-align: center;\n" +
-                "            padding: 14px 16px 4px 16px;\n" +
+                "            padding: 14px 14px 4px 16px;\n" +
                 "            text-decoration: none;\n" +
                 "        }\n" +
                 "        .logOut{\n" +
@@ -278,7 +270,7 @@ public class ServletOrder extends HttpServlet {
                 "    <a href=\"https://phabpharmacy.herokuapp.com/login\"><i class=\"fa fa-fw fa-user\"></i>Login</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/register\"><i class=\"fa fa-fw fa-user-plus\"></i>Register</a>\n" +
                 "    <a href=\"https://phabpharmacy.herokuapp.com/map\"><i class=\"fa fa-compass\" aria-hidden=\"true\"></i>In-Store</a>\n" +
-                "    <a name=\"Basket\" style=\"background-color: #00B8C5;\"><i style=\"width: 35px;\" class=\"fa fa-fw fa-shopping-basket\"><p style=\"display: inline; font-family: Arial; font-weight: bold\" id=\"basket\"> " + basketSizeOut + "</p></i></a>\n" +
+                "    <a href=\"https://phabpharmacy.herokuapp.com/basket\"name=\"Basket\" style=\"background-color: #00B8C5;\"><i style=\"width: 35px;\" class=\"fa fa-fw fa-shopping-basket\"><p style=\"display: inline; font-family: Arial; font-weight: bold;\" id=\"basket\"> " + basketSizeOut + "</p></i></a>\n" +
                 displayCurrentUser +
                 "</div>\n" +
                 "<h1>Confirm Order</h1>\n";

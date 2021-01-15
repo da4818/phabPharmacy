@@ -5,6 +5,7 @@
   Time: 19:19
   To change this template use File | Settings | File Templates.
 --%>
+//UPDATED//
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- doGet and doPost (display same HTML) -->
 <!DOCTYPE html>
@@ -82,11 +83,10 @@
             font-size: 16px;
             color: white;
             text-align: center;
-            padding: 14px 16px 4px 16px;
+            padding: 14px 14px 4px 16px;
             text-decoration: none;
         }
         .logOut{
-            position: absolute;
             height: 10px;
             bottom: 0px;
             margin: 0px;
@@ -104,13 +104,12 @@
             border: none;
         }
     </style>
-
 </head>
 <body>
 <div class="navbar">
     <a style="background-color: #00B8C5"><i class="fa fa-fw fa-home"></i>Home</a> <%-- Tab coloured in blue to indicate it's the active tab --%>
     <div class="dropdown">
-        <button style="cursor: pointer;" class= "dropbtn" onclick="redirectBrowse()"><i class="fa fa-fw fa-search"></i>Browse<i class="fa fa-caret-down"></i></button>
+        <button name="Browse" style="cursor: pointer;" class= "dropbtn" onclick="redirectBrowse()"><i class="fa fa-fw fa-search"></i>Browse<i class="fa fa-caret-down"></i></button>
         <div class="dropdown-content">
             <a href="https://phabpharmacy.herokuapp.com/browse#cold_and_flu">Cold and Flu</a>
             <a href="https://phabpharmacy.herokuapp.com/browse#skincare">Skincare</a>
@@ -122,7 +121,8 @@
     </div>
     <a href="https://phabpharmacy.herokuapp.com/login"><i class="fa fa-fw fa-user"></i>Login</a>
     <a href="https://phabpharmacy.herokuapp.com/register"><i class="fa fa-fw fa-user-plus"></i>Register</a>
-    <a href="https://phabpharmacy.herokuapp.com/basket" style="width: 35px;" class="fa fa-fw fa-shopping-basket"><b id="basket"></b></a>
+    <a href="https://phabpharmacy.herokuapp.com/map"><i class="fa fa-compass" aria-hidden="true"></i>In-Store</a>
+    <a href="https://phabpharmacy.herokuapp.com/basket"name="Basket"><i style="width: 35px;" class="fa fa-fw fa-shopping-basket"><p style="display: inline; font-family: Arial; font-weight: bold;" id="basket"></p></i></a>
     <!-- If a user is logged in -->
     <form name="logOut" action="home" method="post"> <!-- A form is needed to process the log out button -->
         <div style="float: right;" class="currentUser">" + cUser.fname + "<i class="fa fa-fw fa-user"></i>

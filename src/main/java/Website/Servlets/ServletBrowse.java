@@ -73,7 +73,10 @@ public class ServletBrowse extends HttpServlet {
             LoginDAO.resetTable("logged_in_customer");
         }
         if (!LoginDAO.checkLoggedIn()){ // If no one is logged in, it will prevent them from adding items to their basket
-            resp.getWriter().write("<pre><script>window.onload(alert(\"Please ensure that you have created an account and logged in before adding items to your basket.\"));</script></pre>");
+            resp.getWriter().write("<pre><script>window.onload=function(){\n" +
+                    " alertMessage()" +
+                    //"alert(\"Please ensure that you have created an account and logged in before adding items to your basket.\");\n" +
+                    "};</script></pre>\n");
         }
         if(LoginDAO.checkLoggedIn()){
             int pos = Integer.parseInt(req.getParameter("buttonNumber"));
@@ -133,9 +136,9 @@ public class ServletBrowse extends HttpServlet {
             output.add("Allergy");
             output.add("First Aid");
         }
-        else if (info_in.equals("headerURLs")){ //These are the names to hyperlink to a specific part of the page (termed an 'anchor link')
-            output.add("cold_and_flu"); //Each anchor link is named in the 'id' section of the header tag (line 30)
-            output.add("skincare"); //This anchor link corresponds to the hyperlink URL for each dropdown option in the navigation bar (lines 273-278)
+        else if (info_in.equals("headerURLs")){ // These are the names to hyperlink to a specific part of the page (termed an 'anchor link')
+            output.add("cold_and_flu"); // Each anchor link is named in the 'id' section of the header tag (line 30)
+            output.add("skincare"); // This anchor link corresponds to the hyperlink URL for each dropdown option in the navigation bar (lines 273-278)
             output.add("headaches_and_pain_relief");
             output.add("digestion");
             output.add("allergy");
@@ -160,7 +163,7 @@ public class ServletBrowse extends HttpServlet {
         int basketSize = LoginDAO.getBasketSize();
         String basketSizeOut = "";
         if (basketSize != 0){ basketSizeOut = String.valueOf(basketSize);}
-        return "<!DOCTYPE html>\n" + //HTML comments are on the respective .jsp files (need updating)
+        return "<!DOCTYPE html>\n" + // HTML comments are on the respective .jsp files (need updating)
                 "<html>\n" +
                 "<head>\n" +
                 "   <meta charset=\"utf-8\">\n" +
@@ -324,6 +327,11 @@ public class ServletBrowse extends HttpServlet {
                 "            visibility: visible;\n" +
                 "        }\n" +
                 "   </style>\n" +
+                "<script>\n" +
+                "function alertMessage() {\n" +
+                "   alert(\"Please ensure that you have created an account and logged in before adding items to your basket.\");\n" +
+                "}\n" +
+                "</script>\n" +
                 "</head>\n" +
                 "<body>\n" +
                 "<button onclick=\"topFunction()\" id=\"scrollBtn\" title=\"Go to top\">Top</button>\n" +
