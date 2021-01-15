@@ -16,7 +16,7 @@ public class AccessUsers {
             ResultSet rs = stmt.executeQuery(sqlStr);
             if (rs.next()) {
                 String password1 = rs.getString("password");
-                if (" " + password1 == password){
+                if ((" " + password1) == password){
                     this.output = "true";
                     System.out.println("password check passed");
                 }
