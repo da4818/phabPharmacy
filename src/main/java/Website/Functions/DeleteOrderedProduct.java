@@ -13,7 +13,7 @@ public class DeleteOrderedProduct {
             Connection db = DriverManager.getConnection(dbUrl);
             //Makes connection to our database
             Statement stmt = db.createStatement();
-            String sqlStr = "SELECT * FROM ordered_product WHERE barcode = " + intId + " AND customer_id = " + custId + " AND confirmed_order = TRUE";
+            String sqlStr = "DELETE FROM ordered_product WHERE barcode = " + intId + " AND customer_id = " + custId + " AND confirmed_order = TRUE";
             System.out.println(sqlStr);
             //delete rows of orders which have been completed
             ResultSet rs = stmt.executeQuery(sqlStr);

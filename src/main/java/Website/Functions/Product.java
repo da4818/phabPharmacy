@@ -1,7 +1,7 @@
 package Website.Functions;
 
 import java.io.Serializable;
-
+//This class stores information about real world pharmacy products
 public class Product implements Serializable {
     public String name;
     public String brand;
