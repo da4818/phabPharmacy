@@ -1,6 +1,6 @@
 package Website.Functions;
 
-
+import Website.Entities.Product;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +16,8 @@ public class UpdateQuantity {
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         try {
             Class.forName("org.postgresql.Driver");
-            Connection db = DriverManager.getConnection(dbUrl);
-            Statement stmt = db.createStatement();
+            Connection c = DriverManager.getConnection(dbUrl);
+            Statement stmt = c.createStatement();
             //Get the details from the database about the specific product
             String sqlStr = "SELECT * FROM shop_product WHERE name = " + name1 + " AND brand = " + brand1;
             System.out.println(sqlStr);
@@ -50,9 +50,8 @@ public class UpdateQuantity {
             int update = quant + quantityChange;
             //update the quantity of the product
             stmt.execute("UPDATE shop_product SET quantity = " + update + " WHERE name = " + name1 + " AND brand = " + brand1 + ";");
-            //check if stock of this product has fallen below the minimum allowed stock level
-            int hardmin = (int) (fullStock*0.1);
-            if(update<hardmin){
+            int hardMin = (int) (fullStock*0.1);
+            if(update<hardMin){
                 List<Product> order = new ArrayList<>();
                 order.add(new Product(name1, brand1, fullStock-quant));
                 //we want to check all other members below their softmins e.g fullstock*0.2 and make order
@@ -68,12 +67,12 @@ public class UpdateQuantity {
                         System.out.println(name2);
                     }
                 }
-                //output the orders list to the wholesaler or email
-                MailSender newMail = new MailSender(order);
+                // Output the orders list to the wholesaler or email
+                //MailSender newMail = new MailSender(order);
             }
             rs.close();
             stmt.close();
-            db.close();
+            c.close();
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }

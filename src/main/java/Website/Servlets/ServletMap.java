@@ -22,7 +22,7 @@ public class ServletMap extends HttpServlet {
         resp.getWriter().write(HTML);
         switch (req.getServletPath()) {
             case "/map":
-                resp.getWriter().write("<h3> </h3>" + "<div class=\"box\">\n" + "</div>\n" +
+                resp.getWriter().write("<h3 name=\"mapResponse\"></h3>" + "<div class=\"box\">\n" + "</div>\n" +
                         "<section style=\"float: right; margin-right: 15%;\">\n" +
                         "<img class=\"images\" src=\"https://bit.ly/main_map\" alt=\"Paddington Store\" width=\"316\" height=\"400\">\n" +
                         "</section>\n");
@@ -160,7 +160,7 @@ public class ServletMap extends HttpServlet {
         String displayCurrentUser = "<div class=\"currentUser\"><i class=\"fa fa-fw fa-user\"></i></div>\n";
         if (userLoggedIn) {
             User cUser = LoginDAO.getCurrentUser();
-            displayCurrentUser = "     <form name=\"logOut\" action=\"home\" method=\"post\">\n" +
+            displayCurrentUser = "     <form name=\"logOutForm\" action=\"home\" method=\"post\">\n" +
                     "       <div style=\"float: right;\" class=\"currentUser\">" + cUser.fname +"<i class=\"fa fa-fw fa-user\"></i>\n" +
                     "        <div class=\"logOut\">\n" +
                     "          <input type=\"submit\" name=\"logOut\" class=\"logOutButton\" value=\"Log Out\">\n" +

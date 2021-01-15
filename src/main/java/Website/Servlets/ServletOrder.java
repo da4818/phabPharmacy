@@ -4,6 +4,7 @@ import Website.Entities.Address;
 import Website.Entities.CreditCard;
 import Website.Entities.Product;
 import Website.Entities.User;
+import Website.Functions.UpdateQuantity;
 import Website.LoginDAO;
 
 import javax.servlet.ServletException;
@@ -54,7 +55,7 @@ public class ServletOrder extends HttpServlet {
 
         resp.getWriter().write("  <p><b>Payment Details</b></p>\n" +
                 "  <p>" + cc.getCensoredCardNumber() + "<br>" + cc.getSortCode() + "<br>" + cc.accountNumber +"</p>\n" +
-                "  <button onclick=\"window.location.href='https://phabpharmacy.herokuapp.com/amend_details';\"class=\"buttonStyle\">Edit Details</button>\n" +
+                "  <button name=\"editDetails\" onclick=\"window.location.href='https://phabpharmacy.herokuapp.com/amend_details';\"class=\"buttonStyle\">Edit Details</button>\n" +
                 "  <div class=\"confirmContainer\">\n" +
                 "  <p>Total Cost: <b>£" + total +"</b></p>\n" +
                 "  <form id=\"confirmOrder\"  action=\"order\" method=\"post\">\n" + //A form allows us to to retrieve information added by the user (e.g. entering information)
@@ -75,7 +76,7 @@ public class ServletOrder extends HttpServlet {
             resp.getWriter().write(b.brand + " " + b.name + " " + b.amount + " - x" + b.quantity + " - £" + subtotal + "<br>");
             }
             resp.getWriter().write("</p>\n" +
-                    "    <button onclick=\"window.location.href='https://phabpharmacy.herokuapp.com/basket'\" class=\"buttonStyle\">Edit Basket</button>\n" +
+                    "    <button name=\"editBasket\" onclick=\"window.location.href='https://phabpharmacy.herokuapp.com/basket'\" class=\"buttonStyle\">Edit Basket</button>\n" +
                     "</div>\n");
             resp.getWriter().write("<script>\n" +
                     "function redirectBrowse(){\n" +
@@ -94,6 +95,11 @@ public class ServletOrder extends HttpServlet {
         String HTML = htmlOutput();
         resp.getWriter().write(HTML); // There is no information request in the ServletOrder doPost - the only possible way to redirect to this doPost in particular is through clicking 'Confirm Order' button
         User u = LoginDAO.getCurrentUser();
+        int n = LoginDAO.tableSize("ordered_product");
+        for(int i=1;i<n+1;i++) {
+            Product b = LoginDAO.getBasketInfo(i);
+            new UpdateQuantity(b.name,b.brand,b.quantity);
+        }
         //LoginDAO.resetTable("ordered_products");
 
         resp.getWriter().write("<h2 name=\"orderResponse\">Order confirmed!</h2>");

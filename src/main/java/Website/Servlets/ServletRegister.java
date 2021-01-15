@@ -106,7 +106,7 @@ public class ServletRegister extends HttpServlet {
         String displayCurrentUser = "<div class=\"currentUser\"><i class=\"fa fa-fw fa-user\"></i></div>\n";
         if (userLoggedIn) {
             User cUser = LoginDAO.getCurrentUser();
-            displayCurrentUser = "     <form name=\"logOut\" action=\"home\" method=\"post\">\n" +
+            displayCurrentUser = "     <form name=\"logOutForm\" action=\"home\" method=\"post\">\n" +
                     "       <div style=\"float: right;\" class=\"currentUser\">" + cUser.fname +"<i class=\"fa fa-fw fa-user\"></i>\n" +
                     "        <div class=\"logOut\">\n" +
                     "          <input type=\"submit\" name=\"logOut\" class=\"logOutButton\" value=\"Log Out\">\n" +
@@ -252,7 +252,7 @@ public class ServletRegister extends HttpServlet {
                 "</div>\n" +
                 "\n" +
                 "<h1>Register</h1>\n" +
-                "<p> Register below. If you already have an account, <a href=\"https://phabpharmacy.herokuapp.com/login\"> login here.</a>\n" +
+                "<p name=\"redirectToLogin\"> Register below. If you already have an account, <a href=\"https://phabpharmacy.herokuapp.com/login\"> login here.</a>\n" +
                 "    <form name=\"registerForm\" action=\"register\" method=\"post\">\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"fname\" placeholder=\"First Name*\"><br>\n" +
                 "  <input type=\"text\" size=\"30\" class=\"form-control\" name=\"lname\" placeholder=\"Last Name*\"><br>\n" +

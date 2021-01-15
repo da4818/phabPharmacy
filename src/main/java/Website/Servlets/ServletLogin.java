@@ -51,7 +51,7 @@ public class ServletLogin extends HttpServlet {
             resp.getWriter().write("<h2 name=\"loginResponse\">Incomplete fields, please enter all the information.</h2>\n");
         }
         else{ // If the input variables don't match any existing entries in the customer ('user') database
-            resp.getWriter().write("<h2vname=\"loginResponse\">Wrong email or password, please try again.</h2>\n");
+            resp.getWriter().write("<h2 name=\"loginResponse\">Wrong email or password, please try again.</h2>\n");
         }
         resp.getWriter().write("<script>\n" +
                 "    function refreshPage(){\n" +
@@ -70,7 +70,7 @@ public class ServletLogin extends HttpServlet {
         String displayCurrentUser = "<div class=\"currentUser\"><i class=\"fa fa-fw fa-user\"></i></div>\n";
         if (userLoggedIn) {
             User cUser = LoginDAO.getCurrentUser();
-            displayCurrentUser = "     <form name=\"logOut\" action=\"home\" method=\"post\">\n" +
+            displayCurrentUser = "     <form name=\"logOutForm\" action=\"home\" method=\"post\">\n" +
                     "       <div style=\"float: right;\" class=\"currentUser\">" + cUser.fname +"<i class=\"fa fa-fw fa-user\"></i>\n" +
                     "        <div class=\"logOut\">\n" +
                     "          <input type=\"submit\" name=\"logOut\" class=\"logOutButton\" value=\"Log Out\">\n" +
@@ -211,7 +211,7 @@ public class ServletLogin extends HttpServlet {
                 displayCurrentUser +
                 "</div>\n" +
                 "<h1>Login</h1>\n" +
-                "<p> Login below. If you haven't got an account, <a href=\"https://phabpharmacy.herokuapp.com/register\"> register here.</a></p>\n" +
+                "<p name=\"redirectToRegister\"> Login below. If you haven't got an account, <a href=\"https://phabpharmacy.herokuapp.com/register\"> register here.</a></p>\n" +
                 "\n" +
                 "<form name=\"loginForm\" action=\"login\" method=\"post\">\n" +
                 "        <input type=\"text\" size=\"30\" class=\"form-control\" name=\"email\" placeholder=\"Email Address*\"><br>\n" +
